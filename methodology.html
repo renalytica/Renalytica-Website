@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How We Verify Data | Our Research Methodology — Renalytica</title>
+  <meta name="description" content="Discover how Renalytica ensures accurate market data. Learn our simple 4-step process combining primary field surveys, verified secondary resources, econometric testing, and senior analyst reviews.">
+  <meta name="keywords" content="market research methodology, how we verify data, primary field surveys, secondary resources market research, accurate market data, economic forecasting methods, reliable business research">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/methodology.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main>
+    <!-- 3. HERO STAGE: The Science of Accurate Numbers -->
+    <section class="methodology-hero-section" id="hero-methodology">
+      <div class="container methodology-hero-container">
+        <!-- 2-Column Hero Showcase Grid -->
+        <div class="methodology-hero-grid">
+          <!-- Left Column: Precision Narrative & Actions -->
+          <div class="methodology-hero-content">
+            <!-- Telemetry Eyebrow Badges -->
+            <div class="hero-telemetry-badge-group" data-reveal="fade-up" style="--delay: 0">
+              <span class="telemetry-badge-pill">
+                <span class="pulse-orange-dot"></span>
+                HOW WE WORK // TRUSTED DATA GOVERNANCE
+              </span>
+              <span class="telemetry-badge-pill accent">
+                DUAL-TRACK DATA INGESTION: PRIMARY + SECONDARY
+              </span>
+            </div>
+
+            <!-- Monumental Display Headline -->
+            <h1 class="methodology-hero-title" data-reveal="fade-up" style="--delay: 1">
+              How We Get the Numbers Right:<br>
+              <span class="title-accent">Reliable Facts You Can Trust.</span>
+            </h1>
+
+            <!-- Sub-Headline -->
+            <p class="methodology-hero-desc" data-reveal="fade-up" style="--delay: 2">
+              When you make multi-million-dollar decisions, you cannot rely on rumors, unverified web searches, or straight-line guesses. At Renalytica, every figure we publish is built on a dual foundation of <strong>primary field surveys</strong> and <strong>verified secondary resources</strong>, passing through a strict 4-step verification protocol to ensure it is accurate, grounded in reality, and completely trustworthy.
+            </p>
+
+            <!-- Hero Actions -->
+            <div class="methodology-hero-actions" data-reveal="fade-up" style="--delay: 3">
+              <a href="#pipeline-stages" class="btn-pill-primary">
+                Explore the 4-Step Pipeline ↓
+              </a>
+              <button class="btn-pill-outline" id="open-whitepaper-modal-btn">
+                Download Methodology Whitepaper (PDF)
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Quantitative Telemetry Data Lab Card (Pexels Verified Black Analyst) -->
+          <div class="methodology-hero-visual-col" data-reveal="fade-left" style="--delay: 2">
+            <div class="hero-datalab-frame" data-parallax="0.07">
+              <div class="hero-datalab-media">
+                <img src="assets/images/analyst_screen_option.jpg" 
+                     alt="Black quantitative economic and data analyst inspecting econometric trend models on telemetry screen" 
+                     class="hero-datalab-img" 
+                     width="640" 
+                     height="540" 
+                     loading="eager" />
+                <div class="hero-datalab-gradient"></div>
+              </div>
+
+              <!-- Overlay Micro-Telemetry Header Badge -->
+              <div class="hero-datalab-telemetry-badge">
+                <span class="pulse-orange-dot"></span>
+                <span>QUANTITATIVE TELEMETRY LAB // STOCHASTIC SIMULATION</span>
+              </div>
+
+              <!-- Floating Counter-Parallax HUD Telemetry Widget -->
+              <div class="hero-datalab-hud-card" data-parallax-reverse="-0.12">
+                <div class="hud-card-header">
+                  <span class="hud-status-dot"></span>
+                  <span class="hud-title">LIVE TELEMETRY AUDIT</span>
+                </div>
+                <div class="hud-stat-line">
+                  <span class="hud-key">PRIMARY_SURVEY_NODES:</span>
+                  <span class="hud-val accent">184 Live</span>
+                </div>
+                <div class="hud-stat-line">
+                  <span class="hud-key">MONTE_CARLO_RUNS:</span>
+                  <span class="hud-val">10,000 Iterations</span>
+                </div>
+                <div class="hud-stat-line">
+                  <span class="hud-key">RECONCILED_CERTAINTY:</span>
+                  <span class="hud-val success">99.4% Verified</span>
+                </div>
+              </div>
+
+              <div class="hero-datalab-pill" data-parallax="0.09">
+                <span class="pulse-green-dot"></span>
+                <span>DUAL-VECTOR RECONCILIATION ACTIVE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrity Strip: 5 High-Precision Metrics with Animated Counters -->
+        <div class="hero-integrity-ribbon" data-reveal="scale" style="--delay: 4">
+          <div class="ribbon-metric-cell">
+            <span class="metric-number-mega" data-counter-target="4" data-counter-suffix="-Step">4-Step</span>
+            <span class="metric-label-micro">Verification Pipeline</span>
+          </div>
+          <div class="ribbon-metric-cell">
+            <span class="metric-number-mega" data-counter-target="180" data-counter-suffix="+">180+</span>
+            <span class="metric-label-micro">Primary Survey Nodes</span>
+          </div>
+          <div class="ribbon-metric-cell">
+            <span class="metric-number-mega" data-counter-target="60" data-counter-suffix="+">60+</span>
+            <span class="metric-label-micro">Secondary Repositories</span>
+          </div>
+          <div class="ribbon-metric-cell">
+            <span class="metric-number-mega" data-counter-target="10000" data-counter-suffix="+">10,000+</span>
+            <span class="metric-label-micro">Monte Carlo Iterations</span>
+          </div>
+          <div class="ribbon-metric-cell">
+            <span class="metric-number-mega" data-counter-target="100" data-counter-suffix="%">100%</span>
+            <span class="metric-label-micro">Dual-Economist Review</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHY DATA QUALITY MATTERS: The Problem vs The Solution -->
+    <section class="quality-narrative-section" id="why-quality-matters">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">THE PROBLEM WITH BLACK-BOX RESEARCH</span>
+          <h2 class="section-title-standard">No Fluff. No Guesswork. Just Real Facts.</h2>
+          <p class="section-subtitle-standard">
+            A lot of market research published today is built on recycled web articles, surface-level online surveys, or simple straight-line guesses. That kind of research fills up pages, but collapses when real-world challenges—like currency volatility, fuel price spikes, or supply chain bottlenecks—impact your business.
+          </p>
+        </div>
+
+        <div class="bento-contrast-grid">
+          <!-- Card A: The Risk of Black-Box Research -->
+          <div class="bento-risk-card" data-reveal="card" style="--delay: 0">
+            <span class="card-status-pill status-pill-risk">
+              <span>✕</span> TRADITIONAL & LOW-RIGOR RESEARCH
+            </span>
+            <h3 class="bento-card-title">The Flaws of Superficial Scraping</h3>
+            <p class="bento-card-p">
+              Relying on unchecked internet sources, isolated surveys with microscopic sample sizes, or academic models disconnected from commercial operational realities.
+            </p>
+            <ul class="features-check-list">
+              <li class="features-check-item">
+                <span class="check-icon-risk">✕</span>
+                <span><strong>Recycled Desk Research:</strong> Secondary data repeated across outdated blogs without verifying original methodology or sample sizes.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-risk">✕</span>
+                <span><strong>Single-Point Surveys:</strong> Unweighted surveys that suffer from respondent self-reporting bias and lack real physical corroboration.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-risk">✕</span>
+                <span><strong>Currency Blindness:</strong> Treating nominal figures as real growth without separating currency devaluation from actual unit volume demand.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-risk">✕</span>
+                <span><strong>Black-Box Algorithms:</strong> Mathematical models that cannot be audited by institutional risk officers or investment committees.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card B: The Renalytica Dual-Vector Standard -->
+          <div class="bento-solution-card" data-reveal="card" style="--delay: 1">
+            <span class="card-status-pill status-pill-solution">
+              <span>✔</span> THE RENALYTICA EMPIRICAL STANDARD
+            </span>
+            <h3 class="bento-card-title">Dual-Vector Ground-Truth Triangulation</h3>
+            <p class="bento-card-p">
+              We eliminate guesswork by combining on-the-ground primary field surveys with audited secondary institutional resources—reconciling both to uncover real market movements.
+            </p>
+            <ul class="features-check-list">
+              <li class="features-check-item">
+                <span class="check-icon-success">✔</span>
+                <span><strong>Ground-Truth Primary Surveys:</strong> Real price and volume data collected weekly across wholesale markets, distribution hubs, and agricultural cooperatives.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-success">✔</span>
+                <span><strong>Audited Secondary Repositories:</strong> Ingestion of official statistics from Central Banks, Ministries, IMF, World Bank, and listed company filings.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-success">✔</span>
+                <span><strong>Dual-Currency Normalization:</strong> Tracking historical and forecast trends in both local currency and US Dollars with parallel exchange adjustments.</span>
+              </li>
+              <li class="features-check-item">
+                <span class="check-icon-success">✔</span>
+                <span><strong>Transparent Mathematical Auditing:</strong> Every forecast provides base, conservative, and upside scenarios backed by open data citations.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DUAL-TRACK DATA INGESTION: Primary Surveys vs. Secondary Resources -->
+    <section class="dual-track-section" id="data-sources">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">DATA HARVESTING INFRASTRUCTURE</span>
+          <h2 class="section-title-standard">Two Independent Tracks. One Unified Ground Truth.</h2>
+          <p class="section-subtitle-standard">
+            No economic model is stronger than its inputs. We do not choose between on-the-ground surveys and institutional records—we harness both simultaneously to give you the most accurate picture possible.
+          </p>
+        </div>
+
+        <div class="dual-track-grid">
+          <!-- Track 1: Primary Field Research & Surveys -->
+          <div class="track-container-card" data-reveal="card" style="--delay: 0">
+            <div class="track-badge-header">
+              <span class="track-index-num">TRACK 01 // DIRECT</span>
+              <span class="track-type-tag">PRIMARY FIELD SURVEYS</span>
+            </div>
+            <h3 class="track-title">On-the-Ground Telemetry & Direct Surveys</h3>
+            <p class="track-lead">
+              Direct physical observation capturing fresh market velocity before official government bodies or commercial agencies even begin drafting reports.
+            </p>
+
+            <div class="track-media-preview" data-parallax="0.04">
+              <img src="assets/images/methodology_field_research.jpg" 
+                   alt="Renalytica field enumerator conducting primary agricultural survey in Nigeria" 
+                   class="track-media-img" 
+                   loading="lazy" 
+                   width="600" 
+                   height="240">
+              <div class="track-media-overlay">
+                <span class="track-media-pill">
+                  <span class="pulse-orange-dot"></span> 180+ Primary Survey Nodes // Nigeria & Regional Hubs
+                </span>
+              </div>
+            </div>
+
+            <div class="track-vectors-stack">
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">📋</div>
+                <div>
+                  <h4 class="vector-title">Wholesale & Merchant Price Surveys</h4>
+                  <p class="vector-desc">Trained enumerators record real transaction prices, stock levels, and distributor margins across 180+ commercial hubs weekly.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">🚢</div>
+                <div>
+                  <h4 class="vector-title">Port Manifests & Bill-of-Lading Registers</h4>
+                  <p class="vector-desc">Audited customs records tracking exact physical tonnage entering and exiting key seaports, borders, and bonded terminals.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">🛰️</div>
+                <div>
+                  <h4 class="vector-title">Satellite Vegetation (NDVI) & Weather Scans</h4>
+                  <p class="vector-desc">Remote sensing telemetry monitoring soil moisture and biomass health from space to independently verify crop yield estimates.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">🎙️</div>
+                <div>
+                  <h4 class="vector-title">Direct Industry Executive Inquiries</h4>
+                  <p class="vector-desc">Structured qualitative and quantitative interviews with manufacturing leads, freight haulers, and trade association executives.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Track 2: Authoritative Secondary Resources -->
+          <div class="track-container-card" data-reveal="card" style="--delay: 1">
+            <div class="track-badge-header">
+              <span class="track-index-num">TRACK 02 // INSTITUTIONAL</span>
+              <span class="track-type-tag">SECONDARY RESOURCES</span>
+            </div>
+            <h3 class="track-title">Audited Secondary Resources & Repositories</h3>
+            <p class="track-lead">
+              Systematic harvesting and harmonization of official records, regulatory filings, and vetted multilateral databases across regional economies.
+            </p>
+
+            <div class="track-media-preview" data-parallax="0.04">
+              <img src="assets/images/methodology_secondary_data.jpg" 
+                   alt="Lead financial data analyst reconciling institutional and multilateral databases" 
+                   class="track-media-img" 
+                   loading="lazy" 
+                   width="600" 
+                   height="240">
+              <div class="track-media-overlay">
+                <span class="track-media-pill">
+                  <span class="pulse-orange-dot"></span> 60+ Repositories // Central Banks & IMF Harmonization
+                </span>
+              </div>
+            </div>
+
+            <div class="track-vectors-stack">
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">🏛️</div>
+                <div>
+                  <h4 class="vector-title">Central Banks & Statistics Bureaus</h4>
+                  <p class="vector-desc">Direct ingestion of monetary policy releases, foreign exchange reserves, trade balance ledgers, and National Bureaus of Statistics indices.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">🌐</div>
+                <div>
+                  <h4 class="vector-title">Multilateral Economic Databases</h4>
+                  <p class="vector-desc">Structured time-series datasets from the International Monetary Fund (IMF), World Bank, African Development Bank (AfDB), and FAO.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">📑</div>
+                <div>
+                  <h4 class="vector-title">Corporate Annual Disclosures & Filings</h4>
+                  <p class="vector-desc">Audited financial statements and stock exchange disclosures from major listed FMCG, agribusiness, energy, and financial corporations.</p>
+                </div>
+              </div>
+              <div class="vector-row-item">
+                <div class="vector-icon-badge">📚</div>
+                <div>
+                  <h4 class="vector-title">Specialized Commodity & Industry Archives</h4>
+                  <p class="vector-desc">Historical spot pricing archives, trade federation bulletins, academic econometric studies, and regulatory gazettes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Triangulation Bridge Card -->
+        <div class="triangulation-bridge-card" data-reveal="fade-up" data-parallax="0.03">
+          <div class="triangulation-media-thumb">
+            <img src="assets/images/methodology_port_logistics.jpg" 
+                 alt="Industrial seaport container terminal for verifying customs tonnage and bills of lading" 
+                 class="triangulation-img" 
+                 loading="lazy" 
+                 width="220" 
+                 height="140">
+            <span class="triangulation-thumb-badge">PORT & MANIFEST AUDIT</span>
+          </div>
+          <div class="triangulation-info-text">
+            <h4>The Cross-Vector Triangulation Advantage</h4>
+            <p>
+              Secondary resources provide essential macro structure and historical context; primary field surveys provide real-time reality checks. When triangulated, statistical discrepancies are immediately exposed. If a secondary government bulletin claims domestic grain harvests surged 35%, but our primary surveys reveal soaring spot market prices and port manifests show record grain imports, our research desk investigates until the empirical truth is uncovered.
+            </p>
+          </div>
+          <div class="triangulation-badge-pill">
+            100% RECONCILED ACCURACY
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. THE 4-STAGE VERIFICATION PIPELINE (Interactive Stepper) -->
+    <section class="pipeline-stepper-section" id="pipeline-stages">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">OUR 4-STEP VERIFICATION PIPELINE</span>
+          <h2 class="section-title-standard">From Raw Data to Boardroom Direction</h2>
+          <p class="section-subtitle-standard">
+            Every table, forecast, and strategic recommendation follows our strict 4-step data verification pipeline. Click through the stages below to see our methodology in action.
+          </p>
+        </div>
+
+        <!-- Interactive Tabs Nav -->
+        <div class="pipeline-tabs-nav" data-reveal="fade-up">
+          <button class="pipeline-tab-btn active" data-stage="1">
+            <span>01</span> Multi-Source Ingestion
+          </button>
+          <button class="pipeline-tab-btn" data-stage="2">
+            <span>02</span> Clean & Reconcile
+          </button>
+          <button class="pipeline-tab-btn" data-stage="3">
+            <span>03</span> Econometric Modeling
+          </button>
+          <button class="pipeline-tab-btn" data-stage="4">
+            <span>04</span> Boardroom Synthesis
+          </button>
+        </div>
+
+        <!-- Stage 1 Card (Active Default) -->
+        <div class="pipeline-stage-card active" id="stage-card-1">
+          <div class="stage-copy-col">
+            <span class="stage-index-badge">STEP 01 // DATA HARVESTING</span>
+            <h3 class="stage-headline">Gathering Real Facts from Field & Secondary Repositories</h3>
+            <p class="stage-lead-summary">
+              We ingest raw quantitative and qualitative data across synchronized primary surveys and secondary institutional repositories.
+            </p>
+            <div class="stage-checklist">
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Primary Field Surveys:</strong> 180+ verified commercial points, wholesale spot pricing, retail shelves, and farming cooperatives.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Audited Secondary Registries:</strong> Official feeds from Central Banks, National Bureaus of Statistics, IMF, and World Bank datasets.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Port & Customs Logs:</strong> Direct container throughput manifests and cross-border customs declarations.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Remote Sensing:</strong> High-resolution satellite NDVI vegetation and precipitation maps for agricultural yield models.</span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-visual-col">
+            <div class="telemetry-interactive-terminal">
+              <div class="terminal-header-bar">
+                <div class="terminal-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <span class="terminal-title-tag">INGESTION_PIPELINE // ACTIVE</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">PRIMARY_SURVEY_NODES:</span>
+                <span class="log-val accent">184 Live Hubs</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">SECONDARY_REGISTRIES:</span>
+                <span class="log-val">64 Institutional APIs</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">CUSTOMS_MANIFESTS:</span>
+                <span class="log-val">12 Ports Reconciled</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">SATELLITE_INDEX:</span>
+                <span class="log-val">NDVI 0.68 Biomass Verified</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">INGESTION_STATUS:</span>
+                <span class="log-val success">100% Verified Inputs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2 Card -->
+        <div class="pipeline-stage-card" id="stage-card-2">
+          <div class="stage-copy-col">
+            <span class="stage-index-badge">STEP 02 // PRE-PROCESSING</span>
+            <h3 class="stage-headline">Cleaning, Currency Normalization & Noise Filtering</h3>
+            <p class="stage-lead-summary">
+              Raw data is noisy and distorted by volatile exchange rates or reporting lags. Our economists apply strict econometric filters before any data touches a forecast.
+            </p>
+            <div class="stage-checklist">
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Dual-Currency Normalization:</strong> Separating local nominal price inflation from real purchasing power using parallel and official FX dynamics.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Seasonal De-Trending:</strong> Smoothing cyclical harvest gluts and lean season price spikes to isolate long-term multi-year trajectories.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Outlier & Anomaly Elimination:</strong> Algorithmic screening to identify statistical blips and investigate reporting errors.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Source Reconciliation:</strong> Cross-validating field survey answers against official trade registers to guarantee consistency.</span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-visual-col">
+            <div class="telemetry-interactive-terminal">
+              <div class="terminal-header-bar">
+                <div class="terminal-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <span class="terminal-title-tag">CLEANSING_FILTER // ACTIVE</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">FX_WEIGHTING:</span>
+                <span class="log-val accent">Dual USD / Local Normalized</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">SEASONAL_FILTER:</span>
+                <span class="log-val">X-13ARIMA-SEATS Applied</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">OUTLIERS_REMOVED:</span>
+                <span class="log-val">3.4% Noise Discarded</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">CROSS_CHECK_MATCH:</span>
+                <span class="log-val success">99.2% Triangulated</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">CLEAN_STATUS:</span>
+                <span class="log-val success">Harmonized Time-Series</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 3 Card -->
+        <div class="pipeline-stage-card" id="stage-card-3">
+          <div class="stage-copy-col">
+            <span class="stage-index-badge">STEP 03 // QUANTITATIVE SIMULATION</span>
+            <h3 class="stage-headline">Econometric Modeling & Multi-Scenario Stress-Testing</h3>
+            <p class="stage-lead-summary">
+              Markets are non-linear; single-point best-case guesses fail when real-world shocks hit. We stress-test all projections across dynamic scenarios.
+            </p>
+            <div class="stage-checklist">
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Monte Carlo Simulations:</strong> Minimum 10,000 stochastic simulation iterations per market model to compute realistic confidence intervals.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Three Distinct Scenarios:</strong> Every forecast provides a Base Case, Conservative (Bear Case), and Growth (Bull Case) scenario.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Multi-Factor Sensitivity Testing:</strong> Modeling the real-world impact of diesel tariffs, rainfall shortages, and interest rate spikes.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Explicit Margin of Error:</strong> Clear bounds for 5-to-10-year projections so corporate risk officers know downside limits.</span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-visual-col">
+            <div class="telemetry-interactive-terminal">
+              <div class="terminal-header-bar">
+                <div class="terminal-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <span class="terminal-title-tag">SIMULATION_ENGINE // ACTIVE</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">SIMULATION_RUNS:</span>
+                <span class="log-val accent">10,000 Iterations</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">BASE_CASE_PROBABILITY:</span>
+                <span class="log-val">68.4% Confidence</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">STRESS_TEST_SHOCKS:</span>
+                <span class="log-val">+25% Diesel / -15% FX Liquidity</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">CONFIDENCE_INTERVAL:</span>
+                <span class="log-val success">p &lt; 0.01 Significance</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">MODEL_STATUS:</span>
+                <span class="log-val success">Tri-Scenario Formatted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 4 Card -->
+        <div class="pipeline-stage-card" id="stage-card-4">
+          <div class="stage-copy-col">
+            <span class="stage-index-badge">STEP 04 // EXECUTIVE SYNTHESIS</span>
+            <h3 class="stage-headline">Dual Senior Economist Review & Plain-English Translation</h3>
+            <p class="stage-lead-summary">
+              Mathematics must translate into actionable boardroom direction. Two senior econometricians independently verify every table before publication.
+            </p>
+            <div class="stage-checklist">
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Dual-Economist Sign-Off:</strong> Two senior researchers must independently co-sign each quantitative exhibit and model.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Zero Academic Jargon:</strong> Complex statistical formulas are translated into clear, simple executive takeaways anyone can grasp.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Boardroom-Ready Deliverables:</strong> High-resolution watermarked PDFs, presentation decks, and unlocked Excel models.</span>
+              </div>
+              <div class="stage-check-item">
+                <span class="stage-dot-bullet"></span>
+                <span><strong>Transparent Citations:</strong> Full provenance detailing exact primary sample sizes and secondary bibliographic registries.</span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-visual-col">
+            <div class="telemetry-interactive-terminal">
+              <div class="terminal-header-bar">
+                <div class="terminal-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <span class="terminal-title-tag">SYNTHESIS_SIGN_OFF // COMPLETE</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">PRIMARY_SIGN_OFF:</span>
+                <span class="log-val success">Dr. A. Sanusi (Lead Macro)</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">PEER_AUDIT_SIGN_OFF:</span>
+                <span class="log-val success">C. Okoye (Agri Econometrician)</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">EXCEL_DATA_PACK:</span>
+                <span class="log-val accent">Formulas Unlocked (.xlsx)</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">EXECUTIVE_BRIEF:</span>
+                <span class="log-val">Boardroom Synthesis Ready</span>
+              </div>
+              <div class="terminal-log-row">
+                <span class="log-key">REPORT_STATUS:</span>
+                <span class="log-val success">Published to Store</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. INTERACTIVE SOURCE CONFIDENCE SIMULATOR WIDGET -->
+    <section class="confidence-simulator-section" id="confidence-simulator">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">INTERACTIVE VERIFICATION SIMULATOR</span>
+          <h2 class="section-title-standard">Inspect How We Score Data Confidence</h2>
+          <p class="section-subtitle-standard">
+            Select a key sector to explore how primary survey data and secondary institutional resources are weighted, cross-checked, and calculated into an empirical confidence rating.
+          </p>
+        </div>
+
+        <div class="simulator-box" data-reveal="scale">
+          <!-- Sector Picker Buttons -->
+          <div class="simulator-sector-picker">
+            <button class="sector-pick-btn active" data-sector="agri">
+              🌾 Grains & Food Security
+            </button>
+            <button class="sector-pick-btn" data-sector="macro">
+              📈 Macroeconomics & FX Liquidity
+            </button>
+            <button class="sector-pick-btn" data-sector="fmcg">
+              🛒 Retail FMCG & Logistics
+            </button>
+          </div>
+
+          <!-- Live Metrics Display Grid -->
+          <div class="simulator-display-grid">
+            <!-- Left Data Breakdown -->
+            <div class="simulator-data-col">
+              <div class="data-breakdown-row">
+                <div class="breakdown-label-line">
+                  <span>Primary Field Surveys & Telemetry</span>
+                  <span id="primary-weight-label" class="log-val accent">55% Total Weight</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-orange" id="primary-bar" style="width: 55%"></div>
+                </div>
+                <p class="vector-desc mt-8" id="primary-desc">
+                  180+ weekly merchant price surveys across rural collection depots and major grain silos, verified via satellite NDVI scans.
+                </p>
+              </div>
+
+              <div class="data-breakdown-row">
+                <div class="breakdown-label-line">
+                  <span>Secondary Institutional Repositories</span>
+                  <span id="secondary-weight-label" class="log-val">45% Total Weight</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-blue" id="secondary-bar" style="width: 45%"></div>
+                </div>
+                <p class="vector-desc mt-8" id="secondary-desc">
+                  Ministries of Agriculture crop assessments, FAO GIEWS seasonal registers, port fertilizer import manifests, and Central Bank agricultural loans.
+                </p>
+              </div>
+
+              <div class="data-breakdown-row">
+                <div class="breakdown-label-line">
+                  <span>Primary Discrepancy Mitigated</span>
+                  <span id="risk-factor-tag" class="log-val" style="color: var(--signal-success);">Harvest Seasonality & Smuggling</span>
+                </div>
+                <p class="vector-desc mt-8" id="risk-desc">
+                  Reconciling official production claims against live port import volumes and cross-border trucking manifests.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Score Card -->
+            <div class="simulator-score-col">
+              <div class="score-circle-badge">
+                <span class="score-val-mega" id="confidence-score-val">99.4%</span>
+                <span class="score-tag-micro">CONFIDENCE RATING</span>
+              </div>
+              <h4 class="score-summary-title" id="score-summary-headline">High Empirical Certainty</h4>
+              <p class="score-summary-desc" id="score-summary-text">
+                Multi-point triangulation active. Data vetted through dual-economist peer review and 10,000 Monte Carlo stochastic simulation iterations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. SECTOR-SPECIFIC EMPIRICAL PROTOCOLS -->
+    <section class="sector-protocols-section" id="sector-protocols">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">TAILORED DOMAIN RIGOR</span>
+          <h2 class="section-title-standard">Sector-Specific Verification Protocols</h2>
+          <p class="section-subtitle-standard">
+            Every industry has unique data dynamics. We adapt our primary survey design and secondary data gathering protocols to fit specific sector market mechanics.
+          </p>
+        </div>
+
+        <!-- Interactive Horizontal Sector Protocol Rail -->
+        <div class="horizontal-rail-wrapper protocols-rail-wrapper" data-reveal="fade-up">
+          <div class="horizontal-rail-top-bar">
+            <div class="rail-telemetry-hint">
+              <span class="pulse-orange-dot"></span>
+              <span>DRAG &amp; SWIPE SECTOR PROTOCOLS // 4 SPECIALIZED DOMAINS</span>
+            </div>
+            <div class="rail-nav-group">
+              <button class="rail-nav-btn prev" aria-label="Previous Protocol" data-rail-prev>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button class="rail-nav-btn next" aria-label="Next Protocol" data-rail-next>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="horizontal-rail-track protocols-rail-track">
+            <!-- Protocol 1: Agriculture -->
+            <div class="protocol-card rail-card-item" data-reveal="card" style="--delay: 0">
+              <span class="protocol-sector-badge">AGRICULTURE &amp; COMMODITIES</span>
+              <h3 class="protocol-card-title">Crop Yield &amp; Input Deficit Modeling</h3>
+              <div class="protocol-card-media">
+                <img src="assets/images/methodology_agri_protocol.jpg" 
+                     alt="Agricultural field survey team inspecting wheat harvest in Makurdi, Benue State, Nigeria" 
+                     class="protocol-media-img" 
+                     loading="lazy" 
+                     width="400" 
+                     height="180">
+                <div class="protocol-media-badge">
+                  <span>🌾 BENUE &amp; NORTHERN BASIN SAMPLING</span>
+                </div>
+              </div>
+              <div class="protocol-specs-block">
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Primary Surveys &amp; Fieldwork</div>
+                  <div class="spec-category-val">Weekly surveys of 180+ farmer cooperatives, grain trading hubs, and satellite biomass (NDVI) ground-truthing.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Secondary Resources</div>
+                  <div class="spec-category-val">Ministry of Agriculture crop forecast bulletins, FAO grain balances, fertilizer import manifests, commodity board trade registers.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Econometric Output</div>
+                  <div class="spec-category-val">Harvest volume projections, landed fertilizer price pass-through elasticities, and post-harvest storage shrinkage models.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Protocol 2: Macroeconomics & FX -->
+            <div class="protocol-card rail-card-item" data-reveal="card" style="--delay: 1">
+              <span class="protocol-sector-badge">ECONOMY &amp; CURRENCY</span>
+              <h3 class="protocol-card-title">Sovereign Liquidity &amp; Inflation Transmission</h3>
+              <div class="protocol-card-media">
+                <img src="assets/images/methodology_macro_protocol.jpg" 
+                     alt="Financial strategist analyzing foreign exchange volatility and macroeconomic growth projections" 
+                     class="protocol-media-img" 
+                     loading="lazy" 
+                     width="400" 
+                     height="180">
+                <div class="protocol-media-badge">
+                  <span>📈 DUAL FX DIVERGENCE &amp; LIQUIDITY STRESS-TESTS</span>
+                </div>
+              </div>
+              <div class="protocol-specs-block">
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Primary Surveys &amp; Fieldwork</div>
+                  <div class="spec-category-val">Direct spot FX bureau rate sampling, commercial bank treasurer inquiries, and cross-border transport corridor tariff tracking.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Secondary Resources</div>
+                  <div class="spec-category-val">Central Bank statistical bulletins, sovereign debt amortization schedules, IMF Article IV staff reports, and National Bureau of Statistics CPI series.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Econometric Output</div>
+                  <div class="spec-category-val">Foreign currency reserve cover forecasts, parallel market divergence forecasting, and 3-scenario currency depreciation shock models.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Protocol 3: Retail & FMCG -->
+            <div class="protocol-card rail-card-item" data-reveal="card" style="--delay: 2">
+              <span class="protocol-sector-badge">COMMERCE &amp; LOGISTICS</span>
+              <h3 class="protocol-card-title">Route-to-Market &amp; Distributor Margin Telemetry</h3>
+              <div class="protocol-card-media">
+                <img src="assets/images/methodology_commerce_protocol.jpg" 
+                     alt="Bustling open-air wholesale trading market in Lagos, Nigeria" 
+                     class="protocol-media-img" 
+                     loading="lazy" 
+                     width="400" 
+                     height="180">
+                <div class="protocol-media-badge">
+                  <span>🛒 OPEN-AIR &amp; MODERN RETAIL VELOCITY</span>
+                </div>
+              </div>
+              <div class="protocol-specs-block">
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Primary Surveys &amp; Fieldwork</div>
+                  <div class="spec-category-val">Store audits across modern supermarkets and open-air traditional markets, distributor warehouse offload spot checks.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Secondary Resources</div>
+                  <div class="spec-category-val">Audited corporate earnings reports of listed FMCG conglomerates, port container throughput logs, national retail censuses.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Econometric Output</div>
+                  <div class="spec-category-val">Distributor channel margin breakdowns, price elasticity across consumer basket essentials, and modern vs informal retail share shifts.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Protocol 4: Seaport Customs & Maritime Trade -->
+            <div class="protocol-card rail-card-item" data-reveal="card" style="--delay: 3">
+              <span class="protocol-sector-badge">MARITIME &amp; INDUSTRIAL CORRIDORS</span>
+              <h3 class="protocol-card-title">Seaport Ingestion &amp; Manifest Verification</h3>
+              <div class="protocol-card-media">
+                <img src="assets/images/methodology_port_logistics.jpg" 
+                     alt="Industrial seaport container terminal for verifying customs tonnage and bills of lading" 
+                     class="protocol-media-img" 
+                     loading="lazy" 
+                     width="400" 
+                     height="180">
+                <div class="protocol-media-badge">
+                  <span>🚢 12 COMMERCIAL PORTS AUDITED</span>
+                </div>
+              </div>
+              <div class="protocol-specs-block">
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Primary Surveys &amp; Fieldwork</div>
+                  <div class="spec-category-val">Terminal gate audits, container dwell time logs, bonded warehouse offloading records, and freight hauler surveys.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Secondary Resources</div>
+                  <div class="spec-category-val">National Port Authority statistical manifests, international AIS vessel tracking transponders, customs single-window databases.</div>
+                </div>
+                <div class="spec-category-item">
+                  <div class="spec-category-label">Econometric Output</div>
+                  <div class="spec-category-val">Physical cargo throughput reconciliation, import tariff inflation pass-through, and trade corridor transit friction modeling.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. OUR 100% ETHICAL INDEPENDENCE GUARANTEE -->
+    <section class="independence-guarantee-section" id="ethical-guarantee">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-tag-mono">UNCOMPROMISED INTEGRITY</span>
+          <h2 class="section-title-standard">Our 100% Ethical Independence Guarantee</h2>
+          <p class="section-subtitle-standard">
+            Real intelligence requires total objectivity. We enforce strict institutional governance rules to keep our loyalty 100% aligned with our report buyers.
+          </p>
+        </div>
+
+        <!-- Executive Governance Showcase Card -->
+        <div class="ethics-showcase-card" data-reveal="fade-up">
+          <div class="ethics-showcase-media">
+            <img src="assets/images/methodology_ethics_boardroom.jpg" 
+                 alt="Renalytica senior research council and governance oversight committee" 
+                 class="ethics-showcase-img" 
+                 loading="lazy" 
+                 width="560" 
+                 height="280">
+            <div class="ethics-media-badge">
+              <span class="pulse-orange-dot"></span> INDEPENDENT GOVERNANCE COUNCIL
+            </div>
+          </div>
+          <div class="ethics-showcase-content">
+            <span class="section-tag-mono">FIDUCIARY RIGOR // UNCOMPROMISED OBJECTIVITY</span>
+            <h3 class="ethics-showcase-title">Independent Research by Institutional Design</h3>
+            <p class="ethics-showcase-p">
+              Unlike typical research houses funded by corporate sponsorships or PR retainers, Renalytica operates under an ironclad ethical charter. Our analysts do not hold active commercial positions in covered assets, and our findings are never shaped by sponsors, advertisers, or political lobbies.
+            </p>
+            <div class="ethics-meta-tags">
+              <span class="ethics-tag-item">✔ 100% Subscriber-Funded</span>
+              <span class="ethics-tag-item">✔ Zero Sponsored Studies</span>
+              <span class="ethics-tag-item">✔ Strict Personal Trading Bans</span>
+              <span class="ethics-tag-item">✔ Dual-Economist Sign-Off</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="independence-4col-grid">
+          <div class="independence-card" data-reveal="card" style="--delay: 0">
+            <span class="independence-num">01 // INTEGRITY</span>
+            <h4 class="independence-title">Zero Paid Reviews</h4>
+            <p class="independence-desc">
+              We never accept sponsorship money or PR retainers to promote companies or products. Our revenue comes solely from verified research subscriptions and report sales.
+            </p>
+          </div>
+
+          <div class="independence-card" data-reveal="card" style="--delay: 1">
+            <span class="independence-num">02 // COMPLIANCE</span>
+            <h4 class="independence-title">No Trading Conflicts</h4>
+            <p class="independence-desc">
+              Our lead economists and analysts are legally barred from trading commodity futures, currencies, or equities in the specific industries and companies they cover.
+            </p>
+          </div>
+
+          <div class="independence-card" data-reveal="card" style="--delay: 2">
+            <span class="independence-num">03 // PROVENANCE</span>
+            <h4 class="independence-title">Complete Attribution</h4>
+            <p class="independence-desc">
+              Every table clearly documents its data sources—distinguishing between our on-the-ground survey samples and verified secondary institutional registers.
+            </p>
+          </div>
+
+          <div class="independence-card" data-reveal="card" style="--delay: 3">
+            <span class="independence-num">04 // SECURITY</span>
+            <h4 class="independence-title">Ironclad Confidentiality</h4>
+            <p class="independence-desc">
+              Custom feasibility studies and private corporate advisory engagements are guarded by institutional Non-Disclosure Agreements (NDAs) and bank-grade data security.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 10. TECHNICAL DUE DILIGENCE CTA & WHITEPAPER ACCESS -->
+    <section class="methodology-cta-section" id="cta-briefing">
+      <div class="container">
+        <div class="cta-box-center" data-reveal="fade-up">
+          <span class="cta-tag-obsidian">INSTITUTIONAL DUE DILIGENCE</span>
+          <h2 class="cta-headline-obsidian">
+            We Are Always Happy to Explain Our Numbers.
+          </h2>
+          <p class="cta-desc-obsidian">
+            We welcome technical due diligence from institutional risk officers, chief economists, and boardroom investment committees. Review our full methodology whitepaper or schedule a direct briefing with our lead research team.
+          </p>
+          <div class="cta-buttons-row">
+            <button class="btn-pill-primary" id="open-whitepaper-modal-btn-2">
+              Download Methodology Whitepaper (PDF) →
+            </button>
+            <a href="https://wa.me/2348137538723?text=Hello%20Renalytica%20Research%20Team%2C%20I%20would%20like%20to%20request%20a%20methodology%20briefing." target="_blank" rel="noopener noreferrer" class="btn-pill-outline cta-outline-btn">
+              Schedule a Methodology Briefing
+            </a>
+            <a href="reports.html" class="link-arrow-orange">
+              Browse Verified Reports in Store →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+  </main>
+
+  <!-- 11. WHITEPAPER DOWNLOAD MODAL -->
+  <div class="modal-overlay" id="whitepaper-modal">
+    <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+      <button class="modal-close-btn" id="close-whitepaper-modal-btn" aria-label="Close Modal">&times;</button>
+      <h3 class="modal-title" id="modal-headline">Download Methodology Whitepaper</h3>
+      <p class="modal-subtitle">
+        Receive our complete 38-page technical specification covering primary survey sampling protocols, secondary institutional data ingestion, and econometric forecasting algorithms.
+      </p>
+
+      <form class="modal-form" id="whitepaper-download-form" onsubmit="handleWhitepaperSubmit(event)">
+        <div class="form-group-item">
+          <label for="modal-full-name">Full Name *</label>
+          <input type="text" id="modal-full-name" required placeholder="e.g. Dr. Babatunde Alabi">
+        </div>
+        <div class="form-group-item">
+          <label for="modal-work-email">Corporate Work Email *</label>
+          <input type="email" id="modal-work-email" required placeholder="e.g. b.alabi@africacapital.com">
+        </div>
+        <div class="form-group-item">
+          <label for="modal-org">Company or Institution *</label>
+          <input type="text" id="modal-org" required placeholder="e.g. Standard Chartered / Cargill">
+        </div>
+        <button type="submit" class="btn-pill-primary modal-submit-btn">
+          Download PDF Specification Brief →
+        </button>
+      </form>
+
+      <div class="modal-success-alert" id="modal-success-msg">
+        ✔ Success! Your technical methodology whitepaper has been generated. Check your inbox for the download link.
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. Global Mega Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Scripts -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Page Interactive Logic -->
+  <script>
+    // 1. Pipeline Stepper Tab Navigation
+    const pipelineTabs = document.querySelectorAll('.pipeline-tab-btn');
+    const pipelineCards = document.querySelectorAll('.pipeline-stage-card');
+
+    pipelineTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const stageNum = tab.getAttribute('data-stage');
+        
+        pipelineTabs.forEach(t => t.classList.remove('active'));
+        pipelineCards.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        const targetCard = document.getElementById(`stage-card-${stageNum}`);
+        if (targetCard) {
+          targetCard.classList.add('active');
+        }
+      });
+    });
+
+    // 2. Source Confidence Simulator Widget
+    const sectorData = {
+      agri: {
+        primaryWeight: '55% Total Weight',
+        primaryWidth: '55%',
+        primaryDesc: '180+ weekly merchant price surveys across rural collection depots and major grain silos, verified via satellite NDVI scans.',
+        secondaryWeight: '45% Total Weight',
+        secondaryWidth: '45%',
+        secondaryDesc: 'Ministries of Agriculture crop assessments, FAO GIEWS seasonal registers, port fertilizer import manifests, and Central Bank agricultural loans.',
+        riskTag: 'Harvest Seasonality & Smuggling',
+        riskDesc: 'Reconciling official production claims against live port import volumes and cross-border trucking manifests.',
+        score: '99.4%',
+        headline: 'High Empirical Certainty',
+        summary: 'Multi-point triangulation active. Data vetted through dual-economist peer review and 10,000 Monte Carlo stochastic simulation iterations.'
+      },
+      macro: {
+        primaryWeight: '40% Total Weight',
+        primaryWidth: '40%',
+        primaryDesc: 'Daily spot FX bureau rate sampling across Lagos, Nairobi, and Accra, plus commercial bank liquidity desk surveys.',
+        secondaryWeight: '60% Total Weight',
+        secondaryWidth: '60%',
+        secondaryDesc: 'Central Bank weekly balance sheets, IMF Article IV surveillance datasets, sovereign bond debt amortizations, and National Bureau of Statistics CPI.',
+        riskTag: 'Parallel Market FX Divergence',
+        riskDesc: 'Detecting currency premium spreads between official foreign exchange auctions and real private market liquidity.',
+        score: '98.9%',
+        headline: 'Institutional Policy Rigor',
+        summary: 'Harmonized sovereign liquidity models adjusted for foreign exchange reserve cover and monetary policy transmission lags.'
+      },
+      fmcg: {
+        primaryWeight: '65% Total Weight',
+        primaryWidth: '65%',
+        primaryDesc: 'Shelf velocity checks across 45 modern retail chains and 120 traditional open wholesale markets in 8 commercial metropolises.',
+        secondaryWeight: '35% Total Weight',
+        secondaryWidth: '35%',
+        secondaryDesc: 'Quarterly financial earnings reports from listed consumer goods conglomerates, maritime container clearance logs, and retail trade censuses.',
+        riskTag: 'Distributor Margin Concealment',
+        riskDesc: 'Uncovering actual wholesale rebates, transit fuel surcharges, and informal route-to-market distribution friction.',
+        score: '99.1%',
+        headline: 'Granular Commercial Clarity',
+        summary: 'Direct retail point-of-sale audits reconciled with audited consumer corporate revenues across 28 leading FMCG brands.'
+      }
+    };
+
+    const sectorButtons = document.querySelectorAll('.sector-pick-btn');
+    sectorButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sectorKey = btn.getAttribute('data-sector');
+        if (!sectorData[sectorKey]) return;
+
+        sectorButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const d = sectorData[sectorKey];
+        document.getElementById('primary-weight-label').textContent = d.primaryWeight;
+        document.getElementById('primary-bar').style.width = d.primaryWidth;
+        document.getElementById('primary-desc').textContent = d.primaryDesc;
+
+        document.getElementById('secondary-weight-label').textContent = d.secondaryWeight;
+        document.getElementById('secondary-bar').style.width = d.secondaryWidth;
+        document.getElementById('secondary-desc').textContent = d.secondaryDesc;
+
+        document.getElementById('risk-factor-tag').textContent = d.riskTag;
+        document.getElementById('risk-desc').textContent = d.riskDesc;
+
+        document.getElementById('confidence-score-val').textContent = d.score;
+        document.getElementById('score-summary-headline').textContent = d.headline;
+        document.getElementById('score-summary-text').textContent = d.summary;
+      });
+    });
+
+    // 3. Whitepaper Download Modal Interactions
+    const modal = document.getElementById('whitepaper-modal');
+    const openBtn1 = document.getElementById('open-whitepaper-modal-btn');
+    const openBtn2 = document.getElementById('open-whitepaper-modal-btn-2');
+    const closeBtn = document.getElementById('close-whitepaper-modal-btn');
+
+    function openModal() {
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeModal() {
+      if (modal) modal.classList.remove('active');
+    }
+
+    if (openBtn1) openBtn1.addEventListener('click', openModal);
+    if (openBtn2) openBtn2.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+    }
+
+    function handleWhitepaperSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('whitepaper-download-form');
+      const successMsg = document.getElementById('modal-success-msg');
+      if (form && successMsg) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+        setTimeout(() => {
+          closeModal();
+          form.reset();
+          form.style.display = 'flex';
+          successMsg.style.display = 'none';
+        }, 3200);
+      }
+    }
+  </script>
+
+  <!-- Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <!-- Box-style Bars (Built from individual blocks) -->
+        <g class="chart-bars">
+          <!-- Bar 1 -->
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          
+          <!-- Bar 2 -->
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          
+          <!-- Bar 3 -->
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          
+          <!-- Bar 4 -->
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+
+        <!-- Growing Arrow Line -->
+        <path 
+          d="M 5 90 L 35 65 L 65 45 L 90 20" 
+          fill="none" 
+          stroke="#ef7d00" 
+          stroke-width="6" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="animate-line"
+        />
+
+        <!-- Nodes/Nodes -->
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        
+        <!-- Arrow Head -->
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

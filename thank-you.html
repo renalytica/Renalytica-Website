@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Call Confirmed | Institutional Research Advisory — Renalytica</title>
+  <meta name="description" content="Your 30-minute institutional discovery call with Renalytica is confirmed. Review pre-session methodology blueprints and market research reports.">
+  <link rel="canonical" href="https://www.renalytica.com/thank-you">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/contact.css">
+
+  <style>
+    .thankyou-wrapper {
+      padding: 60px 0 100px;
+      min-height: 80vh;
+    }
+    .thankyou-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-2xl, 24px);
+      padding: 48px;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .thankyou-glow {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 128, 0, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .thankyou-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #10B981;
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+    .thankyou-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin: 16px 0 12px;
+      line-height: 1.2;
+    }
+    .thankyou-title-gradient {
+      background: linear-gradient(135deg, var(--color-momentum-orange, #FF8000), #F59E0B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .thankyou-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .booking-hud-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      background: var(--bg-canvas-subtle, rgba(0,0,0,0.02));
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+      font-family: var(--font-mono, monospace);
+      font-size: 12px;
+    }
+    .hud-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .hud-val {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+    .hud-val.accent {
+      color: var(--color-momentum-orange, #FF8000);
+    }
+    .hud-val.green {
+      color: #10B981;
+    }
+    .resource-hub-heading {
+      margin-bottom: 24px;
+    }
+    .resource-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .resource-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .resource-card:hover {
+      border-color: var(--color-momentum-orange, #FF8000);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .res-tag {
+      font-family: var(--font-mono, monospace);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .res-tag.amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #D97706;
+    }
+    .res-tag.orange {
+      background: rgba(255, 128, 0, 0.12);
+      color: #FF8000;
+    }
+    .res-tag.green {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10B981;
+    }
+    .res-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .res-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .res-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-momentum-orange, #FF8000);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rescheduling-box {
+      border: 1px dashed var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: var(--bg-surface);
+    }
+  </style>
+
+  <!-- Early Theme Initialization -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content" class="thankyou-wrapper">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <div style="margin-bottom: 24px;">
+        <a href="index.html" style="font-size: 12px; font-weight: 600; color: var(--text-muted); text-decoration: none;">
+          &larr; Return to Renalytica Terminal Home
+        </a>
+      </div>
+
+      <!-- Hero Confirmation Card -->
+      <div class="thankyou-card">
+        <div class="thankyou-glow"></div>
+
+        <div class="thankyou-icon-box">
+          &#10003;
+        </div>
+
+        <div class="telemetry-badge-pill" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <span class="pulse-green-dot"></span>
+          <span>BOOKING CONFIRMED // CALENDAR SYNC ACTIVE</span>
+        </div>
+
+        <h1 class="thankyou-title">
+          You&rsquo;re Confirmed.<br>
+          <span class="thankyou-title-gradient">We Look Forward to Meeting You.</span>
+        </h1>
+
+        <p class="thankyou-desc">
+          Your 30-minute institutional discovery call has been successfully scheduled with the Renalytica Research Directorate. 
+          An automated calendar invitation with secure video conferencing credentials has been delivered to your email.
+        </p>
+
+        <!-- Booking Details HUD Box -->
+        <div class="booking-hud-grid">
+          <div>
+            <span class="hud-label">Meeting Type</span>
+            <span class="hud-val" id="hud-meeting-type">30-Minute Discovery Call</span>
+          </div>
+          <div>
+            <span class="hud-label">Booking Reference</span>
+            <span class="hud-val accent" id="hud-booking-ref">RNL-849204</span>
+          </div>
+          <div>
+            <span class="hud-label">Host Directorate</span>
+            <span class="hud-val" id="hud-host-name">Senior Macro Analysts</span>
+          </div>
+          <div>
+            <span class="hud-label">Conferencing Mode</span>
+            <span class="hud-val green">Google Meet / Teams (Included)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategic Pre-Call Resource Hub -->
+      <div class="resource-hub-heading">
+        <p class="channels-eyebrow" style="margin-bottom: 8px;">
+          <span class="pulse-green-dot"></span>
+          RECOMMENDED PRE-CALL READING
+        </p>
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">
+          Review Our Institutional Blueprints &amp; Datasets
+        </h2>
+        <p style="font-size: 15px; color: var(--text-secondary); max-width: 600px; margin-top: 4px;">
+          Explore our published research reports, empirical methodology, and advisory case studies prior to your session.
+        </p>
+      </div>
+
+      <div class="resource-hub-grid">
+        <!-- Resource 1: Methodology -->
+        <a href="methodology.html" class="resource-card">
+          <div>
+            <span class="res-tag amber">01 // METHODOLOGY</span>
+            <h3 class="res-title">Dual-Track Empirical Verification</h3>
+            <p class="res-desc">
+              Understand how our ground-level surveys, port logs, and econometric triangulation ensure mathematical accuracy in frontier African markets.
+            </p>
+          </div>
+          <div class="res-link">
+            Explore Methodology Blueprint &rarr;
+          </div>
+        </a>
+
+        <!-- Resource 2: Research Catalog -->
+        <a href="reports.html" class="resource-card">
+          <div>
+            <span class="res-tag orange">02 // RESEARCH STORE</span>
+            <h3 class="res-title">Institutional Report Catalog</h3>
+            <p class="res-desc">
+              Browse 10 comprehensive research publications covering African AI adoption, stablecoin velocity, solar mini-grids, and cross-border logistics.
+            </p>
+          </div>
+          <div class="res-link">
+            Browse Published Reports &rarr;
+          </div>
+        </a>
+
+        <!-- Resource 3: Case Studies -->
+        <a href="insights.html" class="resource-card">
+          <div>
+            <span class="res-tag green">03 // ADVISORY INSIGHTS</span>
+            <h3 class="res-title">Executive Case Studies</h3>
+            <p class="res-desc">
+              Examine how multilateral development banks, PE funds, and conglomerates utilize Renalytica forecasting models for strategic capital allocation.
+            </p>
+          </div>
+          <div class="res-link">
+            Read Whitepapers &amp; Briefs &rarr;
+          </div>
+        </a>
+      </div>
+
+      <!-- Assistance / Rescheduling Strip -->
+      <div class="rescheduling-box">
+        <div>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">
+            Need to invite colleagues or adjust your time?
+          </h4>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0;">
+            Use the one-click rescheduling link in your email invitation, or contact our desk directly on WhatsApp.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <a href="https://wa.me/2348137538723" target="_blank" rel="noopener noreferrer" class="channel-cta-btn" style="padding: 10px 18px; font-size: 13px; text-decoration: none;">
+            WhatsApp Desk &rarr;
+          </a>
+          <a href="portal.html" class="channel-cta-btn outline" style="padding: 10px 18px; font-size: 13px; text-decoration: none;">
+            Client Intelligence Portal &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Mega Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Scripts -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="lib/articles-repository.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+
+  <!-- Script to parse URL params -->
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookingId = urlParams.get('booking_id');
+      const eventTitle = urlParams.get('title');
+      const host = urlParams.get('host');
+
+      if (bookingId) {
+        document.getElementById('hud-booking-ref').textContent = bookingId;
+      } else {
+        document.getElementById('hud-booking-ref').textContent = 'RNL-' + Math.floor(100000 + Math.random() * 900000);
+      }
+
+      if (eventTitle) {
+        document.getElementById('hud-meeting-type').textContent = eventTitle;
+      }
+
+      if (host) {
+        document.getElementById('hud-host-name').textContent = host;
+      }
+    })();
+  </script>
+</body>
+</html>

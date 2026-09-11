@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &amp; Research Licensing Agreement — Renalytica</title>
+  <meta name="description" content="Read the official Terms of Service and Research Licensing Agreement governing the use of Renalytica’s website, digital report store, Excel data packs, corporate subscriptions, and custom advisory services.">
+  <meta name="keywords" content="terms of service, market research licensing agreement, research report terms, commercial data usage policy, Renalytica legal terms, intellectual property market reports">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Renalytica Terms of Service &amp; Research License">
+  <meta property="og:description" content="Clear, balanced terms governing digital research delivery, intellectual property rights, licensing scopes, and enterprise usage.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.renalytica.com/terms">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/legal.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <!-- 3. HERO STAGE -->
+    <section class="legal-hero-section" id="hero-terms">
+      <div class="legal-hero-container">
+        <div class="legal-badges-row" data-reveal="fade-up" style="--delay: 0">
+          <span class="legal-pill-badge accent">
+            <span class="pulse-dot-orange"></span>
+            LEGAL SUITE // GOVERNANCE &amp; COMPLIANCE
+          </span>
+          <span class="legal-pill-badge">
+            ENTERPRISE CONTRACT CODE: REN-TOS-2026-V2
+          </span>
+        </div>
+
+        <h1 class="legal-hero-title legal-title" data-reveal="fade-up" style="--delay: 1">
+          Terms of Service &amp;<br>
+          <span class="title-accent">Research Licensing Agreement.</span>
+        </h1>
+
+        <p class="legal-hero-desc" data-reveal="fade-up" style="--delay: 2">
+          Clear, transparent, and fair terms governing your access to Renalytica’s digital intelligence, published research reports, unlocked data models, corporate subscriptions, and bespoke advisory services.
+        </p>
+
+        <div class="legal-meta-strip" data-reveal="fade-up" style="--delay: 3">
+          <div class="legal-meta-item">
+            <span>Last Updated:</span>
+            <strong>September 2026</strong>
+          </div>
+          <div class="legal-meta-item">
+            <span>Jurisdiction:</span>
+            <strong>Federal Republic of Nigeria (LCA)</strong>
+          </div>
+          <div class="legal-meta-item">
+            <span>Version:</span>
+            <strong>2.4 Enterprise Edition</strong>
+          </div>
+          <button class="btn-legal-action" id="btn-print-terms" aria-label="Print or Export Terms of Service">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Agreement
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile Quick Jump Bar (Visible < 1024px) -->
+    <div class="legal-mobile-jump" id="legal-mobile-jump">
+      <select class="legal-mobile-select" id="legal-mobile-select" aria-label="Jump to legal section">
+        <option value="#sec-1">Section 1: Introduction &amp; Authority</option>
+        <option value="#sec-2">Section 2: Definitions</option>
+        <option value="#sec-3">Section 3: Licensing Tiers &amp; Usage</option>
+        <option value="#sec-4">Section 4: Prohibited Uses &amp; AI Ban</option>
+        <option value="#sec-5">Section 5: Intellectual Property Rights</option>
+        <option value="#sec-6">Section 6: Fair Use &amp; Citations</option>
+        <option value="#sec-7">Section 7: Orders, Pricing &amp; Delivery</option>
+        <option value="#sec-8">Section 8: Refund Policy &amp; Remedies</option>
+        <option value="#sec-9">Section 9: Corporate Subscriptions</option>
+        <option value="#sec-10">Section 10: Custom Advisory &amp; NDA</option>
+        <option value="#sec-11">Section 11: Disclaimers &amp; Non-Reliance</option>
+        <option value="#sec-12">Section 12: Limitation of Liability</option>
+        <option value="#sec-13">Section 13: Indemnification</option>
+        <option value="#sec-14">Section 14: Dispute Resolution &amp; LCA</option>
+        <option value="#sec-15">Section 15: General Provisions</option>
+        <option value="#sec-16">Section 16: Legal Desk &amp; Inquiries</option>
+      </select>
+    </div>
+
+    <!-- 4. MAIN TWO-COLUMN SECTION -->
+    <section class="legal-main-section">
+      <div class="legal-layout-container">
+
+        <!-- Sticky Sidebar: Table of Contents -->
+        <aside class="legal-toc-sidebar" aria-label="Terms of Service Table of Contents">
+          <div class="legal-toc-header">
+            <span class="legal-toc-title">Table of Contents</span>
+          </div>
+          <nav class="legal-toc-nav" id="legal-toc-nav">
+            <a href="#sec-1" class="legal-toc-link active" data-target="sec-1">
+              <span class="legal-toc-num">01</span> Introduction &amp; Authority
+            </a>
+            <a href="#sec-2" class="legal-toc-link" data-target="sec-2">
+              <span class="legal-toc-num">02</span> Definitions &amp; Terms
+            </a>
+            <a href="#sec-3" class="legal-toc-link" data-target="sec-3">
+              <span class="legal-toc-num">03</span> License Tiers &amp; Scope
+            </a>
+            <a href="#sec-4" class="legal-toc-link" data-target="sec-4">
+              <span class="legal-toc-num">04</span> Prohibited Uses &amp; AI Ban
+            </a>
+            <a href="#sec-5" class="legal-toc-link" data-target="sec-5">
+              <span class="legal-toc-num">05</span> IP Rights &amp; Ownership
+            </a>
+            <a href="#sec-6" class="legal-toc-link" data-target="sec-6">
+              <span class="legal-toc-num">06</span> Fair Use &amp; Citations
+            </a>
+            <a href="#sec-7" class="legal-toc-link" data-target="sec-7">
+              <span class="legal-toc-num">07</span> Orders, Pricing &amp; Delivery
+            </a>
+            <a href="#sec-8" class="legal-toc-link" data-target="sec-8">
+              <span class="legal-toc-num">08</span> Refund Policy &amp; SLA
+            </a>
+            <a href="#sec-9" class="legal-toc-link" data-target="sec-9">
+              <span class="legal-toc-num">09</span> Corporate Subscriptions
+            </a>
+            <a href="#sec-10" class="legal-toc-link" data-target="sec-10">
+              <span class="legal-toc-num">10</span> Custom Advisory &amp; NDA
+            </a>
+            <a href="#sec-11" class="legal-toc-link" data-target="sec-11">
+              <span class="legal-toc-num">11</span> Disclaimers &amp; As-Is
+            </a>
+            <a href="#sec-12" class="legal-toc-link" data-target="sec-12">
+              <span class="legal-toc-num">12</span> Limitation of Liability
+            </a>
+            <a href="#sec-13" class="legal-toc-link" data-target="sec-13">
+              <span class="legal-toc-num">13</span> Indemnification
+            </a>
+            <a href="#sec-14" class="legal-toc-link" data-target="sec-14">
+              <span class="legal-toc-num">14</span> Dispute Resolution (LCA)
+            </a>
+            <a href="#sec-15" class="legal-toc-link" data-target="sec-15">
+              <span class="legal-toc-num">15</span> General Provisions
+            </a>
+            <a href="#sec-16" class="legal-toc-link" data-target="sec-16">
+              <span class="legal-toc-num">16</span> Legal Desk &amp; Contacts
+            </a>
+          </nav>
+
+          <div class="legal-toc-contact">
+            <div class="legal-toc-contact-title">Corporate Counsel Desk</div>
+            <p>Direct licensing, compliance, or enterprise procurement queries:</p>
+            <a href="mailto:legal@renalytica.com">legal@renalytica.com →</a>
+          </div>
+        </aside>
+
+        <!-- Substantive Legal Body -->
+        <div class="legal-content-body">
+
+          <!-- Crosslink Alert Ribbon -->
+          <div class="legal-crosslink-ribbon">
+            <div>
+              <strong>Privacy &amp; Data Governance:</strong> For information on our NDPA 2023 and GDPR compliance, view our <a href="privacy.html">Privacy &amp; Data Protection Policy</a>.
+            </div>
+            <div>
+              <a href="faq.html">Browse FAQ &amp; Purchasing Help →</a>
+            </div>
+          </div>
+
+          <!-- SECTION 1: INTRODUCTION -->
+          <section class="legal-doc-section" id="sec-1">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 01</span>
+              <h2 class="legal-section-title">Introduction &amp; Corporate Identification</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">1.1</span> <b>Contractual Agreement:</b> These Terms of Service and Research Licensing Agreement ("Terms", "Agreement") constitute a legally binding agreement between you (whether individually or on behalf of an entity, "Client", "Licensee", "User", "You") and <b>Renalytica Technologies &amp; Research Advisory Limited</b> ("Renalytica", "Company", "We", "Us", "Our"), registered under the Companies and Allied Matters Act in the Federal Republic of Nigeria.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">1.2</span> <b>Acceptance:</b> By accessing, browsing, or utilizing the Renalytica website (<code>www.renalytica.com</code>), creating a client account, purchasing a digital research report, downloading a sample brief, subscribing to the Renalytica Research Terminal, or executing a Custom Research Statement of Work (SOW), you expressly acknowledge that you have read, understood, and agree to be bound by all provisions of this Agreement. If you do not agree with all of these terms, you are prohibited from using the platform and must immediately cease access.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">1.3</span> <b>Corporate Authority:</b> If you enter into this Agreement on behalf of a corporation, partnership, investment fund, financial institution, or government agency, you represent and warrant that you possess full corporate power and legal authority to bind that entity to these Terms.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 2: DEFINITIONS -->
+          <section class="legal-doc-section" id="sec-2">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 02</span>
+              <h2 class="legal-section-title">Definitions &amp; Interpretations</h2>
+            </div>
+            
+            <p>Throughout this Agreement, the following terms shall have the meanings ascribed below:</p>
+
+            <ul>
+              <li><b>"Licensed Materials"</b> means any published industry report, macroeconomic outlook, commodity dispatch, data tables, forecasting models, slide decks, newsletters, infographics, or custom research deliverables generated and provided by Renalytica in PDF, Excel, PowerPoint, API, or web format.</li>
+              <li><b>"Single User License"</b> means a non-exclusive, non-transferable personal research license granted to one (1) designated individual employee.</li>
+              <li><b>"Departmental License"</b> means a non-exclusive, non-transferable organizational license granted to up to five (5) designated professionals within a single defined department or operating unit of the Licensee.</li>
+              <li><b>"Global Enterprise License"</b> means a non-exclusive, non-transferable worldwide corporate license permitting unlimited internal access across all wholly-owned subsidiaries, regional branches, and global offices of the Licensee.</li>
+              <li><b>"Unlocked Excel Data Pack"</b> means the spreadsheet file (.xlsx) containing underlying quantitative baseline series, primary survey tables, econometric coefficients, and customizable forecast formulas.</li>
+              <li><b>"Custom Deliverables"</b> means bespoke market scans, commercial due diligence dossiers, feasibility reports, or econometric models commissioned under a dedicated Statement of Work.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 3: LICENSING TIERS -->
+          <section class="legal-doc-section" id="sec-3">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 03</span>
+              <h2 class="legal-section-title">Research Licensing Tiers &amp; Scope of Permitted Use</h2>
+            </div>
+            
+            <p>Renalytica publishes high-value proprietary market intelligence. All access to Licensed Materials is subject to the specific license tier purchased by the Client:</p>
+
+            <!-- Visual License Tier Comparison Cards -->
+            <div class="legal-license-grid">
+              <div class="legal-license-card">
+                <span class="legal-license-tier-tag">TIER 01 // PERSONAL</span>
+                <div class="legal-license-title">Single User License</div>
+                <div class="legal-license-price">$2,500</div>
+                <div class="legal-license-scope">For one (1) designated individual researcher or executive on up to 2 personal devices.</div>
+                <ul class="legal-license-bullets">
+                  <li>Read-only watermarked PDF</li>
+                  <li>Strictly personal usage</li>
+                  <li>No internal network hosting</li>
+                  <li>Locked spreadsheets</li>
+                </ul>
+              </div>
+
+              <div class="legal-license-card highlight">
+                <span class="legal-license-tier-tag">TIER 02 // MOST POPULAR</span>
+                <div class="legal-license-title">Departmental License</div>
+                <div class="legal-license-price">$4,500</div>
+                <div class="legal-license-scope">For up to five (5) named professionals within a single functional department.</div>
+                <ul class="legal-license-bullets">
+                  <li>Unlocked Excel Data Pack (.xlsx)</li>
+                  <li>Internal executive printing</li>
+                  <li>Internal model integration</li>
+                  <li>60-min lead analyst briefing</li>
+                </ul>
+              </div>
+
+              <div class="legal-license-card">
+                <span class="legal-license-tier-tag">TIER 03 // INSTITUTIONAL</span>
+                <div class="legal-license-title">Global Enterprise License</div>
+                <div class="legal-license-price">$7,500</div>
+                <div class="legal-license-scope">Unlimited access across all corporate subsidiaries, regional branches, and board members.</div>
+                <ul class="legal-license-bullets">
+                  <li>Intranet &amp; knowledge hub hosting</li>
+                  <li>80-100 slide executive deck (.pptx)</li>
+                  <li>2-hour boardroom briefing session</li>
+                  <li>4 consecutive quarterly addenda</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.1</span> <b>Single User License Provisions:</b></p>
+              <ul>
+                <li><b>Authorized User:</b> The Licensed Materials may be accessed, stored, and read solely by <b>one (1) designated named individual</b> on up to two (2) personal computing devices (e.g., corporate laptop and desktop).</li>
+                <li><b>Internal Sharing Prohibition:</b> The Licensee shall not post, host, upload, or circulate the Licensed Materials on internal shared network folders, cloud drives (e.g., Google Drive, OneDrive, SharePoint, Dropbox), internal messaging channels (Slack, Microsoft Teams), or corporate intranets.</li>
+                <li><b>Format Restrictions:</b> Delivered as a digitally watermarked, read-only PDF file. Printing, text extraction, and unlocked spreadsheet access are explicitly restricted.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.2</span> <b>Departmental License Provisions:</b></p>
+              <ul>
+                <li><b>Authorized Users:</b> The Licensed Materials may be shared, accessed, and utilized by up to <b>five (5) named employees</b> operating within the same specific functional department (e.g., Corporate Strategy, Treasury, or Agribusiness Investments).</li>
+                <li><b>Internal Presentation &amp; Printing:</b> The Licensee is authorized to print physical copies strictly for internal executive review, committee meetings, and board packs.</li>
+                <li><b>Data Modeling Rights:</b> Includes the Unlocked Excel Data Pack. Authorized users may extract data points, alter forecast assumptions, and integrate figures into internal financial, valuation, or feasibility models.</li>
+                <li><b>Analyst Consultation:</b> Includes one (1) sixty-minute virtual briefing session with the lead research economist, exercisable within ninety (90) days of purchase.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.3</span> <b>Global Enterprise License Provisions:</b></p>
+              <ul>
+                <li><b>Universal Internal Access:</b> The Licensed Materials may be accessed, hosted, and utilized across the entire corporate entity, including all global subsidiaries, regional operating offices, and board members.</li>
+                <li><b>Enterprise Document Hosting:</b> Authorized for hosting on secure internal document repositories, knowledge hubs, and enterprise intranet portals protected by enterprise authentication.</li>
+                <li><b>Executive Slide Pack:</b> Includes an editable 80-to-100 slide executive PowerPoint deck for internal boardroom presentations and corporate planning workshops.</li>
+                <li><b>Boardroom Briefing:</b> Includes a two-hour formal virtual or in-person executive briefing session conducted by Renalytica senior economists for the Client's executive committee.</li>
+                <li><b>Quarterly Updates:</b> Entitles the Client to four (4) consecutive quarterly macroeconomic and sector addenda updates for twelve (12) months following purchase.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECTION 4: PROHIBITED USES -->
+          <section class="legal-doc-section" id="sec-4">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 04</span>
+              <h2 class="legal-section-title">Prohibited Uses &amp; Restrictions</h2>
+            </div>
+            
+            <p>Except as expressly authorized in Section 3, the Client shall NOT:</p>
+            
+            <ol>
+              <li><b>Public Redistribution:</b> Post, publish, transmit, or distribute any full Renalytica report, chapter, or Excel data sheet on public websites, peer-to-peer file sharing networks, social media platforms, or open internet forums.</li>
+              <li><b>Commercial Exploitation &amp; Resale:</b> Sub-license, rent, lease, resell, assign, distribute, or commercially exploit Renalytica research materials or data feeds to any external third party.</li>
+              <li><b>Artificial Intelligence &amp; LLM Scraping:</b> Ingest, feed, scrape, or index any portion of Renalytica’s Licensed Materials into public or private Artificial Intelligence (AI) models, Large Language Models (LLMs), machine learning training corpuses, or automated semantic retrieval databases without an explicit Enterprise Machine Learning License agreement.</li>
+              <li><b>Removal of Proprietary Notices:</b> Alter, obscure, remove, or delete any copyright notice, trademark, digital signature, watermark, or metadata identifier embedded within Licensed Materials.</li>
+              <li><b>Reverse Engineering:</b> Attempt to reverse engineer, decompile, or extract the underlying software architecture or algorithmic logic of the Renalytica platform or Research Terminal.</li>
+            </ol>
+
+            <div class="legal-callout-box warning">
+              <div class="legal-callout-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                AI Model Training Prohibition Notice
+              </div>
+              <p class="legal-callout-desc">
+                Renalytica expressly reserves all rights against text and data mining, automated scraping, and LLM fine-tuning ingestion under international copyright treaties. Any systematic extraction of our proprietary econometric data for training AI models will be prosecuted to the fullest extent of civil and commercial law.
+              </p>
+            </div>
+          </section>
+
+          <!-- SECTION 5: IP OWNERSHIP -->
+          <section class="legal-doc-section" id="sec-5">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 05</span>
+              <h2 class="legal-section-title">Intellectual Property Rights &amp; Ownership</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">5.1</span> <b>Proprietary Ownership:</b> Renalytica and its licensors retain sole, exclusive, and unencumbered ownership of all right, title, and interest in and to the Licensed Materials, the website, the Renalytica brand, logos, data collection methodologies, econometric modeling algorithms, survey repositories, and all derivative works, including all worldwide copyright, trademark, trade secret, and patent rights.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">5.2</span> <b>No Transfer of Title:</b> The purchase of a report, subscription, or advisory engagement grants only a limited, revocable, non-transferable license as defined herein; <b>it does not transfer intellectual property ownership or copyright title to the Client.</b></p>
+            </div>
+          </section>
+
+          <!-- SECTION 6: FAIR USE & ATTRIBUTION -->
+          <section class="legal-doc-section" id="sec-6">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 06</span>
+              <h2 class="legal-section-title">Fair Use, Citations &amp; Attribution Guidelines</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">6.1</span> <b>External Citation Rights:</b> Clients holding a Departmental or Global Enterprise license are permitted to cite brief data points, isolated statistics, and individual charts in external materials—such as investor presentations, IPO prospectuses, bank loan applications, regulatory filings, or media interviews—provided that:</p>
+              <ul>
+                <li>The cited material does not exceed ten percent (10%) of the total report content.</li>
+                <li>Clear, prominent, and legible attribution is provided in the required format:</li>
+              </ul>
+              
+              <div class="legal-citation-quote">
+                "Source: Renalytica — [Report Title], [Publication Year], www.renalytica.com"
+              </div>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">6.2</span> <b>White-Labeling Restriction:</b> Clients may not present Renalytica forecasts, market sizing figures, or field survey data as their own internal original research without explicit written authorization from Renalytica.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 7: ORDERS & DELIVERY -->
+          <section class="legal-doc-section" id="sec-7">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 07</span>
+              <h2 class="legal-section-title">Orders, Multi-Currency Pricing &amp; Digital Delivery</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">7.1</span> <b>Pricing &amp; Currencies:</b> All report prices are clearly displayed on the platform in United States Dollars (USD) as the baseline global benchmark. Local currency conversions (including Nigerian Naira - NGN, British Pounds - GBP, and Euros - EUR) are provided at prevailing interbank exchange rates. Renalytica reserves the right to update published prices without prior notice.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">7.2</span> <b>Taxes &amp; Withholdings:</b> Published prices exclude value-added taxes (VAT), sales taxes, or cross-border withholding taxes where applicable. Where local tax authorities require withholding tax deduction at source, the Client shall provide an official Tax Withholding Credit Certificate within thirty (30) days of invoice payment.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">7.3</span> <b>Digital Delivery Guarantee:</b> Upon successful card payment clearance or receipt of verified bank wire confirmation, Renalytica’s automated fulfillment system dispatches secure download links via email within sixty (60) seconds. Links remain active for seventy-two (72) hours. Replacement download links are available upon request through <code>fulfillment@renalytica.com</code>.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 8: REFUNDS & REMEDIES -->
+          <section class="legal-doc-section" id="sec-8">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 08</span>
+              <h2 class="legal-section-title">Refund Policy &amp; Digital Fulfillment Remedies</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">8.1</span> <b>Finality of Digital Purchases:</b> Due to the confidential, proprietary, and instantly consumable nature of digital research reports and Excel data packs, <b>all sales are final and non-refundable once digital files have been downloaded or accessed by the Client.</b></p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">8.2</span> <b>Technical Defect Remedy:</b> If a downloaded file is corrupted, unreadable, or missing components described in the product specification, Renalytica will provide replacement files or technical conversion support within <b>two (2) business hours</b> of receiving written notice at <code>support@renalytica.com</code>.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">8.3</span> <b>Material Discrepancy Claims:</b> If a Client can demonstrate in good faith that a purchased report materially deviates from the Table of Contents or coverage boundaries published on the product detail page, Renalytica will investigate the claim within five (5) business days and, at its sole discretion, issue an organizational credit toward any alternative publication or custom advisory project.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 9: CORPORATE SUBSCRIPTIONS -->
+          <section class="legal-doc-section" id="sec-9">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 09</span>
+              <h2 class="legal-section-title">Corporate Subscriptions &amp; Research Terminal Terms</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">9.1</span> <b>Subscription Term:</b> Corporate Subscriptions are contracted on an <b>annual twelve (12) month basis</b>, commencing on the date enterprise login credentials or IP whitelist authentication are provisioned.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">9.2</span> <b>User Access &amp; Seat Governance:</b> The Client agrees to ensure that login credentials assigned to specific employees are not shared, distributed, or rotated among non-designated personnel. Renalytica monitors concurrent session activity to protect against systemic credential abuse.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">9.3</span> <b>Renewal Terms:</b> Corporate subscriptions automatically renew for successive twelve (12) month terms unless either party provides written notice of non-renewal at least <b>thirty (30) days prior</b> to the expiration of the current subscription term.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 10: CUSTOM ADVISORY -->
+          <section class="legal-doc-section" id="sec-10">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 10</span>
+              <h2 class="legal-section-title">Custom Research &amp; Advisory Engagements</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">10.1</span> <b>Statements of Work (SOW):</b> All bespoke research, commercial due diligence, and feasibility studies shall be governed by a separate, bilateral Statement of Work defining the project objectives, primary survey methodology, geographic boundary, milestone schedule, and fee schedule.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">10.2</span> <b>Mutual Non-Disclosure (NDA):</b> Every custom advisory engagement is executed under strict mutual confidentiality obligations. Renalytica warrants that all proprietary client data, strategic intentions, and commercial transaction details disclosed during the project will remain strictly confidential.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">10.3</span> <b>Deliverable Ownership:</b> Unless otherwise stipulated in the SOW, the Client owns the final bespoke report deliverable upon receipt of full payment, while Renalytica retains all underlying methodology frameworks, statistical models, and proprietary primary fieldwork repositories.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 11: DISCLAIMERS -->
+          <section class="legal-doc-section" id="sec-11">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 11</span>
+              <h2 class="legal-section-title">Disclaimer of Warranties &amp; Non-Reliance Declarations</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">11.1</span> <b>Informational Purpose Only:</b> All Licensed Materials, market projections, econometric calculations, and analytical opinions published by Renalytica are prepared for general strategic guidance, commercial evaluation, and informational purposes only.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">11.2</span> <b>No Investment or Legal Advice:</b> <b>Renalytica does not provide formal legal, accounting, tax, investment, or regulated financial advisory services.</b> Nothing contained within our publications, platform, or analyst briefings constitutes a recommendation or endorsement to buy, sell, or hold any security, commodity, currency, financial derivative, or physical asset.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">11.3</span> <b>As-Is Provision:</b> While Renalytica employs its Dual-Track Verification Methodology and rigorous econometric validation, macroeconomic and commercial conditions in frontier economies are inherently volatile. <b>All materials are provided "AS IS" and "AS AVAILABLE" without warranty of any kind, whether express, implied, statutory, or otherwise, including implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</b></p>
+            </div>
+          </section>
+
+          <!-- SECTION 12: LIMITATION OF LIABILITY -->
+          <section class="legal-doc-section" id="sec-12">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 12</span>
+              <h2 class="legal-section-title">Limitation of Financial Liability</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">12.1</span> <b>Exclusion of Consequential Damages:</b> To the maximum extent permitted by applicable law, in no event shall Renalytica, its directors, economists, enumerators, affiliates, or agents be liable for any indirect, incidental, special, consequential, punitive, or exemplary damages—including but not limited to loss of business profits, lost investment capital, business interruption, loss of data, or operational delays—arising out of or in connection with the use of, or inability to use, our research publications.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">12.2</span> <b>Aggregate Financial Cap:</b> In all circumstances, Renalytica’s maximum aggregate financial liability arising out of or related to this Agreement, whether in contract, tort (including negligence), strict liability, or otherwise, <b>shall be strictly limited to the total fee actually paid by the Client for the specific report, subscription period, or advisory service giving rise to the claim.</b></p>
+            </div>
+          </section>
+
+          <!-- SECTION 13: INDEMNIFICATION -->
+          <section class="legal-doc-section" id="sec-13">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 13</span>
+              <h2 class="legal-section-title">Indemnification</h2>
+            </div>
+            
+            <p>The Client agrees to defend, indemnify, and hold harmless Renalytica, its officers, directors, employees, and analysts from and against any third-party claims, liabilities, damages, losses, costs, or expenses (including reasonable legal fees) arising from the Client's unauthorized distribution of Licensed Materials, violation of third-party intellectual property rights, or breach of this Agreement.</p>
+          </section>
+
+          <!-- SECTION 14: DISPUTE RESOLUTION -->
+          <section class="legal-doc-section" id="sec-14">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 14</span>
+              <h2 class="legal-section-title">Governing Law &amp; Multi-Tiered Dispute Resolution</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">14.1</span> <b>Governing Law:</b> This Agreement shall be governed by, construed, and enforced in accordance with the laws of the <b>Federal Republic of Nigeria</b>, without regard to principles of conflicts of law.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">14.2</span> <b>Amicable Negotiation:</b> In the event of any controversy, claim, or dispute arising out of or relating to this Agreement, the parties shall first endeavor in good faith to resolve the dispute through direct commercial negotiation between designated executive representatives for a period of thirty (30) days.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">14.3</span> <b>Binding Commercial Arbitration:</b> If the dispute remains unresolved following thirty days of executive negotiation, it shall be referred to and finally resolved by binding commercial arbitration administered under the <b>Arbitration and Mediation Act 2023</b> of the Federal Republic of Nigeria, or the rules of the <b>Lagos Court of Arbitration (LCA)</b>.</p>
+              <ul>
+                <li>The tribunal shall consist of one (1) independent commercial arbitrator mutually agreed upon by the parties, or failing agreement, appointed by the President of the LCA.</li>
+                <li>The seat and legal place of arbitration shall be <b>Lagos, Nigeria</b>.</li>
+                <li>The language of the arbitration proceedings shall be English.</li>
+                <li>The arbitral award shall be final, binding, and enforceable in any court of competent jurisdiction worldwide under the <b>New York Convention on the Recognition and Enforcement of Foreign Arbitral Awards</b>.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECTION 15: GENERAL PROVISIONS -->
+          <section class="legal-doc-section" id="sec-15">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 015</span>
+              <h2 class="legal-section-title">General Provisions</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">15.1</span> <b>Severability:</b> If any provision of this Agreement is held to be invalid, illegal, or unenforceable by an arbitral tribunal or court of competent jurisdiction, such invalidity shall not affect the enforceability of any other provision, which shall remain in full force and effect.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">15.2</span> <b>Entire Agreement:</b> This Agreement, together with our Privacy Policy and any executed Statement of Work, constitutes the entire understanding between the parties regarding the subject matter hereof, superseding all prior discussions, emails, representations, or oral agreements.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">15.3</span> <b>Updates to Terms:</b> Renalytica reserves the right to modify these Terms periodically to reflect evolving legal, technological, or operational requirements. Updated terms will be posted at <code>www.renalytica.com/terms</code> with a revised "Last Updated" timestamp. Continued use of the platform constitutes acceptance of revised terms.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 16: LEGAL DESK & CONTACTS -->
+          <section class="legal-doc-section" id="sec-16">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 16</span>
+              <h2 class="legal-section-title">Legal Desk &amp; Formal Inquiries</h2>
+            </div>
+            
+            <p>For questions regarding copyright permissions, enterprise sub-licensing, corporate governance, or compliance matters, please direct formal communications to:</p>
+
+            <div class="legal-desk-container">
+              <div class="legal-desk-title">Renalytica Corporate Governance &amp; Legal Desk</div>
+              <p>Our legal team responds to formal regulatory and corporate licensing inquiries within 24 business hours.</p>
+
+              <div class="legal-desk-grid">
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Legal &amp; Governance</span>
+                  <span class="legal-desk-val"><a href="mailto:legal@renalytica.com">legal@renalytica.com</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Licensing Clearances</span>
+                  <span class="legal-desk-val"><a href="mailto:licensing@renalytica.com">licensing@renalytica.com</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Corporate WhatsApp</span>
+                  <span class="legal-desk-val"><a href="https://wa.me/2348137538723" target="_blank" rel="noopener noreferrer">+234 813 753 8723</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Registered Headquarters</span>
+                  <span class="legal-desk-val">Victoria Island, Lagos, Nigeria</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Sticky Global Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- 6. Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <g class="chart-bars">
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+        <path d="M 5 90 L 35 65 L 65 45 L 90 20" fill="none" stroke="#ef7d00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="animate-line" />
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Component Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Interactive TOC Scroll-Spy & Mobile Jump Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Print handler
+      document.getElementById('btn-print-terms')?.addEventListener('click', () => {
+        window.print();
+      });
+
+      // 2. Desktop Scroll-Spy
+      const sections = document.querySelectorAll('.legal-doc-section');
+      const tocLinks = document.querySelectorAll('.legal-toc-link');
+      const mobileSelect = document.getElementById('legal-mobile-select');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px -60% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            
+            // Update desktop TOC
+            tocLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+
+            // Update mobile select
+            if (mobileSelect) {
+              mobileSelect.value = `#${id}`;
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+
+      // 3. Mobile Jump Dropdown Change
+      mobileSelect?.addEventListener('change', (e) => {
+        const targetId = e.target.value;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

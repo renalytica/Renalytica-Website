@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Perspectives | Expert Op-Eds & Economic Analysis — Renalytica</title>
+  <meta name="description" content="Read in-depth blog articles, analytical op-eds, and field dispatches from Renalytica’s economists and industry fellows. Plain-English commentary on African commerce, agriculture, currency, and supply chains.">
+  <meta name="keywords" content="African economic blog, Renalytica op-ed, agribusiness commentary, African market analysis opinions, data journalism Africa, supply chain thought leadership">
+  <link rel="canonical" href="https://www.renalytica.com/blog">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Blog & Perspectives | Expert Op-Eds & Economic Analysis — Renalytica">
+  <meta property="og:description" content="Unfiltered analysis, expert opinions, and behind-the-scenes data stories written by Renalytica’s economists, field researchers, and guest industry practitioners.">
+  <meta property="og:image" content="assets/images/blog/hero_blog_editorial.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/blog.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <!-- ====================================================================
+         SECTION 2. HERO SECTION: RENALYTICA PERSPECTIVES
+         ==================================================================== -->
+    <section class="blog-hero-section" id="hero-blog">
+      <div class="container blog-hero-container">
+        <div class="blog-hero-grid">
+          <!-- Left Column: Copy & Interactive Filter Pills -->
+          <div class="blog-hero-content">
+            <!-- Telemetry Eyebrow Badges -->
+            <div class="hero-telemetry-badge-group" data-reveal="fade-up" style="--delay: 0">
+              <span class="telemetry-badge-pill">
+                <span class="pulse-green-dot"></span>
+                RENALYTICA PERSPECTIVES // THE EDITORIAL DESK
+              </span>
+              <span class="telemetry-badge-pill accent">
+                FIELD TELEMETRY NETWORK
+              </span>
+              <span class="telemetry-badge-pill live-pulse">
+                INDEPENDENT ECONOMIC COMMENTARY
+              </span>
+            </div>
+
+            <!-- Monumental Headline -->
+            <h1 class="blog-hero-title" data-reveal="fade-up" style="--delay: 1">
+              Perspectives, Op-Eds &amp;<br>
+              <span class="title-accent">Economic Insights.</span>
+            </h1>
+
+            <!-- Sub-Headline -->
+            <p class="blog-hero-desc" data-reveal="fade-up" style="--delay: 2">
+              Unfiltered analysis, expert opinions, and behind-the-scenes data stories written by Renalytica’s economists, field researchers, and guest industry practitioners across African markets.
+            </p>
+
+            <!-- Topic Filter Pills Bar -->
+            <div class="blog-filter-pills-bar" data-reveal="fade-up" style="--delay: 3">
+              <button class="topic-filter-pill active" data-filter="all">All Perspectives</button>
+              <button class="topic-filter-pill" data-filter="oped">Op-Eds &amp; Analysis</button>
+              <button class="topic-filter-pill" data-filter="agri">Agribusiness &amp; Food Security</button>
+              <button class="topic-filter-pill" data-filter="macro">Macro &amp; Currency</button>
+              <button class="topic-filter-pill" data-filter="retail">Retail &amp; FMCG</button>
+              <button class="topic-filter-pill" data-filter="dispatch">Behind The Data</button>
+            </div>
+
+            <!-- Editorial Desk Quick Note -->
+            <div class="blog-quick-contributor-note" data-reveal="fade-up" style="--delay: 4">
+              <span>✍️</span>
+              <span>
+                <strong>Have a compelling market perspective or industry thesis?</strong> We accept guest op-eds from economists, operators, and supply chain leaders. Read our <a href="#contributor-guidelines">Contributor Guidelines</a> or email <a href="mailto:editorial@renalytica.com">editorial@renalytica.com</a>.
+              </span>
+            </div>
+          </div>
+
+          <!-- Right Column: Institutional Editorial Visual Frame -->
+          <div class="blog-hero-visual-col" data-reveal="fade-left" style="--delay: 2">
+            <div class="hero-editorial-frame" data-parallax="0.05">
+              <div class="hero-editorial-media">
+                <img src="assets/images/blog/hero_blog_editorial.jpg" 
+                     alt="Senior African economic researcher and writer analyzing trade data at editorial desk" 
+                     class="hero-editorial-img" 
+                     width="640" 
+                     height="540" 
+                     loading="eager" />
+                <div class="hero-editorial-gradient"></div>
+              </div>
+
+              <!-- Overlay Micro-Telemetry Chip -->
+              <div class="hero-editorial-badge">
+                <span class="pulse-green-dot"></span>
+                <span>EDITORIAL DESK // NAIROBI &amp; LAGOS</span>
+              </div>
+
+              <!-- Floating Metric Chip: 48h Review SLA -->
+              <div class="hero-floating-chip top-right" data-parallax-reverse="-0.08">
+                <span class="chip-icon">⏱️</span>
+                <div>
+                  <span class="chip-val">48 Hours</span>
+                  <span class="chip-lbl">Pitch Review SLA</span>
+                </div>
+              </div>
+
+              <!-- Floating Metric Chip: Weekly Readers -->
+              <div class="hero-floating-chip bottom-left" data-parallax="0.08">
+                <span class="chip-icon">👥</span>
+                <div>
+                  <span class="chip-val">11,200+</span>
+                  <span class="chip-lbl">Weekly Executive Readers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrity Ribbon: 4 Key Metrics with Animated Counters -->
+        <div class="blog-stats-ribbon" data-reveal="scale" style="--delay: 4">
+          <div class="blog-stat-cell">
+            <span class="blog-stat-val" data-counter-target="50" data-counter-suffix="+">50+</span>
+            <span class="blog-stat-label">Verified Op-Eds &amp; Dispatches</span>
+          </div>
+          <div class="blog-stat-cell">
+            <span class="blog-stat-val" data-counter-target="180" data-counter-suffix="+">180+</span>
+            <span class="blog-stat-label">Primary Field Survey Nodes</span>
+          </div>
+          <div class="blog-stat-cell">
+            <span class="blog-stat-val" data-counter-target="11200" data-counter-suffix="+">11,200+</span>
+            <span class="blog-stat-label">Corporate Newsletter Subscribers</span>
+          </div>
+          <div class="blog-stat-cell">
+            <span class="blog-stat-val" data-counter-target="48" data-counter-suffix=" Hours">48 Hours</span>
+            <span class="blog-stat-label">Pitch Evaluation Response SLA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 3. FEATURED FLAGSHIP OP-ED (HERO EDITORIAL)
+         ==================================================================== -->
+    <section class="featured-editorial-section" id="featured-oped">
+      <div class="container">
+        <div class="featured-editorial-card" data-reveal="fade-up">
+          <!-- Editorial Card Topbar -->
+          <div class="featured-editorial-header">
+            <div class="editorial-tag-cluster">
+              <span class="editorial-flag-badge">FEATURED OP-ED</span>
+              <span class="editorial-category-label">Op-Ed &amp; Policy Analysis</span>
+            </div>
+            <div class="editorial-meta-pills">
+              <span>📅 September 04, 2026</span>
+              <span>⏱️ 7 min read</span>
+              <span>📍 Malaba &amp; Mile 2 Depots</span>
+            </div>
+          </div>
+
+          <!-- Editorial Card Body -->
+          <div class="featured-editorial-body">
+            <!-- Headline & Subtitle -->
+            <h2 class="flagship-headline">
+              <a href="article.html?id=african-trade-integration" style="color: inherit; text-decoration: none;">
+                Why African Trade Integration Won’t Happen on Paper—It Happens in Truck Parks and Border Depots
+              </a>
+            </h2>
+            <p class="flagship-subtitle">
+              Trade agreements like the AfCFTA provide the diplomatic framework, but true regional commerce is determined by diesel tariffs, border bottlenecks, and informal currency clearing. Here is what 180 days of field data reveals.
+            </p>
+
+            <!-- Author Lockup -->
+            <div class="editorial-author-lockup">
+              <img src="assets/images/blog/author_arinze_okafor.jpg" alt="Dr. Arinze Okafor" class="author-avatar-img" width="58" height="58">
+              <div class="author-info-block">
+                <span class="author-name">Dr. Arinze Okafor</span>
+                <span class="author-title">Lead Regional Econometrician &amp; Senior Fellow, Renalytica</span>
+              </div>
+            </div>
+
+            <!-- 2-Column Editorial Grid (Media + Key Analytical Sections) -->
+            <div class="flagship-editorial-grid">
+              <!-- Left Column: Photo & Lead Pull Quote -->
+              <div class="flagship-media-pane">
+                <div class="flagship-hero-image-wrap">
+                  <img src="assets/images/blog/flagship_border_trade.jpg" alt="Long-haul commercial haulage trucks queued at regional transit border depot" width="600" height="380" loading="lazy">
+                </div>
+                <div class="flagship-lead-quote">
+                  “Walk into any ministerial trade summit in Addis Ababa or Accra and you will hear ambitious presentations about pan-African tariff harmonization. But step into the sprawling truck transit park at Malaba on the Kenya-Uganda border, or the Mile 2 container depot in Lagos at 4:30 AM, and you encounter a completely different economic reality. African trade integration is not being delayed by a lack of political will—it is being held back by operational friction that policy treaties never capture.”
+                </div>
+              </div>
+
+              <!-- Right Column: 4 Key Sections & Empirical Evidence -->
+              <div class="flagship-sections-pane">
+                <!-- Section 1 -->
+                <div class="flagship-section-block">
+                  <h3 class="flagship-section-heading">
+                    <span class="section-idx">01</span>
+                    The Anatomy of the 72-Hour Border Delay
+                  </h3>
+                  <ul class="flagship-bullet-list">
+                    <li>Official border inspection protocols mandate clearance within 3 hours. In practice, long-haul grain and consumer goods drivers spend an average of <strong>68 to 82 hours idling</strong> at major regional crossings.</li>
+                    <li>Every day a refrigerated or dry-cargo truck sits idle costs the cargo owner between <strong>$180 and $320 in lost capital efficiency</strong>, driver per-diems, and auxiliary generator fuel.</li>
+                    <li>These delays silently eliminate the margin gains that tariff reductions were intended to deliver.</li>
+                  </ul>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="flagship-section-block">
+                  <h3 class="flagship-section-heading">
+                    <span class="section-idx">02</span>
+                    The Informal Bureaucracy of Physical Checkpoints
+                  </h3>
+                  <ul class="flagship-bullet-list">
+                    <li>Our road freight telemetry team tracked 64 commercial haulage trucks moving agricultural commodities along the 1,020 km corridor between Kano and Lagos.</li>
+                    <li>Across this single domestic route, drivers documented an average of <strong>42 informal checkpoint stops</strong>, adding roughly 19 hours to transit time and inflating transport costs by <strong>16.4% per metric ton</strong>.</li>
+                    <li>Cross-border hauliers face similar friction on the Abidjan-Lagos corridor, where documentation stamps must be physically cross-verified across four separate sovereign authorities.</li>
+                  </ul>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="flagship-section-block">
+                  <h3 class="flagship-section-heading">
+                    <span class="section-idx">03</span>
+                    The Currency Mismatch at the Borderline
+                  </h3>
+                  <ul class="flagship-bullet-list">
+                    <li>While central banks debate unified digital settlement systems, cross-border traders rely on street-level currency bureaus (<em>Bureau de Change</em>) operating under market stalls.</li>
+                    <li>The spread between official interbank exchange rates and border cash conversions regularly reaches <strong>8% to 14%</strong>, effectively acting as an unofficial private import duty.</li>
+                  </ul>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="flagship-section-block">
+                  <h3 class="flagship-section-heading">
+                    <span class="section-idx">04</span>
+                    The Pragmatic Path Forward for Business Executives
+                  </h3>
+                  <ul class="flagship-bullet-list">
+                    <li><strong>Do Not Wait for Pan-African Harmonization:</strong> Successful multi-country conglomerates are bypassing border delays by setting up decentralized regional processing hubs rather than relying on centralized megaplants.</li>
+                    <li><strong>Build Direct Relationships with Border Forwarders:</strong> Real-time visibility comes from local clearing agents, not customs dashboards.</li>
+                    <li><strong>Price In Logistics Volatility:</strong> Stress-test supply chains with a minimum 25% transit time buffer during harvest peak seasons.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Author Sign-off Quote Box -->
+            <div class="flagship-author-quote-box">
+              <blockquote>
+                “Until our trade metrics measure the time it takes a 30-ton trailer to clear a customs barrier rather than the signatures on a treaty, we are mistaking diplomatic progress for commercial reality.”
+              </blockquote>
+              <span class="quote-author-sig">— Dr. Arinze Okafor, Senior Fellow at Renalytica</span>
+            </div>
+
+            <!-- Interactive Action Bar -->
+            <div class="flagship-action-bar">
+              <!-- Dual Reading Action Buttons -->
+              <div class="flagship-dual-cta" style="margin-bottom: 14px; width: 100%; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                <button class="btn-pill-primary" onclick="openArticleModal('african-trade-integration')" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 12px 22px;">
+                  Quick Read 📖
+                </button>
+                <a href="article.html?id=african-trade-integration" class="btn-pill-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; padding: 12px 24px; background: var(--surface-gray); color: var(--text-primary); border: 1px solid var(--border-strong);">
+                  Read Full Op-Ed ↗
+                </a>
+              </div>
+
+              <!-- Social Share Pills -->
+              <div class="share-btn-group">
+                <span class="share-label">Share Op-Ed:</span>
+                <button class="share-pill-btn" onclick="shareArticle('linkedin')">LinkedIn</button>
+                <button class="share-pill-btn" onclick="shareArticle('twitter')">X / Twitter</button>
+                <button class="share-pill-btn" onclick="shareArticle('whatsapp')">WhatsApp</button>
+                <button class="share-pill-btn" onclick="copyArticleLink()">Copy Link</button>
+              </div>
+
+              <!-- Download & Report Links -->
+              <div class="action-links-group">
+                <button class="btn-pill-download" onclick="window.print()">
+                  📄 Download Article PDF (Print Ready)
+                </button>
+                <a href="reports.html" class="related-report-link">
+                  Related Report: West Africa Cross-Border Road Freight Telemetry (2026–2030) →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 4. CURATED BLOG ARTICLES & IN-DEPTH OP-EDS GRID
+         ==================================================================== -->
+    <section class="curated-articles-section" id="curated-articles">
+      <div class="container">
+        <!-- Section Header with Search Bar -->
+        <div class="section-head-flex" data-reveal="fade-up">
+          <div class="section-head-left">
+            <span class="section-eyebrow">CURATED RESEARCH &amp; PERSPECTIVES</span>
+            <h2 class="section-headline-standard">Ground-Level Commentary &amp; In-Depth Analyses</h2>
+            <p class="section-desc-sub">
+              Explore plain-English analyses spanning agribusiness adoption, currency devaluation hedging, informal retail dominance, and wholesale B2B payments.
+            </p>
+          </div>
+
+          <!-- Instant Search Input -->
+          <div class="blog-search-wrap">
+            <span>🔍</span>
+            <input type="text" id="article-search-input" class="blog-search-input" placeholder="Search by topic, author or keyword..." onkeyup="filterArticlesBySearch()">
+          </div>
+        </div>
+
+        <!-- Bento Grid of 5 Key Curated Articles -->
+        <div class="curated-articles-grid" id="articles-grid">
+          <!-- Article 1: Macro & Corporate Strategy (Nkechi Balogun) -->
+          <article class="article-bento-card" data-category="macro oped" data-reveal="fade-up" style="--delay: 1">
+            <div class="article-card-thumb-wrap">
+              <img src="assets/images/blog/topic_b2b_clearing.jpg" alt="African currency and foreign exchange risk analysis" class="article-card-thumb" loading="lazy">
+              <span class="article-category-chip macro">Op-Ed // Corporate Strategy</span>
+            </div>
+            <div class="article-card-content">
+              <div class="article-time-row">
+                <span>August 26, 2026</span>
+                <span>⏱️ 5 min read</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href="article.html?id=devaluation" style="color: inherit; text-decoration: none;">
+                  Rethinking Currency Devaluation: How African Importers Are Building Domestic Resiliency Through Reverse Integration
+                </a>
+              </h3>
+              <p class="article-card-teaser">
+                Relying on imported raw materials when your revenue is in local currency is financial roulette. We examine how three leading consumer goods manufacturers pivoted to contract farming and local packaging—slashing foreign exchange exposure by 40% in under 18 months.
+              </p>
+              
+              <!-- Takeaways Box -->
+              <div class="article-takeaways-box">
+                <span class="takeaways-title">Core Analytical Takeaways:</span>
+                <ul class="takeaways-list">
+                  <li>Why FX hedging instruments in frontier markets often fail during sharp devaluations due to shallow liquidity.</li>
+                  <li>The mechanics of "backward integration": partnering directly with outgrower farmer schemes to guarantee supply.</li>
+                  <li>Cost comparison: importing refined starch versus building a local cassava processing mill.</li>
+                </ul>
+              </div>
+
+              <!-- Footer with Author & CTA -->
+              <div class="article-card-footer">
+                <div class="card-author-mini">
+                  <img src="assets/images/blog/author_nkechi_balogun.jpg" alt="Nkechi Balogun" class="author-mini-img">
+                  <div>
+                    <span class="mini-author-name">Nkechi Balogun</span>
+                    <span class="mini-author-role">Senior Analyst, Advisory</span>
+                  </div>
+                <div class="article-actions-row">
+                  <button class="btn-alert-quick-read" onclick="openArticleModal('devaluation')">Quick Read 📖</button>
+                  <a href="article.html?id=devaluation" class="btn-read-cta" style="text-decoration: none;">Full Op-Ed ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article 2: Agribusiness & Food Systems (Ibrahim Sanusi) -->
+          <article class="article-bento-card" data-category="agri" data-reveal="fade-up" style="--delay: 2">
+            <div class="article-card-thumb-wrap">
+              <img src="assets/images/blog/topic_seed_maize.jpg" alt="Hybrid maize adoption in commercial African fields" class="article-card-thumb" loading="lazy">
+              <span class="article-category-chip agri">Agri-Business &amp; Food Systems</span>
+            </div>
+            <div class="article-card-content">
+              <div class="article-time-row">
+                <span>August 18, 2026</span>
+                <span>⏱️ 6 min read</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href="article.html?id=hybrid-maize" style="color: inherit; text-decoration: none;">
+                  The Silent Revolution in Seed Technology: Why Hybrid Maize Adoption is Outpacing State Subsidies
+                </a>
+              </h3>
+              <p class="article-card-teaser">
+                While government fertilizer distribution programs dominate the headlines, commercial farmers are quietly doubling their yields through drought-tolerant hybrid seeds. Here is the field-level data on why seed genetics are transforming commercial farming ROI.
+              </p>
+              
+              <!-- Takeaways Box -->
+              <div class="article-takeaways-box">
+                <span class="takeaways-title">Core Analytical Takeaways:</span>
+                <ul class="takeaways-list">
+                  <li>Average yield disparity: 1.8 tons/hectare for open-pollinated varieties vs. 4.6 tons/hectare for certified hybrid seed.</li>
+                  <li>The economics of seed: an extra $35/ha generates over $420 in additional harvest revenue.</li>
+                  <li>How private off-takers are financing seed inputs directly to lock in harvest volumes before planting.</li>
+                </ul>
+              </div>
+
+              <!-- Footer with Author & CTA -->
+              <div class="article-card-footer">
+                <div class="card-author-mini">
+                  <img src="assets/images/about/team_agriculture_lead.jpg" alt="Ibrahim Sanusi" class="author-mini-img">
+                  <div>
+                    <span class="mini-author-name">Ibrahim Sanusi</span>
+                    <span class="mini-author-role">Lead Agribusiness Economist</span>
+                  </div>
+                <div class="article-actions-row">
+                  <button class="btn-alert-quick-read" onclick="openArticleModal('hybrid-maize')">Quick Read 📖</button>
+                  <a href="article.html?id=hybrid-maize" class="btn-read-cta" style="text-decoration: none;">Full Article ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article 3: Behind The Data / Field Dispatch (Tariq Mensah) -->
+          <article class="article-bento-card" data-category="dispatch" data-reveal="fade-up" style="--delay: 3">
+            <div class="article-card-thumb-wrap">
+              <img src="assets/images/blog/topic_dawanau_market.jpg" alt="Grain bags counted at 5 AM at Dawanau market Kano" class="article-card-thumb" loading="lazy">
+              <span class="article-category-chip dispatch">Behind The Data // Field Dispatch</span>
+            </div>
+            <div class="article-card-content">
+              <div class="article-time-row">
+                <span>August 09, 2026</span>
+                <span>⏱️ 4 min read</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href="article.html?id=dawanau" style="color: inherit; text-decoration: none;">
+                  Behind The Data: The Art of Counting Grain Bags at 5 AM in Dawanau Market, Kano
+                </a>
+              </h3>
+              <p class="article-card-teaser">
+                Official agricultural statistics often rely on phone surveys or regional estimates. At Renalytica, our numbers come from our field enumerators walking physical market aisles before sunrise. Here is a look at how we measure true wholesale commodity flows.
+              </p>
+              
+              <!-- Takeaways Box -->
+              <div class="article-takeaways-box">
+                <span class="takeaways-title">Core Analytical Takeaways:</span>
+                <ul class="takeaways-list">
+                  <li>Why morning truck arrivals at Dawanau provide a 30-day early warning indicator of regional food inflation.</li>
+                  <li>How our enumerators verify actual transacted prices versus quoted asking prices.</li>
+                  <li>The rigorous triangulation: reconciling lorry manifests, offloader tallies, and merchant ledgers.</li>
+                </ul>
+              </div>
+
+              <!-- Footer with Author & CTA -->
+              <div class="article-card-footer">
+                <div class="card-author-mini">
+                  <img src="assets/images/blog/author_tariq_mensah.jpg" alt="Tariq Mensah" class="author-mini-img">
+                  <div>
+                    <span class="mini-author-name">Tariq Mensah</span>
+                    <span class="mini-author-role">Field Telemetry Coordinator</span>
+                  </div>
+                <div class="article-actions-row">
+                  <button class="btn-alert-quick-read" onclick="openArticleModal('dawanau')">Quick Read 📖</button>
+                  <a href="article.html?id=dawanau" class="btn-read-cta" style="text-decoration: none;">Full Dispatch ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article 4: Retail & Consumer Markets (Folashade Adeleke) -->
+          <article class="article-bento-card" data-category="retail oped" data-reveal="fade-up" style="--delay: 1">
+            <div class="article-card-thumb-wrap">
+              <img src="assets/images/blog/topic_informal_kiosk.jpg" alt="Informal retail kiosk and market stalls in Nigeria" class="article-card-thumb" loading="lazy">
+              <span class="article-category-chip retail">Op-Ed // Retail &amp; Consumer Markets</span>
+            </div>
+            <div class="article-card-content">
+              <div class="article-time-row">
+                <span>July 30, 2026</span>
+                <span>⏱️ 5 min read</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href="article.html?id=modern-trade" style="color: inherit; text-decoration: none;">
+                  The Modern Trade Illusion: Why 85% of African FMCG Volume Remains Anchored in Informal Corner Kiosks
+                </a>
+              </h3>
+              <p class="article-card-teaser">
+                For a decade, international consultancy reports predicted that modern supermarkets would sweep across African capitals. They were wrong. Neighborhood kiosks, informal tabletop stalls, and open markets continue to dominate consumer spend—and will for the next decade.
+              </p>
+              
+              <!-- Takeaways Box -->
+              <div class="article-takeaways-box">
+                <span class="takeaways-title">Core Analytical Takeaways:</span>
+                <ul class="takeaways-list">
+                  <li>The convenience premium: why daily single-serve sachets defeat weekly supermarket grocery runs.</li>
+                  <li>Micro-credit relationships: informal kiosk owners extend credit to trusted neighbors, creating social lock-in.</li>
+                  <li>How multinational FMCG brands are rewiring routes to serve 50,000 neighborhood shops.</li>
+                </ul>
+              </div>
+
+              <!-- Footer with Author & CTA -->
+              <div class="article-card-footer">
+                <div class="card-author-mini">
+                  <img src="assets/images/about/team_fmcg_lead.jpg" alt="Folashade Adeleke" class="author-mini-img">
+                  <div>
+                    <span class="mini-author-name">Folashade Adeleke</span>
+                    <span class="mini-author-role">Director of Retail &amp; FMCG</span>
+                  </div>
+                <div class="article-actions-row">
+                  <button class="btn-alert-quick-read" onclick="openArticleModal('modern-trade')">Quick Read 📖</button>
+                  <a href="article.html?id=modern-trade" class="btn-read-cta" style="text-decoration: none;">Full Op-Ed ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article 5: Financial Infrastructure & Fintech (Emeka Nwosu) -->
+          <article class="article-bento-card" data-category="macro" data-reveal="fade-up" style="--delay: 2">
+            <div class="article-card-thumb-wrap">
+              <img src="assets/images/about/team_quant_lead.jpg" alt="Emeka Nwosu analyzing cross-border clearing systems" class="article-card-thumb" loading="lazy">
+              <span class="article-category-chip macro">Financial Infrastructure &amp; Fintech</span>
+            </div>
+            <div class="article-card-content">
+              <div class="article-time-row">
+                <span>July 14, 2026</span>
+                <span>⏱️ 6 min read</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href="article.html?id=b2b-clearing" style="color: inherit; text-decoration: none;">
+                  Beyond the Mobile Money Hype: The Unseen Plumbing of Cross-Border B2B Clearing
+                </a>
+              </h3>
+              <p class="article-card-teaser">
+                Peer-to-peer mobile transfers get all the consumer attention, but the real trillion-dollar challenge is commercial B2B payment settlement across currency boundaries. Here is why wholesale clearing remains the final frontier of African fintech.
+              </p>
+              
+              <!-- Takeaways Box -->
+              <div class="article-takeaways-box">
+                <span class="takeaways-title">Core Analytical Takeaways:</span>
+                <ul class="takeaways-list">
+                  <li>Why an enterprise importing packaging from Kenya to Nigeria still takes 4 to 7 days to settle funds.</li>
+                  <li>The emergence of regional multilateral payment switches and real-time gross settlement frameworks.</li>
+                  <li>What treasury managers must understand about liquidity pools, currency counterparty risk, and settlement timelines.</li>
+                </ul>
+              </div>
+
+              <!-- Footer with Author & CTA -->
+              <div class="article-card-footer">
+                <div class="card-author-mini">
+                  <img src="assets/images/about/team_quant_lead.jpg" alt="Emeka Nwosu" class="author-mini-img">
+                  <div>
+                    <span class="mini-author-name">Emeka Nwosu</span>
+                    <span class="mini-author-role">Senior Research Fellow, Payments</span>
+                  </div>
+                <div class="article-actions-row">
+                  <button class="btn-alert-quick-read" onclick="openArticleModal('b2b-clearing')">Quick Read 📖</button>
+                  <a href="article.html?id=b2b-clearing" class="btn-read-cta" style="text-decoration: none;">Full Analysis ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 5. ANALYST COMMENTARY: "THE PRECISION COLUMN"
+         ==================================================================== -->
+    <section class="precision-column-section" id="precision-column">
+      <div class="container">
+        <div class="section-head-flex" data-reveal="fade-up">
+          <div>
+            <span class="section-eyebrow">ANALYST COMMENTARY // THE PRECISION COLUMN</span>
+            <h2 class="section-headline-standard">Short, Sharp Views on Breaking Debates</h2>
+            <p class="section-desc-sub">Immediate 600–800 word perspectives on trending market policies and commercial debates across Africa.</p>
+          </div>
+        </div>
+
+        <div class="precision-columns-grid">
+          <!-- Column 1 -->
+          <div class="precision-column-card" data-reveal="fade-up" style="--delay: 1">
+            <div class="column-tag-row">
+              <span class="column-pill">THE PRECISION COLUMN</span>
+              <span class="column-read-time">⏱️ 3 min read</span>
+            </div>
+            <h3 class="column-headline">
+              <a href="article.html?id=column-middlemen" style="color: inherit; text-decoration: none;">
+                Stop Blaming Middlemen: The Vital Economic Function of Rural Grain Aggregators
+              </a>
+            </h3>
+            <span class="column-byline">By Renalytica Commodities Desk</span>
+            <p class="column-argument">
+              Aggregators are often vilified by politicians for price gouging, but our field data proves they absorb massive transport risks, finance smallholder farmers before banks will, and prevent post-harvest spoilage by deploying immediate off-take cash.
+            </p>
+            <div class="column-footer-action">
+              <button class="btn-alert-quick-read" onclick="openArticleModal('column-middlemen')">Quick Read 📖</button>
+              <a href="article.html?id=column-middlemen" class="column-read-link" style="text-decoration: none;">Full Commentary ↗</a>
+            </div>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="precision-column-card" data-reveal="fade-up" style="--delay: 2">
+            <div class="column-tag-row">
+              <span class="column-pill">THE PRECISION COLUMN</span>
+              <span class="column-read-time">⏱️ 3 min read</span>
+            </div>
+            <h3 class="column-headline">
+              <a href="article.html?id=column-subsidies" style="color: inherit; text-decoration: none;">
+                The Hidden Cost of Fuel Subsidies: When Artificial Pricing Distorts Agricultural Haulage
+              </a>
+            </h3>
+            <span class="column-byline">By Renalytica Energy &amp; Macro Desk</span>
+            <p class="column-argument">
+              Removing fuel subsidies causes short-term price shocks, but keeping them creates chronic diesel shortages that stall harvests in rural transit corridors. We run the numbers on which policy delivers lower long-term consumer food prices.
+            </p>
+            <div class="column-footer-action">
+              <button class="btn-alert-quick-read" onclick="openArticleModal('column-subsidies')">Quick Read 📖</button>
+              <a href="article.html?id=column-subsidies" class="column-read-link" style="text-decoration: none;">Full Commentary ↗</a>
+            </div>
+          </div>
+
+          <!-- Column 3 -->
+          <div class="precision-column-card" data-reveal="fade-up" style="--delay: 3">
+            <div class="column-tag-row">
+              <span class="column-pill">THE PRECISION COLUMN</span>
+              <span class="column-read-time">⏱️ 3 min read</span>
+            </div>
+            <h3 class="column-headline">
+              <a href="article.html?id=column-gdp" style="color: inherit; text-decoration: none;">
+                Why GDP Figures Lie About African Consumer Spending Power
+              </a>
+            </h3>
+            <span class="column-byline">By Renalytica Macroeconomics Desk</span>
+            <p class="column-argument">
+              National accounts consistently underestimate informal sector economic velocity by 30% to 45%. If your corporate market entry strategy relies solely on official GDP per capita, you are underestimating your addressable market.
+            </p>
+            <div class="column-footer-action">
+              <button class="btn-alert-quick-read" onclick="openArticleModal('column-gdp')">Quick Read 📖</button>
+              <a href="article.html?id=column-gdp" class="column-read-link" style="text-decoration: none;">Full Commentary ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 6. READER DISCUSSION & COMMUNITY HIGHLIGHTS
+         ==================================================================== -->
+    <section class="community-engagement-section" id="community-discussion">
+      <div class="container">
+        <div class="section-head-flex" data-reveal="fade-up">
+          <div>
+            <span class="section-eyebrow">PROFESSIONAL ENGAGEMENT // READER HIGHLIGHTS</span>
+            <h2 class="section-headline-standard">Join the Conversation with Market Practitioners</h2>
+            <p class="section-desc-sub">
+              Every article on the Renalytica Blog connects directly to our verified community of researchers, corporate analysts, and commercial directors.
+            </p>
+          </div>
+        </div>
+
+        <div class="community-grid">
+          <!-- Left: Verified Discussion Stream -->
+          <div class="comment-stream-box" data-reveal="fade-up">
+            <h3>Verified Executive Discussion</h3>
+            <p>To preserve analytical rigor, contributions require verification via corporate email or LinkedIn.</p>
+
+            <div class="verified-comment-thread">
+              <!-- Comment 1 -->
+              <div class="comment-card">
+                <div class="comment-user-row">
+                  <div class="user-identity">
+                    <div class="user-avatar-circle">KO</div>
+                    <div class="user-name-title">
+                      <strong>Kofi Owusu-Ansah</strong>
+                      <span>Head of Supply Chain, West Africa FMCG Holdings</span>
+                    </div>
+                  </div>
+                  <span class="verified-badge-chip">✓ Verified Business ID</span>
+                </div>
+                <p class="comment-body-text">
+                  “The 72-hour border metric by Dr. Okafor is spot on. We recently rerouted our tomato paste raw materials through domestic processing in Kaduna precisely because border demurrage was eroding our entire AfCFTA margin advantage.”
+                </p>
+              </div>
+
+              <!-- Comment 2 -->
+              <div class="comment-card">
+                <div class="comment-user-row">
+                  <div class="user-identity">
+                    <div class="user-avatar-circle">AM</div>
+                    <div class="user-name-title">
+                      <strong>Amina Mohammed</strong>
+                      <span>Chief Risk Officer, Sahel Commercial Bank</span>
+                    </div>
+                  </div>
+                  <span class="verified-badge-chip">✓ Verified Business ID</span>
+                </div>
+                <p class="comment-body-text">
+                  “The 8% to 14% border currency spread mentioned in Section 3 matches our internal FX audit on the northern transit routes. Central bank settlement switches need physical market cash liquidity to succeed.”
+                </p>
+              </div>
+            </div>
+
+            <!-- Comment Submission Action -->
+            <button class="btn-pill-primary" onclick="openCommentModal()">
+              Add Verified Comment to Thread →
+            </button>
+          </div>
+
+          <!-- Right: Data Citation & Author Q&A Tools -->
+          <div class="reader-tools-pane" data-reveal="fade-left">
+            <!-- Tool 1: Data Citation Request -->
+            <div class="tool-feature-card">
+              <div class="tool-icon-circle">📊</div>
+              <h4>Request Underlying Data Citation</h4>
+              <p>
+                Need the raw Excel telemetry files, econometric regression tables, or survey manifests referenced in this op-ed for your board pack?
+              </p>
+              <button class="btn-pill-outline" onclick="openCitationModal()">
+                Request Excel Telemetry Files →
+              </button>
+            </div>
+
+            <!-- Tool 2: Ask the Author -->
+            <div class="tool-feature-card">
+              <div class="tool-icon-circle">💬</div>
+              <h4>Ask the Author a Direct Question</h4>
+              <p>
+                Have a technical question about methodology, local sample sizes, or regional trade policies? Our research desk responds within 24 hours.
+              </p>
+              <button class="btn-pill-outline" onclick="openAuthorQAModal()">
+                Ask Dr. Okafor a Question →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 7. CONTRIBUTOR & GUEST OP-ED GUIDELINES
+         ==================================================================== -->
+    <section class="contributor-guidelines-section" id="contributor-guidelines">
+      <div class="container">
+        <div class="guidelines-wrapper" data-reveal="fade-up">
+          <div class="guidelines-header">
+            <span class="section-eyebrow">EDITORIAL STANDARDS &amp; SUBMISSIONS</span>
+            <h2 class="section-headline-standard">Write for Renalytica: Contribute an Op-Ed or Market Analysis</h2>
+            <p class="section-desc-sub">
+              We welcome data-grounded op-eds and analytical essays from corporate executives, academic economists, agricultural operators, and policy analysts.
+            </p>
+          </div>
+
+          <!-- 5 Submission Standards Grid -->
+          <div class="guidelines-standards-grid">
+            <div class="standard-card">
+              <span class="standard-num">01</span>
+              <h4>Grounded in Empirical Reality</h4>
+              <p>We do not publish speculative think-pieces or regurgitated secondary news. Submissions must be backed by verifiable data, field experience, or operational evidence.</p>
+            </div>
+
+            <div class="standard-card">
+              <span class="standard-num">02</span>
+              <h4>Clear, Plain English</h4>
+              <p>Plain English is mandatory. We reject submissions laden with academic jargon, unreadable formulas, or buzzword-heavy consulting terminology.</p>
+            </div>
+
+            <div class="standard-card">
+              <span class="standard-num">03</span>
+              <h4>Actionable Takeaways</h4>
+              <p>Every piece must leave business leaders, investors, or policymakers with concrete, practical insights they can apply immediately.</p>
+            </div>
+
+            <div class="standard-card">
+              <span class="standard-num">04</span>
+              <h4>Target Length</h4>
+              <p>800 to 1,500 words for standard blog articles; 1,200 to 2,200 words for deep-dive Op-Eds. Charts and visual data tables are welcomed.</p>
+            </div>
+          </div>
+
+          <!-- Pitch Process Banner -->
+          <div class="pitch-submission-banner">
+            <div class="pitch-banner-text">
+              <h4>05. Fast-Track Pitch Process (48-Hour Response SLA)</h4>
+              <p>Send an abstract (under 200 words) outlining your core thesis, supporting data points, and author bio. Our editorial board responds within <strong>48 business hours</strong>.</p>
+            </div>
+            <button class="btn-pill-primary" onclick="openPitchModal()">
+              Submit Op-Ed Abstract →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 8. BLOG NEWSLETTER: THE EDITORIAL DISPATCH
+         ==================================================================== -->
+    <section class="newsletter-dispatch-section" id="newsletter">
+      <div class="container">
+        <div class="newsletter-dispatch-card" data-reveal="fade-up">
+          <span class="dispatch-badge">WEEKLY PERSPECTIVES // THE EDITORIAL DISPATCH</span>
+          <h2 class="newsletter-headline">Weekly Perspectives You Won’t Find on Mainstream Media</h2>
+          <p class="newsletter-subhead">
+            Delivered every Thursday morning. Thought-provoking op-eds, field dispatches from rural trading centers, and executive commentary directly from our senior fellows.
+          </p>
+
+          <form class="newsletter-form-row" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" required class="newsletter-input" placeholder="Enter your corporate email address..." id="dispatch-email">
+            <select class="newsletter-select" id="dispatch-sector">
+              <option value="all">All Sectors</option>
+              <option value="agri">Agribusiness &amp; Food Security</option>
+              <option value="macro">Macro &amp; Currency</option>
+              <option value="retail">Retail &amp; FMCG</option>
+            </select>
+            <button type="submit" class="btn-dispatch-subscribe">
+              Subscribe to The Dispatch →
+            </button>
+          </form>
+
+          <p class="newsletter-trust-note">
+            “Zero fluff. Zero spam. Over 11,200 corporate leaders read our analysis weekly.”
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       INTERACTIVE MODALS & TOAST NOTIFICATIONS
+       ==================================================================== -->
+  <!-- Article Reader Modal with Dedicated Landing Page Direct Switch -->
+  <div class="renalytica-modal-backdrop" id="article-reader-modal" onclick="closeArticleModal(event)">
+    <div class="renalytica-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header-row">
+        <span class="modal-header-tag" id="modal-tag">OP-ED // RENALYTICA PERSPECTIVES</span>
+        <button class="modal-close-btn" onclick="closeArticleModal()" aria-label="Close Modal">✕</button>
+      </div>
+
+      <!-- Quick Action Switch to Dedicated Article Landing Page -->
+      <div class="modal-quick-action-strip">
+        <div class="strip-text">
+          <span>⚡ QUICK READ PREVIEW</span> • Full interactive charts, empirical telemetry &amp; citation tools available
+        </div>
+        <a href="article.html?id=african-trade-integration" id="modal-full-page-top" class="btn-modal-full-link">
+          Open Dedicated Article Page ↗
+        </a>
+      </div>
+
+      <div class="modal-article-body">
+        <h2 id="modal-title">Article Title</h2>
+        <div class="modal-meta-bar" id="modal-meta">
+          <span>📅 Date</span>
+          <span>⏱️ Read Time</span>
+          <span>👤 Author</span>
+        </div>
+        <div class="modal-prose" id="modal-prose">
+          <!-- Dynamic Prose Content -->
+        </div>
+
+        <!-- Bottom CTA to Dedicated Page -->
+        <div class="modal-bottom-cta-box">
+          <div class="modal-bottom-cta-text">
+            <h4>Want the complete 2,000-word analysis &amp; telemetry?</h4>
+            <p>Access the full article with complete empirical tables, methodology notes, interactive charts, and academic citation downloads.</p>
+          </div>
+          <a href="article.html?id=african-trade-integration" id="modal-full-page-bottom" class="btn-pill-primary">
+            Read Full Article on Dedicated Page →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation / Pitch Modal -->
+  <div class="renalytica-modal-backdrop" id="generic-form-modal" onclick="closeGenericModal(event)">
+    <div class="renalytica-modal-card" onclick="event.stopPropagation()" style="max-width: 540px;">
+      <div class="modal-header-row">
+        <span class="modal-header-tag" id="form-modal-tag">REQUEST DATA CITATION</span>
+        <button class="modal-close-btn" onclick="closeGenericModal()">✕</button>
+      </div>
+      <div class="modal-article-body">
+        <h2 id="form-modal-title" style="font-size: 22px; margin-bottom: 8px;">Submit Request</h2>
+        <p id="form-modal-sub" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Provide your corporate credentials to receive verified underlying data files.</p>
+        <form onsubmit="handleGenericSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">YOUR NAME</label>
+            <input type="text" required style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: var(--surface-gray); color: var(--text-primary); outline: none;">
+          </div>
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">BUSINESS EMAIL</label>
+            <input type="email" required style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: var(--surface-gray); color: var(--text-primary); outline: none;">
+          </div>
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">ORGANIZATION / INSTITUTION</label>
+            <input type="text" required style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: var(--surface-gray); color: var(--text-primary); outline: none;">
+          </div>
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">NOTE / INQUIRY DETAILS</label>
+            <textarea rows="3" required style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: var(--surface-gray); color: var(--text-primary); outline: none;"></textarea>
+          </div>
+          <button type="submit" class="btn-pill-primary" style="margin-top: 10px; width: 100%; text-align: center;">
+            Submit Request →
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="renalytica-toast" id="blog-toast">Link copied to clipboard!</div>
+
+  <!-- 12. Global Mega Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Scripts -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="lib/articles-repository.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Interactive Client-side Script for Blog Page -->
+  <script>
+    // 1. Topic Filter Pills
+    const filterPills = document.querySelectorAll('.topic-filter-pill');
+    const articles = document.querySelectorAll('.article-bento-card');
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filterVal = pill.getAttribute('data-filter');
+
+        articles.forEach(art => {
+          const cats = art.getAttribute('data-category') || '';
+          if (filterVal === 'all' || cats.includes(filterVal)) {
+            art.style.display = 'flex';
+          } else {
+            art.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 2. Search filtering
+    function filterArticlesBySearch() {
+      const q = document.getElementById('article-search-input').value.toLowerCase().trim();
+      articles.forEach(art => {
+        const text = art.innerText.toLowerCase();
+        if (text.includes(q)) {
+          art.style.display = 'flex';
+        } else {
+          art.style.display = 'none';
+        }
+      });
+    }
+
+    // 3. Share actions & Toast
+    function showToast(msg) {
+      const toast = document.getElementById('blog-toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+
+    function shareArticle(platform) {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent("Why African Trade Integration Won’t Happen on Paper—It Happens in Truck Parks and Border Depots");
+      if (platform === 'linkedin') {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+      } else if (platform === 'twitter') {
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
+      } else if (platform === 'whatsapp') {
+        window.open(`https://api.whatsapp.com/send?text=${title}%20${url}`, '_blank');
+      }
+    }
+
+    function copyArticleLink() {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('✓ Article link copied to clipboard!');
+    }
+
+    // 4. Article Modal Reader Database
+    const articleDB = {
+      'devaluation': {
+        tag: 'OP-ED // CORPORATE STRATEGY',
+        title: 'Rethinking Currency Devaluation: How African Importers Are Building Domestic Resiliency Through Reverse Integration',
+        meta: '📅 August 26, 2026 • ⏱️ 5 min read • 👤 By Nkechi Balogun, Senior Analyst',
+        prose: `
+          <p>Relying on imported raw materials when your revenue is in local currency is financial roulette. Across Sub-Saharan Africa, foreign exchange volatility has ceased to be a cyclical nuisance; it is an ongoing structural reality.</p>
+          <h3>1. The Limit of Traditional Hedging</h3>
+          <p>Traditional non-deliverable forwards (NDFs) and bank letters of credit offer temporary solace, but in frontier markets with shallow FX liquidity, counterparties often fail to deliver on scheduled delivery dates, stranding container cargo at maritime ports.</p>
+          <h3>2. The Mechanics of Backward Integration</h3>
+          <p>In our review of three tier-1 food manufacturers in Nigeria and Ghana, each conglomerate invested between $12M and $28M to establish direct outgrower farmer networks and domestic processing mills. By guaranteeing minimum off-take prices to local farmers, companies eliminated their reliance on imported maize starch and palm concentrates.</p>
+          <p>The result: FX exposure dropped by an average of 40% within 18 months, while margins expanded by 340 basis points despite broader macroeconomic headwinds.</p>
+        `
+      },
+      'hybrid-maize': {
+        tag: 'AGRI-BUSINESS & FOOD SYSTEMS',
+        title: 'The Silent Revolution in Seed Technology: Why Hybrid Maize Adoption is Outpacing State Subsidies',
+        meta: '📅 August 18, 2026 • ⏱️ 6 min read • 👤 By Ibrahim Sanusi, Lead Agribusiness Economist',
+        prose: `
+          <p>While state-run fertilizer subsidy programs frequently dominate political headlines, the real commercial transformation across Africa’s grain belts is unfolding in seed genetics.</p>
+          <h3>1. The Field-Level Yield Disparity</h3>
+          <p>Data gathered from 140 commercial test plots across Kaduna, Nakuru, and the Southern Highlands of Tanzania reveal an unmistakable yield gap. Open-pollinated varieties (OPVs) yielded an average of 1.8 metric tons per hectare under variable rainfall. In contrast, drought-tolerant hybrid seeds averaged 4.6 tons per hectare under identical soil conditions.</p>
+          <h3>2. Return on Capital Efficiency</h3>
+          <p>An incremental investment of $35 per hectare in certified hybrid seed returned over $420 in additional harvest revenue at current wholesale farmgate prices. Commercial off-takers are now stepping in where banks hesitate—supplying certified seed bundles directly to smallholder cooperatives in exchange for guaranteed harvest quotas.</p>
+        `
+      },
+      'dawanau': {
+        tag: 'BEHIND THE DATA // FIELD DISPATCH',
+        title: 'Behind The Data: The Art of Counting Grain Bags at 5 AM in Dawanau Market, Kano',
+        meta: '📅 August 09, 2026 • ⏱️ 4 min read • 👤 By Tariq Mensah, Field Telemetry Coordinator',
+        prose: `
+          <p>Official agricultural inflation statistics often arrive weeks after the fact, derived from high-level telephone surveys or model extrapolations. At Renalytica, our early warning indicators begin at 5:00 AM on the wet gravel of Dawanau Market in Kano.</p>
+          <h3>1. The Pulse of Regional Grain Flows</h3>
+          <p>Dawanau is West Africa’s primary wholesale grain clearing engine. Before the sun rises, over 80 long-haul diesel trucks arrive daily from Niger, Chad, Cameroon, and northern Nigeria. By tallying lorry manifests, counting offloaded 100kg burlap sacks, and verifying transacted cash prices directly with master merchants, our enumerators catch price shifts 30 days before national consumer price indices record them.</p>
+          <h3>2. Rigorous Multi-Source Triangulation</h3>
+          <p>We eliminate reporting bias by cross-referencing three independent data sources: gatekeeper freight manifests, physical offloader head-tallies, and merchant settlement ledgers. That is the essence of verified ground truth.</p>
+        `
+      },
+      'modern-trade': {
+        tag: 'OP-ED // RETAIL & CONSUMER MARKETS',
+        title: 'The Modern Trade Illusion: Why 85% of African FMCG Volume Remains Anchored in Informal Corner Kiosks',
+        meta: '📅 July 30, 2026 • ⏱️ 5 min read • 👤 By Folashade Adeleke, Director of Retail & FMCG',
+        prose: `
+          <p>A decade ago, international strategy reports envisioned a landscape where modern supermarket chains would dominate African capital cities. Today, empirical reality tells a very different story: modern retail penetration remains capped between 12% and 18% in even the largest urban centers.</p>
+          <h3>1. The Power of the Sachet Economy</h3>
+          <p>Consumer cash velocity in frontier economies demands daily, granular liquidity management. Informal kiosks thrive because they sell everyday staples in single-serve portions—from detergent to cooking oil—allowing households to match consumption to daily earnings.</p>
+          <h3>2. The Micro-Credit Relationship</h3>
+          <p>Supermarkets require upfront electronic payment. Neighborhood kiosk owners know their customers personally and routinely extend 3- to 7-day interest-free micro-credit to trusted families. This creates a powerful social lock-in that modern supermarkets cannot match.</p>
+        `
+      },
+      'b2b-clearing': {
+        tag: 'FINANCIAL INFRASTRUCTURE & FINTECH',
+        title: 'Beyond the Mobile Money Hype: The Unseen Plumbing of Cross-Border B2B Clearing',
+        meta: '📅 July 14, 2026 • ⏱️ 6 min read • 👤 By Emeka Nwosu, Senior Research Fellow',
+        prose: `
+          <p>Consumer fintech has democratized peer-to-peer transfers, but enterprise cross-border commerce remains trapped in outdated correspondent banking rails.</p>
+          <h3>1. The 5-Day Transit for Regional Invoices</h3>
+          <p>When an enterprise in Lagos purchases packaging materials from a manufacturer in Nairobi, settlement funds typically travel via correspondent accounts in London or Frankfurt. This results in multi-day settlement lags and foreign exchange conversion haircuts exceeding 4.5%.</p>
+          <h3>2. The Emerging Multilateral Architecture</h3>
+          <p>Regional payment settlement mechanisms and local-currency gross settlement switches are beginning to address this liquidity bottleneck. Forward-thinking corporate treasurers must actively position their liquidity structures to capitalize on these next-generation clearing rails.</p>
+        `
+      },
+      'column-middlemen': {
+        tag: 'THE PRECISION COLUMN // 3 MIN READ',
+        title: 'Stop Blaming Middlemen: The Vital Economic Function of Rural Grain Aggregators',
+        meta: '📅 September 2026 • ⏱️ 3 min read • 👤 By Commodities Desk',
+        prose: `
+          <p>Political rhetoric frequently vilifies grain aggregators as exploitative middlemen who extract margin without providing value. Field telemetry reveals the exact opposite.</p>
+          <p>Aggregators provide three indispensable economic services: they provide immediate cash liquidity at farmgate when smallholders urgently need cash for school fees and inputs; they absorb 100% of the transit spoilage and road theft risks; and they aggregate thousands of tiny 50kg harvests into 30-ton commercial truckloads that industrial mills can actually process.</p>
+          <p>Without aggregators, smallholder post-harvest losses would jump from 18% to over 45% in remote rural corridors.</p>
+        `
+      },
+      'column-subsidies': {
+        tag: 'THE PRECISION COLUMN // 3 MIN READ',
+        title: 'The Hidden Cost of Fuel Subsidies: When Artificial Pricing Distorts Agricultural Haulage',
+        meta: '📅 September 2026 • ⏱️ 3 min read • 👤 By Energy & Macro Desk',
+        prose: `
+          <p>Artificially holding down diesel and gasoline prices is politically popular, but economically ruinous for food transport networks.</p>
+          <p>Subsidized fuel inevitably generates secondary black markets, cross-border smuggling, and chronic depot scarcity. During planting and harvest peaks, haulage trucks sit stranded at depot gates for days awaiting allocations, letting perishable food rot in the fields. A market-reflective diesel price, while higher in headline terms, ensures continuous freight availability that ultimately lowers wholesale food price volatility.</p>
+        `
+      },
+      'column-gdp': {
+        tag: 'THE PRECISION COLUMN // 3 MIN READ',
+        title: 'Why GDP Figures Lie About African Consumer Spending Power',
+        meta: '📅 September 2026 • ⏱️ 3 min read • 👤 By Macroeconomics Desk',
+        prose: `
+          <p>Official GDP calculations systematically underestimate economic velocity in markets where 65% to 80% of transactions occur within informal cash and mobile money ecosystems.</p>
+          <p>When international conglomerates evaluate expansion purely based on official per capita GDP, they misjudge the true depth of addressable purchasing power. Field surveys of wholesale market turnover consistently show real consumer velocity 30% to 45% higher than official state metrics acknowledge.</p>
+        `
+      }
+    };
+
+    function openArticleModal(key) {
+      let item = null;
+      if (window.RenalyticaArticles && typeof window.RenalyticaArticles.getArticleById === 'function') {
+        item = window.RenalyticaArticles.getArticleById(key);
+      }
+      
+      const fullPageUrl = 'article.html?id=' + encodeURIComponent(key);
+      const topBtn = document.getElementById('modal-full-page-top');
+      const bottomBtn = document.getElementById('modal-full-page-bottom');
+      if (topBtn) topBtn.href = fullPageUrl;
+      if (bottomBtn) bottomBtn.href = fullPageUrl;
+
+      if (item) {
+        document.getElementById('modal-tag').textContent = (item.badge || item.category || 'OP-ED // PERSPECTIVES').toUpperCase();
+        document.getElementById('modal-title').textContent = item.title;
+        document.getElementById('modal-meta').innerHTML = `<span>📅 ${item.publishDate || 'Recent'}</span> <span>⏱️ ${item.readTime || '5 min read'}</span> <span>👤 ${item.author?.name || 'Renalytica Research Desk'}</span>`;
+        
+        let contentHtml = '';
+        if (item.subtitle) {
+          contentHtml += `<p style="font-size: 15px; font-weight: 600; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.5;">${item.subtitle}</p>`;
+        }
+        if (item.contentHtml) {
+          contentHtml += item.contentHtml;
+        } else if (item.summary) {
+          contentHtml += `<p>${item.summary}</p>`;
+        }
+        document.getElementById('modal-prose').innerHTML = contentHtml;
+        document.getElementById('article-reader-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        return;
+      }
+
+      // Fallback to local articleDB
+      const data = articleDB[key];
+      if (!data) return;
+      document.getElementById('modal-tag').textContent = data.tag;
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-meta').innerHTML = data.meta;
+      document.getElementById('modal-prose').innerHTML = data.prose;
+      document.getElementById('article-reader-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeArticleModal(e) {
+      document.getElementById('article-reader-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // 5. Generic Modals (Citation / Pitch / Comment)
+    function openCitationModal() {
+      document.getElementById('form-modal-tag').textContent = 'REQUEST DATA CITATION';
+      document.getElementById('form-modal-title').textContent = 'Request Excel Telemetry Files';
+      document.getElementById('form-modal-sub').textContent = 'Receive the underlying data workbook (.xlsx) and telemetry methodology notes for this article.';
+      document.getElementById('generic-form-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openPitchModal() {
+      document.getElementById('form-modal-tag').textContent = 'CONTRIBUTE AN OP-ED';
+      document.getElementById('form-modal-title').textContent = 'Submit Your Op-Ed Abstract';
+      document.getElementById('form-modal-sub').textContent = 'Pitch an empirical market analysis to our editorial board. We respond within 48 business hours.';
+      document.getElementById('generic-form-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openCommentModal() {
+      document.getElementById('form-modal-tag').textContent = 'VERIFIED PRACTITIONER DISCUSSION';
+      document.getElementById('form-modal-title').textContent = 'Join the Discussion';
+      document.getElementById('form-modal-sub').textContent = 'Submit your professional commentary. Corporate email or LinkedIn verification is required.';
+      document.getElementById('generic-form-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openAuthorQAModal() {
+      document.getElementById('form-modal-tag').textContent = 'ASK THE AUTHOR';
+      document.getElementById('form-modal-title').textContent = 'Direct Author Inquiry';
+      document.getElementById('form-modal-sub').textContent = 'Submit your technical inquiry directly to Dr. Arinze Okafor and the research desk.';
+      document.getElementById('generic-form-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGenericModal(e) {
+      document.getElementById('generic-form-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleGenericSubmit(e) {
+      e.preventDefault();
+      closeGenericModal();
+      showToast('✓ Request successfully submitted! Our desk will follow up within 24–48 hours.');
+    }
+
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('dispatch-email').value;
+      showToast(`✓ Subscribed ${email} to The Renalytica Editorial Dispatch!`);
+      document.getElementById('dispatch-email').value = '';
+    }
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeArticleModal();
+        closeGenericModal();
+      }
+    });
+  </script>
+
+  <!-- Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <!-- Box-style Bars (Built from individual blocks) -->
+        <g class="chart-bars">
+          <!-- Bar 1 -->
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          
+          <!-- Bar 2 -->
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          
+          <!-- Bar 3 -->
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          
+          <!-- Bar 4 -->
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+
+        <!-- Growing Arrow Line -->
+        <path 
+          d="M 5 90 L 35 65 L 65 45 L 90 20" 
+          fill="none" 
+          stroke="#ef7d00" 
+          stroke-width="6" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="animate-line"
+        />
+
+        <!-- Nodes/Dots -->
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        
+        <!-- Arrow Head -->
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

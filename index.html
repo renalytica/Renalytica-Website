@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renalytica | Powering Smart Decisions — Market Intelligence & Research Reports</title>
+  <meta name="description" content="Renalytica removes the guesswork from business decisions. We provide clear, high-quality market reports and data analysis across agriculture, commerce, and the economy.">
+  <meta name="keywords" content="market research reports, agriculture market data, economic forecasts, Africa industry reports, business intelligence">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main>
+    <!-- 3. Hero Section: Clear Market Direction (60% White, 30% Orange, Rotating World Map on LEFT) -->
+    <section class="hero-stage-v2 bg-light-canvas" id="hero-stage">
+      <div class="container hero-grid-v2">
+        <!-- LEFT: Hero Copy & Search Architecture -->
+        <div class="hero-copy-col">
+          <!-- Category Badge -->
+          <div class="category-badge-pill" data-reveal="fade-up" style="--delay: 0">
+            <span class="badge-accent-tag">TRUSTED MARKET INTELLIGENCE</span>
+            <span class="badge-sep">//</span>
+            <span class="badge-metric-tag">2,500+ RESEARCH REPORTS</span>
+          </div>
+
+          <!-- Primary Headline -->
+          <h1 class="hero-headline-v2" data-reveal="fade-up" style="--delay: 1">
+            Clear Market Intelligence.<br>
+            <span class="headline-highlight">Zero Clutter.</span> Confident Decisions.
+          </h1>
+
+          <!-- Sub-Headline -->
+          <p class="hero-subheadline-v2" data-reveal="fade-up" style="--delay: 2">
+            Making smart business decisions requires facts, not guesses. Renalytica cuts through confusing data to give you clear, verified market research across agriculture, commerce, and the wider economy—so you can lead your company with complete confidence.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="hero-btn-group" data-reveal="fade-up" style="--delay: 3">
+            <a href="reports.html" class="btn-pill-primary hero-btn-main">
+              Browse Research Store →
+            </a>
+            <a href="contact.html" class="btn-pill-ghost hero-btn-secondary">
+              Request a Custom Study
+            </a>
+          </div>
+
+          <!-- Interactive Search Bar -->
+          <div class="hero-search-card" data-reveal="fade-up" style="--delay: 4">
+            <form action="reports.html" method="GET" class="hero-search-form">
+              <div class="search-input-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input 
+                  type="text" 
+                  name="q"
+                  class="hero-search-input" 
+                  placeholder="Search reports by sector, country, or keyword (e.g., 'grain prices', 'currency outlook', 'retail trends')..."
+                  autocomplete="off"
+                />
+              </div>
+              <button type="submit" class="hero-search-submit">Search</button>
+            </form>
+            <div class="popular-searches-row">
+              <span class="pop-label">Popular Searches:</span>
+              <a href="reports.html?q=Grain+Supply+2026" class="pop-chip">Grain Supply 2026–2032</a>
+              <span class="pop-dot">•</span>
+              <a href="reports.html?q=West+Africa+Currency" class="pop-chip">West Africa Currency Trends</a>
+              <span class="pop-dot">•</span>
+              <a href="reports.html?q=Supermarket+Logistics" class="pop-chip">Supermarket Logistics</a>
+              <span class="pop-dot">•</span>
+              <a href="reports.html?q=Solar+Power" class="pop-chip">Solar Power Projects</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Big Rotating 3D World Map / Globe (Up to Half Page Coverage) -->
+        <div class="hero-globe-col">
+          <div class="globe-canvas-wrapper">
+            <canvas id="hero-globe-canvas" class="globe-canvas-v2" aria-label="Rotating 3D African & Global Economic Velocity Map"></canvas>
+            <div class="globe-caption-pill">
+              <span class="pulse-orange-dot"></span>
+              <span>42 FIELD VERIFICATION NODES // LIVE TELEMETRY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Live Market Ticker Note Bar -->
+    <div class="ticker-helper-banner">
+      <div class="container text-center">
+        <p class="ticker-disclaimer">
+          *Key market benchmark indicators updated regularly from official and field observation nodes.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. Four Key Sectors We Cover -->
+    <section class="sectors-section-v2" id="sectors">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up">
+          <span class="eyebrow-tag-orange">WHAT WE COVER</span>
+          <h2 class="section-title-v2">Reliable Data Across Critical Sectors</h2>
+          <p class="section-intro-v2">
+            We focus on the sectors that drive real economic growth. Whether you are building an annual strategy, planning an investment, or expanding into a new country, our reports give you the exact numbers you need.
+          </p>
+        </div>
+
+        <div class="bento-sectors-grid">
+          <!-- Sector 1: Agriculture & Agribusiness -->
+          <div class="sector-card-v2" data-reveal="card" style="--delay: 0">
+            <div class="sector-card-media">
+              <img src="assets/images/sector_agriculture.jpg" alt="African Agriculture & Agribusiness Field Intelligence" class="sector-card-img" loading="lazy" />
+              <div class="sector-media-gradient"></div>
+              <div class="sector-media-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>₦1.8T GRAIN SUPPLY MONITORED</span>
+              </div>
+            </div>
+            <div class="sector-card-header">
+              <span class="sector-icon-pill">
+                <svg class="sector-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22s5-4 5-10V3M7 7s4-3 9-3 6 4 6 10-5 12-15 12Z"/></svg>
+                AGRICULTURE
+              </span>
+              <span class="sector-count-pill" data-counter-target="420" data-counter-suffix="+ TITLES">420+ TITLES</span>
+            </div>
+            <h3 class="sector-card-title">Agriculture & Agribusiness</h3>
+            <h4 class="sector-sub-headline">Crop Yields, Farming Inputs & Food Supply</h4>
+            <p class="sector-body-text">
+              Accurate data on grain harvests, fertilizer price trends, cold storage facilities, and farm-to-market transportation across key agricultural belts.
+            </p>
+            <div class="sector-card-bottom">
+              <a href="reports.html?sector=agriculture" class="sector-link-cta">
+                Explore Agriculture Reports (420+ Titles) →
+              </a>
+            </div>
+          </div>
+
+          <!-- Sector 2: Macroeconomics & Currency -->
+          <div class="sector-card-v2" data-reveal="card" style="--delay: 1">
+            <div class="sector-card-media">
+              <img src="assets/images/sector_finance.jpg" alt="African Macroeconomic & Financial Analysis" class="sector-card-img" loading="lazy" />
+              <div class="sector-media-gradient"></div>
+              <div class="sector-media-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <span>LIVE FX VOLATILITY MODEL</span>
+              </div>
+            </div>
+            <div class="sector-card-header">
+              <span class="sector-icon-pill">
+                <svg class="sector-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                ECONOMY
+              </span>
+              <span class="sector-count-pill" data-counter-target="310" data-counter-suffix="+ TITLES">310+ TITLES</span>
+            </div>
+            <h3 class="sector-card-title">Macroeconomics & Currency</h3>
+            <h4 class="sector-sub-headline">Inflation, Exchange Rates & Government Policy</h4>
+            <p class="sector-body-text">
+              Practical forecasts on foreign exchange availability, interest rates, import-export policies, and government budgets that affect business cash flow.
+            </p>
+            <div class="sector-card-bottom">
+              <a href="reports.html?sector=economy" class="sector-link-cta">
+                Explore Economic Reports (310+ Titles) →
+              </a>
+            </div>
+          </div>
+
+          <!-- Sector 3: Commerce, Retail & Logistics -->
+          <div class="sector-card-v2" data-reveal="card" style="--delay: 2">
+            <div class="sector-card-media">
+              <img src="assets/images/sector_retail.jpg" alt="African Supermarket & Logistics Warehouse Hub" class="sector-card-img" loading="lazy" />
+              <div class="sector-media-gradient"></div>
+              <div class="sector-media-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                <span>74-HR PORT TURNAROUND INDEX</span>
+              </div>
+            </div>
+            <div class="sector-card-header">
+              <span class="sector-icon-pill">
+                <svg class="sector-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                COMMERCE
+              </span>
+              <span class="sector-count-pill" data-counter-target="580" data-counter-suffix="+ TITLES">580+ TITLES</span>
+            </div>
+            <h3 class="sector-card-title">Commerce, Retail & Logistics</h3>
+            <h4 class="sector-sub-headline">Consumer Spending, Supermarkets & Delivery Routes</h4>
+            <p class="sector-body-text">
+              Real market share numbers for packaged goods, neighborhood shop distribution, supermarket growth, and last-mile trucking costs.
+            </p>
+            <div class="sector-card-bottom">
+              <a href="reports.html?sector=retail" class="sector-link-cta">
+                Explore Retail & Commerce Reports (580+ Titles) →
+              </a>
+            </div>
+          </div>
+
+          <!-- Sector 4: Energy & Natural Resources -->
+          <div class="sector-card-v2" data-reveal="card" style="--delay: 3">
+            <div class="sector-card-media">
+              <img src="assets/images/sector_energy.jpg" alt="African Solar Energy Engineers & Infrastructure" class="sector-card-img" loading="lazy" />
+              <div class="sector-media-gradient"></div>
+              <div class="sector-media-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>8.2 GW CAPACITY MAPPING</span>
+              </div>
+            </div>
+            <div class="sector-card-header">
+              <span class="sector-icon-pill">
+                <svg class="sector-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                ENERGY
+              </span>
+              <span class="sector-count-pill" data-counter-target="290" data-counter-suffix="+ TITLES">290+ TITLES</span>
+            </div>
+            <h3 class="sector-card-title">Energy & Natural Resources</h3>
+            <h4 class="sector-sub-headline">Solar Energy, Power Utilities & Raw Materials</h4>
+            <p class="sector-body-text">
+              Feasibility numbers on commercial solar systems, factory electricity costs, mining resources, and fuel supply trends.
+            </p>
+            <div class="sector-card-bottom">
+              <a href="reports.html?sector=energy" class="sector-link-cta">
+                Explore Energy Reports (290+ Titles) →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 6. Featured Research Reports (Ready to Buy Online) -->
+    <section class="featured-reports-section-v2" id="featured-reports">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up">
+          <span class="eyebrow-tag-orange">NEW RELEASES</span>
+          <h2 class="section-title-v2">Our Latest In-Depth Industry Reports</h2>
+          <p class="section-intro-v2">
+            Every report comes with a full executive overview, realistic 5-to-10-year market forecasts, and unlocked Excel spreadsheets with all the raw numbers.
+          </p>
+        </div>
+
+        <div class="reports-rail-outer" data-reveal="fade-up">
+          <div class="featured-reports-deck">
+            <!-- Report 1 (Agriculture) -->
+            <article class="featured-report-card" data-reveal="card" style="--delay: 0">
+              <div class="report-card-media">
+                <img src="assets/images/sector_agriculture.jpg" alt="Commercial Grains & Oilseeds Outlook" class="report-card-img" loading="lazy" />
+                <span class="report-media-badge">EXCEL + PDF</span>
+              </div>
+              <div class="report-header-strip">
+                <span class="report-sector-tag">Agriculture & Food Security</span>
+                <span class="excel-badge">✔ UNLOCKED EXCEL INCLUDED</span>
+              </div>
+              <h3 class="featured-title">Sub-Saharan Africa Commercial Grains & Oilseeds Outlook (2026–2032)</h3>
+              <div class="quick-stats-row">
+                <span>384 Pages</span>
+                <span class="stat-sep">•</span>
+                <span>Published: August 2026</span>
+                <span class="stat-sep">•</span>
+                <span>14 Countries Covered</span>
+              </div>
+              <div class="key-finding-callout">
+                <span class="finding-label">KEY FINDING:</span>
+                <p>11.8% Annual Market Growth // $18.4 Billion Total Market Value by 2032</p>
+              </div>
+              <p class="featured-overview">
+                A complete look at maize, wheat, and soybean production. Features harvest volume predictions, fertilizer pricing trends, and storage warehouse opportunities across West and East Africa.
+              </p>
+              <div class="what-you-get-box">
+                <span class="wyg-title">WHAT YOU GET:</span>
+                <p>Full PDF Report + Unlocked Excel Spreadsheet + Slide Summary Deck.</p>
+              </div>
+              <div class="featured-price-tier">
+                <div class="price-stack">
+                  <span class="price-main" data-usd="2500">Starting at $2,500</span>
+                  <span class="price-sub">Departmental: $4,500</span>
+                </div>
+                <div class="card-action-btns">
+                  <a href="contact.html?sample=grains-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Report 2 (Macroeconomics) -->
+            <article class="featured-report-card" data-reveal="card" style="--delay: 1">
+              <div class="report-card-media">
+                <img src="assets/images/meeting_lagos.jpg" alt="West African Monetary Zone FX Liquidity" class="report-card-img" loading="lazy" />
+                <span class="report-media-badge">DATA PACK</span>
+              </div>
+              <div class="report-header-strip">
+                <span class="report-sector-tag">Economy & Currency</span>
+                <span class="excel-badge">✔ FINANCIAL WORKBOOK INCLUDED</span>
+              </div>
+              <h3 class="featured-title">West African Monetary Zone FX Liquidity & Sovereign Debt Telemetry (2026–2030)</h3>
+              <div class="quick-stats-row">
+                <span>295 Pages</span>
+                <span class="stat-sep">•</span>
+                <span>Published: July 2026</span>
+                <span class="stat-sep">•</span>
+                <span>Key Trade Hubs</span>
+              </div>
+              <div class="key-finding-callout">
+                <span class="finding-label">KEY FINDING:</span>
+                <p>4 Real-World Economic Scenarios // Actionable Currency Protection Guide</p>
+              </div>
+              <p class="featured-overview">
+                Clear, practical analysis of currency movements, foreign exchange supply, and government debt. Written specifically for corporate treasurers, CFOs, and business owners who need to protect profits from currency drops.
+              </p>
+              <div class="what-you-get-box">
+                <span class="wyg-title">WHAT YOU GET:</span>
+                <p>Full Analysis PDF + Practical Financial Planning Workbook.</p>
+              </div>
+              <div class="featured-price-tier">
+                <div class="price-stack">
+                  <span class="price-main" data-usd="2800">Starting at $2,800</span>
+                  <span class="price-sub">Departmental: $5,000</span>
+                </div>
+                <div class="card-action-btns">
+                  <a href="contact.html?sample=wamz-fx-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Report 3 (Retail & Consumer) -->
+            <article class="featured-report-card" data-reveal="card" style="--delay: 2">
+              <div class="report-card-media">
+                <img src="assets/images/sector_retail.jpg" alt="Next-Gen Retail Logistics & FMCG Distribution" class="report-card-img" loading="lazy" />
+                <span class="report-media-badge">LOGISTICS INDEX</span>
+              </div>
+              <div class="report-header-strip">
+                <span class="report-sector-tag">Retail & Distribution</span>
+                <span class="excel-badge">✔ DISTRIBUTOR MARGIN SPREADSHEET</span>
+              </div>
+              <h3 class="featured-title">Next-Gen Retail Logistics & FMCG Distribution in Major Cities (2026–2031)</h3>
+              <div class="quick-stats-row">
+                <span>312 Pages</span>
+                <span class="stat-sep">•</span>
+                <span>Published: August 2026</span>
+                <span class="stat-sep">•</span>
+                <span>28 Top Brands Profiled</span>
+              </div>
+              <div class="key-finding-callout">
+                <span class="finding-label">KEY FINDING:</span>
+                <p>16.4% Digital Route-to-Market Growth // Complete Distributor Margin Breakdown</p>
+              </div>
+              <p class="featured-overview">
+                Where are shoppers actually spending their money? We compare modern supermarkets with open-air traditional markets, breaking down distributor margins and transport costs for popular household brands.
+              </p>
+              <div class="what-you-get-box">
+                <span class="wyg-title">WHAT YOU GET:</span>
+                <p>Full Research PDF + Complete Distributor Margin Spreadsheet.</p>
+              </div>
+              <div class="featured-price-tier">
+                <div class="price-stack">
+                  <span class="price-main" data-usd="2400">Starting at $2,400</span>
+                  <span class="price-sub">Departmental: $4,200</span>
+                </div>
+                <div class="card-action-btns">
+                  <a href="contact.html?sample=fmcg-retail-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Horizontal Rail Controls -->
+          <div class="rail-controls-bar">
+            <div class="rail-track-hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF8000" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              <span>SWIPE OR USE CONTROLS TO BROWSE REPORTS</span>
+            </div>
+            <div class="rail-btn-group">
+              <button class="rail-arrow-btn rail-prev" aria-label="Previous Reports">←</button>
+              <button class="rail-arrow-btn rail-next" aria-label="Next Reports">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 7. The Renalytica Difference: Why Leaders Choose Us -->
+    <section class="difference-section-v2" id="difference">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up">
+          <span class="eyebrow-tag-orange">THE RENALYTICA ADVANTAGE</span>
+          <h2 class="section-title-v2">The Renalytica Difference: Why Leaders Choose Us</h2>
+          <p class="section-intro-v2">
+            See how our ground-truth research outperforms traditional desk-bound consulting reports.
+          </p>
+        </div>
+
+        <div class="comparison-table-wrapper" data-reveal="card">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th class="th-need">What You Need</th>
+                <th class="th-generic">Generic Research Providers</th>
+                <th class="th-renalytica">Renalytica Market Intelligence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-feature">Data Quality</td>
+                <td class="td-generic">Recycled web articles and outdated census estimates.</td>
+                <td class="td-renalytica">
+                  <span class="check-icon">✔</span>
+                  <strong>Verified Multi-Source Facts:</strong> Direct primary field surveys triangulated with audited secondary resources, port registries, and central bank records.
+                </td>
+              </tr>
+              <tr>
+                <td class="td-feature">Report Format</td>
+                <td class="td-generic">500 pages of dense academic text that takes weeks to read.</td>
+                <td class="td-renalytica">
+                  <span class="check-icon">✔</span>
+                  <strong>Simple & Direct:</strong> Clear executive summaries, easy-to-read charts, and ready-to-use Excel data packs.
+                </td>
+              </tr>
+              <tr>
+                <td class="td-feature">Practical Use</td>
+                <td class="td-generic">Generic theory with no real business application.</td>
+                <td class="td-renalytica">
+                  <span class="check-icon">✔</span>
+                  <strong>Actionable Direction:</strong> Concrete recommendations you can take straight into your board meeting.
+                </td>
+              </tr>
+              <tr>
+                <td class="td-feature">Customer Support</td>
+                <td class="td-generic">Automated downloads with nobody to answer your questions.</td>
+                <td class="td-renalytica">
+                  <span class="check-icon">✔</span>
+                  <strong>Direct Access:</strong> Speak directly with the lead economist who wrote the report.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 8. How We Verify Our Numbers (Our Simple 3-Step Process) -->
+    <section class="methodology-summary-v2" id="verification-process">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up">
+          <span class="eyebrow-tag-orange">OUR 3-STEP METHODOLOGY</span>
+          <h2 class="section-title-v2">How We Verify Our Numbers</h2>
+          <p class="section-intro-v2">
+            Our numbers are grounded in reality, not desk assumptions. Here is our straightforward process:
+          </p>
+        </div>
+
+        <div class="methodology-dual-layout">
+          <!-- Left: 3 Verification Steps -->
+          <div class="three-step-col">
+            <div class="step-card-v2" data-reveal="card" style="--delay: 0">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Multi-Source Ground Truth</h3>
+              <p class="step-desc">
+                We combine primary on-the-ground surveys, port manifests, and satellite imagery with verified secondary resources from central banks, statistical agencies, and corporate filings.
+              </p>
+            </div>
+            <div class="step-card-v2 mt-20" data-reveal="card" style="--delay: 1">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Rigorous Math</h3>
+              <p class="step-desc">
+                Our economists clean and test the data using proven mathematical models to ensure every projection is realistic and trustworthy.
+              </p>
+            </div>
+            <div class="step-card-v2 mt-20" data-reveal="card" style="--delay: 2">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Clear Executive Direction</h3>
+              <p class="step-desc">
+                We translate complex formulas into clear charts and plain-English takeaways that anyone on your executive team can understand.
+              </p>
+            </div>
+            <div class="mt-28">
+              <a href="methodology.html" class="link-arrow-orange">
+                Learn more about our data verification standards →
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Authentic Field Verification Telemetry Showcase -->
+          <div class="methodology-media-card" data-reveal="scale" data-parallax="0.10">
+            <img src="assets/images/field_verification.jpg" alt="Renalytica Field Surveyor Ground Truth Telemetry" class="methodology-img" loading="lazy" />
+            <div class="methodology-telemetry-overlay">
+              <div class="telemetry-header-line">
+                <span class="pulse-orange-dot"></span>
+                <span>42 FIELD VERIFICATION NODES // LIVE TELEMETRY</span>
+              </div>
+              <p class="telemetry-sub-line">
+                Multi-point triangulation active across 18 states. Ground observations updated weekly for unmatched accuracy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 9. Corporate Subscriptions: All-Access Pass for Teams -->
+    <section class="corporate-subscription-section" id="subscriptions">
+      <div class="container">
+        <div class="subscription-feature-box" data-reveal="fade-up">
+          <div class="sub-box-layout">
+            <div class="sub-box-content">
+              <span class="sub-pill-tag">CORPORATE SUBSCRIPTIONS</span>
+              <h2 class="sub-headline">Unlimited Market Intelligence for Your Entire Company</h2>
+              <p class="sub-intro">
+                Save time and budget with an annual corporate subscription. Give your strategy, finance, and investment teams unlimited access to all 2,500+ published reports, monthly updates, and direct analyst consultations.
+              </p>
+              <div class="sub-benefits-grid">
+                <div class="benefit-item">
+                  <span class="check-orange">✔</span>
+                  <span>Unlimited report downloads across all global offices</span>
+                </div>
+                <div class="benefit-item">
+                  <span class="check-orange">✔</span>
+                  <span>Complete unlocked Excel models and raw spreadsheets</span>
+                </div>
+                <div class="benefit-item">
+                  <span class="check-orange">✔</span>
+                  <span>Priority support with a guaranteed 24-hour response time</span>
+                </div>
+                <div class="benefit-item">
+                  <span class="check-orange">✔</span>
+                  <span>Quarterly video briefing presentations for your leadership board</span>
+                </div>
+              </div>
+              <div class="sub-btn-row">
+                <a href="services.html#subscriptions" class="btn-pill-primary">
+                  Explore Corporate Subscriptions
+                </a>
+                <a href="contact.html?subject=demo" class="btn-pill-ghost-dark">
+                  Schedule a Quick Demo
+                </a>
+              </div>
+            </div>
+
+            <!-- Boardroom Consultation Visual -->
+            <div class="sub-media-frame" data-reveal="scale">
+              <img src="assets/images/meeting_kaduna.jpg" alt="Renalytica Executive Board Briefing" class="sub-media-img" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 10. Client Feedback -->
+    <section class="testimonials-section-v2" id="client-feedback">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up">
+          <span class="eyebrow-tag-orange">CLIENT FEEDBACK</span>
+          <h2 class="section-title-v2">What Business Leaders Say</h2>
+        </div>
+
+        <div class="feedback-tri-grid">
+          <!-- Quote 1 -->
+          <div class="feedback-card-v2" data-reveal="card" style="--delay: 0">
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Renalytica’s grain report gave us the exact pricing data we needed to secure our raw materials for the whole year. Clear, practical, and highly accurate.
+            </p>
+            <div class="testimonial-author-block">
+              <img src="assets/images/testimonial_babatunde.png" alt="Babatunde Adeyemi" class="author-avatar-img" />
+              <div class="quote-author-info">
+                <span class="q-name">Babatunde Adeyemi</span>
+                <span class="q-role">Chief Operating Officer, Regional AgriCorp</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote 2 -->
+          <div class="feedback-card-v2" data-reveal="card" style="--delay: 1">
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Unlike other research firms that give you 400 pages of fluff, Renalytica gets straight to the point. The Excel files saved our team hundreds of hours.
+            </p>
+            <div class="testimonial-author-block">
+              <img src="assets/images/testimonial_amina.jpg" alt="Amina Mohammed-Ali" class="author-avatar-img" />
+              <div class="quote-author-info">
+                <span class="q-name">Amina Mohammed-Ali</span>
+                <span class="q-role">Head of Strategy, Commercial Banking Group</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote 3 -->
+          <div class="feedback-card-v2" data-reveal="card" style="--delay: 2">
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Renalytica’s solar viability telemetry and commercial utility models are the gold standard for infrastructure investment underwriting across West Africa.
+            </p>
+            <div class="testimonial-author-block">
+              <img src="assets/images/testimonial_chukwuma.jpg" alt="Dr. Chukwuma Oji" class="author-avatar-img" />
+              <div class="quote-author-info">
+                <span class="q-name">Dr. Chukwuma Oji</span>
+                <span class="q-role">VP Infrastructure, Pan-African Power Partners</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smooth Flow Divider -->
+    <div class="section-flow-divider"></div>
+
+    <!-- 11. Final Call-to-Action & Newsletter -->
+    <section class="final-cta-section-v2" id="contact-cta">
+      <div class="container">
+        <div class="final-cta-card" data-reveal="fade-up">
+          <h2 class="cta-title-v2">Make Your Next Business Decision with Total Confidence.</h2>
+          <p class="cta-subtitle-v2">
+            Explore our online store today, download a free sample, or chat directly with our team to find the exact intelligence you need.
+          </p>
+
+          <div class="cta-buttons-v2">
+            <a href="reports.html" class="btn-pill-primary cta-btn-lg">
+              Browse the Full Research Store →
+            </a>
+            <a href="https://wa.me/2348137538723" target="_blank" class="btn-pill-whatsapp">
+              <span class="wa-icon">💬</span> Chat on WhatsApp (+234 813 753 8723)
+            </a>
+          </div>
+
+          <!-- Newsletter Box -->
+          <div class="newsletter-card-v2">
+            <h3 class="news-box-title">Subscribe to <strong>The Renalytica Weekly</strong></h3>
+            <p class="news-box-sub">Three essential market numbers and trends in your email every Monday morning.</p>
+            <form class="news-form-v2" onsubmit="event.preventDefault(); alert('Thank you for subscribing to The Renalytica Weekly.');">
+              <input type="email" required placeholder="Enter your business email..." class="news-input-v2" />
+              <button type="submit" class="btn-pill-primary news-submit-v2">Subscribe Free</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12. Global Footer -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Engine & Component Scripts (Runs natively on both direct file:/// click and http://) -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="lib/data-globe.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+  <script>
+    // Initialize 3D Globe with prominent large radius and high-contrast styling
+    const globeCanvas = document.getElementById('hero-globe-canvas');
+    let globeInstance = null;
+    if (globeCanvas && window.RenalyticaDataGlobe) {
+      let savedTheme = 'light';
+      try {
+        savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+      } catch (e) {}
+      globeInstance = new window.RenalyticaDataGlobe(globeCanvas, {
+        dotColor: savedTheme === 'dark' ? 'rgba(248, 250, 252, 0.75)' : '#0A0A0A',
+        accentColor: '#FF8000',
+        hubColor: '#00B4D8',
+        arcColor: savedTheme === 'dark' ? 'rgba(255, 128, 0, 0.88)' : 'rgba(255, 128, 0, 0.70)',
+        radiusRatio: 0.44
+      });
+      window.renalyticaGlobe = globeInstance;
+    }
+
+    // Theme Switcher Listener for Globe
+    window.addEventListener('renalytica:theme-change', (e) => {
+      if (globeInstance) {
+        globeInstance.setTheme(e.detail.theme);
+      }
+    });
+
+    // Currency Switcher Listener
+    window.addEventListener('renalytica:currency-change', (e) => {
+      const { currency, rate } = e.detail;
+      if (!rate) return;
+      document.querySelectorAll('.price-main').forEach(el => {
+        const usdPrice = parseFloat(el.getAttribute('data-usd'));
+        if (!isNaN(usdPrice)) {
+          const converted = Math.round(usdPrice * rate.rate);
+          el.textContent = `Starting at ${rate.symbol}${converted.toLocaleString()}`;
+        }
+      });
+    });
+  </script>
+
+  <!-- Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <!-- Box-style Bars (Built from individual blocks) -->
+        <g class="chart-bars">
+          <!-- Bar 1 -->
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          
+          <!-- Bar 2 -->
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          
+          <!-- Bar 3 -->
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          
+          <!-- Bar 4 -->
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+
+        <!-- Growing Arrow Line -->
+        <path 
+          d="M 5 90 L 35 65 L 65 45 L 90 20" 
+          fill="none" 
+          stroke="#ef7d00" 
+          stroke-width="6" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="animate-line"
+        />
+
+        <!-- Nodes/Dots -->
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        
+        <!-- Arrow Head -->
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

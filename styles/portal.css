@@ -1,0 +1,848 @@
+/**
+ * RENALYTICA CLIENT INTELLIGENCE PORTAL STYLESHEET
+ * Enterprise client access, library management, and reader styling.
+ */
+
+/* ==========================================================================
+   1. AUTHENTICATION & LOGIN SCREEN
+   ========================================================================== */
+.portal-auth-section {
+  padding: 5rem 0 6rem;
+  background: var(--surface-tint);
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+}
+
+.portal-auth-container {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.auth-card-wrap {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.auth-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Quick Demo Banner */
+.demo-account-banner {
+  background: var(--accent-momentum-subtle);
+  border: 1px solid var(--accent-momentum-border);
+  border-radius: 10px;
+  padding: 1.15rem;
+  margin-bottom: 1.75rem;
+}
+
+.demo-banner-content {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+.demo-banner-content code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--canvas-surface);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent-momentum);
+}
+
+.btn-demo-quick-login {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--accent-momentum);
+  border: 1px solid var(--accent-momentum);
+  color: #FFFFFF;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-demo-quick-login:hover {
+  background: var(--accent-momentum-hover);
+  box-shadow: 0 4px 12px var(--accent-momentum-glow);
+}
+
+/* Auth Form */
+.auth-error-alert {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: var(--signal-error);
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.auth-field-group {
+  margin-bottom: 1.25rem;
+}
+
+.auth-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.label-with-aside {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.auth-aside-link {
+  font-size: 0.75rem;
+  color: var(--accent-momentum);
+  text-decoration: none;
+}
+
+.auth-aside-link:hover {
+  text-decoration: underline;
+}
+
+.auth-input {
+  width: 100%;
+  background: var(--canvas-primary);
+  border: 1.5px solid var(--border-strong);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-primary);
+}
+
+.auth-input:focus {
+  border-color: var(--accent-momentum);
+  box-shadow: 0 0 0 3px var(--accent-momentum-glow);
+}
+
+.password-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-pwd-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  color: var(--text-muted);
+}
+
+.btn-auth-submit {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--accent-momentum);
+  border: none;
+  color: #FFFFFF;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-auth-submit:hover {
+  background: var(--accent-momentum-hover);
+  box-shadow: 0 6px 20px var(--accent-momentum-glow);
+}
+
+.auth-security-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+}
+
+/* ==========================================================================
+   2. AUTHENTICATED CLIENT DASHBOARD
+   ========================================================================== */
+.portal-dashboard-section {
+  padding: 3.5rem 0 5rem;
+  background: var(--surface-tint);
+}
+
+.portal-dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Client HUD Card */
+.client-hud-card {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hud-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: var(--surface-gray);
+  border: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.hud-avatar img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.hud-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.hud-tier-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-momentum);
+  background: var(--accent-momentum-subtle);
+  border: 1px solid var(--accent-momentum-border);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+}
+
+.hud-verified-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #10B981;
+}
+
+.hud-client-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.hud-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.meta-sep {
+  color: var(--text-muted);
+}
+
+.hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.btn-hud-store {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--accent-momentum);
+  color: #FFFFFF;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-hud-store:hover {
+  background: var(--accent-momentum-hover);
+}
+
+.btn-hud-signout {
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-hud-signout:hover {
+  color: var(--signal-error);
+  border-color: var(--signal-error);
+}
+
+/* Portal Tabs Bar */
+.portal-tabs-bar {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.portal-tab-btn {
+  background: none;
+  border: none;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-family: var(--font-primary);
+}
+
+.portal-tab-btn:hover {
+  color: var(--accent-momentum);
+}
+
+.portal-tab-btn.active {
+  color: var(--accent-momentum);
+  border-bottom-color: var(--accent-momentum);
+  font-weight: 700;
+}
+
+.portal-tab-content {
+  display: none;
+}
+
+.portal-tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ==========================================================================
+   3. UNLOCKED RESEARCH LIBRARY VIEW
+   ========================================================================== */
+.library-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.portal-view-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.portal-view-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.library-search-field {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  min-width: 280px;
+}
+
+.library-search-field:focus {
+  border-color: var(--accent-momentum);
+}
+
+.unlocked-reports-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.unlocked-card {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.unlocked-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+}
+
+.u-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.u-sector-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-momentum);
+  background: var(--accent-momentum-subtle);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.u-sku {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.u-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.u-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.u-telemetry-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.u-telemetry-row div {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-telemetry-row span {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.u-telemetry-row strong {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  margin-top: 0.15rem;
+}
+
+.u-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.btn-u-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--accent-momentum);
+  color: #FFFFFF;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.btn-u-download:hover {
+  background: var(--accent-momentum-hover);
+}
+
+.btn-u-preview,
+.btn-u-excel {
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.65rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.btn-u-preview:hover,
+.btn-u-excel:hover {
+  background: var(--border-light);
+}
+
+/* ==========================================================================
+   4. ANALYST BRIEFINGS DESK VIEW
+   ========================================================================== */
+.portal-view-card {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 2.25rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.briefing-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 1.75rem 0 2.5rem;
+}
+
+.b-stat-box {
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.b-stat-num {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--accent-momentum);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.b-stat-lbl {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* ==========================================================================
+   5. INVOICES & PROFORMAS VIEW
+   ========================================================================== */
+.invoices-table-wrap {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.invoices-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.invoices-table th {
+  padding: 0.85rem 1rem;
+  background: var(--surface-gray);
+  border-bottom: 2px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.invoices-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.badge-status.paid {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.btn-table-action {
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-table-action:hover {
+  background: var(--border-light);
+}
+
+/* ==========================================================================
+   6. API & FEED ACCESS
+   ========================================================================== */
+.api-token-box {
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.api-token-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.token-status-live {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #10B981;
+}
+
+.api-token-code-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.api-token-code-row code {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-strong);
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  color: var(--accent-momentum);
+}
+
+.btn-copy-token {
+  padding: 0.6rem 1rem;
+  background: var(--accent-momentum);
+  border: none;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.token-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   7. IN-BROWSER PDF READER MODAL
+   ========================================================================== */
+.pdf-reader-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.pdf-reader-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pdf-reader-window {
+  background: var(--canvas-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  width: 95vw;
+  max-width: 1200px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.pdf-reader-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface-gray);
+}
+
+.pdf-reader-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pdf-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.pdf-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.pdf-reader-body {
+  flex: 1;
+  background: #2D3748;
+}
+
+.pdf-reader-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .unlocked-reports-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .briefing-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .client-hud-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .u-actions-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy &amp; Data Protection Policy | Information Governance — Renalytica</title>
+  <meta name="description" content="Learn how Renalytica collects, processes, and protects your personal and corporate data in compliance with the Nigeria Data Protection Act (NDPA 2023) and global privacy regulations (GDPR).">
+  <meta name="keywords" content="privacy policy, data protection policy, NDPA compliance Nigeria, GDPR market research, corporate data privacy, Renalytica information security">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Renalytica Privacy &amp; Data Protection Policy">
+  <meta property="og:description" content="Our uncompromising commitment to data confidentiality, transparent processing, and enterprise information security.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.renalytica.com/privacy">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/legal.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <!-- 3. HERO STAGE -->
+    <section class="legal-hero-section" id="hero-privacy">
+      <div class="legal-hero-container">
+        <div class="legal-badges-row" data-reveal="fade-up" style="--delay: 0">
+          <span class="legal-pill-badge accent">
+            <span class="pulse-dot-orange"></span>
+            LEGAL SUITE // INFORMATION GOVERNANCE
+          </span>
+          <span class="legal-pill-badge">
+            COMPLIANCE CHARTER: NDPA 2023 // GDPR // CCPA
+          </span>
+        </div>
+
+        <h1 class="legal-hero-title legal-title" data-reveal="fade-up" style="--delay: 1">
+          Privacy Policy &amp;<br>
+          <span class="title-accent">Data Protection Charter.</span>
+        </h1>
+
+        <p class="legal-hero-desc" data-reveal="fade-up" style="--delay: 2">
+          At Renalytica, we believe that market intelligence must be built on trust. We collect only the data necessary to deliver your research, we never sell your personal information to third parties, and we safeguard your corporate identity with bank-grade encryption.
+        </p>
+
+        <!-- Summary Commitments Cards -->
+        <div class="legal-summary-grid" data-reveal="fade-up" style="--delay: 3">
+          <div class="legal-summary-card">
+            <span class="legal-summary-card-icon">🔒</span>
+            <div class="legal-summary-card-title">Zero Data Monetization</div>
+            <div class="legal-summary-card-desc">We never sell, rent, or trade your personal or organizational information to advertisers, data brokers, or third parties.</div>
+          </div>
+          <div class="legal-summary-card">
+            <span class="legal-summary-card-icon">🛡️</span>
+            <div class="legal-summary-card-title">Multi-Standard Compliance</div>
+            <div class="legal-summary-card-desc">Fully compliant with the Nigeria Data Protection Act 2023 (NDPA), NDPR, and European General Data Protection Regulation (GDPR).</div>
+          </div>
+          <div class="legal-summary-card">
+            <span class="legal-summary-card-icon">⚡</span>
+            <div class="legal-summary-card-title">Immediate Data Rights</div>
+            <div class="legal-summary-card-desc">Full autonomy to access, download, correct, or request the complete deletion of your corporate profile at any time with a 30-day SLA.</div>
+          </div>
+        </div>
+
+        <div class="legal-meta-strip" data-reveal="fade-up" style="--delay: 4">
+          <div class="legal-meta-item">
+            <span>Last Updated:</span>
+            <strong>September 2026</strong>
+          </div>
+          <div class="legal-meta-item">
+            <span>Primary Regulators:</span>
+            <strong>NDPC (Nigeria) • EDPB (EU) • ICO (UK)</strong>
+          </div>
+          <div class="legal-meta-item">
+            <span>Security Standard:</span>
+            <strong>256-bit TLS &amp; AES Storage</strong>
+          </div>
+          <button class="btn-legal-action" id="btn-print-privacy" aria-label="Print or Export Privacy Policy">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Charter
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile Quick Jump Bar (Visible < 1024px) -->
+    <div class="legal-mobile-jump" id="legal-mobile-jump">
+      <select class="legal-mobile-select" id="legal-mobile-select" aria-label="Jump to privacy section">
+        <option value="#sec-1">Section 1: Data Controller &amp; DPO</option>
+        <option value="#sec-2">Section 2: Principles of Lawful Processing</option>
+        <option value="#sec-3">Section 3: Categories of Data We Collect</option>
+        <option value="#sec-4">Section 4: Lawful Bases for Processing</option>
+        <option value="#sec-5">Section 5: Third-Party Sub-Processors</option>
+        <option value="#sec-6">Section 6: Cookie Policy &amp; Tracking</option>
+        <option value="#sec-7">Section 7: Cross-Border Data Transfers</option>
+        <option value="#sec-8">Section 8: Information Security Standards</option>
+        <option value="#sec-9">Section 9: Retention &amp; Destruction</option>
+        <option value="#sec-10">Section 10: Your Legal Rights (30-Day SLA)</option>
+        <option value="#sec-11">Section 11: Supervisory Authorities &amp; Recourse</option>
+        <option value="#sec-12">Section 12: Contact Our Privacy Team</option>
+      </select>
+    </div>
+
+    <!-- 4. MAIN TWO-COLUMN SECTION -->
+    <section class="legal-main-section">
+      <div class="legal-layout-container">
+
+        <!-- Sticky Sidebar: Table of Contents -->
+        <aside class="legal-toc-sidebar" aria-label="Privacy Policy Table of Contents">
+          <div class="legal-toc-header">
+            <span class="legal-toc-title">Table of Contents</span>
+          </div>
+          <nav class="legal-toc-nav" id="legal-toc-nav">
+            <a href="#sec-1" class="legal-toc-link active" data-target="sec-1">
+              <span class="legal-toc-num">01</span> Data Controller &amp; DPO
+            </a>
+            <a href="#sec-2" class="legal-toc-link" data-target="sec-2">
+              <span class="legal-toc-num">02</span> Lawful Principles (NDPA)
+            </a>
+            <a href="#sec-3" class="legal-toc-link" data-target="sec-3">
+              <span class="legal-toc-num">03</span> Data Categories Collected
+            </a>
+            <a href="#sec-4" class="legal-toc-link" data-target="sec-4">
+              <span class="legal-toc-num">04</span> Lawful Bases Matrix
+            </a>
+            <a href="#sec-5" class="legal-toc-link" data-target="sec-5">
+              <span class="legal-toc-num">05</span> Sub-Processor Disclosures
+            </a>
+            <a href="#sec-6" class="legal-toc-link" data-target="sec-6">
+              <span class="legal-toc-num">06</span> Cookie Governance
+            </a>
+            <a href="#sec-7" class="legal-toc-link" data-target="sec-7">
+              <span class="legal-toc-num">07</span> Cross-Border Transfers
+            </a>
+            <a href="#sec-8" class="legal-toc-link" data-target="sec-8">
+              <span class="legal-toc-num">08</span> Security &amp; Encryption
+            </a>
+            <a href="#sec-9" class="legal-toc-link" data-target="sec-9">
+              <span class="legal-toc-num">09</span> Retention &amp; Shredding
+            </a>
+            <a href="#sec-10" class="legal-toc-link" data-target="sec-10">
+              <span class="legal-toc-num">10</span> Data Subject Rights (30d)
+            </a>
+            <a href="#sec-11" class="legal-toc-link" data-target="sec-11">
+              <span class="legal-toc-num">11</span> Supervisory Recourse (NDPC)
+            </a>
+            <a href="#sec-12" class="legal-toc-link" data-target="sec-12">
+              <span class="legal-toc-num">12</span> Privacy Desk Contacts
+            </a>
+          </nav>
+
+          <div class="legal-toc-contact">
+            <div class="legal-toc-contact-title">Data Protection Officer</div>
+            <p>Direct inquiries regarding your personal data rights, consent, or erasure:</p>
+            <a href="mailto:privacy@renalytica.com">privacy@renalytica.com →</a>
+          </div>
+        </aside>
+
+        <!-- Substantive Legal Body -->
+        <div class="legal-content-body">
+
+          <!-- Crosslink Alert Ribbon -->
+          <div class="legal-crosslink-ribbon">
+            <div>
+              <strong>Commercial Licensing:</strong> Looking for report usage rights, multi-seat rules, or corporate subscriptions? View our <a href="terms.html">Terms of Service &amp; Research License</a>.
+            </div>
+            <div>
+              <a href="faq.html">Browse FAQ &amp; Purchasing Help →</a>
+            </div>
+          </div>
+
+          <!-- SECTION 1: DATA CONTROLLER & DPO -->
+          <section class="legal-doc-section" id="sec-1">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 01</span>
+              <h2 class="legal-section-title">Data Controller &amp; Data Protection Officer (DPO)</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">1.1</span> <b>Data Controller Identity:</b> The entity responsible for determining the purposes and means of processing personal data collected through the Renalytica platform (<code>www.renalytica.com</code>) is:</p>
+              <ul>
+                <li><b>Entity:</b> Renalytica Technologies &amp; Research Advisory Limited</li>
+                <li><b>Registration:</b> Incorporated under the Companies and Allied Matters Act, Federal Republic of Nigeria</li>
+                <li><b>Headquarters:</b> Victoria Island, Lagos, Nigeria</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">1.2</span> <b>Data Protection Officer (DPO):</b> We have appointed a dedicated Data Protection Officer to supervise regulatory compliance and handle all data subject inquiries. You may contact our DPO directly at:</p>
+              <ul>
+                <li><b>Email:</b> <code>privacy@renalytica.com</code> / <code>dpo@renalytica.com</code></li>
+                <li><b>Postal Address:</b> Data Protection Officer, Renalytica Technologies, Victoria Island, Lagos, Nigeria.</li>
+                <li><b>Direct Telephone / WhatsApp:</b> <code>+234 813 753 8723</code></li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECTION 2: PRINCIPLES OF LAWFUL PROCESSING -->
+          <section class="legal-doc-section" id="sec-2">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 02</span>
+              <h2 class="legal-section-title">Principles of Lawful Data Processing</h2>
+            </div>
+            
+            <p>In accordance with <b>Section 24 of the Nigeria Data Protection Act 2023</b> and <b>Article 5 of the GDPR</b>, all data processing undertaken by Renalytica adheres to the following foundational principles:</p>
+
+            <ol>
+              <li><b>Lawfulness, Fairness &amp; Transparency:</b> Personal data is collected through fair, transparent means with explicit legal justifications and clear disclosures to individuals.</li>
+              <li><b>Purpose Limitation:</b> Data is obtained strictly for specified, explicit, and legitimate commercial intelligence and research fulfillment purposes, and is not processed in ways incompatible with those aims.</li>
+              <li><b>Data Minimization:</b> We collect only the minimum amount of data strictly necessary to fulfill transactions, provide client support, and deliver research insights.</li>
+              <li><b>Accuracy:</b> We maintain reasonable operational measures to ensure personal information remains accurate, current, and verified.</li>
+              <li><b>Storage Limitation:</b> Information is retained only for as long as necessary to achieve the designated operational or statutory objectives.</li>
+              <li><b>Integrity &amp; Confidentiality:</b> Data is secured against unauthorized access, accidental loss, destruction, or compromise using rigorous technical and organizational controls.</li>
+            </ol>
+          </section>
+
+          <!-- SECTION 3: CATEGORIES OF DATA -->
+          <section class="legal-doc-section" id="sec-3">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 03</span>
+              <h2 class="legal-section-title">Categories of Personal Data We Collect</h2>
+            </div>
+            
+            <p>We collect information across five primary interaction categories:</p>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.1</span> <b>Identification &amp; Contact Data:</b></p>
+              <ul>
+                <li><b>When Collected:</b> When creating a user account, ordering a published report, requesting a sample brief, booking an executive briefing, or submitting an RFP.</li>
+                <li><b>Data Collected:</b> Full name, business email address, job title, corporate department, employer/company legal name, office telephone number, country of operation, and corporate WhatsApp number.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.2</span> <b>Transactional &amp; Billing Information:</b></p>
+              <ul>
+                <li><b>When Collected:</b> When purchasing reports, upgrading licenses, or paying subscription invoices.</li>
+                <li><b>Data Collected:</b> Corporate billing address, invoice contact name, tax identification number (TIN / VAT ID), purchase history, license tier purchased, and payment method identifier.</li>
+              </ul>
+              <div class="legal-callout-box info">
+                <div class="legal-callout-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                  </svg>
+                  Payment Card Security &amp; Tokenization
+                </div>
+                <p class="legal-callout-desc">
+                  <b>Renalytica does NOT store raw credit or debit card numbers, CVVs, or bank security PINs on its servers.</b> All payment card transactions are tokenized and processed directly by our PCI-DSS Level 1 compliant payment gateways (Stripe and Paystack) using 3D-Secure 2.0 authentication.
+                </p>
+              </div>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.3</span> <b>Technical, Device &amp; Telemetry Data:</b></p>
+              <ul>
+                <li><b>When Collected:</b> Automatically collected during your visits to <code>www.renalytica.com</code>.</li>
+                <li><b>Data Collected:</b> Internet Protocol (IP) address, browser type and version, operating system, device screen resolution, referring website URLs, geographic location (country and city level), time spent per page, and interaction heatmaps.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.4</span> <b>Communications &amp; Support Inquiries:</b></p>
+              <ul>
+                <li><b>When Collected:</b> When you email our research desk, submit a custom inquiry, chat via WhatsApp, or engage during an analyst briefing call.</li>
+                <li><b>Data Collected:</b> Email correspondence history, meeting recordings (with prior attendee consent), custom project scope parameters, and feedback ratings.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">3.5</span> <b>Primary Fieldwork &amp; Survey Data:</b></p>
+              <ul>
+                <li><b>When Collected:</b> During our primary economic research operations across agricultural and retail trade corridors.</li>
+                <li><b>Data Processing Standards:</b> All primary market surveys, enumerator interviews, and merchant price checks are <b>fully anonymized and aggregated</b> before publication. We never publish or expose the individual personal identity of surveyed traders, farmers, or logistics drivers.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECTION 4: LAWFUL BASES MATRIX TABLE -->
+          <section class="legal-doc-section" id="sec-4">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 04</span>
+              <h2 class="legal-section-title">Lawful Bases for Processing</h2>
+            </div>
+            
+            <p>We only process your personal information when we have an established legal justification under <b>Section 25 of the NDPA 2023</b> and <b>Article 6 of the GDPR</b>:</p>
+
+            <div class="legal-table-wrapper">
+              <table class="legal-matrix-table" aria-label="Lawful Bases for Data Processing Matrix">
+                <thead>
+                  <tr>
+                    <th>Processing Activity</th>
+                    <th>Categories of Data</th>
+                    <th>Lawful Basis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Fulfillment of Report Purchases &amp; Deliverables</strong>
+                      Delivering files, issuing license keys, sending notifications.
+                    </td>
+                    <td>Contact, Billing, Order History</td>
+                    <td>
+                      <strong>Performance of a Contract</strong>
+                      Essential to generate licenses, send download links, and issue corporate tax receipts.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Corporate Account &amp; Subscription Management</strong>
+                      Managing terminal seats, multi-user accounts, and SSO.
+                    </td>
+                    <td>Identity, Organization, Login Records</td>
+                    <td>
+                      <strong>Performance of a Contract</strong>
+                      Provisioning user access, SSO integration, and seat governance.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Responding to Inquiries &amp; RFP Scoping</strong>
+                      Scoping custom feasibility studies and preparing commercial bids.
+                    </td>
+                    <td>Contact, Business Requirements</td>
+                    <td>
+                      <strong>Legitimate Interests</strong>
+                      Evaluating commercial feasibility and preparing accurate custom proposals.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Direct Marketing (Weekly Signals Newsletter)</strong>
+                      Dispatching sector insights, macro alerts, and report releases.
+                    </td>
+                    <td>Business Email, Topic Preferences</td>
+                    <td>
+                      <strong>Consent</strong>
+                      Freely given upon opt-in. You may unsubscribe instantly at any time via a 1-click link.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Platform Security &amp; Fraud Prevention</strong>
+                      Guarding against card fraud, DDoS attacks, and unauthorized access.
+                    </td>
+                    <td>IP Address, Session Logs, Device Type</td>
+                    <td>
+                      <strong>Legitimate Interests &amp; Legal Obligation</strong>
+                      Preventing unauthorized card testing, cyber attacks, and licensing fraud.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Statutory Tax &amp; Financial Record Keeping</strong>
+                      Maintaining audited corporate transaction books.
+                    </td>
+                    <td>Invoice Records, Billing Details, Tax IDs</td>
+                    <td>
+                      <strong>Compliance with Legal Obligation</strong>
+                      Adhering to Nigerian corporate tax regulations, FIRS reporting, and accounting standards.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 5: SUB-PROCESSORS -->
+          <section class="legal-doc-section" id="sec-5">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 05</span>
+              <h2 class="legal-section-title">Third-Party Service Providers &amp; Sub-Processors</h2>
+            </div>
+            
+            <p>Renalytica does not operate isolated server infrastructure for all platform functions. We engage trusted enterprise third-party sub-processors who adhere to strict data protection standards:</p>
+
+            <div class="legal-processor-grid">
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">Stripe, Inc.</span>
+                  <span class="legal-processor-category">Payments</span>
+                </div>
+                <p class="legal-processor-desc">Handles international credit/debit card processing and fraud screening under global PCI-DSS Level 1 certification.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">Paystack Payments Limited</span>
+                  <span class="legal-processor-category">Payments</span>
+                </div>
+                <p class="legal-processor-desc">Handles local Naira debit cards, instant bank transfers, and USSD transactions under NDPR and PCI-DSS certification.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">Amazon Web Services (AWS)</span>
+                  <span class="legal-processor-category">Cloud</span>
+                </div>
+                <p class="legal-processor-desc">Secure cloud hosting, encrypted database storage, and compute environments maintaining ISO 27001 and SOC 2 Type II compliance.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">Cloudflare, Inc.</span>
+                  <span class="legal-processor-category">Edge CDN</span>
+                </div>
+                <p class="legal-processor-desc">Global content delivery network (CDN), DDoS mitigation, and edge SSL/TLS certificate management.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">SendGrid / Postmark</span>
+                  <span class="legal-processor-category">Email</span>
+                </div>
+                <p class="legal-processor-desc">Secure automated dispatch of report download links, invoice receipts, and account authentication messages.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">Twilio / WhatsApp API</span>
+                  <span class="legal-processor-category">Messaging</span>
+                </div>
+                <p class="legal-processor-desc">Powering verified real-time client concierge messaging and immediate analyst dispatch.</p>
+              </div>
+
+              <div class="legal-processor-card">
+                <div class="legal-processor-header">
+                  <span class="legal-processor-name">PostHog / Plausible</span>
+                  <span class="legal-processor-category">Analytics</span>
+                </div>
+                <p class="legal-processor-desc">Privacy-focused aggregate usage telemetry that does not track individuals across third-party websites.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 6: COOKIE POLICY -->
+          <section class="legal-doc-section" id="sec-6">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 06</span>
+              <h2 class="legal-section-title">Cookie Policy &amp; Tracking Technologies</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">6.1</span> <b>What Are Cookies?</b> Cookies are small text files placed on your computer or mobile device when you browse websites. They help websites remember your device and store session preferences.</p>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">6.2</span> <b>How Renalytica Uses Cookies:</b></p>
+              <ul>
+                <li><b>Strictly Necessary Cookies:</b> Essential for enabling site navigation, maintaining shopping cart contents, and keeping you securely authenticated in your subscription session.</li>
+                <li><b>Functional Cookies:</b> Store your localized preferences, such as selected currency display (USD, NGN, GBP, EUR) and light/dark mode theme selection.</li>
+                <li><b>Performance &amp; Analytics Cookies:</b> Collect anonymous, aggregate telemetry regarding which report categories are most frequently accessed, helping us optimize store navigation.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">6.3</span> <b>Cookie Governance &amp; Control:</b> You can modify your browser settings at any time to block, disable, or delete cookies. Note that disabling strictly necessary cookies may impair the functionality of the online shopping cart and digital download checkout.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 7: CROSS-BORDER DATA TRANSFERS -->
+          <section class="legal-doc-section" id="sec-7">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 07</span>
+              <h2 class="legal-section-title">Cross-Border Data Transfers &amp; Safeguards</h2>
+            </div>
+            
+            <p>Renalytica serves institutional clients across Sub-Saharan Africa, the United Kingdom, Europe, and North America. In operating our international research portal, personal and corporate data may be transferred to and stored on secure cloud servers located outside your country of residence (such as AWS data centers in Ireland, Germany, or the United States).</p>
+
+            <p>When performing international data transfers, we implement statutory safeguards compliant with <b>Sections 41–43 of the NDPA 2023</b> and <b>Chapter V of the GDPR</b>:</p>
+
+            <ul>
+              <li>Utilizing standard contractual clauses (SCCs) approved by international supervisory authorities.</li>
+              <li>Ensuring recipient cloud hosting partners maintain SOC 2 Type II, ISO 27001, and PCI-DSS Level 1 certifications.</li>
+              <li>Implementing mandatory end-to-end cryptographic encryption for all data in transit and at rest.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 8: INFORMATION SECURITY -->
+          <section class="legal-doc-section" id="sec-8">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 08</span>
+              <h2 class="legal-section-title">Information Security &amp; Technical Safeguards</h2>
+            </div>
+            
+            <p>We implement institutional-grade technical, physical, and administrative safeguards to protect your personal and corporate information:</p>
+
+            <ul>
+              <li><b>Transport Encryption:</b> All web traffic, payment transactions, and file downloads are protected by <b>256-bit TLS (Transport Layer Security)</b> encryption.</li>
+              <li><b>Storage Encryption:</b> Stored databases, order records, and customer profiles are encrypted at rest using <b>AES-256</b> cryptographic standards.</li>
+              <li><b>Role-Based Access Control (RBAC):</b> Access to internal order logs and client communication histories is restricted solely to authorized staff who require it for order fulfillment.</li>
+              <li><b>Periodic Vulnerability Audits:</b> Our engineering team conducts regular vulnerability assessments, automated dependency scanning, and third-party code audits to safeguard against unauthorized intrusion.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 9: RETENTION & SHREDDING -->
+          <section class="legal-doc-section" id="sec-9">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 09</span>
+              <h2 class="legal-section-title">Data Retention &amp; Secure Destruction Schedules</h2>
+            </div>
+            
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">9.1</span> <b>Retention Schedules:</b></p>
+              <ul>
+                <li><b>Purchased Report Download Records:</b> Retained for the active duration of your license plus three (3) years to facilitate license upgrades and file recovery requests.</li>
+                <li><b>Tax &amp; Invoicing Documentation:</b> Retained for <b>seven (7) years</b> in accordance with statutory Nigerian corporate taxation and accounting audit laws.</li>
+                <li><b>Marketing &amp; Newsletter Subscriptions:</b> Retained until you opt out or click "Unsubscribe". Upon unsubscribing, your email is immediately expunged from active mailing lists.</li>
+                <li><b>Technical Log Files:</b> Server access and error logs are automatically pruned and deleted after <b>ninety (90) days</b>.</li>
+              </ul>
+            </div>
+
+            <div class="legal-clause-item">
+              <p><span class="legal-clause-tag">9.2</span> <b>Secure Destruction:</b> Upon expiration of applicable retention periods, digital records are permanently overwritten and purged using <b>DoD-standard electronic shredding protocols</b>, ensuring information cannot be retrieved or reconstructed.</p>
+            </div>
+          </section>
+
+          <!-- SECTION 10: DATA SUBJECT RIGHTS -->
+          <section class="legal-doc-section" id="sec-10">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 10</span>
+              <h2 class="legal-section-title">Your Legal Rights as a Data Subject</h2>
+            </div>
+            
+            <p>Under the Nigeria Data Protection Act 2023 and the General Data Protection Regulation (GDPR), you hold enforceable legal rights concerning your personal data:</p>
+
+            <ol>
+              <li><b>Right to Access (Subject Access Request):</b> You have the right to request a complete copy of all personal data Renalytica holds regarding you and your organization.</li>
+              <li><b>Right to Rectification:</b> You have the right to demand the immediate correction of any inaccurate, incomplete, or outdated information.</li>
+              <li><b>Right to Erasure ("Right to Be Forgotten"):</b> You have the right to request the permanent deletion of your personal data, provided retention is no longer mandated by applicable financial or corporate taxation laws.</li>
+              <li><b>Right to Restrict Processing:</b> You have the right to restrict our processing of your personal information under certain circumstances (e.g., while an accuracy dispute is being verified).</li>
+              <li><b>Right to Data Portability:</b> You have the right to receive your personal data in a structured, commonly used, and machine-readable format (e.g., JSON or CSV).</li>
+              <li><b>Right to Object:</b> You have the right to object at any time to the processing of your personal data for direct marketing purposes.</li>
+              <li><b>Right to Withdraw Consent:</b> Where processing is based on consent (such as our email newsletter), you may withdraw your consent instantly by clicking the unsubscribe link or contacting our DPO.</li>
+            </ol>
+
+            <div class="legal-callout-box">
+              <div class="legal-callout-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                How to Exercise Your Statutory Rights (30-Day SLA)
+              </div>
+              <p class="legal-callout-desc">
+                To exercise any of these rights, submit a written request to our Data Protection Officer at <code>privacy@renalytica.com</code>. We will verify your corporate identity and respond comprehensively within <b>thirty (30) calendar days</b> at zero cost to you.
+              </p>
+            </div>
+          </section>
+
+          <!-- SECTION 11: SUPERVISORY RECOURSE -->
+          <section class="legal-doc-section" id="sec-11">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 11</span>
+              <h2 class="legal-section-title">Supervisory Authority &amp; Regulatory Recourse</h2>
+            </div>
+            
+            <p>If you believe that Renalytica has processed your personal data in violation of applicable data protection legislation, you have the statutory right to lodge a formal complaint with the competent supervisory authority:</p>
+
+            <ul>
+              <li>
+                <b>Federal Republic of Nigeria:</b><br>
+                <b>Supervisory Body:</b> Nigeria Data Protection Commission (NDPC)<br>
+                <b>Website:</b> <a href="https://www.ndpc.gov.ng" target="_blank" rel="noopener noreferrer">www.ndpc.gov.ng</a><br>
+                <b>Email:</b> <code>info@ndpc.gov.ng</code>
+              </li>
+              <li>
+                <b>European Union (EU):</b><br>
+                You may contact the National Data Protection Authority (DPA) within the EU Member State of your habitual residence or place of work.
+              </li>
+              <li>
+                <b>United Kingdom (UK):</b><br>
+                <b>Supervisory Body:</b> Information Commissioner’s Office (ICO)<br>
+                <b>Website:</b> <a href="https://www.ico.org.uk" target="_blank" rel="noopener noreferrer">www.ico.org.uk</a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- SECTION 12: PRIVACY TEAM CONTACTS -->
+          <section class="legal-doc-section" id="sec-12">
+            <div class="legal-section-header">
+              <span class="legal-section-indicator">SECTION 12</span>
+              <h2 class="legal-section-title">Contact Our Data Privacy Team</h2>
+            </div>
+            
+            <p>For questions, requests, or concerns regarding our privacy practices, please contact our dedicated governance desk:</p>
+
+            <div class="legal-desk-container">
+              <div class="legal-desk-title">Renalytica Privacy &amp; Data Protection Desk</div>
+              <p>Our Data Protection Officer handles all compliance inquiries, subject access requests, and corporate audits.</p>
+
+              <div class="legal-desk-grid">
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Data Protection Officer</span>
+                  <span class="legal-desk-val"><a href="mailto:privacy@renalytica.com">privacy@renalytica.com</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Secondary DPO Desk</span>
+                  <span class="legal-desk-val"><a href="mailto:dpo@renalytica.com">dpo@renalytica.com</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Corporate Support</span>
+                  <span class="legal-desk-val"><a href="mailto:support@renalytica.com">support@renalytica.com</a></span>
+                </div>
+                <div class="legal-desk-item">
+                  <span class="legal-desk-label">Telephone / WhatsApp</span>
+                  <span class="legal-desk-val"><a href="https://wa.me/2348137538723" target="_blank" rel="noopener noreferrer">+234 813 753 8723</a></span>
+                </div>
+                <div class="legal-desk-item" style="grid-column: 1 / -1;">
+                  <span class="legal-desk-label">Mailing Address</span>
+                  <span class="legal-desk-val">Renalytica Technologies &amp; Research Advisory Limited, Attn: Privacy &amp; Data Protection Officer, Victoria Island, Lagos, Nigeria.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Sticky Global Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- 6. Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <g class="chart-bars">
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+        <path d="M 5 90 L 35 65 L 65 45 L 90 20" fill="none" stroke="#ef7d00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="animate-line" />
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Component Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Interactive TOC Scroll-Spy & Mobile Jump Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Print handler
+      document.getElementById('btn-print-privacy')?.addEventListener('click', () => {
+        window.print();
+      });
+
+      // 2. Desktop Scroll-Spy
+      const sections = document.querySelectorAll('.legal-doc-section');
+      const tocLinks = document.querySelectorAll('.legal-toc-link');
+      const mobileSelect = document.getElementById('legal-mobile-select');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px -60% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            
+            // Update desktop TOC
+            tocLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+
+            // Update mobile select
+            if (mobileSelect) {
+              mobileSelect.value = `#${id}`;
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+
+      // 3. Mobile Jump Dropdown Change
+      mobileSelect?.addEventListener('change', (e) => {
+        const targetId = e.target.value;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

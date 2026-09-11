@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Research Store | Institutional Industry Reports &amp; Forecasts — Renalytica</title>
+  <meta name="description" content="Browse and acquire institutional market research reports across agriculture, currency, retail logistics, energy, and digital assets. Instant digital delivery with unlocked Excel models and executive presentations.">
+  <meta name="keywords" content="market research store, buy industry reports, African market research, agriculture market data, economic forecasts, stablecoins report, AI economics Africa, Renalytica research store">
+  <link rel="canonical" href="https://www.renalytica.com/reports">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Market Research Store | Institutional Industry Reports &amp; Forecasts — Renalytica">
+  <meta property="og:description" content="Browse and acquire institutional market research reports across agriculture, currency, energy, and fintech. Instant download with unlocked Excel spreadsheets.">
+  <meta property="og:image" content="assets/brand/renalytica_emblem.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/reports.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+
+    <!-- ====================================================================
+         SECTION 1. STORE TERMINAL HERO & SEARCH HUD
+         ==================================================================== -->
+    <section class="store-hero-section">
+      <div class="container store-hero-container">
+        
+        <!-- Eyebrow Telemetry Badge -->
+        <div class="store-telemetry-badge-group">
+          <span class="store-badge-pill">
+            <span class="pulse-green-dot"></span>
+            COMMERCIAL RESEARCH TERMINAL // 2,500+ TITLES
+          </span>
+          <span class="store-meta-chip">Q3 2026 RELEASES LIVE</span>
+        </div>
+
+        <h1 class="store-hero-title">
+          Institutional Market Intelligence Store
+        </h1>
+        <p class="store-hero-subtitle">
+          Discover verified market sizing, multi-variable econometric forecasts, and competitive market share analyses across Africa’s highest-growth economic corridors. Download immediately in PDF, unlocked Excel, and executive slide decks.
+        </p>
+
+        <!-- Live Interactive Search Interface -->
+        <div class="store-search-box-wrap">
+          <div class="store-search-inner">
+            <svg class="search-lens-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="catalog-search-input" 
+              class="store-search-input" 
+              placeholder="Search by sector, keyword, geography, or report SKU (e.g., 'Grains', 'Stablecoins', 'AI')..."
+              autocomplete="off"
+            >
+            <button type="button" id="clear-search-btn" class="clear-search-btn" title="Clear Search" aria-label="Clear Search">✕</button>
+          </div>
+
+          <!-- Popular Search Queries Pills -->
+          <div class="popular-queries-bar">
+            <span class="popular-queries-label">POPULAR QUERIES:</span>
+            <div class="popular-pills-list" id="popular-pills-container">
+              <!-- Rendered via JS / Static Fallback -->
+              <button class="popular-pill" data-query="grains">Grains &amp; Fertilizer</button>
+              <button class="popular-pill" data-query="stablecoin">Stablecoins &amp; FX</button>
+              <button class="popular-pill" data-query="AI adoption">AI Economics</button>
+              <button class="popular-pill" data-query="retail">FMCG Distribution</button>
+              <button class="popular-pill" data-query="solar">Commercial Solar</button>
+              <button class="popular-pill" data-query="payments">Trade Rails</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catalog Stats Ribbon -->
+        <div class="store-stats-ribbon">
+          <div class="stats-ribbon-item">
+            <span class="stats-item-icon">⚡</span>
+            <div class="stats-item-text">
+              <strong>Instant Digital Delivery</strong>
+              <span>Watermarked PDF + Unlocked Excel (.xlsx)</span>
+            </div>
+          </div>
+          <div class="stats-ribbon-item">
+            <span class="stats-item-icon">🛡️</span>
+            <div class="stats-item-text">
+              <strong>Dual-Vector Verification</strong>
+              <span>180+ Field Enumerators + Official Registries</span>
+            </div>
+          </div>
+          <div class="stats-ribbon-item">
+            <span class="stats-item-icon">📊</span>
+            <div class="stats-item-text">
+              <strong>Econometric Models</strong>
+              <span>10,000-Iteration Monte Carlo Scenarios</span>
+            </div>
+          </div>
+          <div class="stats-ribbon-item">
+            <span class="stats-item-icon">🎯</span>
+            <div class="stats-item-text">
+              <strong>Direct Analyst Access</strong>
+              <span>1-on-1 Executive Briefings Included</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2. FACETED CATALOG EXPLORER & PRODUCTS GRID
+         ==================================================================== -->
+    <section class="catalog-explorer-section">
+      <div class="container catalog-layout-container">
+        
+        <!-- Left Column: Faceted Sidebar Filters -->
+        <aside class="catalog-sidebar" id="catalog-sidebar" aria-label="Catalog Filters">
+          <div class="sidebar-header-row">
+            <h3 class="sidebar-title">Filters &amp; Facets</h3>
+            <button type="button" id="reset-filters-btn" class="reset-filters-link">Reset All</button>
+          </div>
+
+          <!-- Filter Module 1: Sector / Industry -->
+          <div class="filter-group">
+            <h4 class="filter-group-heading">Sector / Industry</h4>
+            <div class="filter-options-list" id="sector-filters-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="all" checked>
+                <span class="filter-label-text">All Sectors</span>
+                <span class="filter-count" id="count-all">10</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="agriculture">
+                <span class="filter-label-text">Agriculture &amp; Agribusiness</span>
+                <span class="filter-count" id="count-agri">3</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="fintech">
+                <span class="filter-label-text">Financial Systems &amp; Digital Assets</span>
+                <span class="filter-count" id="count-fintech">2</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="technology">
+                <span class="filter-label-text">Digital Economy &amp; Advanced Tech</span>
+                <span class="filter-count" id="count-tech">1</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="economy">
+                <span class="filter-label-text">Economy, Currency &amp; Banking</span>
+                <span class="filter-count" id="count-econ">1</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="retail">
+                <span class="filter-label-text">Retail, Consumer Goods &amp; Logistics</span>
+                <span class="filter-count" id="count-retail">1</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="energy">
+                <span class="filter-label-text">Energy, Solar &amp; Resources</span>
+                <span class="filter-count" id="count-energy">1</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="sector-filter" value="industrial">
+                <span class="filter-label-text">Industrial &amp; Building Materials</span>
+                <span class="filter-count" id="count-industrial">1</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter Module 2: Geographic Scope -->
+          <div class="filter-group">
+            <h4 class="filter-group-heading">Geographic Scope</h4>
+            <div class="filter-options-list" id="region-filters-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="region-filter" value="all" checked>
+                <span class="filter-label-text">All Regions</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="region-filter" value="west_africa">
+                <span class="filter-label-text">West Africa (Nigeria, Ghana, etc.)</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="region-filter" value="sub_saharan_africa">
+                <span class="filter-label-text">Sub-Saharan Africa (Pan-Regional)</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="region-filter" value="pan_african">
+                <span class="filter-label-text">Pan-African &amp; Global Trade</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter Module 3: Publication Horizon -->
+          <div class="filter-group">
+            <h4 class="filter-group-heading">Publication Date</h4>
+            <div class="filter-options-list" id="horizon-filters-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="horizon-filter" value="all" checked>
+                <span class="filter-label-text">All Releases</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="horizon-filter" value="q3_2026">
+                <span class="filter-label-text">Newly Published (Q3 2026)</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="horizon-filter" value="q1_q2_2026">
+                <span class="filter-label-text">Q1–Q2 2026 Releases</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter Module 4: Deliverable Format -->
+          <div class="filter-group">
+            <h4 class="filter-group-heading">Deliverable Format</h4>
+            <div class="filter-options-list" id="format-filters-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="format-filter" value="all" checked>
+                <span class="filter-label-text">All Formats</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="format-filter" value="pdf">
+                <span class="filter-label-text">Executive Vector PDF</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="format-filter" value="xlsx">
+                <span class="filter-label-text">Unlocked Excel Model (.xlsx)</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="format-filter" value="pptx">
+                <span class="filter-label-text">Boardroom Slide Deck (.pptx)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter Module 5: Single User Price Range -->
+          <div class="filter-group">
+            <h4 class="filter-group-heading">Single User Price (USD)</h4>
+            <div class="filter-options-list" id="price-filters-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="price-filter" value="all" checked>
+                <span class="filter-label-text">Any Price</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="price-filter" value="under_2000">
+                <span class="filter-label-text">Under $2,000</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="price-filter" value="2000_3500">
+                <span class="filter-label-text">$2,000 to $3,500 (Standard)</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="price-filter" value="3500_5000">
+                <span class="filter-label-text">$3,500 to $5,000</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="price-filter" value="over_5000">
+                <span class="filter-label-text">Enterprise Tier (&gt;$5,000)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Custom Advisory RFP Card -->
+          <div class="sidebar-concierge-card">
+            <div class="concierge-badge">CUSTOM DATA CUTS</div>
+            <h4 class="concierge-title">Need Tailored Corridors?</h4>
+            <p class="concierge-desc">
+              If your research requirements span non-standard trade lanes or niche commodities, our desk builds custom econometric datasets within 5 business days.
+            </p>
+            <a href="contact.html" class="concierge-btn">Request Custom Briefing →</a>
+          </div>
+
+        </aside>
+
+        <!-- Right Column: Catalog Grid and Controls -->
+        <div class="catalog-main-content">
+          
+          <!-- Catalog Toolbar Header -->
+          <div class="catalog-toolbar">
+            <div class="toolbar-results-info">
+              <span class="results-badge" id="results-count-badge">10 REPORTS</span>
+              <span class="results-status-text" id="results-status-text">Showing all institutional research publications</span>
+            </div>
+
+            <!-- Active Filter Tag Chips -->
+            <div class="active-filter-chips" id="active-filter-chips"></div>
+
+            <div class="toolbar-actions">
+              <!-- Sort Dropdown -->
+              <div class="sort-selector-wrap">
+                <label for="catalog-sort-select" class="sort-label">Sort By:</label>
+                <select id="catalog-sort-select" class="catalog-sort-select">
+                  <option value="newest">Newest Releases</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                  <option value="pages">Page Count</option>
+                </select>
+              </div>
+
+              <!-- Mobile Filter Drawer Toggle -->
+              <button type="button" class="mobile-filter-toggle-btn" id="mobile-filter-toggle-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span>Filters</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Products Grid -->
+          <div class="reports-grid" id="reports-grid" aria-live="polite">
+            <!-- Rendered dynamically via lib/reports-repository.js -->
+          </div>
+
+          <!-- Empty Search State -->
+          <div class="catalog-empty-state" id="catalog-empty-state" style="display: none;">
+            <div class="empty-icon">🔍</div>
+            <h3 class="empty-title">No matching reports found</h3>
+            <p class="empty-desc">We could not find any research reports matching your criteria. Try loosening your keywords or resetting your sidebar filters.</p>
+            <button type="button" id="empty-reset-btn" class="btn-pill-primary">Reset All Filters</button>
+            <div class="empty-help-links">
+              <span>Looking for custom research?</span>
+              <a href="contact.html">Speak with Our Research Team →</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 3. INSTITUTIONAL REASSURANCE & PROCUREMENT STRIP
+         ==================================================================== -->
+    <section class="procurement-guarantee-strip">
+      <div class="container">
+        <div class="procurement-grid">
+          <div class="procurement-col">
+            <h4 class="procurement-col-title">Unlocked Modeling Freedom</h4>
+            <p class="procurement-col-p">Departmental and Enterprise licenses include fully unlocked Microsoft Excel financial workbooks (.xlsx) with live, audit-ready formulas.</p>
+          </div>
+          <div class="procurement-col">
+            <h4 class="procurement-col-title">Formal Corporate Invoicing</h4>
+            <p class="procurement-col-p">We issue proforma invoices with international IBAN and domestic wire instructions, welcoming purchase orders from institutional finance teams.</p>
+          </div>
+          <div class="procurement-col">
+            <h4 class="procurement-col-title">Executive Briefings Included</h4>
+            <p class="procurement-col-p">Schedule private video briefing sessions with our lead economists to interrogate data models, assumptions, and corridor forecasts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       INTERACTIVE CART / BRIEFCASE SLIDE-OVER DRAWER
+       ==================================================================== -->
+  <div class="briefcase-backdrop" id="briefcase-backdrop" aria-hidden="true"></div>
+  <aside class="briefcase-drawer" id="briefcase-drawer" aria-label="Research Briefcase & Cart" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <h3 class="drawer-title">Research Briefcase</h3>
+        <span class="drawer-count-chip" id="drawer-count-chip">0</span>
+      </div>
+      <button type="button" class="drawer-close-btn" id="briefcase-close-btn" aria-label="Close Briefcase">✕</button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div class="drawer-body" id="briefcase-items-container">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Drawer Footer / Summary -->
+    <div class="drawer-footer" id="briefcase-footer">
+      <div class="drawer-promo-wrap">
+        <input type="text" id="promo-code-input" class="promo-input" placeholder="Enterprise access or promo code...">
+        <button type="button" id="apply-promo-btn" class="promo-btn">Apply</button>
+      </div>
+
+      <div class="drawer-subtotal-row">
+        <span class="subtotal-label">Subtotal</span>
+        <span class="subtotal-value" id="briefcase-subtotal">$0 USD</span>
+      </div>
+      <div class="subtotal-vat-note">Instant Digital Delivery via Secure Email + Client Portal Vault</div>
+
+      <div class="drawer-action-buttons">
+        <button type="button" class="btn-pill-primary w-full text-center" id="checkout-btn">
+          Proceed to Secure Checkout →
+        </button>
+        <button type="button" class="proforma-request-link" id="proforma-btn">
+          Request Corporate Proforma Invoice (.pdf)
+        </button>
+      </div>
+
+      <div class="drawer-trust-badges">
+        <span>🔒 256-bit Encrypted Checkout</span>
+        <span>⚡ Instant Download Links</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ====================================================================
+       FREE SAMPLE BRIEF LEAD CAPTURE MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="sample-modal-backdrop" aria-hidden="true">
+    <div class="sample-modal-dialog" role="dialog" aria-labelledby="modal-report-title">
+      <button type="button" class="modal-close-btn" id="sample-modal-close">✕</button>
+      
+      <div class="modal-header-block">
+        <span class="modal-tag">INSTANT EXECUTIVE PREVIEW</span>
+        <h3 class="modal-title" id="modal-report-title">Download Free Sample Brief</h3>
+        <p class="modal-desc" id="modal-report-desc">
+          Enter your professional email to receive immediate access to the 10-page executive summary, sample data tables, and methodology notes.
+        </p>
+      </div>
+
+      <form class="sample-lead-form" id="sample-lead-form">
+        <input type="hidden" id="modal-report-id" value="">
+        <input type="hidden" id="modal-report-pdf" value="">
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="sample-full-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="sample-full-name" required placeholder="Dr. Sarah Alabi">
+          </div>
+          <div class="form-group">
+            <label for="sample-work-email">Corporate / Work Email <span class="required">*</span></label>
+            <input type="email" id="sample-work-email" required placeholder="s.alabi@institution.com">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="sample-company">Company / Organization <span class="required">*</span></label>
+            <input type="text" id="sample-company" required placeholder="e.g., Zenith Bank, AFEX, Dangote">
+          </div>
+          <div class="form-group">
+            <label for="sample-role">Job Title</label>
+            <input type="text" id="sample-role" placeholder="e.g., Head of Corporate Strategy">
+          </div>
+        </div>
+
+        <div class="modal-action-row">
+          <button type="submit" class="btn-pill-primary w-full" id="sample-submit-btn">
+            Download Executive Sample Brief (.pdf) →
+          </button>
+        </div>
+
+        <p class="modal-privacy-note">
+          🔒 Strict Commercial Privacy. We never sell your data or transmit marketing spam. Instant watermarked download.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="renalytica-toast" id="store-toast">Item added to your research briefcase!</div>
+
+  <!-- Global Mega Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Scripts -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="lib/articles-repository.js"></script>
+  <script src="lib/reports-repository.js"></script>
+  <script src="lib/supabase-client.js"></script>
+  <script src="lib/flutterwave-checkout.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Reports Store Page Interactive Engine -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const repo = window.ReportsRepository;
+      if (!repo) {
+        console.error('ReportsRepository not found');
+        return;
+      }
+
+      // DOM Elements
+      const reportsGrid = document.getElementById('reports-grid');
+      const emptyState = document.getElementById('catalog-empty-state');
+      const searchInput = document.getElementById('catalog-search-input');
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+      const sortSelect = document.getElementById('catalog-sort-select');
+      const resetBtn = document.getElementById('reset-filters-btn');
+      const emptyResetBtn = document.getElementById('empty-reset-btn');
+      const resultsBadge = document.getElementById('results-count-badge');
+      const resultsStatusText = document.getElementById('results-status-text');
+      const activeChipsContainer = document.getElementById('active-filter-chips');
+
+      // Briefcase Drawer Elements
+      const briefcaseDrawer = document.getElementById('briefcase-drawer');
+      const briefcaseBackdrop = document.getElementById('briefcase-backdrop');
+      const briefcaseCloseBtn = document.getElementById('briefcase-close-btn');
+      const briefcaseItemsContainer = document.getElementById('briefcase-items-container');
+      const briefcaseSubtotal = document.getElementById('briefcase-subtotal');
+      const drawerCountChip = document.getElementById('drawer-count-chip');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const proformaBtn = document.getElementById('proforma-btn');
+
+      // Sample Brief Modal Elements
+      const sampleModal = document.getElementById('sample-modal-backdrop');
+      const sampleCloseBtn = document.getElementById('sample-modal-close');
+      const sampleForm = document.getElementById('sample-lead-form');
+      const modalReportTitle = document.getElementById('modal-report-title');
+      const modalReportId = document.getElementById('modal-report-id');
+      const modalReportPdf = document.getElementById('modal-report-pdf');
+
+      // Toast
+      const toast = document.getElementById('store-toast');
+      function showToast(msg, type = 'success') {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.style.background = type === 'warning' ? '#D97706' : (type === 'error' ? '#DC2626' : '#0A0A0A');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3500);
+      }
+
+      // Parse URL parameters for initial hydration (e.g. ?sector=agriculture or ?q=grains)
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialSector = urlParams.get('sector') || 'all';
+      const initialQuery = urlParams.get('q') || '';
+      const initialPrice = urlParams.get('price') || 'all';
+
+      // Current Filter State
+      let currentCriteria = {
+        sector: initialSector,
+        region: 'all',
+        horizon: 'all',
+        format: 'all',
+        priceRange: initialPrice,
+        search: initialQuery,
+        sort: 'newest'
+      };
+
+      if (initialQuery) {
+        searchInput.value = initialQuery;
+        clearSearchBtn.style.display = 'block';
+      }
+
+      // Check initial sector radio
+      const sectorRadio = document.querySelector(`input[name="sector-filter"][value="${initialSector}"]`);
+      if (sectorRadio) sectorRadio.checked = true;
+
+      // Render Reports Function
+      function renderCatalog() {
+        const reports = repo.filter(currentCriteria);
+        
+        // Update Count Badges
+        resultsBadge.textContent = `${reports.length} REPORT${reports.length === 1 ? '' : 'S'}`;
+        resultsStatusText.textContent = reports.length > 0 
+          ? `Showing ${reports.length} verified research publication${reports.length === 1 ? '' : 's'}` 
+          : 'No publications match your current filters';
+
+        // Update Active Chips
+        renderActiveChips();
+
+        if (reports.length === 0) {
+          reportsGrid.style.display = 'none';
+          emptyState.style.display = 'block';
+          return;
+        }
+
+        reportsGrid.style.display = 'grid';
+        emptyState.style.display = 'none';
+
+        reportsGrid.innerHTML = reports.map(r => {
+          const hasRealPdf = r.samplePdfUrl && r.samplePdfUrl.includes('assets/reports/');
+          return `
+            <article class="report-card ${r.isFlagship ? 'flagship-card' : ''}" data-id="${r.id}">
+              <div class="card-header-meta">
+                <div class="meta-tag-group">
+                  <span class="report-sku-chip">${r.sku}</span>
+                  <span class="report-sector-chip">${r.sectorLabel}</span>
+                  ${r.isFlagship ? '<span class="flagship-badge">FLAGSHIP</span>' : ''}
+                </div>
+                <span class="report-pub-date">${r.pubDate} • ${r.pageCount} Pages</span>
+              </div>
+
+              <h2 class="report-card-title">
+                <a href="report.html?id=${r.id}">${r.title}</a>
+              </h2>
+
+              <p class="report-card-teaser">${r.teaser}</p>
+
+              <!-- Key Telemetry Metrics Banner -->
+              <div class="card-telemetry-banner">
+                <div class="telemetry-stat">
+                  <span class="stat-label">GROWTH // FORECAST</span>
+                  <strong class="stat-value">${r.keyTelemetry.cagr}</strong>
+                </div>
+                <div class="telemetry-stat">
+                  <span class="stat-label">MARKET VALUATION</span>
+                  <strong class="stat-value">${r.keyTelemetry.marketSize}</strong>
+                </div>
+                <div class="telemetry-stat">
+                  <span class="stat-label">EXECUTIVE HIGHLIGHT</span>
+                  <strong class="stat-value text-accent">${r.keyTelemetry.highlightMetric}</strong>
+                </div>
+              </div>
+
+              <!-- Licensing Breakdown Box -->
+              <div class="card-licensing-box">
+                <div class="license-price-pill">
+                  <span class="l-label">Single User:</span>
+                  <strong>$${r.pricing.single.toLocaleString()}</strong>
+                </div>
+                <div class="license-price-pill featured-license">
+                  <span class="l-label">Departmental:</span>
+                  <strong>$${r.pricing.departmental.toLocaleString()}</strong>
+                </div>
+                <div class="license-price-pill">
+                  <span class="l-label">Enterprise:</span>
+                  <strong>$${r.pricing.enterprise.toLocaleString()}</strong>
+                </div>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="card-action-bar">
+                <div class="primary-actions">
+                  <a href="report.html?id=${r.id}" class="btn-card-action primary">
+                    View Full Details &amp; Models →
+                  </a>
+                  <button type="button" class="btn-card-action outline sample-btn" data-id="${r.id}" data-title="${r.shortTitle || r.title}" data-pdf="${r.samplePdfUrl}">
+                    Free Sample Brief
+                  </button>
+                </div>
+                <button type="button" class="quick-add-cart-btn" data-id="${r.id}" title="Add Departmental License to Briefcase">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>+ Add to Cart</span>
+                </button>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Bind Card Action Events
+        bindCardEvents();
+      }
+
+      function renderActiveChips() {
+        let chipsHtml = '';
+        if (currentCriteria.sector !== 'all') {
+          const s = repo.getSectors().find(sec => sec.id === currentCriteria.sector);
+          chipsHtml += `<span class="filter-chip" data-type="sector">${s ? s.name : currentCriteria.sector} ✕</span>`;
+        }
+        if (currentCriteria.region !== 'all') {
+          chipsHtml += `<span class="filter-chip" data-type="region">${currentCriteria.region.replace(/_/g, ' ')} ✕</span>`;
+        }
+        if (currentCriteria.horizon !== 'all') {
+          chipsHtml += `<span class="filter-chip" data-type="horizon">${currentCriteria.horizon.replace(/_/g, ' ')} ✕</span>`;
+        }
+        if (currentCriteria.format !== 'all') {
+          chipsHtml += `<span class="filter-chip" data-type="format">${currentCriteria.format.toUpperCase()} ✕</span>`;
+        }
+        if (currentCriteria.priceRange !== 'all') {
+          chipsHtml += `<span class="filter-chip" data-type="priceRange">Price Filter ✕</span>`;
+        }
+        if (currentCriteria.search) {
+          chipsHtml += `<span class="filter-chip" data-type="search">"${currentCriteria.search}" ✕</span>`;
+        }
+
+        activeChipsContainer.innerHTML = chipsHtml;
+
+        // Dismiss chip click
+        activeChipsContainer.querySelectorAll('.filter-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            const type = chip.getAttribute('data-type');
+            if (type === 'sector') {
+              currentCriteria.sector = 'all';
+              document.querySelector('input[name="sector-filter"][value="all"]').checked = true;
+            } else if (type === 'region') {
+              currentCriteria.region = 'all';
+              document.querySelector('input[name="region-filter"][value="all"]').checked = true;
+            } else if (type === 'horizon') {
+              currentCriteria.horizon = 'all';
+              document.querySelector('input[name="horizon-filter"][value="all"]').checked = true;
+            } else if (type === 'format') {
+              currentCriteria.format = 'all';
+              document.querySelector('input[name="format-filter"][value="all"]').checked = true;
+            } else if (type === 'priceRange') {
+              currentCriteria.priceRange = 'all';
+              document.querySelector('input[name="price-filter"][value="all"]').checked = true;
+            } else if (type === 'search') {
+              currentCriteria.search = '';
+              searchInput.value = '';
+              clearSearchBtn.style.display = 'none';
+            }
+            renderCatalog();
+          });
+        });
+      }
+
+      function bindCardEvents() {
+        // Quick Add to Cart
+        document.querySelectorAll('.quick-add-cart-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const reportId = btn.getAttribute('data-id');
+            repo.addToCart(reportId, 'departmental');
+            showToast('Added Departmental License to your research briefcase!');
+            openBriefcase();
+          });
+        });
+
+        // Sample Brief Modal Open
+        document.querySelectorAll('.sample-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = btn.getAttribute('data-id');
+            const title = btn.getAttribute('data-title');
+            const pdf = btn.getAttribute('data-pdf');
+
+            modalReportId.value = id;
+            modalReportTitle.textContent = `Download Sample Brief: ${title}`;
+            modalReportPdf.value = pdf;
+            sampleModal.classList.add('active');
+          });
+        });
+      }
+
+      // Search Events
+      let debounceTimer = null;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        const val = e.target.value;
+        clearSearchBtn.style.display = val ? 'block' : 'none';
+        debounceTimer = setTimeout(() => {
+          currentCriteria.search = val;
+          renderCatalog();
+        }, 250);
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentCriteria.search = '';
+        clearSearchBtn.style.display = 'none';
+        renderCatalog();
+      });
+
+      // Popular Queries Pills
+      document.querySelectorAll('.popular-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const query = pill.getAttribute('data-query');
+          searchInput.value = query;
+          currentCriteria.search = query;
+          clearSearchBtn.style.display = 'block';
+          renderCatalog();
+          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      // Radio Filter Handlers
+      ['sector', 'region', 'horizon', 'format', 'price'].forEach(facet => {
+        document.querySelectorAll(`input[name="${facet}-filter"]`).forEach(radio => {
+          radio.addEventListener('change', (e) => {
+            if (facet === 'price') {
+              currentCriteria.priceRange = e.target.value;
+            } else {
+              currentCriteria[facet] = e.target.value;
+            }
+            renderCatalog();
+          });
+        });
+      });
+
+      // Sort Select
+      sortSelect.addEventListener('change', (e) => {
+        currentCriteria.sort = e.target.value;
+        renderCatalog();
+      });
+
+      // Reset Button
+      function resetAllFilters() {
+        currentCriteria = {
+          sector: 'all',
+          region: 'all',
+          horizon: 'all',
+          format: 'all',
+          priceRange: 'all',
+          search: '',
+          sort: 'newest'
+        };
+        searchInput.value = '';
+        clearSearchBtn.style.display = 'none';
+        sortSelect.value = 'newest';
+        document.querySelector('input[name="sector-filter"][value="all"]').checked = true;
+        document.querySelector('input[name="region-filter"][value="all"]').checked = true;
+        document.querySelector('input[name="horizon-filter"][value="all"]').checked = true;
+        document.querySelector('input[name="format-filter"][value="all"]').checked = true;
+        document.querySelector('input[name="price-filter"][value="all"]').checked = true;
+        renderCatalog();
+      }
+
+      resetBtn.addEventListener('click', resetAllFilters);
+      emptyResetBtn.addEventListener('click', resetAllFilters);
+
+      // ========================================================================
+      // BRIEFCASE DRAWER LOGIC
+      // ========================================================================
+      function openBriefcase() {
+        briefcaseDrawer.classList.add('open');
+        briefcaseBackdrop.classList.add('open');
+        renderBriefcaseDrawer();
+      }
+
+      function closeBriefcase() {
+        briefcaseDrawer.classList.remove('open');
+        briefcaseBackdrop.classList.remove('open');
+      }
+
+      briefcaseCloseBtn.addEventListener('click', closeBriefcase);
+      briefcaseBackdrop.addEventListener('click', closeBriefcase);
+
+      // Listen for Cart Button in HeaderNav
+      document.addEventListener('click', (e) => {
+        const briefcaseTrigger = e.target.closest('.briefcase-btn') || e.target.closest('[href*="#briefcase"]');
+        if (briefcaseTrigger) {
+          e.preventDefault();
+          openBriefcase();
+        }
+      });
+
+      // Render Briefcase Items
+      function renderBriefcaseDrawer() {
+        const items = repo.getCart();
+        drawerCountChip.textContent = items.length;
+        const total = repo.getCartTotal();
+        briefcaseSubtotal.textContent = `$${total.toLocaleString()} USD`;
+
+        if (items.length === 0) {
+          briefcaseItemsContainer.innerHTML = `
+            <div class="empty-briefcase">
+              <span class="empty-briefcase-icon">💼</span>
+              <h4>Your briefcase is empty</h4>
+              <p>Explore our institutional store catalog and add required publications to configure license tiers.</p>
+              <button type="button" class="btn-pill-primary" id="drawer-browse-btn">Explore Reports →</button>
+            </div>
+          `;
+          document.getElementById('drawer-browse-btn')?.addEventListener('click', closeBriefcase);
+          return;
+        }
+
+        briefcaseItemsContainer.innerHTML = items.map(item => {
+          const report = repo.getById(item.id);
+          const singleP = report ? report.pricing.single : 2500;
+          const deptP = report ? report.pricing.departmental : 4500;
+          const entP = report ? report.pricing.enterprise : 7500;
+
+          return `
+            <div class="briefcase-item" data-id="${item.id}">
+              <div class="b-item-top">
+                <span class="b-item-sku">${item.sku}</span>
+                <button type="button" class="b-item-remove-btn" data-id="${item.id}" title="Remove Item">✕</button>
+              </div>
+              <h4 class="b-item-title">${item.title}</h4>
+              <div class="b-item-sector">${item.sector} • ${item.pageCount} Pages</div>
+
+              <div class="b-license-row">
+                <label class="b-license-label">License:</label>
+                <select class="b-license-select" data-id="${item.id}">
+                  <option value="single" ${item.licenseType === 'single' ? 'selected' : ''}>Single User ($${singleP.toLocaleString()})</option>
+                  <option value="departmental" ${item.licenseType === 'departmental' ? 'selected' : ''}>Departmental ($${deptP.toLocaleString()})</option>
+                  <option value="enterprise" ${item.licenseType === 'enterprise' ? 'selected' : ''}>Global Enterprise ($${entP.toLocaleString()})</option>
+                </select>
+              </div>
+
+              <div class="b-item-price-row">
+                <span>Total:</span>
+                <strong class="b-item-price">$${(item.price || 0).toLocaleString()} USD</strong>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Remove item listener
+        briefcaseItemsContainer.querySelectorAll('.b-item-remove-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            repo.removeFromCart(id);
+            renderBriefcaseDrawer();
+            showToast('Item removed from briefcase', 'warning');
+          });
+        });
+
+        // Change license dropdown listener
+        briefcaseItemsContainer.querySelectorAll('.b-license-select').forEach(select => {
+          select.addEventListener('change', (e) => {
+            const id = select.getAttribute('data-id');
+            const newTier = e.target.value;
+            repo.updateLicense(id, newTier);
+            renderBriefcaseDrawer();
+          });
+        });
+      }
+
+      // Checkout Button with Flutterwave Gateway
+      checkoutBtn.addEventListener('click', () => {
+        const cart = repo.getCart();
+        if (cart.length === 0) {
+          showToast('Please add at least one report to your briefcase.', 'warning');
+          return;
+        }
+
+        const totalAmount = repo.getCartTotal();
+        const reportIds = cart.map(i => i.id);
+        const title = cart.length === 1 ? cart[0].title : `Renalytica Intelligence Portfolio (${cart.length} Publications)`;
+
+        if (window.RenalyticaPayment) {
+          window.RenalyticaPayment.pay({
+            amount: totalAmount,
+            currency: 'USD',
+            title: title,
+            reportIds: reportIds,
+            licenseType: cart[0].licenseType || 'departmental',
+            onSuccess: (rec) => {
+              closeBriefcase();
+              window.location.href = 'portal.html?checkout=active&tx=' + encodeURIComponent(rec.txRef);
+            }
+          });
+        } else {
+          closeBriefcase();
+          window.location.href = 'portal.html?checkout=active';
+        }
+      });
+
+      // Corporate Proforma Generator
+      proformaBtn.addEventListener('click', () => {
+        closeBriefcase();
+        showToast('Directing to Corporate Proforma Generator...', 'success');
+        window.location.href = 'contact.html#contact-form';
+      });
+
+      // Sample Brief Form Submission
+      sampleForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('sample-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Generating Secure Watermarked Brief...';
+
+        const pdfUrl = modalReportPdf.value || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Download Executive Sample Brief (.pdf) →';
+          sampleModal.classList.remove('active');
+          showToast('Sample brief ready! Your download has started.', 'success');
+
+          // Trigger automatic browser download
+          const link = document.createElement('a');
+          link.href = pdfUrl;
+          link.download = pdfUrl.split('/').pop();
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          sampleForm.reset();
+        }, 1200);
+      });
+
+      sampleCloseBtn.addEventListener('click', () => sampleModal.classList.remove('active'));
+      sampleModal.addEventListener('click', (e) => {
+        if (e.target === sampleModal) sampleModal.classList.remove('active');
+      });
+
+      // Initial Render
+      renderCatalog();
+
+      // Listen for cart changes
+      window.addEventListener('renalytica:cart-updated', (e) => {
+        const badge = document.getElementById('briefcase-badge');
+        if (badge) badge.textContent = e.detail.count;
+      });
+    });
+  </script>
+
+</body>
+</html>

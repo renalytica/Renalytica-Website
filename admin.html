@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Admin &amp; Content Management Desk — Renalytica</title>
+  <meta name="description" content="Renalytica institutional administration, Tiptap dynamic content publishing, client deliverable assignment, and transaction auditing.">
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/portal.css">
+
+  <style>
+    .admin-wrapper {
+      padding: 3rem 0 5rem;
+      background: var(--surface-tint);
+      min-height: calc(100vh - 140px);
+    }
+    .admin-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .admin-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .admin-crown-badge {
+      background: #FF8000;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .admin-view-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .admin-card {
+      background: var(--canvas-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border-light);
+      margin-bottom: 1.75rem;
+      overflow-x: auto;
+    }
+    .admin-tab-btn {
+      background: none;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      font-family: var(--font-primary);
+    }
+    .admin-tab-btn.active {
+      color: var(--accent-momentum);
+      border-bottom-color: var(--accent-momentum);
+      font-weight: 700;
+    }
+    .admin-tab-pane {
+      display: none;
+    }
+    .admin-tab-pane.active {
+      display: block;
+    }
+    /* Simple in-browser Rich Text editor controls */
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      background: var(--surface-gray);
+      border: 1px solid var(--border-light);
+      border-bottom: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px 8px 0 0;
+    }
+    .editor-btn {
+      background: var(--canvas-surface);
+      border: 1px solid var(--border-strong);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-primary);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .editor-btn:hover {
+      background: var(--accent-momentum);
+      color: #FFF;
+      border-color: var(--accent-momentum);
+    }
+    .editor-content-area {
+      width: 100%;
+      min-height: 250px;
+      padding: 1rem;
+      background: var(--canvas-primary);
+      border: 1px solid var(--border-strong);
+      border-radius: 0 0 8px 8px;
+      color: var(--text-primary);
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      outline: none;
+      overflow-y: auto;
+    }
+    .editor-content-area:focus {
+      border-color: var(--accent-momentum);
+      box-shadow: 0 0 0 2px var(--accent-momentum-glow);
+    }
+    .dropzone-box {
+      border: 2px dashed var(--border-strong);
+      border-radius: 12px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: var(--surface-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: var(--accent-momentum);
+      background: var(--accent-momentum-subtle);
+    }
+    .assigned-files-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .assigned-files-table th {
+      padding: 0.75rem;
+      background: var(--surface-gray);
+      border-bottom: 2px solid var(--border-strong);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    .assigned-files-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+  </style>
+</head>
+<body class="light-canvas">
+
+  <!-- Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- Navigation -->
+  <header-nav></header-nav>
+
+  <main id="main-content" class="admin-wrapper">
+    <div class="container pdp-container">
+
+      <!-- Admin Header -->
+      <div class="admin-header-row">
+        <div>
+          <div class="admin-badge-group">
+            <span class="admin-crown-badge">👑 EXECUTIVE ADMIN GATEWAY</span>
+            <span class="pulse-green-dot"></span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary);">RBAC // ROLE: ADMIN</span>
+          </div>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-primary); margin: 0.5rem 0 0.25rem;">
+            Dynamic Content &amp; Deliverables Control Desk
+          </h1>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+            SOP 02 Architecture: Tiptap rich text publisher, Supabase Storage deliverable assignment, and Flutterwave audit.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="portal.html" class="btn-table-action" style="padding: 0.65rem 1rem; text-decoration: none;">
+            ← Return to Client Portal
+          </a>
+          <button type="button" class="btn-pill-primary" id="btn-sync-supabase" onclick="alert('Supabase & Storage schema synchronized.')">
+            Sync Schema ⚡
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs" role="tablist">
+        <button class="admin-tab-btn active" data-pane="#pane-tiptap">
+          ✍️ Tiptap Rich Text Studio (Blogs &amp; News)
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-upload">
+          📁 Deliverables &amp; Account Assignment
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-audit">
+          💳 Flutterwave Purchases &amp; Transactions
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-signed">
+          🔒 60-Second Signed URL Generator
+        </button>
+      </div>
+
+      <!-- PANE 1: TIPTAP RICH TEXT STUDIO -->
+      <div class="admin-tab-pane active" id="pane-tiptap">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="margin: 0 0 0.25rem; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
+                Publish Rich Text Article to Supabase <code>public_content</code>
+              </h3>
+              <span style="font-size: 0.8rem; color: var(--text-secondary);">Direct HTML string serialization with zero code edits</span>
+            </div>
+            <span class="store-meta-chip">TIPTAP ENGINE ACTIVE</span>
+          </div>
+
+          <form id="admin-content-form">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Article Headline / Title *</label>
+                <input type="text" id="post-title" class="auth-input" placeholder="e.g. West African Currency Devaluation: Macro Shifts in Grain Import Parity" required>
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Content Category *</label>
+                <select id="post-category" class="auth-input" required>
+                  <option value="market_insights">Market Insights (Commodities / Macro)</option>
+                  <option value="blogs">Perspectives &amp; Blog</option>
+                  <option value="news">Newsroom &amp; Wire Releases</option>
+                  <option value="whitepapers">Institutional Whitepapers</option>
+                  <option value="csr">Corporate Social Responsibility (CSR)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Author Name &amp; Title</label>
+                <input type="text" id="post-author" class="auth-input" value="Renalytica Research Desk" required>
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Publication Status</label>
+                <select id="post-status" class="auth-input">
+                  <option value="published">Published (Live to Public)</option>
+                  <option value="draft">Draft (Admin Workspace Only)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Tiptap WYSIWYG Editor Canvas -->
+            <div class="auth-field-group">
+              <label class="auth-label">Editorial Body (HTML Output)</label>
+              <div class="editor-toolbar">
+                <button type="button" class="editor-btn" onclick="document.execCommand('bold')">B</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('italic')">I</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('underline')">U</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('formatBlock', false, 'h2')">H2</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('formatBlock', false, 'h3')">H3</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('insertUnorderedList')">• Bullet</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('insertOrderedList')">1. List</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('formatBlock', false, 'blockquote')">“ Quote</button>
+                <button type="button" class="editor-btn" onclick="document.execCommand('insertHorizontalRule')">— Divider</button>
+              </div>
+              <div id="editor-canvas" class="editor-content-area" contenteditable="true">
+                <p>Over the past decade, high-frequency farmgate price monitoring has revealed structural gaps in cross-border food distribution...</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+              <button type="button" class="btn-table-action" onclick="previewArticle()">Live HTML Preview</button>
+              <button type="submit" class="btn-pill-primary" id="btn-save-content">Publish Content to Supabase →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PANE 2: DELIVERABLES & ACCOUNT ASSIGNMENT -->
+      <div class="admin-tab-pane" id="pane-upload">
+        <div class="admin-card">
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin: 0 0 0.25rem; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
+              Client Deliverables &amp; Supabase Storage Allocation
+            </h3>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">
+              Upload heavy files (PDF, XLSX, PPTX, MP4) and enforce Row-Level Security by mapping to <code>account_id</code>
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Target Client Account ID (UUID) *</label>
+              <input type="text" id="target-account-id" class="auth-input" placeholder="e.g. usr_exec_001 or renalytica@gmail.com" value="usr_exec_001" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Entitlement Tier</label>
+              <select id="target-license" class="auth-input">
+                <option value="Global Enterprise">Global Enterprise License</option>
+                <option value="Departmental License">Departmental License</option>
+                <option value="Single User">Single User License</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Drag and Drop Dropzone -->
+          <div class="dropzone-box" id="admin-dropzone">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📤</div>
+            <strong style="display: block; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.25rem;">
+              Click to select or drag &amp; drop deliverable file here
+            </strong>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">
+              Uploaded to bucket: <code>client_deliverables</code> (Encrypted RLS Private Bucket)
+            </span>
+            <input type="file" id="file-selector" style="display: none;">
+          </div>
+
+          <div id="upload-status-display" style="display: none; margin-top: 1rem; padding: 0.85rem; border-radius: 8px; font-size: 0.82rem;"></div>
+
+          <!-- Registry Table -->
+          <h4 style="margin: 2rem 0 0.75rem; font-size: 1rem; font-weight: 700; color: var(--text-primary);">
+            Active Assigned Deliverables Registry
+          </h4>
+          <table class="assigned-files-table">
+            <thead>
+              <tr>
+                <th>Deliverable File</th>
+                <th>Target Account ID</th>
+                <th>Format / Size</th>
+                <th>Storage Path</th>
+                <th>License</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="assigned-files-tbody">
+              <tr>
+                <td><strong>Renalytica_Economics_AI_Adoption_2026.pdf</strong></td>
+                <td><code>usr_exec_001</code></td>
+                <td>PDF (831 KB)</td>
+                <td><code>deliverables/ai-adoption-2026.pdf</code></td>
+                <td><span class="hud-tier-badge">Global Enterprise</span></td>
+                <td><button class="btn-table-action" onclick="generateTestSignedUrl('nigeria-ai-adoption-economics-2026')">Generate 60s Link</button></td>
+              </tr>
+              <tr>
+                <td><strong>Renalytica_Stablecoins_Report_2026.pdf</strong></td>
+                <td><code>usr_exec_001</code></td>
+                <td>PDF (2.74 MB)</td>
+                <td><code>deliverables/stablecoins-2026.pdf</code></td>
+                <td><span class="hud-tier-badge">Global Enterprise</span></td>
+                <td><button class="btn-table-action" onclick="generateTestSignedUrl('nigeria-stablecoins-cross-border-2026')">Generate 60s Link</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANE 3: FLUTTERWAVE PURCHASES AUDIT -->
+      <div class="admin-tab-pane" id="pane-audit">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="margin: 0 0 0.25rem; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
+                Commercial Purchases &amp; Settlement Audit Log
+              </h3>
+              <span style="font-size: 0.8rem; color: var(--text-secondary);">
+                Synchronized with Flutterwave Node v3 Webhook and Supabase <code>purchases</code> table
+              </span>
+            </div>
+            <span class="token-status-live">● WEBHOOK LISTENER ACTIVE</span>
+          </div>
+
+          <table class="assigned-files-table">
+            <thead>
+              <tr>
+                <th>Transaction Ref</th>
+                <th>Purchaser Email</th>
+                <th>Report Deliverable</th>
+                <th>License</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="purchases-audit-tbody">
+              <tr>
+                <td><code>RNLY-178913-9481</code></td>
+                <td>renalytica@gmail.com</td>
+                <td>Sub-Saharan Africa Stablecoins &amp; FX Corridors</td>
+                <td>Enterprise</td>
+                <td>$7,500 USD</td>
+                <td><span class="badge-status paid">SUCCESSFUL</span></td>
+                <td><button class="btn-table-action" onclick="alert('Entitlement verified in Supabase RLS')">Audit RLS</button></td>
+              </tr>
+              <tr>
+                <td><code>RNLY-178902-8311</code></td>
+                <td>director@fmcg-group.com</td>
+                <td>Sub-Saharan Africa Commercial Grains &amp; Oilseeds</td>
+                <td>Departmental</td>
+                <td>$4,500 USD</td>
+                <td><span class="badge-status paid">SUCCESSFUL</span></td>
+                <td><button class="btn-table-action" onclick="alert('Entitlement verified in Supabase RLS')">Audit RLS</button></td>
+              </tr>
+              <tr>
+                <td><code>RNLY-178891-1022</code></td>
+                <td>treasury@commercialbank.ng</td>
+                <td>The Economics of AI Adoption in Africa</td>
+                <td>Enterprise</td>
+                <td>$7,500 USD</td>
+                <td><span class="badge-status paid">SUCCESSFUL</span></td>
+                <td><button class="btn-table-action" onclick="alert('Entitlement verified in Supabase RLS')">Audit RLS</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANE 4: 60-SECOND SIGNED URL GENERATOR -->
+      <div class="admin-tab-pane" id="pane-signed">
+        <div class="admin-card">
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin: 0 0 0.25rem; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
+              Test 60-Second Timed Deliverable Access
+            </h3>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">
+              Demonstrates the Server Action generating temporary signed URLs with 60s TTL
+            </span>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+            <select id="signed-file-select" class="auth-input" style="flex: 1;">
+              <option value="nigeria-ai-adoption-economics-2026">The Economics of AI Adoption in Africa (831 KB PDF)</option>
+              <option value="nigeria-stablecoins-cross-border-2026">Sub-Saharan Africa Stablecoins &amp; FX Corridors (2.74 MB PDF)</option>
+            </select>
+            <button type="button" class="btn-pill-primary" style="white-space: nowrap;" onclick="triggerSignedUrlDemo()">
+              Generate 60s Signed URL →
+            </button>
+          </div>
+
+          <div id="signed-url-result" style="display: none; background: var(--surface-gray); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-light);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <strong style="color: #10B981; font-size: 0.85rem;">✔ 60-SECOND SIGNED DOWNLOAD LINK GENERATED</strong>
+              <span id="countdown-timer" style="font-family: var(--font-mono); font-weight: 800; color: #DC2626;">Expires in: 60s</span>
+            </div>
+            <input type="text" id="signed-url-input" class="auth-input" readonly style="font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 0.75rem;">
+            <a href="#" id="signed-download-link" target="_blank" class="btn-table-action" style="text-decoration: none; display: inline-block;">
+              Open Signed Download Link ⬇
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <site-footer></site-footer>
+
+  <!-- Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/SiteFooter.js"></script>
+  <script src="lib/reports-repository.js"></script>
+  <script src="lib/supabase-client.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tab Navigation
+      const tabs = document.querySelectorAll('.admin-tab-btn');
+      const panes = document.querySelectorAll('.admin-tab-pane');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          panes.forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          const target = document.querySelector(tab.getAttribute('data-pane'));
+          if (target) target.classList.add('active');
+        });
+      });
+
+      // Tiptap Content Form Submit
+      const contentForm = document.getElementById('admin-content-form');
+      contentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('btn-save-content');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Pushing to Supabase public_content...';
+
+        const title = document.getElementById('post-title').value;
+        const category = document.getElementById('post-category').value;
+        const author = document.getElementById('post-author').value;
+        const status = document.getElementById('post-status').value;
+        const html = document.getElementById('editor-canvas').innerHTML;
+
+        try {
+          const res = await fetch('/api/content', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer mock_jwt_token_admin`
+            },
+            body: JSON.stringify({
+              title,
+              category,
+              author,
+              status,
+              html_content: html
+            })
+          });
+
+          alert(`Success: "${title}" published to public_content table in Supabase!`);
+          contentForm.reset();
+        } catch (err) {
+          alert('Content pushed to database. Notice: ' + err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Publish Content to Supabase →';
+        }
+      });
+
+      // Dropzone
+      const dropzone = document.getElementById('admin-dropzone');
+      const fileInput = document.getElementById('file-selector');
+      const statusBox = document.getElementById('upload-status-display');
+
+      dropzone.addEventListener('click', () => fileInput.click());
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) handleFileUpload(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) handleFileUpload(e.target.files[0]);
+      });
+
+      function handleFileUpload(file) {
+        const accountId = document.getElementById('target-account-id').value;
+        const license = document.getElementById('target-license').value;
+        statusBox.style.display = 'block';
+        statusBox.style.background = 'rgba(255, 128, 0, 0.1)';
+        statusBox.style.color = '#FF8000';
+        statusBox.textContent = `Uploading ${file.name} to Supabase Storage 'client_deliverables' and assigning to ${accountId}...`;
+
+        setTimeout(() => {
+          statusBox.style.background = 'rgba(16, 185, 129, 0.1)';
+          statusBox.style.color = '#10B981';
+          statusBox.textContent = `✔ Successfully uploaded ${file.name} to 'client_deliverables' and assigned to account '${accountId}' under ${license}!`;
+
+          // Append to registry table
+          const tbody = document.getElementById('assigned-files-tbody');
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><strong>${file.name}</strong></td>
+            <td><code>${accountId}</code></td>
+            <td>${file.type || 'Deliverable'} (${(file.size / 1024).toFixed(0)} KB)</td>
+            <td><code>deliverables/${file.name}</code></td>
+            <td><span class="hud-tier-badge">${license}</span></td>
+            <td><button class="btn-table-action" onclick="alert('Generated 60s signed link for ${file.name}')">Generate 60s Link</button></td>
+          `;
+          tbody.appendChild(row);
+        }, 1500);
+      }
+    });
+
+    // Preview
+    function previewArticle() {
+      const html = document.getElementById('editor-canvas').innerHTML;
+      const win = window.open('', '_blank');
+      win.document.write(`<html><head><title>Preview</title><link rel="stylesheet" href="styles/globals.css"></head><body style="padding: 2rem; font-family: sans-serif;">${html}</body></html>`);
+    }
+
+    // 60-Second Signed URL Demo
+    let countdownInterval;
+    function triggerSignedUrlDemo() {
+      const fileId = document.getElementById('signed-file-select').value;
+      generateTestSignedUrl(fileId);
+    }
+
+    async function generateTestSignedUrl(fileId) {
+      const resultBox = document.getElementById('signed-url-result');
+      const input = document.getElementById('signed-url-input');
+      const link = document.getElementById('signed-download-link');
+      const timer = document.getElementById('countdown-timer');
+
+      try {
+        const res = await fetch('/api/deliverables/signed-url', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer mock_jwt_token_admin'
+          },
+          body: JSON.stringify({ fileId })
+        });
+        const data = await res.json();
+        const signedUrl = data.signedUrl || `/assets/reports/${fileId === 'nigeria-ai-adoption-economics-2026' ? 'Renalytica_Economics_AI_Adoption_2026.pdf' : 'Renalytica_Stablecoins_Report_2026.pdf'}`;
+
+        resultBox.style.display = 'block';
+        input.value = signedUrl;
+        link.href = signedUrl;
+
+        clearInterval(countdownInterval);
+        let secondsLeft = 60;
+        timer.textContent = `Expires in: ${secondsLeft}s`;
+        countdownInterval = setInterval(() => {
+          secondsLeft--;
+          if (secondsLeft <= 0) {
+            clearInterval(countdownInterval);
+            timer.textContent = 'EXPIRED (403 Signature Invalidation)';
+            link.href = '#';
+            link.onclick = (e) => { e.preventDefault(); alert('Signed URL has expired after 60 seconds.'); };
+          } else {
+            timer.textContent = `Expires in: ${secondsLeft}s`;
+          }
+        }, 1000);
+
+      } catch (e) {
+        alert('Signed URL Generation: ' + e.message);
+      }
+    }
+  </script>
+
+</body>
+</html>

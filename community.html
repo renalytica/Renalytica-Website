@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renalytica Community & Guilds | The Ground-Truth Intelligence Network</title>
+  <meta name="description" content="Connect with 4,200+ field enumerators, econometricians, institutional procurement leaders, and diaspora investors across Africa and global financial hubs. Real-time market telemetry and verified ground truth.">
+  <meta name="keywords" content="Renalytica community, African market research network, field enumerators Nigeria, econometricians community, Lagos market intelligence, agritech value chain guild, diaspora investment Africa">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/community.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <!-- 3. HERO STAGE: The Ground-Truth Network -->
+    <section class="community-hero-section" id="hero-community">
+      <div class="container community-hero-container">
+        <div class="community-hero-grid">
+          <!-- Left Column: Copy & Actions -->
+          <div class="community-hero-content">
+            <div class="community-hero-badges" data-reveal="fade-up" style="--delay: 0">
+              <span class="community-pill">
+                <span class="pulse-dot-green"></span>
+                LIVE NETWORK // 4,200+ NODES
+              </span>
+              <span class="community-pill accent">
+                SUB-SAHARAN AFRICA &amp; GLOBAL DIASPORA
+              </span>
+            </div>
+
+            <h1 class="community-hero-title" data-reveal="fade-up" style="--delay: 1">
+              The Ground-Truth Network.<br>
+              <span class="title-accent">Where Emerging Market Intelligence Unites.</span>
+            </h1>
+
+            <p class="community-hero-desc" data-reveal="fade-up" style="--delay: 2">
+              Renalytica is more than a research terminal—it is a collaborative intelligence exchange. We bridge 4,200+ vetted field enumerators, quantitative econometricians, corporate procurement chiefs, and diaspora investors tracking consumer realities from Lagos open markets to Wall Street boardrooms.
+            </p>
+
+            <div class="community-hero-actions" data-reveal="fade-up" style="--delay: 3">
+              <button class="btn-community-primary open-join-modal-btn" id="hero-join-btn">
+                Apply for Guild Access →
+              </button>
+              <a href="#working-groups" class="btn-community-secondary">
+                Explore 6 Working Groups ↓
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Visual Showcase Frame with Parallax & Telemetry -->
+          <div class="community-hero-media" data-reveal="fade-up" style="--delay: 2">
+            <div class="hero-visual-frame" data-parallax="0.06">
+              <img 
+                src="assets/images/community/community_strategy_conference.jpg" 
+                alt="Renalytica corporate executive fellows in conference" 
+                width="800" 
+                height="533" 
+                loading="eager"
+              >
+
+              <!-- Floating Telemetry Badges -->
+              <div class="floating-telemetry-badge top-right" data-parallax="-0.08">
+                <span class="badge-label-small">PRIMARY HUBS</span>
+                <span class="badge-value-strong">
+                  LAGOS // NAIROBI // NYC
+                </span>
+              </div>
+
+              <div class="floating-telemetry-badge bottom-left" data-parallax="0.10">
+                <span class="badge-label-small">VERIFIED ACCURACY</span>
+                <span class="badge-value-strong">
+                  <span class="pulse-dot-green"></span> 98.4% DATA SLA
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Stat Ribbon Odometers -->
+        <div class="community-hero-stats-ribbon" data-reveal="fade-up">
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">
+              <span data-counter-target="4200" data-counter-suffix="+">4,200+</span>
+            </div>
+            <div class="hero-stat-label">Active Field Contributors</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">
+              <span data-counter-target="36">36</span>
+            </div>
+            <div class="hero-stat-label">Monitored Trade Corridors</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">
+              <span data-counter-target="184" data-counter-suffix="+">184+</span>
+            </div>
+            <div class="hero-stat-label">Peer-Reviewed Dispatches</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">
+              <span class="stat-accent" data-counter-target="98.4" data-counter-suffix="%">98.4%</span>
+            </div>
+            <div class="hero-stat-label">Ground-Truth Reliability SLA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. COMMUNITY PILLARS: 4-Card Bento Grid -->
+    <section class="community-pillars-section" id="community-pillars">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // OUR FOUR INTELLIGENCE PILLARS
+          </span>
+          <h2>A Triangulated Network Built for Absolute Accuracy</h2>
+          <p>
+            No single methodology captures frontier economic realities. Our ecosystem combines boots-on-the-ground price auditing with quantitative econometric modeling and institutional capital oversight.
+          </p>
+        </div>
+
+        <div class="community-bento-grid">
+          <!-- Pillar 1: Ground Enumerators (Span 7) -->
+          <div class="bento-pillar-card bento-card-span-7" data-reveal="card">
+            <div>
+              <div class="pillar-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <h3 class="pillar-card-title">Boots-on-the-Ground Field Enumerators</h3>
+              <p class="pillar-card-desc">
+                Over 2,800 trained local agents conduct bi-weekly physical censuses across major wholesale hubs (Mile 12 Lagos, Bodija Ibadan, Alaba International, Dawanau Grain Market Kano). Every basket, bag, and liter is logged offline via cryptographic geo-tagged timestamps.
+              </p>
+            </div>
+            <div class="pillar-data-meta">
+              <span>ACTIVE CORRIDORS: 36 STATES &amp; FCT</span>
+              <span class="pillar-status-active"><span class="pulse-dot-green"></span> LIVE INGESTION</span>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Econometric Calibration (Span 5) -->
+          <div class="bento-pillar-card bento-card-span-5" data-reveal="card">
+            <div>
+              <div class="pillar-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+              </div>
+              <h3 class="pillar-card-title">Quantitative Econometrics Guild</h3>
+              <p class="pillar-card-desc">
+                Academic fellows, PhD statisticians, and macro modelers continuously apply hedonic price adjustments, seasonal de-trending, and FX pass-through regression to prevent sampling skew.
+              </p>
+            </div>
+            <div class="pillar-data-meta">
+              <span>PEER REVIEWS: WEEKLY</span>
+              <span>120+ QUANT FELLOWS</span>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Agritech & Cold-Chain (Span 5) -->
+          <div class="bento-pillar-card bento-card-span-5" data-reveal="card">
+            <div>
+              <div class="pillar-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              </div>
+              <h3 class="pillar-card-title">Agritech &amp; Cold-Chain Logisticians</h3>
+              <p class="pillar-card-desc">
+                Farmgate aggregators, freight truckers, and silo operators measure transit spoilage, diesel surcharges, and inter-state tax levies that official bureau statistics routinely omit.
+              </p>
+            </div>
+            <div class="pillar-data-meta">
+              <span>GRAIN &amp; PERISHABLE TRACKING</span>
+              <span>45 LOGISTICS HUBS</span>
+            </div>
+          </div>
+
+          <!-- Pillar 4: Diaspora Capital & Institutional Allocators (Span 7) -->
+          <div class="bento-pillar-card bento-card-span-7" data-reveal="card">
+            <div>
+              <div class="pillar-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 6v2"></path><path d="M12 16v2"></path></svg>
+              </div>
+              <h3 class="pillar-card-title">Diaspora Capital &amp; Institutional Allocators</h3>
+              <p class="pillar-card-desc">
+                Private equity partners, family offices, and diaspora syndicate heads in London, New York, and Toronto stress-test macro thesis models against on-the-ground cash flow realities, unlocking high-conviction deployment channels.
+              </p>
+            </div>
+            <div class="pillar-data-meta">
+              <span>ASSETS REPRESENTED: $1.8B+</span>
+              <span>CLOSED-DOOR ROUNDTABLES</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE SCROLLYTELLING: Life of a Ground-Truth Signal -->
+    <section class="scrolly-pipeline-section" id="scrolly-pipeline">
+      <div class="scrolly-container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // INTERACTIVE SCROLLYTELLING
+          </span>
+          <h2>The Life of a Ground-Truth Signal</h2>
+          <p>
+            Scroll to follow how a raw price point observed at dawn in a Kaduna grain depot matures into an institutional boardroom dispatch by dusk.
+          </p>
+        </div>
+
+        <!-- Interactive Layout: Scrubber & Steps on Left, Sticky Live Telemetry on Right -->
+        <div class="scrolly-interactive-layout">
+          <!-- Left Column: Scrub Navigation & Interactive Steps -->
+          <div class="scrolly-steps-container">
+            <!-- Timeline Navigation Buttons for Direct Scrubbing -->
+            <div class="scrolly-timeline-nav" role="tablist" aria-label="Pipeline Timeline">
+              <button class="scrolly-nav-btn active" data-step-target="0" role="tab" aria-selected="true">05:00 AM Dawn</button>
+              <button class="scrolly-nav-btn" data-step-target="1" role="tab" aria-selected="false">09:30 AM Audit</button>
+              <button class="scrolly-nav-btn" data-step-target="2" role="tab" aria-selected="false">02:00 PM Model</button>
+              <button class="scrolly-nav-btn" data-step-target="3" role="tab" aria-selected="false">06:00 PM Release</button>
+            </div>
+
+            <div class="scrolly-steps-stream">
+              <!-- Step 0 -->
+              <div class="scrolly-step-card active-step" data-step-index="0" data-reveal="fade-up">
+                <div class="step-time-eyebrow">
+                  <span class="step-bullet-num">1</span>
+                  <span>05:00 AM WAT // PHYSICAL INGESTION</span>
+                </div>
+                <h3 class="step-card-title">Dawn Ground Tally &amp; Offline Sensor Polling</h3>
+                <p class="step-card-desc">
+                  Field enumerators arrive at wholesale truck unloading bays in Kano and Kaduna before retail middlemen inflate price quotes. 3 distinct bag weights and moisture levels are recorded with barcode telemetry.
+                </p>
+                <div class="step-audit-quote">
+                  "Enumerator #842 logged 100kg Maize Bag at ₦84,500 in Dawanau. GPS: 12.0022° N, 8.5920° E. Hash: SHA256-OK."
+                </div>
+              </div>
+
+              <!-- Step 1 -->
+              <div class="scrolly-step-card" data-step-index="1" data-reveal="fade-up">
+                <div class="step-time-eyebrow">
+                  <span class="step-bullet-num">2</span>
+                  <span>09:30 AM WAT // PEER CONSENSUS</span>
+                </div>
+                <h3 class="step-card-title">Guild Peer-Audit &amp; Cross-Corridor Triangulation</h3>
+                <p class="step-card-desc">
+                  Regional Guild leaders in Lagos and Abuja compare incoming morning prices against highway diesel tolls and parallel market FX quotes. Any outlier greater than 2.4 sigma triggers automated re-sampling requests.
+                </p>
+                <div class="step-audit-quote">
+                  "Consensus check validated across 14 independent depot tallies. Inter-corridor variance within 1.1% threshold."
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="scrolly-step-card" data-step-index="2" data-reveal="fade-up">
+                <div class="step-time-eyebrow">
+                  <span class="step-bullet-num">3</span>
+                  <span>02:00 PM WAT // ECONOMETRIC ENGINE</span>
+                </div>
+                <h3 class="step-card-title">Econometric Calibration &amp; Hedonic Regression</h3>
+                <p class="step-card-desc">
+                  Quantitative analysts in London and Lagos ingest the cleansed price vectors into the Renalytica Core Engine. Hedonic adjustments strip out brand premiums and packaging shrinkflation to derive pure unit costs.
+                </p>
+                <div class="step-audit-quote">
+                  "Hedonic model calibrated: Effective consumer inflation +18.4 bps relative to official bureau baseline."
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="scrolly-step-card" data-step-index="3" data-reveal="fade-up">
+                <div class="step-time-eyebrow">
+                  <span class="step-bullet-num">4</span>
+                  <span>06:00 PM WAT // INSTITUTIONAL SIGNAL</span>
+                </div>
+                <h3 class="step-card-title">Boardroom Signal Release &amp; Terminal Dispatch</h3>
+                <p class="step-card-desc">
+                  Subscribers receive cryptographic terminal alerts, structured CSV telemetry, and executive briefings. Procurement leaders adjust supply contracts 14 hours ahead of broader market sentiment shifts.
+                </p>
+                <div class="step-audit-quote">
+                  "Dispatch #2026-W37 delivered to 48 enterprise treasury desks across Sub-Saharan Africa and Wall Street."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Sticky Dynamic Telemetry Monitor -->
+          <div class="scrolly-sticky-viewport" id="scrolly-monitor">
+            <div class="monitor-header-bar">
+              <span class="monitor-title">
+                <span class="pulse-dot-green"></span> TELEMETRY DISPATCH MONITOR
+              </span>
+              <span class="community-pill" id="monitor-stage-badge">STAGE 01 // DAWN POLL</span>
+            </div>
+
+            <div class="monitor-visual-stage">
+              <img 
+                id="monitor-visual-img" 
+                src="assets/images/community/community_analyst_desk.jpg" 
+                alt="Renalytica analyst reviewing ground truth telemetry"
+              >
+              <div class="monitor-overlay-readout">
+                <span id="monitor-location-label">LOCATION: DAWANAU GRAIN DEPOT // KANO</span>
+                <span id="monitor-confidence-score" style="color: #10b981; font-weight: bold;">CONFIDENCE: 99.2%</span>
+              </div>
+            </div>
+
+            <div class="monitor-telemetry-tags">
+              <span class="monitor-tag" id="monitor-metric-1">DATA LATENCY: 14ms</span>
+              <span class="monitor-tag" id="monitor-metric-2">NODES ACTIVE: 412 ENUMERATORS</span>
+              <span class="monitor-tag" id="monitor-metric-3">CONSENSUS: VALIDATED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ACTIVE WORKING GROUPS & GUILDS (FILTERABLE) -->
+    <section class="working-groups-section" id="working-groups">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // SPECIALIZED SUB-COMMUNITIES
+          </span>
+          <h2>Active Guilds &amp; Research Working Groups</h2>
+          <p>
+            Members collaborate inside focused sector circles. Filter by research discipline to discover where your expertise fits.
+          </p>
+        </div>
+
+        <!-- Filter Pill Navigation -->
+        <div class="filter-pills-bar" data-reveal="fade-up">
+          <button class="filter-pill-btn active" data-filter="all">All Guilds (6)</button>
+          <button class="filter-pill-btn" data-filter="macro">Macro &amp; Currency</button>
+          <button class="filter-pill-btn" data-filter="agri">Agritech &amp; Logistics</button>
+          <button class="filter-pill-btn" data-filter="commodity">Commodity Corridors</button>
+          <button class="filter-pill-btn" data-filter="diaspora">Diaspora Capital</button>
+        </div>
+
+        <!-- Working Groups Grid -->
+        <div class="working-groups-grid">
+          <!-- Guild 1: FX Parallel Arbitrage -->
+          <div class="guild-card" data-category="macro" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Macro &amp; Currency</span>
+              <h3 class="guild-title">FX Parallel Arbitrage &amp; Remittance Guild</h3>
+              <p class="guild-mission">
+                Monitors daily street bureau de change (BDC) rates across Lagos, Abuja, Kano, and London. Tracks FX spread anomalies, crypto stablecoin liquidity, and importer demand.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>412 FELLOWS</span>
+                <span>BI-WEEKLY BRIEFING</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="FX Parallel Arbitrage &amp; Remittance Guild">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+
+          <!-- Guild 2: Sahelian Grain Corridors -->
+          <div class="guild-card" data-category="commodity" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Commodity Corridors</span>
+              <h3 class="guild-title">Sahelian Grain &amp; Cereal Corridor Group</h3>
+              <p class="guild-mission">
+                Tracks cross-border sorghum, millet, and maize flows between Niger, Chad, and Northern Nigeria. Delivers early warnings on drought cycles and transport bottlenecks.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>340 FELLOWS</span>
+                <span>WEEKLY TELEMETRY</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="Sahelian Grain &amp; Cereal Corridor Group">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+
+          <!-- Guild 3: Last-Mile Cold-Chain -->
+          <div class="guild-card" data-category="agri" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Agritech &amp; Logistics</span>
+              <h3 class="guild-title">Last-Mile Cold-Chain &amp; Spoilage Guild</h3>
+              <p class="guild-mission">
+                Engineers and cold-hub managers quantifying perishability rates in tomato and leafy vegetable transport from Plateau State to coastal urban centers.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>528 FELLOWS</span>
+                <span>MONTHLY FIELD STUDY</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="Last-Mile Cold-Chain &amp; Spoilage Guild">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+
+          <!-- Guild 4: Sub-Saharan Sovereign Debt -->
+          <div class="guild-card" data-category="macro" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Macro &amp; Currency</span>
+              <h3 class="guild-title">Sub-Saharan Sovereign Debt &amp; Yield Guild</h3>
+              <p class="guild-mission">
+                Fixed-income analysts and sovereign debt specialists dissecting local currency treasury bill auctions, Eurobond spreads, and IMF debt sustainability metrics.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>290 FELLOWS</span>
+                <span>MONTHLY AMA</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="Sub-Saharan Sovereign Debt &amp; Yield Guild">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+
+          <!-- Guild 5: FMCG Shrinkflation & Consumer Basket -->
+          <div class="guild-card" data-category="commodity" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Commodity Corridors</span>
+              <h3 class="guild-title">FMCG Shrinkflation &amp; Retail Basket Guild</h3>
+              <p class="guild-mission">
+                Supermarket brand auditors measuring pack-size reductions, sachetization trends, and household substitution behaviors across low-income informal retail points.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>670 FELLOWS</span>
+                <span>WEEKLY CENSUS</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="FMCG Shrinkflation &amp; Retail Basket Guild">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+
+          <!-- Guild 6: African Angel & Diaspora Syndicate -->
+          <div class="guild-card" data-category="diaspora" data-reveal="card">
+            <div class="guild-card-top">
+              <span class="guild-category-badge">Diaspora Capital</span>
+              <h3 class="guild-title">African Angel &amp; Diaspora Syndicate Guild</h3>
+              <p class="guild-mission">
+                High-net-worth diaspora professionals collaborating on direct investment syndicates in renewable energy mini-grids, export processing, and fintech infrastructure.
+              </p>
+            </div>
+            <div>
+              <div class="guild-stats-row">
+                <span>845 FELLOWS</span>
+                <span>QUARTERLY PITCH DECK</span>
+              </div>
+              <button class="guild-action-btn open-charter-btn" data-guild="African Angel &amp; Diaspora Syndicate Guild">
+                View Guild Charter →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LIVE ROUNDTABLES & AMAS -->
+    <section class="roundtables-section" id="roundtables">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // LIVE KNOWLEDGE EXCHANGE
+          </span>
+          <h2>Upcoming Closed-Door Roundtables &amp; AMAs</h2>
+          <p>
+            Conducted under strict Chatham House Rule. Engage directly with frontline data architects, central bank observers, and enterprise supply directors.
+          </p>
+        </div>
+
+        <div class="roundtables-grid">
+          <!-- Session 1 -->
+          <div class="roundtable-card" data-reveal="card">
+            <div>
+              <div class="roundtable-status-bar">
+                <span class="roundtable-badge live">
+                  <span class="pulse-dot-green"></span> UPCOMING // 4 DAYS
+                </span>
+                <span class="roundtable-date-time">MAR 18 • 16:00 WAT</span>
+              </div>
+              <h3 class="roundtable-title">Parallel FX Volatility &amp; Central Bank Pass-Through in West Africa</h3>
+              <p class="roundtable-desc">
+                An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.
+              </p>
+            </div>
+            <div>
+              <div class="speaker-lockup">
+                <img 
+                  src="assets/images/community/community_roundtable_charts.jpg" 
+                  alt="Dr. Tariq Adeleke" 
+                  class="speaker-avatar-circle"
+                >
+                <div class="speaker-info">
+                  <h4>Dr. Tariq Adeleke</h4>
+                  <p>Lead Econometrician, Lagos Node</p>
+                </div>
+              </div>
+              <button class="btn-rsvp-trigger" data-session="Parallel FX Volatility &amp; Central Bank Pass-Through">
+                RSVP for Seat (Free for Fellows) →
+              </button>
+            </div>
+          </div>
+
+          <!-- Session 2 -->
+          <div class="roundtable-card" data-reveal="card">
+            <div>
+              <div class="roundtable-status-bar">
+                <span class="roundtable-badge upcoming">UPCOMING // NEXT WEEK</span>
+                <span class="roundtable-date-time">MAR 25 • 15:00 WAT</span>
+              </div>
+              <h3 class="roundtable-title">Grains, Fertilizer &amp; The 2026 Wet Season Outlook</h3>
+              <p class="roundtable-desc">
+                Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.
+              </p>
+            </div>
+            <div>
+              <div class="speaker-lockup">
+                <img 
+                  src="assets/images/community/community_colleagues_laptop.jpg" 
+                  alt="Chioma Okonjo-Briggs" 
+                  class="speaker-avatar-circle"
+                >
+                <div class="speaker-info">
+                  <h4>Chioma Okonjo-Briggs</h4>
+                  <p>Director of Agritech Telemetry</p>
+                </div>
+              </div>
+              <button class="btn-rsvp-trigger" data-session="Grains, Fertilizer &amp; 2026 Wet Season Outlook">
+                RSVP for Seat (Free for Fellows) →
+              </button>
+            </div>
+          </div>
+
+          <!-- Session 3 -->
+          <div class="roundtable-card" data-reveal="card">
+            <div>
+              <div class="roundtable-status-bar">
+                <span class="roundtable-badge upcoming">CLOSED-DOOR BRIEFING</span>
+                <span class="roundtable-date-time">APR 02 • 17:00 WAT</span>
+              </div>
+              <h3 class="roundtable-title">Diaspora Direct Investment: Navigating Real Estate &amp; Agritech Yields</h3>
+              <p class="roundtable-desc">
+                High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.
+              </p>
+            </div>
+            <div>
+              <div class="speaker-lockup">
+                <img 
+                  src="assets/images/community/community_strategy_conference.jpg" 
+                  alt="Babatunde Fayemi" 
+                  class="speaker-avatar-circle"
+                >
+                <div class="speaker-info">
+                  <h4>Babatunde Fayemi</h4>
+                  <p>Senior FX Corridor Strategist</p>
+                </div>
+              </div>
+              <button class="btn-rsvp-trigger" data-session="Diaspora Direct Investment: Navigating Yields">
+                RSVP for Seat (Free for Fellows) →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FELLOWS SPOTLIGHT (STRICT DEMOGRAPHIC COMPLIANCE: BLACK AFRICAN / NIGERIAN) -->
+    <section class="fellows-spotlight-section" id="fellows">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // RESEARCH FELLOWS IN RESIDENCE
+          </span>
+          <h2>Ground-Truth Custodians &amp; Domain Leads</h2>
+          <p>
+            Meet the senior data scientists, field directors, and sector strategists anchoring the Renalytica verification methodology across Africa and the global diaspora.
+          </p>
+        </div>
+
+        <div class="fellows-spotlight-grid">
+          <!-- Fellow 1 -->
+          <div class="fellow-card" data-reveal="card">
+            <div class="fellow-photo-wrap">
+              <img 
+                src="assets/images/community/community_team_collaboration.jpg" 
+                alt="Dr. Tariq Adeleke, Lead Econometrician"
+              >
+              <span class="fellow-city-badge">LAGOS NODE</span>
+            </div>
+            <div class="fellow-content">
+              <div>
+                <h3 class="fellow-name">Dr. Tariq Adeleke</h3>
+                <div class="fellow-role">Lead Econometrician &amp; Methodology Chair</div>
+                <p class="fellow-bio">
+                  Former monetary policy research advisor with 14 years modeling inflation forecasting and hedonic index construction across West African markets.
+                </p>
+              </div>
+              <div class="fellow-stats-bar">
+                <span>38 DISPATCHES</span>
+                <span>GUILD CO-CHAIR</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fellow 2 -->
+          <div class="fellow-card" data-reveal="card">
+            <div class="fellow-photo-wrap">
+              <img 
+                src="assets/images/community/community_colleagues_laptop.jpg" 
+                alt="Chioma Okonjo-Briggs, Director of Agritech Telemetry"
+              >
+              <span class="fellow-city-badge">PORT HARCOURT</span>
+            </div>
+            <div class="fellow-content">
+              <div>
+                <h3 class="fellow-name">Chioma Okonjo-Briggs</h3>
+                <div class="fellow-role">Director of Agritech Telemetry</div>
+                <p class="fellow-bio">
+                  Agricultural economist specializing in cold-storage logistics, post-harvest grain losses, and cross-border staple crop arbitrage corridors.
+                </p>
+              </div>
+              <div class="fellow-stats-bar">
+                <span>24 DISPATCHES</span>
+                <span>AGRITECH LEAD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fellow 3 -->
+          <div class="fellow-card" data-reveal="card">
+            <div class="fellow-photo-wrap">
+              <img 
+                src="assets/images/community/community_roundtable_charts.jpg" 
+                alt="Babatunde Fayemi, Senior FX Corridor Strategist"
+              >
+              <span class="fellow-city-badge">LONDON // LAGOS</span>
+            </div>
+            <div class="fellow-content">
+              <div>
+                <h3 class="fellow-name">Babatunde Fayemi</h3>
+                <div class="fellow-role">Senior FX Corridor Strategist</div>
+                <p class="fellow-bio">
+                  12 years managing frontier currency risk and treasury hedging solutions for African diaspora asset allocators and multinational FMCG importers.
+                </p>
+              </div>
+              <div class="fellow-stats-bar">
+                <span>42 DISPATCHES</span>
+                <span>MACRO GUILD CHAIR</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fellow 4 -->
+          <div class="fellow-card" data-reveal="card">
+            <div class="fellow-photo-wrap">
+              <img 
+                src="assets/images/community/community_document_review.jpg" 
+                alt="Amina Bello, Commodity Value Chain Fellow"
+              >
+              <span class="fellow-city-badge">KANO // ABUJA</span>
+            </div>
+            <div class="fellow-content">
+              <div>
+                <h3 class="fellow-name">Amina Bello</h3>
+                <div class="fellow-role">Commodity Value Chain Fellow</div>
+                <p class="fellow-bio">
+                  Field operations director overseeing wholesale market enumerators across Northern Nigeria, managing high-frequency pricing censuses in 18 commodity centers.
+                </p>
+              </div>
+              <div class="fellow-stats-bar">
+                <span>29 DISPATCHES</span>
+                <span>FIELD MARSHAL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. MEMBERSHIP TIERS -->
+    <section class="membership-tiers-section" id="membership">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // JOIN THE NETWORK
+          </span>
+          <h2>Membership Tiers Designed for Every Stakeholder</h2>
+          <p>
+            Whether you are an independent academic researcher, a corporate procurement executive, or an institutional desk, there is a dedicated tier for you.
+          </p>
+        </div>
+
+        <div class="membership-tiers-grid">
+          <!-- Tier 1: Research Fellow -->
+          <div class="membership-tier-card" data-reveal="card">
+            <div>
+              <h3 class="tier-name">Research Fellow</h3>
+              <div class="tier-price-row">
+                <span class="tier-price">Free</span>
+                <span class="tier-cadence">/ Vetted Application</span>
+              </div>
+              <p class="tier-desc">
+                For independent academics, graduate economists, and field analysts who contribute data, peer-reviews, or ground telemetry.
+              </p>
+              <ul class="tier-perks-list">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Access to 2 specialized Working Groups
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Bi-weekly Ground-Truth Digest &amp; Wire
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Chatham House Roundtables (Standard Access)
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Renalytica Peer-Reviewed Byline Credit
+                </li>
+              </ul>
+            </div>
+            <button class="btn-tier-action open-join-modal-btn" data-tier="Research Fellow">
+              Apply for Fellowship →
+            </button>
+          </div>
+
+          <!-- Tier 2: Corporate Practitioner (Featured) -->
+          <div class="membership-tier-card featured" data-reveal="card">
+            <span class="tier-featured-pill">MOST POPULAR</span>
+            <div>
+              <h3 class="tier-name">Corporate Practitioner</h3>
+              <div class="tier-price-row">
+                <span class="tier-price">$149</span>
+                <span class="tier-cadence">/ month (billed annually)</span>
+              </div>
+              <p class="tier-desc">
+                For supply chain heads, treasury managers, and equity analysts requiring real-time corridor telemetry and priority briefings.
+              </p>
+              <ul class="tier-perks-list">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Full access to all 6 Working Groups &amp; Guilds
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Raw CSV Data Ingestion &amp; API Feeds
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Priority Seating in Closed-Door AMAs
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Direct Inquiry Desk with Regional Lead Fellows
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Early 24-Hour Access to Flagship Market Reports
+                </li>
+              </ul>
+            </div>
+            <button class="btn-tier-action primary open-join-modal-btn" data-tier="Corporate Practitioner">
+              Join as Corporate Practitioner →
+            </button>
+          </div>
+
+          <!-- Tier 3: Institutional Node -->
+          <div class="membership-tier-card" data-reveal="card">
+            <div>
+              <h3 class="tier-name">Institutional Node</h3>
+              <div class="tier-price-row">
+                <span class="tier-price">Custom</span>
+                <span class="tier-cadence">/ Enterprise License</span>
+              </div>
+              <p class="tier-desc">
+                For commercial banks, development finance institutions (DFIs), and multinational conglomerates requiring bespoke enumerator sweeps.
+              </p>
+              <ul class="tier-perks-list">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Dedicated Field Sampling Corridors
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Unlimited Team Seats &amp; Single Sign-On (SSO)
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Private Quarterly Board Briefings
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Dedicated Sovereign Strategy Hotline
+                </li>
+              </ul>
+            </div>
+            <a href="contact.html?subject=Institutional+Community+Node" class="btn-tier-action">
+              Request Enterprise Node →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CODE OF ETHICS & CHATHAM HOUSE RULE PLEDGE -->
+    <section class="ethics-code-section" id="ethics">
+      <div class="container">
+        <div class="section-head-center" data-reveal="fade-up">
+          <span class="section-eyebrow">
+            // TRUST &amp; INTEGRITY STANDARDS
+          </span>
+          <h2>The Renalytica Community Code of Ethics</h2>
+          <p>
+            To maintain our status as Africa's definitive ground-truth benchmark, every fellow, auditor, and corporate subscriber adheres to four foundational governance pillars.
+          </p>
+        </div>
+
+        <div class="code-rules-grid">
+          <div class="ethics-rule-card" data-reveal="card">
+            <h4>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef7d00" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Chatham House Rule
+            </h4>
+            <p>
+              Participants are free to use information received in roundtables and working group discussions, but neither the identity nor the affiliation of speakers may be revealed.
+            </p>
+          </div>
+
+          <div class="ethics-rule-card" data-reveal="card">
+            <h4>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef7d00" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              Zero Conflict of Interest
+            </h4>
+            <p>
+              Contributors who hold active trading positions or speculative contracts in commodities under census must disclose interests prior to submitting price telemetry.
+            </p>
+          </div>
+
+          <div class="ethics-rule-card" data-reveal="card">
+            <h4>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef7d00" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Cryptographic Provenance
+            </h4>
+            <p>
+              Every field observation is anchored by immutable GPS coordinates, device hashes, and time-stamped photo proofs to ensure zero synthetic data hallucination.
+            </p>
+          </div>
+
+          <div class="ethics-rule-card" data-reveal="card">
+            <h4>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef7d00" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              Replicable Methodology
+            </h4>
+            <p>
+              All quantitative index formulas, hedonic adjustment weights, and sample dispersion metrics are published for independent peer review by our academic council.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. CLOSING CTA & CONCIERGE -->
+    <section class="community-cta-section" id="cta-community">
+      <div class="container">
+        <div class="community-cta-box" data-reveal="fade-up">
+          <h2>Ready to Shape Frontier Market Truth?</h2>
+          <p>
+            Whether submitting field telemetry or leveraging validated signals for multi-million dollar procurement tenders, your seat at the Renalytica table is waiting.
+          </p>
+          <div class="community-cta-buttons">
+            <button class="btn-community-primary open-join-modal-btn" id="footer-cta-join-btn">
+              Apply to Join the Community →
+            </button>
+            <a href="https://wa.me/2348137538723?text=Hello%20Renalytica%20Community%20Desk,%20I%20would%20like%20to%20inquire%20about%20joining%20a%20Guild." class="btn-community-secondary" target="_blank" rel="noopener">
+              WhatsApp Concierge (+234 813 753 8723) 💬
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12. INTERACTIVE MODALS -->
+  <!-- Join Community Modal -->
+  <div class="community-modal-backdrop" id="join-modal" aria-hidden="true" role="dialog" aria-labelledby="join-modal-title">
+    <div class="community-modal-dialog">
+      <div class="modal-header-bar">
+        <h3 id="join-modal-title">Apply for Guild Membership</h3>
+        <button class="modal-close-btn" id="close-join-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <form class="modal-body-form" id="join-community-form">
+        <div class="modal-field">
+          <label for="member-name">Full Name</label>
+          <input type="text" id="member-name" name="name" placeholder="e.g. Adebayo Ogunlesi" required>
+        </div>
+        <div class="modal-field">
+          <label for="member-email">Corporate or Institutional Email</label>
+          <input type="email" id="member-email" name="email" placeholder="name@institution.com" required>
+        </div>
+        <div class="modal-field">
+          <label for="member-guild">Preferred Working Group / Guild</label>
+          <select id="member-guild" name="guild">
+            <option value="FX Parallel Arbitrage & Remittance">FX Parallel Arbitrage &amp; Remittance Guild</option>
+            <option value="Sahelian Grain & Cereal Corridor">Sahelian Grain &amp; Cereal Corridor Group</option>
+            <option value="Last-Mile Cold-Chain & Spoilage">Last-Mile Cold-Chain &amp; Spoilage Guild</option>
+            <option value="Sub-Saharan Sovereign Debt">Sub-Saharan Sovereign Debt &amp; Yield Guild</option>
+            <option value="FMCG Shrinkflation & Retail Basket">FMCG Shrinkflation &amp; Retail Basket Guild</option>
+            <option value="African Angel & Diaspora Syndicate">African Angel &amp; Diaspora Syndicate Guild</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label for="member-tier">Membership Tier</label>
+          <select id="member-tier" name="tier">
+            <option value="Research Fellow">Research Fellow (Vetted / Free)</option>
+            <option value="Corporate Practitioner" selected>Corporate Practitioner ($149/mo)</option>
+            <option value="Institutional Node">Institutional Node (Enterprise)</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label for="member-background">Brief Professional Background &amp; Location</label>
+          <textarea id="member-background" name="background" rows="3" placeholder="e.g. Senior Treasury Analyst based in Lagos with 8 years commodity trading experience." required></textarea>
+        </div>
+        <button type="submit" class="modal-submit-btn">Submit Application for Review →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Roundtable RSVP Modal -->
+  <div class="community-modal-backdrop" id="rsvp-modal" aria-hidden="true" role="dialog" aria-labelledby="rsvp-modal-title">
+    <div class="community-modal-dialog">
+      <div class="modal-header-bar">
+        <h3 id="rsvp-modal-title">Reserve Closed-Door Roundtable Seat</h3>
+        <button class="modal-close-btn" id="close-rsvp-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <form class="modal-body-form" id="rsvp-form">
+        <div class="modal-field">
+          <label for="rsvp-session-name">Selected Roundtable</label>
+          <input type="text" id="rsvp-session-name" name="session" readonly style="background: var(--surface-card); font-weight: bold;">
+        </div>
+        <div class="modal-field">
+          <label for="rsvp-name">Your Full Name</label>
+          <input type="text" id="rsvp-name" name="name" placeholder="e.g. Dr. Ngozi Balogun" required>
+        </div>
+        <div class="modal-field">
+          <label for="rsvp-email">Email for Calendar Invite &amp; Access Link</label>
+          <input type="email" id="rsvp-email" name="email" placeholder="ngozi@firm.com" required>
+        </div>
+        <div class="modal-field">
+          <label for="rsvp-org">Organization / Institutional Desk</label>
+          <input type="text" id="rsvp-org" name="organization" placeholder="e.g. Standard Chartered Bank / Lagos Office" required>
+        </div>
+        <button type="submit" class="modal-submit-btn">Confirm RSVP &amp; Send Calendar Token →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Guild Charter Modal -->
+  <div class="community-modal-backdrop" id="charter-modal" aria-hidden="true" role="dialog" aria-labelledby="charter-modal-title">
+    <div class="community-modal-dialog">
+      <div class="modal-header-bar">
+        <h3 id="charter-modal-title">Guild Governance Charter</h3>
+        <button class="modal-close-btn" id="close-charter-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body-form" style="padding-top: 12px;">
+        <h4 id="charter-guild-title" style="color: var(--brand-orange, #ff8000); font-family: var(--font-display); margin: 0 0 8px 0;"></h4>
+        <p id="charter-guild-summary" style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary);"></p>
+        <div style="background: var(--surface-gray); border-radius: 8px; padding: 14px; font-family: var(--font-mono); font-size: 11.5px; color: var(--text-primary); margin-top: 10px;">
+          <strong>Cadence:</strong> Bi-Weekly Synchronous Discord Audio + Signal Group<br>
+          <strong>Output:</strong> Monthly Macro Working Paper + Real-Time Telemetry CSV<br>
+          <strong>Compliance:</strong> Chatham House Rule + Mandatory Affiliation Disclosures
+        </div>
+        <button type="button" class="modal-submit-btn open-join-from-charter-btn" style="margin-top: 16px;">Apply to Join This Guild →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Toast Feedback -->
+  <div class="community-toast" id="community-toast" role="status" aria-live="polite">
+    <span id="toast-message">Application submitted successfully!</span>
+  </div>
+
+  <!-- 13. Global Mega Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- Universal Scripts -->
+  <script src="lib/telemetry-data.js"></script>
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Community Page Interactive Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. WORKING GROUPS FILTERING LOGIC
+      const filterBtns = document.querySelectorAll('.filter-pill-btn');
+      const guildCards = document.querySelectorAll('.guild-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          guildCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+              card.style.display = 'flex';
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 2. SCROLLYTELLING INTERACTIVE PIPELINE
+      const stepCards = document.querySelectorAll('.scrolly-step-card');
+      const scrubberBtns = document.querySelectorAll('.scrolly-nav-btn');
+      const monitorBadge = document.getElementById('monitor-stage-badge');
+      const monitorImg = document.getElementById('monitor-visual-img');
+      const monitorLoc = document.getElementById('monitor-location-label');
+      const monitorScore = document.getElementById('monitor-confidence-score');
+      const metric1 = document.getElementById('monitor-metric-1');
+      const metric2 = document.getElementById('monitor-metric-2');
+      const metric3 = document.getElementById('monitor-metric-3');
+
+      const stageData = [
+        {
+          badge: 'STAGE 01 // DAWN POLL',
+          img: 'assets/images/community/community_analyst_desk.jpg',
+          loc: 'LOCATION: DAWANAU GRAIN DEPOT // KANO',
+          conf: 'CONFIDENCE: 99.2%',
+          m1: 'DATA LATENCY: 14ms',
+          m2: 'NODES ACTIVE: 412 ENUMERATORS',
+          m3: 'CONSENSUS: VALIDATED'
+        },
+        {
+          badge: 'STAGE 02 // PEER AUDIT',
+          img: 'assets/images/community/community_analyst_desk.jpg',
+          loc: 'LOCATION: IKEJA REGIONAL GUILD // LAGOS',
+          conf: 'CONFIDENCE: 98.9%',
+          m1: 'SAMPLING VARIANCE: 1.1%',
+          m2: 'AUDITORS ONLINE: 28 FELLOWS',
+          m3: 'SIGMA TOLERANCE: PASSED'
+        },
+        {
+          badge: 'STAGE 03 // CALIBRATION',
+          img: 'assets/images/community/community_data_screen.jpg',
+          loc: 'LOCATION: CORE QUANT DESK // LONDON & NYC',
+          conf: 'CONFIDENCE: 99.6%',
+          m1: 'HEDONIC DRIFT: -4.2%',
+          m2: 'SEASONAL ADJUST: +1.8%',
+          m3: 'REGRESSION: COMPLETE'
+        },
+        {
+          badge: 'STAGE 04 // RELEASE',
+          img: 'assets/images/community/community_data_screen.jpg',
+          loc: 'LOCATION: GLOBAL TERMINAL DISPATCH // ALL NODES',
+          conf: 'CONFIDENCE: 99.9%',
+          m1: 'BROADCAST SLA: 98.4%',
+          m2: 'SUBSCRIBER DESKS: 48 TREASURIES',
+          m3: 'STATUS: DISPATCHED'
+        }
+      ];
+
+      function setActiveStep(index) {
+        stepCards.forEach((card, idx) => {
+          if (idx === index) {
+            card.classList.add('active-step');
+          } else {
+            card.classList.remove('active-step');
+          }
+        });
+
+        scrubberBtns.forEach((btn, idx) => {
+          if (idx === index) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+          } else {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          }
+        });
+
+        const data = stageData[index];
+        if (data && monitorBadge && monitorImg) {
+          monitorBadge.textContent = data.badge;
+          if (monitorImg.getAttribute('src') !== data.img) {
+            monitorImg.style.opacity = '0.4';
+            setTimeout(() => {
+              monitorImg.setAttribute('src', data.img);
+              monitorImg.style.opacity = '0.92';
+            }, 180);
+          }
+          if (monitorLoc) monitorLoc.textContent = data.loc;
+          if (monitorScore) monitorScore.textContent = data.conf;
+          if (metric1) metric1.textContent = data.m1;
+          if (metric2) metric2.textContent = data.m2;
+          if (metric3) metric3.textContent = data.m3;
+        }
+      }
+
+      scrubberBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetIndex = parseInt(btn.getAttribute('data-step-target'), 10);
+          setActiveStep(targetIndex);
+          const targetCard = stepCards[targetIndex];
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      });
+
+      // Intersection observer for automatic scrollytelling step sync on scroll
+      const scrollyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-step-index'), 10);
+            setActiveStep(index);
+          }
+        });
+      }, { threshold: 0.5, rootMargin: '-10% 0px -25% 0px' });
+
+      stepCards.forEach(card => scrollyObserver.observe(card));
+
+      // 3. TOAST NOTIFICATION UTILITY
+      const toastEl = document.getElementById('community-toast');
+      const toastMsg = document.getElementById('toast-message');
+
+      function showToast(message) {
+        if (!toastEl || !toastMsg) return;
+        toastMsg.textContent = message;
+        toastEl.classList.add('show');
+        setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, 4000);
+      }
+
+      // 4. MODAL INTERACTIONS
+      const joinModal = document.getElementById('join-modal');
+      const rsvpModal = document.getElementById('rsvp-modal');
+      const charterModal = document.getElementById('charter-modal');
+
+      function openModal(modal) {
+        if (!modal) return;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      // Join Modal triggers
+      document.querySelectorAll('.open-join-modal-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tier = btn.getAttribute('data-tier');
+          if (tier) {
+            const tierSelect = document.getElementById('member-tier');
+            if (tierSelect) tierSelect.value = tier;
+          }
+          openModal(joinModal);
+        });
+      });
+
+      document.getElementById('close-join-modal')?.addEventListener('click', () => closeModal(joinModal));
+
+      // RSVP Modal triggers
+      document.querySelectorAll('.btn-rsvp-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sessionName = btn.getAttribute('data-session') || 'Closed-Door Roundtable';
+          const sessionInput = document.getElementById('rsvp-session-name');
+          if (sessionInput) sessionInput.value = sessionName;
+          openModal(rsvpModal);
+        });
+      });
+
+      document.getElementById('close-rsvp-modal')?.addEventListener('click', () => closeModal(rsvpModal));
+
+      // Charter Modal triggers
+      document.querySelectorAll('.open-charter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const guildName = btn.getAttribute('data-guild') || 'Working Group';
+          const charterTitle = document.getElementById('charter-guild-title');
+          const charterSummary = document.getElementById('charter-guild-summary');
+          if (charterTitle) charterTitle.textContent = guildName;
+          if (charterSummary) {
+            charterSummary.textContent = `Operating charter and member guidelines for the ${guildName}. All discussions adhere to Chatham House Rule. Members actively publish consensus vectors and participate in bi-weekly sync sessions.`;
+          }
+          openModal(charterModal);
+        });
+      });
+
+      document.getElementById('close-charter-modal')?.addEventListener('click', () => closeModal(charterModal));
+
+      document.querySelector('.open-join-from-charter-btn')?.addEventListener('click', () => {
+        closeModal(charterModal);
+        openModal(joinModal);
+      });
+
+      // Close on background click & Escape key
+      [joinModal, rsvpModal, charterModal].forEach(modal => {
+        modal?.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal(modal);
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal(joinModal);
+          closeModal(rsvpModal);
+          closeModal(charterModal);
+        }
+      });
+
+      // Form Submissions
+      document.getElementById('join-community-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('member-name')?.value || 'Fellow';
+        closeModal(joinModal);
+        e.target.reset();
+        showToast(`Thank you, ${name}! Your Guild membership application has been received for review.`);
+      });
+
+      document.getElementById('rsvp-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const session = document.getElementById('rsvp-session-name')?.value || 'Roundtable';
+        closeModal(rsvpModal);
+        e.target.reset();
+        showToast(`RSVP Confirmed! Calendar token and access credentials for "${session}" have been dispatched.`);
+      });
+    });
+  </script>
+
+  <!-- 14. Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <!-- Box-style Bars (Built from individual blocks) -->
+        <g class="chart-bars">
+          <!-- Bar 1 -->
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          
+          <!-- Bar 2 -->
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          
+          <!-- Bar 3 -->
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          
+          <!-- Bar 4 -->
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+
+        <!-- Growing Arrow Line -->
+        <path 
+          d="M 5 90 L 35 65 L 65 45 L 90 20" 
+          fill="none" 
+          stroke="#ef7d00" 
+          stroke-width="6" 
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="animate-line"
+        />
+
+        <!-- Nodes/Dots -->
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        
+        <!-- Arrow Head -->
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+
+</body>
+</html>

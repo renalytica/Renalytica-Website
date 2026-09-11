@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions (FAQ) | Purchasing, Licensing & Methodology — Renalytica</title>
+  <meta name="description" content="Find clear, authoritative answers to common questions about purchasing market research reports, licensing options (Single User, Departmental, Global Enterprise), data verification methodology, corporate subscriptions, and custom advisory services.">
+  <meta name="keywords" content="market research FAQ, buy research reports online, market intelligence licensing, research report download help, Renalytica data methodology, corporate research subscription FAQ">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Renalytica FAQ — Everything You Need to Know About Our Research, Data & Services">
+  <meta property="og:description" content="Fast, transparent answers on digital fulfillment, licensing rights, field verification methodology, and corporate accounts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.renalytica.com/faq">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/faq.css">
+
+  <!-- Early Theme Initialization to Prevent Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Sticky Global Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <!-- 3. HERO STAGE -->
+    <section class="faq-hero-section" id="hero-faq">
+      <div class="container faq-hero-container">
+        <div class="faq-badges-row" data-reveal="fade-up" style="--delay: 0">
+          <span class="faq-pill-badge">
+            <span class="pulse-dot-green"></span>
+            KNOWLEDGE &amp; SUPPORT CENTER
+          </span>
+          <span class="faq-pill-badge accent">
+            24+ VERIFIED QUESTIONS // INSTANT SEARCH
+          </span>
+        </div>
+
+        <h1 class="faq-hero-title" data-reveal="fade-up" style="--delay: 1">
+          Clear Answers to<br>
+          <span class="title-accent">Common Questions.</span>
+        </h1>
+
+        <p class="faq-hero-desc" data-reveal="fade-up" style="--delay: 2">
+          Whether you are purchasing your first market report, evaluating a corporate subscription for your strategy department, or curious about how our field teams verify commercial data on the ground, find everything you need right here.
+        </p>
+
+        <!-- Real-time Live Search Box -->
+        <div class="faq-search-wrapper" data-reveal="fade-up" style="--delay: 3">
+          <div class="faq-search-bar" id="faq-search-bar">
+            <svg class="search-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="faq-search-input" 
+              class="faq-search-input" 
+              placeholder="Search our FAQ (e.g., 'Excel data pack', 'Departmental license', 'refund policy', 'custom quote')..."
+              aria-label="Search FAQ questions"
+              autocomplete="off"
+            >
+            <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search">✕</button>
+          </div>
+        </div>
+
+        <div class="search-meta-row" data-reveal="fade-up" style="--delay: 4">
+          <span class="search-results-counter" id="search-results-counter">Showing <span>all 24</span> questions</span>
+          <span class="search-hint">Tip: Type keywords to filter instantly</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. STICKY CATEGORY FILTER BAR -->
+    <nav class="faq-filter-sticky-bar" id="faq-sticky-bar" aria-label="FAQ Categories">
+      <div class="container faq-filter-container">
+        <div class="faq-category-pills" id="category-pills">
+          <button class="faq-category-btn active" data-category="all">
+            All Questions <span class="cat-count">24</span>
+          </button>
+          <button class="faq-category-btn" data-category="buying">
+            1. Buying &amp; Delivery <span class="cat-count">5</span>
+          </button>
+          <button class="faq-category-btn" data-category="licensing">
+            2. Licensing &amp; Usage <span class="cat-count">4</span>
+          </button>
+          <button class="faq-category-btn" data-category="methodology">
+            3. Data &amp; Methodology <span class="cat-count">4</span>
+          </button>
+          <button class="faq-category-btn" data-category="subscriptions">
+            4. Corporate Subscriptions <span class="cat-count">3</span>
+          </button>
+          <button class="faq-category-btn" data-category="custom">
+            5. Custom Advisory <span class="cat-count">3</span>
+          </button>
+          <button class="faq-category-btn" data-category="invoicing">
+            6. Invoicing &amp; Payments <span class="cat-count">4</span>
+          </button>
+          <button class="faq-category-btn" data-category="coverage">
+            7. Global Coverage <span class="cat-count">1</span>
+          </button>
+        </div>
+
+        <div class="faq-action-toggles">
+          <button class="btn-toggle-all" id="btn-toggle-all">Expand All</button>
+          <button class="btn-ask-question" id="btn-trigger-ask-modal">+ Ask Question</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 5. MAIN FAQ ACCORDIONS CONTENT -->
+    <section class="faq-main-content-section">
+      <div class="container faq-layout-container">
+
+        <!-- Empty State (Shown when search has 0 matches) -->
+        <div class="faq-empty-state" id="faq-empty-state">
+          <div class="empty-icon-box">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h3 class="empty-title">No matching questions found</h3>
+          <p class="empty-desc">We couldn't find any questions matching your query. Try different keywords or submit your question directly to our economists.</p>
+          <button class="btn-faq-primary" id="btn-empty-ask">Ask Our Research Desk Directly →</button>
+        </div>
+
+        <!-- CATEGORY 1: BUYING & DIGITAL DELIVERY -->
+        <div class="faq-category-block" data-category="buying" id="category-buying">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 01</span>
+              <h2 class="faq-category-title">Buying &amp; Instant Digital Delivery</h2>
+            </div>
+            <span class="faq-category-sub">5 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q1.1 -->
+            <div class="faq-item" data-keywords="purchase buy report online checkout stripe paystack bank wire transfer download">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-1-1" aria-controls="faq-panel-1-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q1.1</span>
+                  <span class="faq-q-text">How do I purchase a report on the Renalytica platform?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-1-1" role="region" aria-labelledby="faq-trigger-1-1">
+                <div class="faq-panel-inner">
+                  <p>Purchasing an industry report is straightforward and takes less than three minutes:</p>
+                  <ol>
+                    <li><b>Find Your Report:</b> Use our search bar or browse by sector (Agriculture, Macroeconomics, Retail, Energy, Payments) in the <a href="reports.html" style="color: var(--faq-accent); font-weight: 600;">Research Store</a>.</li>
+                    <li><b>Choose Your License:</b> Select the license that fits your organizational needs (<b>Single User</b>, <b>Departmental</b>, or <b>Global Enterprise</b>).</li>
+                    <li><b>Add to Cart / Buy Now:</b> Click <b>"Add to Cart"</b> or <b>"Buy Now"</b> to proceed directly to our encrypted checkout.</li>
+                    <li><b>Enter Billing Information:</b> Provide your name, corporate email address, and company details.</li>
+                    <li><b>Complete Payment:</b> Pay securely using a corporate credit/debit card (Visa, MasterCard, American Express) via Stripe, Paystack for local currency transactions, or select <b>Bank Wire Transfer</b>.</li>
+                    <li><b>Instant Delivery:</b> As soon as payment is confirmed, an automated download email containing secure, expiring download links for your PDF, Excel Data Pack, and Slide Deck is dispatched to your inbox.</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q1.2 -->
+            <div class="faq-item" data-keywords="delivery speed receive email immediate instant wire transfer card approval">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-1-2" aria-controls="faq-panel-1-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q1.2</span>
+                  <span class="faq-q-text">How quickly will I receive my files after payment?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-1-2" role="region" aria-labelledby="faq-trigger-1-2">
+                <div class="faq-panel-inner">
+                  <p><b>Immediately.</b> Card payments are processed in real time through PCI-DSS Level 1 certified gateways. Within 60 seconds of transaction approval, an email containing your personalized download links will arrive in your inbox. You can also access your purchased files directly from the post-purchase confirmation screen.</p>
+                  <p>For bank wire transfers, we verify incoming SWIFT/NIP confirmations within <b>2 business hours</b> and dispatch files immediately upon clearance.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q1.3 -->
+            <div class="faq-item" data-keywords="format file pdf excel xlsx powerpoint pptx slide deck spreadsheet data pack unlocked formulas">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-1-3" aria-controls="faq-panel-1-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q1.3</span>
+                  <span class="faq-q-text">What file formats are included in my purchase?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-1-3" role="region" aria-labelledby="faq-trigger-1-3">
+                <div class="faq-panel-inner">
+                  <p>Depending on the license selected, your delivery bundle includes:</p>
+                  <ul>
+                    <li><b>Full Research Report (PDF):</b> A high-resolution, vector-rendered executive publication containing comprehensive chapters, infographics, and market share models.</li>
+                    <li><b>Unlocked Excel Data Pack (.xlsx):</b> Included with <i>Departmental</i> and <i>Global Enterprise</i> licenses. Contains all underlying quantitative time series, historical baseline figures, econometric forecast models, and pivot-ready raw survey tables. Formulas are completely unlocked so your internal financial analysts can build proprietary valuation models.</li>
+                    <li><b>Executive Presentation Deck (.pptx):</b> Included with <i>Global Enterprise</i> licenses. An 80-to-100 slide PowerPoint deck summarizing key executive takeaways, competitive landscape rankings, and macro scenario trees, ready for your boardroom presentation.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q1.4 -->
+            <div class="faq-item" data-keywords="sample preview free brief toc table of contents evaluate trial test">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-1-4" aria-controls="faq-panel-1-4">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q1.4</span>
+                  <span class="faq-q-text">Can I review a sample before making a financial commitment?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-1-4" role="region" aria-labelledby="faq-trigger-1-4">
+                <div class="faq-panel-inner">
+                  <p><b>Yes, absolutely.</b> On every report page, you can click the <b>"Download Free Sample Brief"</b> button to review an authentic sample publication before purchasing.</p>
+                  <p>Our sample brief includes the unabridged Table of Contents, executive summary highlights, multi-country forecast tables, methodology disclosures, and competitive ranking matrices.</p>
+                  <p style="margin-top: 14px;">
+                    <a href="assets/docs/renalytica_sample_grain_report_brief.pdf" download class="btn-faq-primary" style="padding: 8px 16px; font-size: 0.85rem;">
+                      Download Mini Sample Report Brief (PDF) ↓
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q1.5 -->
+            <div class="faq-item" data-keywords="expired link download failed recover resend 72 hours firewall technical issue">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-1-5" aria-controls="faq-panel-1-5">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q1.5</span>
+                  <span class="faq-q-text">My download link expired or failed. How do I recover my files?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-1-5" role="region" aria-labelledby="faq-trigger-1-5">
+                <div class="faq-panel-inner">
+                  <p>For enterprise security, automated download links remain active for <b>72 hours</b> and permit up to 5 download attempts. If your link expires or your corporate firewall interrupts the download:</p>
+                  <ul>
+                    <li>Simply reply directly to your original order confirmation email.</li>
+                    <li>Email our 24/7 client fulfillment desk at <code>fulfillment@renalytica.com</code> with your Order Number (e.g., <code>#REN-2026-8942</code>).</li>
+                    <li>Or message our instant WhatsApp Concierge at <b>+234 813 753 8723</b>.</li>
+                  </ul>
+                  <p>Our engineering team will verify your purchase and dispatch a fresh, high-speed download link within <b>30 minutes</b>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 2: LICENSING & USAGE -->
+        <div class="faq-category-block" data-category="licensing" id="category-licensing">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 02</span>
+              <h2 class="faq-category-title">Licensing Tiers &amp; Permitted Usage</h2>
+            </div>
+            <span class="faq-category-sub">4 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q2.1 -->
+            <div class="faq-item" data-keywords="license tiers single user departmental global enterprise comparison difference 2500 4500 7500 intranet printing">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-2-1" aria-controls="faq-panel-2-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q2.1</span>
+                  <span class="faq-q-text">What is the difference between Single User, Departmental, and Global Enterprise licenses?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-2-1" role="region" aria-labelledby="faq-trigger-2-1">
+                <div class="faq-panel-inner">
+                  <p>We structure our research licenses clearly to align with organizational collaboration requirements:</p>
+                  <ul>
+                    <li><b>Single User License ($2,500 USD standard):</b> Granted to <b>one (1) designated individual</b> on up to two personal work devices. Digital PDF only; printing and network drive hosting are restricted.</li>
+                    <li><b>Departmental License ($4,500 USD standard — Most Popular):</b> Granted for up to <b>five (5) team members</b> within a single department (e.g., Strategy, Treasury, or Agribusiness M&amp;A). Includes the <b>Unlocked Excel Data Pack (.xlsx)</b> with full modeling rights, printable PDF rights for internal meeting packs, and a <b>1-hour private briefing video call</b> with the lead economist.</li>
+                    <li><b>Global Enterprise Site License ($7,500 USD standard):</b> <b>Unlimited access</b> for all employees, directors, and subsidiaries of your corporate group worldwide. Authorized for hosting on internal enterprise document servers, SharePoint, and intranets. Includes the Unlocked Excel Data Pack, Executive PowerPoint Deck, a <b>2-hour formal boardroom presentation</b>, and 12 months of quarterly macroeconomic updates.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q2.2 -->
+            <div class="faq-item" data-keywords="upgrade license difference pay price change single to departmental enterprise">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-2-2" aria-controls="faq-panel-2-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q2.2</span>
+                  <span class="faq-q-text">Can we upgrade our license after purchasing?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-2-2" role="region" aria-labelledby="faq-trigger-2-2">
+                <div class="faq-panel-inner">
+                  <p><b>Yes, absolutely.</b> If you initially purchased a Single User license and later realize that your finance team, board of directors, or regional operating units require access, you can upgrade at any time within 12 months of your original purchase.</p>
+                  <p>You only pay the exact price difference between your current tier and the higher tier (for example, upgrading from Single User to Departmental is exactly $2,000). Contact <code>sales@renalytica.com</code> to receive an instant upgrade checkout link.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q2.3 -->
+            <div class="faq-item" data-keywords="quote citing attribution public deck regulatory filing ipo pitch deck investor presentation">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-2-3" aria-controls="faq-panel-2-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q2.3</span>
+                  <span class="faq-q-text">Are we allowed to quote Renalytica data in public presentations or regulatory filings?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-2-3" role="region" aria-labelledby="faq-trigger-2-3">
+                <div class="faq-panel-inner">
+                  <p>Yes, subject to standard fair attribution standards:</p>
+                  <ul>
+                    <li>You may cite individual statistics, market growth percentages, or charts in external investor pitch decks, annual reports, corporate prospectuses, or industry keynote addresses, provided clear and visible attribution is given:</li>
+                  </ul>
+                  <p style="padding: 10px 14px; background: var(--surface-tint, rgba(0,0,0,0.03)); border-left: 3px solid var(--faq-accent); border-radius: 4px; font-style: italic;">
+                    "Source: Renalytica — [Report Title], [Publication Year], www.renalytica.com"
+                  </p>
+                  <p>You may <b>not</b> reproduce substantial excerpts (e.g., more than three consecutive pages or entire chapters) or distribute raw Excel data sheets to external third parties without prior written consent from Renalytica’s legal desk (<code>legal@renalytica.com</code>).</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q2.4 -->
+            <div class="faq-item" data-keywords="consulting firms advisory bankers deliverables client work engagement resale">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-2-4" aria-controls="faq-panel-2-4">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q2.4</span>
+                  <span class="faq-q-text">Can consulting firms or financial advisory practices buy a report to use for client deliverables?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-2-4" role="region" aria-labelledby="faq-trigger-2-4">
+                <div class="faq-panel-inner">
+                  <p>Yes, under our <b>Departmental</b> or <b>Global Enterprise</b> licenses:</p>
+                  <ul>
+                    <li>Management consultants, investment bankers, and legal advisors may use Renalytica data to inform strategic advisory deliverables, valuation models, and client presentations.</li>
+                    <li>However, the original Renalytica report, Excel model, or raw dataset may not be re-sold, re-packaged, or handed over in its entirety as a standalone product to third parties.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 3: DATA VERIFICATION & METHODOLOGY -->
+        <div class="faq-category-block" data-category="methodology" id="category-methodology">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 03</span>
+              <h2 class="faq-category-title">Data Verification &amp; Dual-Track Methodology</h2>
+            </div>
+            <span class="faq-category-sub">4 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q3.1 -->
+            <div class="faq-item" data-keywords="methodology verification primary field ground truth secondary central bank monte carlo simulation">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-3-1" aria-controls="faq-panel-3-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q3.1</span>
+                  <span class="faq-q-text">How does Renalytica verify its market data and projections?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-3-1" role="region" aria-labelledby="faq-trigger-3-1">
+                <div class="faq-panel-inner">
+                  <p>Every Renalytica publication is grounded in our proprietary <b>Dual-Track Verification Methodology</b>. We refuse to rely solely on recycled secondary web articles or unverified desktop extrapolations.</p>
+                  <ol>
+                    <li><b>Track 1: Primary On-The-Ground Enumeration:</b> We deploy field enumerators across 180+ major trading hubs, commercial ports, agricultural aggregation depots, and wholesale markets across 14 African economies. They capture daily farmgate commodity prices, truck haulage costs, retail sachet turnover, and physical inventory levels.</li>
+                    <li><b>Track 2: Authoritative Secondary Repositories:</b> Our quantitative desk simultaneously ingests official data from central banks, ministries of finance, national statistics agencies, multilateral agencies (World Bank, AfDB, FAO), and audited corporate filings.</li>
+                    <li><b>The Triangulation &amp; Harmonization Engine:</b> Both data streams are mathematically cross-checked to eliminate anomalies, normalized against exchange rate distortions, and subjected to 10,000 Monte Carlo simulation runs before undergoing formal peer review by two senior economists.</li>
+                  </ol>
+                  <p><a href="methodology.html" style="color: var(--faq-accent); font-weight: 600;">Read our full empirical methodology guide →</a></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q3.2 -->
+            <div class="faq-item" data-keywords="frequency update cadence refresh annual quarterly weekly indicators vintage">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-3-2" aria-controls="faq-panel-3-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q3.2</span>
+                  <span class="faq-q-text">How frequently are market forecasts and pricing numbers updated?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-3-2" role="region" aria-labelledby="faq-trigger-3-2">
+                <div class="faq-panel-inner">
+                  <ul>
+                    <li><b>High-Frequency Market Indicators:</b> Farmgate prices, port clearance dwell times, and parallel FX rates are tracked weekly and published in our free <i>Renalytica Weekly</i> and <i>Market Insights</i> wire.</li>
+                    <li><b>Published Store Reports:</b> Major sector reports are comprehensively refreshed every <b>12 to 18 months</b>. In rapidly moving sectors (such as Foreign Exchange Liquidity or Fuel Subsidy impacts), interim quarterly update addenda are issued to Departmental and Enterprise license holders.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q3.3 -->
+            <div class="faq-item" data-keywords="geographic coverage countries markets africa nigeria ghana kenya tanzania zambia south africa us europe asia">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-3-3" aria-controls="faq-panel-3-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q3.3</span>
+                  <span class="faq-q-text">What geographic markets are covered by Renalytica?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-3-3" role="region" aria-labelledby="faq-trigger-3-3">
+                <div class="faq-panel-inner">
+                  <p>Our primary research footprint spans <b>14 core Sub-Saharan African economies</b>:</p>
+                  <ul>
+                    <li><b>West Africa:</b> Nigeria, Ghana, Côte d'Ivoire, Senegal, Cameroon.</li>
+                    <li><b>East Africa:</b> Kenya, Tanzania, Uganda, Ethiopia, Rwanda.</li>
+                    <li><b>Southern Africa:</b> South Africa, Zambia, Mozambique, Angola.</li>
+                  </ul>
+                  <p>For bespoke projects through our Custom Advisory desk, we frequently deploy field investigations into adjacent regional markets across the ECOWAS, EAC, and SADC trade zones.</p>
+                  <p><b>Global Scope:</b> In addition to our African footprint, <b>we cover the US, Europe, and Asia as well</b>—specifically tracking institutional trade flows, capital allocations, commodity import-export balances, and currency dynamics connecting global financial centers to emerging markets.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q3.4 -->
+            <div class="faq-item" data-keywords="policy change tariff devaluation shock bulletin addenda unexpected government regulations">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-3-4" aria-controls="faq-panel-3-4">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q3.4</span>
+                  <span class="faq-q-text">What happens if an unexpected government policy change alters market fundamentals?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-3-4" role="region" aria-labelledby="faq-trigger-3-4">
+                <div class="faq-panel-inner">
+                  <p>Frontier markets experience real-world regulatory shifts—such as sudden tariff adjustments, currency floatations, or subsidy removals. When a material structural event occurs within 90 days of a report's release, Renalytica’s research desk issues a complimentary <b>Executive Policy Bulletin</b> to all verified purchasers, analyzing the exact quantitative impact of the policy change on the report's baseline forecasts.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 4: CORPORATE SUBSCRIPTIONS -->
+        <div class="faq-category-block" data-category="subscriptions" id="category-subscriptions">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 04</span>
+              <h2 class="faq-category-title">Corporate Subscriptions (The Research Terminal)</h2>
+            </div>
+            <span class="faq-category-sub">3 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q4.1 -->
+            <div class="faq-item" data-keywords="corporate subscription terminal all-access pass annual contract 2500 library institutional">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-4-1" aria-controls="faq-panel-4-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q4.1</span>
+                  <span class="faq-q-text">What is the Renalytica Corporate Research Subscription?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-4-1" role="region" aria-labelledby="faq-trigger-4-1">
+                <div class="faq-panel-inner">
+                  <p>The Corporate Subscription is an annual enterprise agreement designed for commercial banks, private equity firms, multinational corporations, and strategic consultancies. Rather than purchasing reports ad-hoc on a per-title basis, your entire organization receives <b>unlimited, company-wide access</b> to our entire 2,500+ report library, all unlocked Excel data models, and all new titles released during your 12-month contract period.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q4.2 -->
+            <div class="faq-item" data-keywords="subscription benefits analyst priority 24 hour sla boardroom briefings custom data cuts sso">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-4-2" aria-controls="faq-panel-4-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q4.2</span>
+                  <span class="faq-q-text">What additional benefits do Corporate Subscribers receive?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-4-2" role="region" aria-labelledby="faq-trigger-4-2">
+                <div class="faq-panel-inner">
+                  <p>Subscribers enjoy premium institutional privileges:</p>
+                  <ul>
+                    <li><b>Guaranteed Analyst Priority Desk:</b> Submit custom data inquiries directly to our lead economists with a guaranteed <b>24-hour turnaround SLA</b>.</li>
+                    <li><b>Quarterly Executive Strategy Briefings:</b> Four scheduled 90-minute live boardroom presentations per year, tailored specifically to your executive committee's strategic priorities.</li>
+                    <li><b>Custom Regional Data Cuts:</b> Request custom aggregations and Excel cross-tabs extracted from our proprietary primary survey repositories.</li>
+                    <li><b>Single Sign-On (SSO) Integration:</b> Enterprise IP-authentication or Okta/Azure AD single sign-on for effortless team-wide onboarding.</li>
+                    <li><b>Substantial Budget Savings:</b> A single predictable annual corporate fee that reduces total market intelligence expenditure by up to 60% compared to ad-hoc purchases.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q4.3 -->
+            <div class="faq-item" data-keywords="subscription seats admin dashboard users logins permissions multi-office">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-4-3" aria-controls="faq-panel-4-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q4.3</span>
+                  <span class="faq-q-text">How are subscription seats and user logins managed?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-4-3" role="region" aria-labelledby="faq-trigger-4-3">
+                <div class="faq-panel-inner">
+                  <p>We provide dedicated administrative dashboards. Your corporate account administrator can instantly add, reassign, or remove team members, track report utilization metrics, and manage departmental download permissions across multiple office locations worldwide.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 5: CUSTOM ADVISORY -->
+        <div class="faq-category-block" data-category="custom" id="category-custom">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 05</span>
+              <h2 class="faq-category-title">Custom Advisory &amp; Bespoke Feasibility Studies</h2>
+            </div>
+            <span class="faq-category-sub">3 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q5.1 -->
+            <div class="faq-item" data-keywords="custom research projects feasibility studies commercial due diligence market entry outgrower retail audit">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-5-1" aria-controls="faq-panel-5-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q5.1</span>
+                  <span class="faq-q-text">What types of custom research projects does Renalytica accept?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-5-1" role="region" aria-labelledby="faq-trigger-5-1">
+                <div class="faq-panel-inner">
+                  <p>When an off-the-shelf published report does not answer your exact question, our Custom Advisory desk conducts tailored engagements, including:</p>
+                  <ul>
+                    <li><b>Commercial Due Diligence (CDD):</b> Independent market share, revenue, and customer-retention verification for private equity acquisitions.</li>
+                    <li><b>Market Entry Feasibility Studies:</b> Evaluating target market size, unit economics, regulatory licensing requirements, and distribution channels for new country launches.</li>
+                    <li><b>Industrial Site &amp; Supply Chain Sourcing Reviews:</b> Evaluating local farmer outgrower networks, raw material security, cold-chain logistics, and industrial utilities before building a processing factory.</li>
+                    <li><b>Retail Brand &amp; Consumer Sentiment Audits:</b> High-frequency point-of-sale audits across thousands of informal retail kiosks to gauge brand penetration, price elasticity, and competitor promotional activity.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q5.2 -->
+            <div class="faq-item" data-keywords="custom timeline delivery weeks scoping rapid scan due diligence feasibility">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-5-2" aria-controls="faq-panel-5-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q5.2</span>
+                  <span class="faq-q-text">How long does a custom research study take from kickoff to final delivery?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-5-2" role="region" aria-labelledby="faq-trigger-5-2">
+                <div class="faq-panel-inner">
+                  <p>Typical timelines depend on geographic scope and primary field intensity:</p>
+                  <ul>
+                    <li><b>Rapid Market Scan (Desk-Led with Spot Verification):</b> 2 to 3 weeks.</li>
+                    <li><b>Comprehensive Market Sizing &amp; Competitor Study:</b> 4 to 6 weeks.</li>
+                    <li><b>Full Multi-Country Feasibility &amp; Fieldwork Study:</b> 6 to 8 weeks.</li>
+                  </ul>
+                  <p>At project kickoff, we establish clear milestone deliverables, weekly progress checkpoints, and a binding delivery date backed by formal contractual SLAs.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q5.3 -->
+            <div class="faq-item" data-keywords="confidentiality nda non-disclosure client data protection proprietary secret firewall">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-5-3" aria-controls="faq-panel-5-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q5.3</span>
+                  <span class="faq-q-text">How do you protect client confidentiality during custom projects?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-5-3" role="region" aria-labelledby="faq-trigger-5-3">
+                <div class="faq-panel-inner">
+                  <p><b>Confidentiality is strictly protected.</b> Every custom research engagement begins with the execution of a bilateral, mutual <b>Non-Disclosure Agreement (NDA)</b> before any proprietary client data, commercial goals, or project parameters are discussed.</p>
+                  <p>Our field enumerators and desk researchers operate behind strict information firewalls to ensure that competitors or market participants never discover the identity of our sponsoring client.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 6: INVOICING & PAYMENTS -->
+        <div class="faq-category-block" data-category="invoicing" id="category-invoicing">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 06</span>
+              <h2 class="faq-category-title">Invoicing, Taxes, Currency &amp; Payment Security</h2>
+            </div>
+            <span class="faq-category-sub">4 Questions</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q6.1 -->
+            <div class="faq-item" data-keywords="currencies accepted usd ngn naira gbp pounds eur euros payment methods">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-6-1" aria-controls="faq-panel-6-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q6.1</span>
+                  <span class="faq-q-text">What currencies can I purchase in?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-6-1" role="region" aria-labelledby="faq-trigger-6-1">
+                <div class="faq-panel-inner">
+                  <p>Our platform supports flexible multi-currency settlement:</p>
+                  <ul>
+                    <li><b>US Dollars (USD):</b> Default international invoicing benchmark.</li>
+                    <li><b>Nigerian Naira (NGN):</b> Supported via localized instant bank transfer, debit cards, and corporate e-invoicing.</li>
+                    <li><b>British Pounds (GBP) &amp; Euros (EUR):</b> Supported for European institutional clients and cross-border bank wires.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q6.2 -->
+            <div class="faq-item" data-keywords="proforma invoice corporate accounts payable tin vat tax receipt 2 hours">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-6-2" aria-controls="faq-panel-6-2">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q6.2</span>
+                  <span class="faq-q-text">Can you provide a formal corporate proforma invoice for our accounts payable team?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-6-2" role="region" aria-labelledby="faq-trigger-6-2">
+                <div class="faq-panel-inner">
+                  <p><b>Yes.</b> We routinely work with corporate procurement and accounts payable processes. If your finance team requires an approved proforma invoice, vendor registration documentation, or certificate of tax compliance before releasing payment:</p>
+                  <ol>
+                    <li>Contact our corporate billing team at <code>billing@renalytica.com</code>.</li>
+                    <li>Provide your company legal name, registered address, and the report titles and licenses required.</li>
+                    <li>We will issue a formal proforma invoice within <b>two (2) business hours</b>, complete with our company registration details, banking instructions, and Taxpayer Identification Number (TIN).</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q6.3 -->
+            <div class="faq-item" data-keywords="refund return policy cancel money back guarantee digital goods replacement credit">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-6-3" aria-controls="faq-panel-6-3">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q6.3</span>
+                  <span class="faq-q-text">What is your refund and return policy?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-6-3" role="region" aria-labelledby="faq-trigger-6-3">
+                <div class="faq-panel-inner">
+                  <p>Because our publications are confidential, high-value digital information goods delivered immediately upon payment, <b>we cannot accept general returns or issue refunds once files have been accessed or downloaded.</b></p>
+                  <ul>
+                    <li>However, if you experience technical issues opening or viewing your files, our engineering team will provide immediate replacement formats within 1 hour.</li>
+                    <li>In the rare event that a purchased report demonstrably fails to match the Table of Contents or scope described on its product detail page, our Managing Director will personally review your case and issue a credit toward any other report in our catalog.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Q6.4 -->
+            <div class="faq-item" data-keywords="security secure payment ssl tls 256 bit encryption pci dss stripe paystack 3d secure">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-6-4" aria-controls="faq-panel-6-4">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q6.4</span>
+                  <span class="faq-q-text">Is payment on your website secure?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-6-4" role="region" aria-labelledby="faq-trigger-6-4">
+                <div class="faq-panel-inner">
+                  <p><b>100% secure.</b> Our website employs bank-grade <b>256-bit Transport Layer Security (TLS/SSL)</b> encryption across all sessions. We never store, process, or retain your raw credit card numbers or banking passwords on our servers. All digital payments are handled through PCI-DSS Level 1 compliant financial processors (Stripe and Paystack), featuring 3D-Secure 2.0 authentication and automated fraud scrubbing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 7: GLOBAL COVERAGE -->
+        <div class="faq-category-block" data-category="coverage" id="category-coverage">
+          <div class="faq-category-header">
+            <div class="faq-category-title-wrap">
+              <span class="faq-cat-indicator">SECTION 07</span>
+              <h2 class="faq-category-title">Global Coverage &amp; International Operations</h2>
+            </div>
+            <span class="faq-category-sub">1 Question</span>
+          </div>
+
+          <div class="faq-accordion-group">
+            <!-- Q7.1 -->
+            <div class="faq-item" data-keywords="international global us europe asia north america diaspora trade flows capital corridors">
+              <button class="faq-trigger" aria-expanded="false" id="faq-trigger-7-1" aria-controls="faq-panel-7-1">
+                <div class="faq-trigger-content">
+                  <span class="faq-q-number">Q7.1</span>
+                  <span class="faq-q-text">Does Renalytica cover markets outside Sub-Saharan Africa?</span>
+                </div>
+                <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-panel" id="faq-panel-7-1" role="region" aria-labelledby="faq-trigger-7-1">
+                <div class="faq-panel-inner">
+                  <p><b>Yes. We cover the US, Europe, and Asia as well.</b></p>
+                  <p>While our physical ground-truth enumeration network is centered in 14 African economies, our macroeconomic and commodities modeling specifically traces the cross-border capital, supply-chain, and currency corridors connecting:</p>
+                  <ul>
+                    <li><b>The United States:</b> Institutional asset allocators, agricultural machinery exporters, and Dollar monetary policy transmission.</li>
+                    <li><b>Europe:</b> Trade financing partners, bilateral development finance institutions (DFIs), and FMCG corporate headquarters.</li>
+                    <li><b>Asia:</b> Grain procurement titans, solar equipment manufacturers, and sovereign infrastructure financiers across China, Singapore, and India.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. CONCIERGE SUPPORT DESK LOCKUP -->
+    <section class="faq-concierge-section">
+      <div class="container">
+        <div class="concierge-header">
+          <h2 class="concierge-title">Can’t Find What You’re Looking For?</h2>
+          <p class="concierge-desc">Our dedicated client support team and sector research economists are on standby to answer your questions.</p>
+        </div>
+
+        <div class="concierge-grid">
+          <!-- Card 1: General Inquiries -->
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <span class="concierge-role">CLIENT DESK</span>
+            <h3 class="concierge-card-title">General Inquiries</h3>
+            <p class="concierge-card-desc">For questions regarding report content, methodology, or platform access.</p>
+            <a href="mailto:info@renalytica.com" class="concierge-link">info@renalytica.com →</a>
+          </div>
+
+          <!-- Card 2: Sales & Licensing -->
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7.5" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+            </div>
+            <span class="concierge-role">COMMERCIAL DESK</span>
+            <h3 class="concierge-card-title">Sales &amp; Licensing</h3>
+            <p class="concierge-card-desc">For Departmental or Global Enterprise quotes, upgrades, and subscriptions.</p>
+            <a href="mailto:sales@renalytica.com" class="concierge-link">sales@renalytica.com →</a>
+          </div>
+
+          <!-- Card 3: Billing & Proforma -->
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+            </div>
+            <span class="concierge-role">FINANCE &amp; TAX</span>
+            <h3 class="concierge-card-title">Billing &amp; Tax</h3>
+            <p class="concierge-card-desc">For corporate proforma invoices, wire transfers, and VAT tax receipts.</p>
+            <a href="mailto:billing@renalytica.com" class="concierge-link">billing@renalytica.com →</a>
+          </div>
+
+          <!-- Card 4: WhatsApp Concierge -->
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <span class="concierge-role">INSTANT MESSAGING</span>
+            <h3 class="concierge-card-title">WhatsApp Concierge</h3>
+            <p class="concierge-card-desc">Direct chat with our Lagos research desk. Mon–Fri, 08:00–18:00 WAT.</p>
+            <a href="https://wa.me/2348137538723" target="_blank" rel="noopener noreferrer" class="concierge-link">+234 813 753 8723 →</a>
+          </div>
+        </div>
+
+        <div class="concierge-actions">
+          <button class="btn-faq-primary" id="btn-concierge-ask">
+            Submit a Question to Our Economists →
+          </button>
+          <a href="reports.html" class="btn-faq-secondary">
+            Browse Research Store (2,500+ Reports)
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. ASK A QUESTION MODAL -->
+  <div class="faq-modal-overlay" id="modal-ask-question" aria-hidden="true">
+    <div class="faq-modal-card" role="dialog" aria-labelledby="modal-ask-title">
+      <button class="modal-close-btn" id="modal-ask-close" aria-label="Close Modal">✕</button>
+      <div class="modal-eyebrow">DIRECT INQUIRY // RESEARCH DESK</div>
+      <h3 class="modal-title" id="modal-ask-title">Ask Our Research Team</h3>
+      <p class="modal-desc">Have a question that wasn’t answered in our FAQ? Send your inquiry directly to our senior economists and receive a verified response within 24 hours.</p>
+
+      <form id="faq-ask-form">
+        <div class="form-group">
+          <label class="form-label" for="ask-name">Full Name *</label>
+          <input type="text" id="ask-name" class="form-input" placeholder="e.g. Dr. Kemi Balogun" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ask-email">Corporate Business Email *</label>
+          <input type="email" id="ask-email" class="form-input" placeholder="e.g. k.balogun@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ask-category">Inquiry Category *</label>
+          <select id="ask-category" class="form-select" required>
+            <option value="report-data">Report Data &amp; Methodology</option>
+            <option value="licensing">Licensing &amp; Enterprise Access</option>
+            <option value="custom">Custom Research &amp; Feasibility</option>
+            <option value="billing">Invoicing &amp; Wire Payment</option>
+            <option value="other">Other Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ask-question-text">Your Question or Data Need *</label>
+          <textarea id="ask-question-text" class="form-textarea" placeholder="Please describe your specific question, commodity, or corporate requirement..." required></textarea>
+        </div>
+        <button type="submit" class="btn-faq-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+          Send Question to Research Desk →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. TOAST NOTIFICATION CONTAINER -->
+  <div class="faq-toast-container" id="faq-toast-container"></div>
+
+  <!-- 9. Sticky Global Footer Component -->
+  <mega-footer></mega-footer>
+
+  <!-- 10. Renalytica Page Transition Reveal Overlay -->
+  <div id="renalytica-overlay" class="transition-overlay hidden" aria-hidden="true">
+    <div id="renalytica-logo" class="logo-container">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; overflow: visible;" aria-label="Renalytica Transition Reveal">
+        <g class="chart-bars">
+          <rect x="10" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-1" />
+          <rect x="10" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-2" />
+          <rect x="30" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="30" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="30" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-3" />
+          <rect x="50" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="50" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="50" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="50" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="82" width="12" height="8" fill="#ef7d00" class="animate-box delay-4" />
+          <rect x="70" y="72" width="12" height="8" fill="#ef7d00" class="animate-box delay-5" />
+          <rect x="70" y="62" width="12" height="8" fill="#ef7d00" class="animate-box delay-6" />
+          <rect x="70" y="52" width="12" height="8" fill="#ef7d00" class="animate-box delay-7" />
+          <rect x="70" y="42" width="12" height="8" fill="#ef7d00" class="animate-box delay-8" />
+          <rect x="70" y="32" width="12" height="8" fill="#ef7d00" class="animate-box delay-9" />
+          <rect x="70" y="22" width="12" height="8" fill="#ef7d00" class="animate-box delay-10" />
+        </g>
+        <path d="M 5 90 L 35 65 L 65 45 L 90 20" fill="none" stroke="#ef7d00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="animate-line" />
+        <circle cx="35" cy="65" r="5" fill="#ef7d00" class="animate-dot-1" />
+        <circle cx="65" cy="45" r="5" fill="#ef7d00" class="animate-dot-2" />
+        <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Component Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/motion-engine.js"></script>
+  <script src="lib/page-transition.js"></script>
+
+  <!-- Interactive FAQ Engine Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Accordion Toggle Logic
+      const faqItems = document.querySelectorAll('.faq-item');
+      const triggers = document.querySelectorAll('.faq-trigger');
+
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const item = trigger.closest('.faq-item');
+          const panel = item.querySelector('.faq-panel');
+          const isExpanded = item.classList.contains('expanded');
+
+          if (isExpanded) {
+            panel.style.maxHeight = null;
+            item.classList.remove('expanded');
+            trigger.setAttribute('aria-expanded', 'false');
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            item.classList.add('expanded');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // 2. Expand All / Collapse All
+      const btnToggleAll = document.getElementById('btn-toggle-all');
+      let allExpanded = false;
+
+      btnToggleAll?.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        btnToggleAll.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+
+        faqItems.forEach(item => {
+          // Only expand visible items
+          if (!item.classList.contains('hidden')) {
+            const trigger = item.querySelector('.faq-trigger');
+            const panel = item.querySelector('.faq-panel');
+            if (allExpanded) {
+              panel.style.maxHeight = panel.scrollHeight + 'px';
+              item.classList.add('expanded');
+              trigger.setAttribute('aria-expanded', 'true');
+            } else {
+              panel.style.maxHeight = null;
+              item.classList.remove('expanded');
+              trigger.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      });
+
+      // 3. Category Filter Tabs
+      const categoryBtns = document.querySelectorAll('.faq-category-btn');
+      const categoryBlocks = document.querySelectorAll('.faq-category-block');
+      let currentCategory = 'all';
+
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.dataset.category;
+          filterQuestions();
+        });
+      });
+
+      // 4. Real-time Live Search Engine
+      const searchInput = document.getElementById('faq-search-input');
+      const searchClearBtn = document.getElementById('search-clear-btn');
+      const resultsCounter = document.getElementById('search-results-counter');
+      const emptyState = document.getElementById('faq-empty-state');
+
+      function filterQuestions() {
+        const query = (searchInput?.value || '').trim().toLowerCase();
+        let visibleCount = 0;
+
+        // Manage clear button
+        if (query.length > 0) {
+          searchClearBtn?.classList.add('active');
+        } else {
+          searchClearBtn?.classList.remove('active');
+        }
+
+        categoryBlocks.forEach(block => {
+          const blockCat = block.dataset.category;
+          const matchesCategory = (currentCategory === 'all' || currentCategory === blockCat);
+          let visibleInBlock = 0;
+
+          const itemsInBlock = block.querySelectorAll('.faq-item');
+          itemsInBlock.forEach(item => {
+            const keywords = item.dataset.keywords ? item.dataset.keywords.toLowerCase() : '';
+            const textContent = item.textContent.toLowerCase();
+            const matchesQuery = (query === '' || keywords.includes(query) || textContent.includes(query));
+
+            if (matchesCategory && matchesQuery) {
+              item.classList.remove('hidden');
+              visibleInBlock++;
+              visibleCount++;
+
+              // Auto-expand if search query has 3+ characters
+              if (query.length >= 3) {
+                const panel = item.querySelector('.faq-panel');
+                const trigger = item.querySelector('.faq-trigger');
+                panel.style.maxHeight = panel.scrollHeight + 'px';
+                item.classList.add('expanded');
+                trigger.setAttribute('aria-expanded', 'true');
+              }
+            } else {
+              item.classList.add('hidden');
+            }
+          });
+
+          // Show or hide the entire category block
+          if (visibleInBlock > 0) {
+            block.classList.remove('hidden');
+          } else {
+            block.classList.add('hidden');
+          }
+        });
+
+        // Update Results Counter
+        if (resultsCounter) {
+          if (query === '' && currentCategory === 'all') {
+            resultsCounter.innerHTML = `Showing <span>all 24</span> questions`;
+          } else {
+            resultsCounter.innerHTML = `Found <span>${visibleCount}</span> matching ${visibleCount === 1 ? 'question' : 'questions'}`;
+          }
+        }
+
+        // Toggle Empty State
+        if (visibleCount === 0) {
+          emptyState?.classList.add('active');
+        } else {
+          emptyState?.classList.remove('active');
+        }
+      }
+
+      searchInput?.addEventListener('input', filterQuestions);
+
+      searchClearBtn?.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        filterQuestions();
+        searchInput?.focus();
+      });
+
+      // 5. Ask a Question Modal & Form
+      const askModal = document.getElementById('modal-ask-question');
+      const askModalClose = document.getElementById('modal-ask-close');
+      const btnTriggerAsk = document.getElementById('btn-trigger-ask-modal');
+      const btnConciergeAsk = document.getElementById('btn-concierge-ask');
+      const btnEmptyAsk = document.getElementById('btn-empty-ask');
+
+      const openAskModal = () => {
+        askModal?.classList.add('active');
+        askModal?.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeAskModal = () => {
+        askModal?.classList.remove('active');
+        askModal?.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      [btnTriggerAsk, btnConciergeAsk, btnEmptyAsk].forEach(btn => {
+        btn?.addEventListener('click', openAskModal);
+      });
+
+      askModalClose?.addEventListener('click', closeAskModal);
+      askModal?.addEventListener('click', (e) => {
+        if (e.target === askModal) closeAskModal();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && askModal?.classList.contains('active')) {
+          closeAskModal();
+        }
+      });
+
+      // 6. Toast Notification Helper
+      function showToast(message) {
+        const container = document.getElementById('faq-toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = 'faq-toast';
+        toast.innerHTML = `
+          <svg class="toast-icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <div>${message}</div>
+        `;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(10px)';
+          toast.style.transition = 'all 0.3s ease';
+          setTimeout(() => toast.remove(), 300);
+        }, 4500);
+      }
+
+      // Form submission
+      document.getElementById('faq-ask-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('ask-name')?.value || 'Client';
+        closeAskModal();
+        e.target.reset();
+        showToast(`Thank you, ${name}! Your question has been routed to our research desk. We will reply within 24 hours.`);
+      });
+    });
+  </script>
+</body>
+</html>

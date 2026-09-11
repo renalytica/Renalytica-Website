@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Renalytica Case Study & Institutional Publication Frontmatter Schema",
+  "type": "object",
+  "required": [
+    "title",
+    "slug",
+    "category",
+    "publishedDate",
+    "author",
+    "summary",
+    "clientIndustry",
+    "geographicScope",
+    "metrics"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 180,
+      "description": "The authoritative headline of the case study or whitepaper"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "URL-safe unique kebab-case slug"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "CaseStudies",
+        "CommoditiesAgribusiness",
+        "FinancialSystemsFX",
+        "DigitalEconomyAI",
+        "MacroCorridors"
+      ]
+    },
+    "publishedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date"
+    },
+    "author": {
+      "type": "object",
+      "required": ["name", "title"],
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "avatar": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 350
+    },
+    "clientIndustry": {
+      "type": "string"
+    },
+    "geographicScope": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "value"],
+        "properties": {
+          "label": { "type": "string" },
+          "value": { "type": "string" },
+          "delta": { "type": "string" }
+        }
+      }
+    },
+    "deliverableAsset": {
+      "type": "object",
+      "properties": {
+        "fileId": { "type": "string" },
+        "pageCount": { "type": "integer" },
+        "format": { "type": "string" },
+        "restrictedTier": { "type": "string" }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "metaTitle": { "type": "string" },
+        "metaDescription": { "type": "string" },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}
