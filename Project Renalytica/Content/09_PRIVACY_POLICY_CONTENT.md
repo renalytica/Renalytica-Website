@@ -42,7 +42,7 @@
 1.2 **Data Protection Officer (DPO):** We have appointed a dedicated Data Protection Officer to supervise regulatory compliance and handle all data subject inquiries. You may contact our DPO directly at:
 * **Email:** `privacy@renalytica.com` / `dpo@renalytica.com`
 * **Postal Address:** Data Protection Officer, Renalytica Technologies, Victoria Island, Lagos, Nigeria.
-* **Direct Telephone / WhatsApp:** `+234 813 753 8723`
+* **Direct Telephone / WhatsApp:** `+234 902 084 6138`
 
 ---
 
@@ -199,5 +199,5 @@ For questions, requests, or concerns regarding our privacy practices, please con
 
 * **Data Protection Officer (DPO):** `privacy@renalytica.com`
 * **Corporate Support Desk:** `support@renalytica.com`
-* **Direct Telephone / WhatsApp:** `+234 813 753 8723`
+* **Direct Telephone / WhatsApp:** `+234 902 084 6138`
 * **Mailing Address:** Renalytica Technologies & Research Advisory Limited, Attn: Privacy & Data Protection Officer, Victoria Island, Lagos, Nigeria.

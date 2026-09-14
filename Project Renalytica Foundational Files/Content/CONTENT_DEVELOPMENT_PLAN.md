@@ -45,7 +45,7 @@ Following the client's directive and benchmark analysis of the world's leading m
 | **Monetization Models** | Single/Multi/Enterprise report licenses | "Profound" (sectional purchase) + "Knowledge Center" (annual subscription) | **Triple Monetization:** (1) Tiered report sales, (2) Enterprise Knowledge Subscriptions, (3) Custom Advisory |
 | **Lead Generation** | "Request Free Sample", "Ask an Analyst" | "Inquire Before Buying", "Analyst Consultation" | High-touch **Executive Briefing Samples** (watermarked PDF) + 1-Click "Ask Lead Analyst" modal |
 | **Report Detail Anatomy** | Executive Summary, TOC, List of Tables/Figures, Companies Mentioned | Executive Summary, Granular Chapter Index, Market Forecast Metrics (CAGR, Base Year) | Modular report layout: Overview, Market Telemetry (CAGR/Sizing), Interactive TOC, Methodology, Sample Request Gate |
-| **Trust Indicators** | Worldwide toll-free hotlines, Fortune 500 badges, analyst citations | Research-as-a-service credibility, enterprise client logos | Strict Empirical Methodology disclosures, WhatsApp Concierge (+234 813 753 8723), verified data sources |
+| **Trust Indicators** | Worldwide toll-free hotlines, Fortune 500 badges, analyst citations | Research-as-a-service credibility, enterprise client logos | Strict Empirical Methodology disclosures, WhatsApp Concierge (+234 902 084 6138), verified data sources |
 
 ---
 
@@ -101,7 +101,7 @@ RENALYTICA PLATFORM
 ├── 7.0 CONTACT & CLIENT CONCIERGE
 │   ├── 7.1 Direct Office & Corporate Inquiries (Lagos / Global Desks)
 │   ├── 7.2 Request for Proposal (RFP) / Custom Project Scoping Form
-│   └── 7.3 WhatsApp Executive Concierge Integration (+234 813 753 8723)
+│   └── 7.3 WhatsApp Executive Concierge Integration (+234 902 084 6138)
 │
 └── 8.0 GOVERNANCE, LEGAL & SUPPORT
     ├── 8.1 Frequently Asked Questions (FAQ) — Purchasing, Formats & Licensing
@@ -181,7 +181,7 @@ RENALYTICA PLATFORM
 ### 4.8 Contact Us & RFP (`/contact`)
 * **Multi-Channel Contact Modules:**
   * *Corporate Headquarters:* Official corporate email (`info@renalytica.com`), phone lines, registered office address.
-  * *Executive Concierge:* Instant WhatsApp direct link (`+234 813 753 8723`) for urgent institutional inquiries.
+  * *Executive Concierge:* Instant WhatsApp direct link (`+234 902 084 6138`) for urgent institutional inquiries.
 * **Interactive RFP / Project Scoping Form:**
   * Inquiry Type (Purchase Support, Custom Research RFP, Enterprise Subscription, Press/Media)
   * Scope Parameters (Target Market, Timeline, Estimated Budget, Data Requirements)

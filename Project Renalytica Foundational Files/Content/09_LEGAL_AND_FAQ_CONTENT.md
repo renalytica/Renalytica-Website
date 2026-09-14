@@ -84,7 +84,7 @@
 ---
 
 ### Q11: What if the report I need is not listed in your store?
-**A:** We frequently conduct **Custom Research and Feasibility Studies** for clients who need specific data or geographic cuts. Tell us what you need via our [Contact Page](/contact) or message our WhatsApp concierge at `+234 813 753 8723`, and we will provide a custom proposal within 48 hours.
+**A:** We frequently conduct **Custom Research and Feasibility Studies** for clients who need specific data or geographic cuts. Tell us what you need via our [Contact Page](/contact) or message our WhatsApp concierge at `+234 902 084 6138`, and we will provide a custom proposal within 48 hours.
 
 ---
 
@@ -174,5 +174,5 @@ These terms are governed by the commercial laws of the Federal Republic of Niger
 
 If you have any questions regarding these terms, report licensing, or permissions, please contact:
 * **Legal & Licensing Desk:** `legal@renalytica.com`
-* **Direct Telephone / WhatsApp:** `+234 813 753 8723`
+* **Direct Telephone / WhatsApp:** `+234 902 084 6138`
 * **Website:** `www.renalytica.com`

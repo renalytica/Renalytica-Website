@@ -143,4 +143,4 @@
 * **Action Buttons:**
   * `Browse Published Intelligence Reports →` (Color: `#FF8000`)
   * `Inquire About Corporate Advisory`
-  * `Connect via WhatsApp Concierge (+234 813 753 8723)`
+  * `Connect via WhatsApp Concierge (+234 902 084 6138)`

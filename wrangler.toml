@@ -1,0 +1,48 @@
+# ==============================================================================
+# RENALYTICA CLOUDFLARE WORKER DEPLOYMENT CONFIGURATION
+# Target: Cloudflare Free Tier (Workers / KV / DNS Proxy)
+# ==============================================================================
+# Deploy: npx wrangler deploy
+# Dev:    npx wrangler dev
+# Tail:   npx wrangler tail
+# ==============================================================================
+
+name = "renalytica-fulfillment-engine"
+main = "cloudflare-worker.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Worker routes — bind to your domain
+# Uncomment and replace with your actual domain after DNS setup:
+# routes = [
+#   { pattern = "api.renalytica.com/api/webhooks/*", zone_name = "renalytica.com" },
+#   { pattern = "api.renalytica.com/health", zone_name = "renalytica.com" }
+# ]
+
+# Environment variables (secrets should be set via `wrangler secret put`)
+[vars]
+ENVIRONMENT = "production"
+WORKER_NAME = "renalytica-fulfillment-engine"
+
+# ==========================================================
+# SECRETS — Set these via CLI, never hardcode:
+#   npx wrangler secret put SUPABASE_URL
+#   npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+#   npx wrangler secret put FLW_SECRET_KEY
+#   npx wrangler secret put FLW_SECRET_HASH
+# ==========================================================
+
+# KV Namespace for rate limiting and token caching (optional)
+# Create with: npx wrangler kv:namespace create "FULFILLMENT_KV"
+# [[kv_namespaces]]
+# binding = "FULFILLMENT_KV"
+# id = "<your-kv-namespace-id>"
+
+# R2 Bucket binding for direct PDF storage access (optional)
+# [[r2_buckets]]
+# binding = "REPORTS_BUCKET"
+# bucket_name = "renalytica-reports"
+
+# Observability
+[observability]
+enabled = true

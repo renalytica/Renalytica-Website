@@ -18,7 +18,7 @@
 ## 2. Header & Global Navigation Bar
 * **Brand Wordmark:** `Renalytica` *(Tagline: powering smart decisions)*
 * **Top Utility Strip:**
-  * Direct Phone / Global Desk: `+234 813 753 8723` | `info@renalytica.com`
+  * Direct Phone / Global Desk: `+234 902 084 6138` | `info@renalytica.com`
   * Currency Selector: `USD ($) | EUR (€) | GBP (£) | NGN (₦)` (Default: USD)
   * Corporate Portal: `Client Login` | `Access Knowledge Terminal`
 * **Primary Navigation Menu:**
@@ -210,7 +210,7 @@
 * **Sub-Headline:** Connect with our research advisory desk today or explore our published market reports to arm your executive team with uncompromised empirical clarity.
 * **Action Buttons:**
   * `Explore Full Research Store →` (Color: `#FF8000`)
-  * `Speak with an Analyst Concierge (+234 813 753 8723)`
+  * `Speak with an Analyst Concierge (+234 902 084 6138)`
 * **Newsletter Subscription Module:**
   * *Headline:* Subscribe to **The Precision Signal**
   * *Subtext:* A weekly briefing delivering verified macroeconomic telemetry and market movement indicators directly to C-suite inboxes.
@@ -249,6 +249,6 @@
   * Terms of Service & Licensing Agreement
   * Privacy & Data Protection Policy
   * Report Delivery & Fulfillment Protocol
-  * Direct WhatsApp: `+234 813 753 8723`
+  * Direct WhatsApp: `+234 902 084 6138`
 * **Bottom Copyright Bar:**
   * `© 2026 Renalytica. All Rights Reserved. "Powering Smart Decisions" is a registered brand asset of Renalytica.`

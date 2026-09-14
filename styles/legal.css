@@ -37,6 +37,12 @@
   padding: 0 24px;
 }
 
+/* Fail-safe visibility for legal hero stage elements */
+.legal-hero-section [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .legal-badges-row {
   display: flex;
   align-items: center;

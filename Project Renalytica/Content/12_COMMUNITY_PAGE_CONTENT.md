@@ -149,4 +149,4 @@
 * **Action Buttons:**
   * `Join the Renalytica Community Today →` (Color: `#FF8000`)
   * `Explore Upcoming Events`
-  * `Questions? Message Our Community Team on WhatsApp (+234 813 753 8723)`
+  * `Questions? Message Our Community Team on WhatsApp (+234 902 084 6138)`

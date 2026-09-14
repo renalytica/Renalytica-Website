@@ -16,6 +16,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
@@ -23,7 +24,7 @@ body {
   background-color: var(--canvas);
   color: var(--text-primary);
   line-height: var(--leading-body);
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color var(--duration-medium) var(--ease-cinematic),
               color var(--duration-medium) var(--ease-cinematic);
 }

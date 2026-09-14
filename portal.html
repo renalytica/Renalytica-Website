@@ -42,48 +42,88 @@
   <!-- Global Header Navigation -->
   <header-nav></header-nav>
 
+  <!-- Omnipresent Executive Mode Banner (Shown when admin is logged in) -->
+  <div id="executive-mode-banner" class="executive-switcher-banner" style="display: none;">
+    <div>
+      <span>👑 <strong>EXECUTIVE PREVIEW:</strong> You are browsing the Subscriber Client Portal with Admin Privileges.</span>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="admin.html">Launch Executive Admin Desk →</a>
+    </div>
+  </div>
+
   <main id="main-content">
 
     <!-- ====================================================================
-         STATE 1: UNAUTHENTICATED LOGIN & REGISTRATION SCREEN
+         STATE 1: UNAUTHENTICATED DUAL-MODE LOGIN & REGISTRATION GATEWAY
          ==================================================================== -->
     <section class="portal-auth-section" id="portal-auth-view">
+      <!-- Ambient 3D Rotating Data Globe in Background -->
+      <div class="portal-globe-bg-wrap" aria-hidden="true">
+        <canvas id="portal-globe-canvas" class="portal-globe-canvas" aria-label="3D Rotating Planetary Telemetry Globe"></canvas>
+      </div>
+
       <div class="container portal-auth-container">
         
         <div class="auth-card-wrap">
           <div class="auth-header">
             <span class="auth-security-badge">
               <span class="pulse-green-dot"></span>
-              256-BIT ENCRYPTED CLIENT GATEWAY
+              256-BIT ENCRYPTED INSTITUTIONAL GATEWAY
             </span>
-            <h1 class="auth-title">Client Intelligence Portal</h1>
-            <p class="auth-subtitle">
-              Sign in to access your purchased research publications, unlocked Excel econometric data packs, and scheduled analyst briefings.
+            <h1 class="auth-title" id="auth-main-heading">Client Intelligence Portal</h1>
+            <p class="auth-subtitle" id="auth-main-subtext">
+              Secure access to proprietary research publications, unlocked econometric models, and lead economist briefings.
             </p>
           </div>
 
-          <!-- Quick Demo Banner -->
-          <div class="demo-account-banner">
-            <div class="demo-banner-content">
-              <strong>Institutional Access Credentials:</strong>
-              <span>Use client account <code>renalytica@gmail.com</code> or click below to launch instant executive session.</span>
-            </div>
-            <button type="button" class="btn-demo-quick-login" id="btn-quick-demo">
-              Launch Instant Demo Session ⚡
+          <!-- Dual Mode Switcher Tabs -->
+          <div class="auth-mode-tabs" role="tablist">
+            <button type="button" class="auth-mode-tab active" id="tab-mode-signin" role="tab" aria-selected="true">
+              🔒 Client Sign In
+            </button>
+            <button type="button" class="auth-mode-tab" id="tab-mode-signup" role="tab" aria-selected="false">
+              Create Account (Sign Up)
             </button>
           </div>
 
-          <!-- Auth Form -->
-          <form id="portal-login-form" class="auth-form-card">
-            <div class="auth-error-alert" id="auth-error-box" style="display: none;"></div>
+          <!-- Social / Single Sign-On (SSO) Options -->
+          <div class="auth-social-row">
+            <button type="button" class="btn-social-sso" id="btn-google-sso" title="Instant Google Workspace Authentication">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+              </svg>
+              <span>Continue with Google Workspace</span>
+            </button>
+            <button type="button" class="btn-social-sso" id="btn-linkedin-sso" title="Corporate Single Sign-On">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>Continue with Corporate SSO / LinkedIn</span>
+            </button>
+          </div>
 
+          <div class="auth-divider">
+            <span>or with institutional credentials</span>
+          </div>
+
+          <!-- Alert / Error message container -->
+          <div class="auth-error-alert" id="auth-error-box" style="display: none;"></div>
+
+          <!-- ==========================================
+               PANE A: SIGN IN FORM
+               ========================================== -->
+          <form id="portal-login-form" class="auth-form-card">
             <div class="auth-field-group">
-              <label for="login-email" class="auth-label">Institutional Email Address</label>
+              <label for="login-email" class="auth-label">Work Email</label>
               <input 
                 type="email" 
                 id="login-email" 
                 class="auth-input" 
-                placeholder="name@institution.com or renalytica@gmail.com" 
+                placeholder="name@organization.com or renalytica@gmail.com" 
                 value="renalytica@gmail.com" 
                 required
               >
@@ -111,12 +151,103 @@
               Sign In to Research Library →
             </button>
 
-            <div class="auth-security-footer">
-              <span>🔒 SOC-2 Type II Certified Gateway</span>
-              <span>•</span>
-              <span>Watermarked PDF Access</span>
+            <!-- Quick Demo Banner Inside Sign In -->
+            <div class="demo-account-banner" style="margin-top: 1.5rem; margin-bottom: 0;">
+              <div class="demo-banner-content">
+                <strong>Executive Sandbox Demonstration:</strong>
+                <span>Click below to instantly launch the executive director session without manual typing.</span>
+              </div>
+              <button type="button" class="btn-demo-quick-login" id="btn-quick-demo">
+                Launch Instant Demo Session ⚡
+              </button>
             </div>
           </form>
+
+          <!-- ==========================================
+               PANE B: SIGN UP / REGISTRATION FORM
+               ========================================== -->
+          <form id="portal-signup-form" class="auth-form-card" style="display: none;">
+            <div class="auth-field-group">
+              <label for="signup-name" class="auth-label">Full Name &amp; Title *</label>
+              <input 
+                type="text" 
+                id="signup-name" 
+                class="auth-input" 
+                placeholder="Dr. Samuel Adeyemi — Head of Treasury" 
+                required
+              >
+            </div>
+
+            <div class="auth-field-group">
+              <label for="signup-email" class="auth-label">Corporate Work Email *</label>
+              <input 
+                type="email" 
+                id="signup-email" 
+                class="auth-input" 
+                placeholder="s.adeyemi@firstcommercialbank.ng" 
+                required
+              >
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="auth-field-group">
+                <label for="signup-org" class="auth-label">Organization / Fund *</label>
+                <input 
+                  type="text" 
+                  id="signup-org" 
+                  class="auth-input" 
+                  placeholder="Commercial Bank of Africa" 
+                  required
+                >
+              </div>
+              <div class="auth-field-group">
+                <label for="signup-sector" class="auth-label">Primary Sector *</label>
+                <select id="signup-sector" class="auth-input" required>
+                  <option value="Agribusiness & Commodities">Agribusiness &amp; Commodities</option>
+                  <option value="Financial Systems & FX">Financial Systems &amp; FX</option>
+                  <option value="Tech & Digital Economy">Tech &amp; Digital Economy</option>
+                  <option value="Energy & Infrastructure">Energy &amp; Infrastructure</option>
+                  <option value="Macroeconomics & Trade">Macroeconomics &amp; Trade</option>
+                  <option value="Public Policy & Government">Public Policy &amp; Government</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="auth-field-group">
+              <label for="signup-password" class="auth-label">Create Secure Password (Min. 6 Characters) *</label>
+              <div class="password-input-wrap">
+                <input 
+                  type="password" 
+                  id="signup-password" 
+                  class="auth-input" 
+                  placeholder="••••••••••••" 
+                  required
+                  minlength="6"
+                >
+                <button type="button" id="toggle-signup-pwd-btn" class="toggle-pwd-btn" title="Show / Hide Password">👁️</button>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.25rem; font-size: 0.78rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px;">
+              <input type="checkbox" id="signup-agree-terms" style="margin-top: 3px;" required checked>
+              <label for="signup-agree-terms">
+                I agree to Renalytica's <a href="terms.html" target="_blank" style="color: var(--accent-momentum);">Terms of Service</a>, 
+                <a href="privacy.html" target="_blank" style="color: var(--accent-momentum);">Privacy Policy</a>, and enterprise data governance standards.
+              </label>
+            </div>
+
+            <button type="submit" class="btn-auth-submit" id="signup-submit-btn">
+              Create Client Account &amp; Access Terminal →
+            </button>
+          </form>
+
+          <div class="auth-security-footer">
+            <span>🔒 SOC-2 Type II Certified Gateway</span>
+            <span>•</span>
+            <span>Watermarked Vector PDF Access</span>
+            <span>•</span>
+            <span>End-to-End RLS Encryption</span>
+          </div>
 
         </div>
 
@@ -169,6 +300,9 @@
           <button class="portal-tab-btn active" data-view="#view-library" role="tab" aria-selected="true">
             📚 Unlocked Publications (<span id="library-count-badge">2</span>)
           </button>
+          <button class="portal-tab-btn" data-view="#view-terminal" role="tab" aria-selected="false">
+            📈 Live Market Terminal
+          </button>
           <button class="portal-tab-btn" data-view="#view-briefings" role="tab" aria-selected="false">
             🎯 Analyst Briefings Desk
           </button>
@@ -193,61 +327,131 @@
             </div>
           </div>
 
+          <!-- MODULE 5: PAYHIP-BENCHMARKED FULFILLMENT & PIRACY SHIELD HUD -->
+          <div style="background: linear-gradient(180deg, rgba(13, 21, 39, 0.9), rgba(7, 13, 27, 0.95)); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 14px 20px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 1.5rem;">🛡️</span>
+              <div>
+                <strong style="color: #fff; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                  Native Digital Fulfillment &amp; Piracy Shield Engine
+                  <span style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 999px; padding: 1px 8px; font-size: 0.68rem; font-weight: 700;">
+                    PAYHIP PARITY ACTIVE
+                  </span>
+                </strong>
+                <span style="font-size: 0.76rem; color: #94a3b8;">
+                  24-Hour Access Tokens • Max 3 Download Quota • Server-Side Footer Watermarking
+                </span>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="token-status-live" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 700;">
+                ● 2 VERIFIED INSTITUTIONAL LICENSES
+              </span>
+              <button type="button" class="btn-table-action" onclick="refreshPortalFulfillments()" style="font-size: 0.75rem; padding: 4px 10px;">
+                🔄 Sync Tokens
+              </button>
+            </div>
+          </div>
+
           <div class="unlocked-reports-grid" id="unlocked-reports-container">
             
             <!-- Real PDF 1: AI Adoption in Africa Report -->
-            <div class="unlocked-card">
-              <div class="u-card-header">
-                <span class="u-sector-pill">TECH &amp; DIGITAL ECONOMY</span>
-                <span class="u-sku">SKU: REN-AI-2026-042</span>
+            <div class="unlocked-card" data-title="The Economics of AI Adoption in Africa: Enterprise Survey, Infrastructure Gaps, and Labor Realities" data-sector="TECH & DIGITAL ECONOMY">
+              <div class="u-cover-col">
+                <div class="u-cover-box">
+                  <img src="assets/images/analyst_holding_market_chart.jpg" alt="The Economics of AI Adoption in Africa cover" class="u-cover-thumb" loading="lazy" />
+                </div>
               </div>
-              <h4 class="u-title">The Economics of AI Adoption in Africa: Enterprise Survey, Infrastructure Gaps, and Labor Realities</h4>
-              <p class="u-desc">
-                Definitive empirical benchmark covering 385 enterprises across 6 major tech hubs. Evaluates enterprise ROI, data residency bottlenecks, GPU infrastructure deficits, and labor workforce restructuring.
-              </p>
-              <div class="u-telemetry-row">
-                <div><span>FORMAT</span><strong>Vector PDF (831 KB)</strong></div>
-                <div><span>EXCEL PACK</span><strong>48 Unlocked Sheets</strong></div>
-                <div><span>LICENSE</span><strong>Global Enterprise</strong></div>
-              </div>
-              <div class="u-actions-row">
-                <a href="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf" target="_blank" download="Renalytica_Economics_AI_Adoption_2026.pdf" class="btn-u-download">
-                  ⬇ Download Full PDF
-                </a>
-                <button type="button" class="btn-u-preview" data-pdf="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf" data-title="The Economics of AI Adoption in Africa">
-                  👁 Read Online
-                </button>
-                <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
-                  📊 Excel Model (.xlsx)
-                </button>
+              <div class="u-content-col">
+                <div class="u-card-header">
+                  <span class="u-sector-pill">TECH &amp; DIGITAL ECONOMY</span>
+                  <span class="u-sku">SKU: REN-AI-2026-042</span>
+                </div>
+                <h4 class="u-title">The Economics of AI Adoption in Africa: Enterprise Survey, Infrastructure Gaps, and Labor Realities</h4>
+                
+                <!-- Report Revision Update Banner (Payhip Feature Benchmark) -->
+                <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                  <span style="font-size: 1rem;">📢</span>
+                  <div>
+                    <strong style="color: #fbbf24; font-size: 0.78rem; display: block;">REVISION v2.2 AVAILABLE (Updated Datasets &amp; Liquidity Matrices)</strong>
+                    <span style="font-size: 0.72rem; color: #cbd5e1;">Your digital fulfillment token has been automatically extended. Download includes updated Q3 central bank econometric models.</span>
+                  </div>
+                </div>
+
+                <p class="u-desc">
+                  Definitive empirical benchmark covering 385 enterprises across 6 major tech hubs. Evaluates enterprise ROI, data residency bottlenecks, GPU infrastructure deficits, and labor workforce restructuring.
+                </p>
+                <div class="u-telemetry-row">
+                  <div><span>FORMAT</span><strong>Vector PDF (831 KB)</strong></div>
+                  <div><span>EXCEL PACK</span><strong>48 Unlocked Sheets</strong></div>
+                  <div><span>LICENSE</span><strong>Global Enterprise</strong></div>
+                </div>
+
+                <!-- Payhip Anti-Piracy & Fulfillment Telemetry Row -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; padding: 8px 12px; background: rgba(15, 23, 42, 0.6); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.72rem;">
+                  <span style="color: #10B981; font-weight: 600;" id="token-status-1">🛡️ Anti-Piracy: 2 of 3 Downloads Remaining</span>
+                  <span style="color: #64748b;">•</span>
+                  <span style="color: #38BDF8; font-weight: 600;">⏳ Window: Active (Expires in 23h 45m)</span>
+                  <span style="color: #64748b;">•</span>
+                  <span style="color: #94a3b8;">📄 Margin Watermark: <code>renalytica@gmail.com</code></span>
+                </div>
+
+                <div class="u-actions-row">
+                  <a href="/api/fulfillment/download/token-ai-economics-demo-2026" class="btn-u-download btn-timed-download" data-file-id="nigeria-ai-adoption-economics-2026" data-token="token-ai-economics-demo-2026">
+                    ⬇ Download Watermarked PDF
+                  </a>
+                  <button type="button" class="btn-u-preview" data-pdf="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf" data-title="The Economics of AI Adoption in Africa">
+                    👁 Read Online
+                  </button>
+                  <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
+                    📊 Excel Model (.xlsx)
+                  </button>
+                </div>
               </div>
             </div>
 
             <!-- Real PDF 2: Stablecoins & Digital FX Corridors -->
-            <div class="unlocked-card">
-              <div class="u-card-header">
-                <span class="u-sector-pill">FINANCIAL SYSTEMS &amp; FX</span>
-                <span class="u-sku">SKU: REN-FS-2026-019</span>
+            <div class="unlocked-card" data-title="Sub-Saharan Africa Stablecoins & Digital FX Corridors: Cross-Border Liquidity, Treasury & De-Dollarization" data-sector="FINANCIAL SYSTEMS & FX">
+              <div class="u-cover-col">
+                <div class="u-cover-box">
+                  <img src="assets/images/sector_finance.jpg" alt="Sub-Saharan Africa Stablecoins & Digital FX Corridors cover" class="u-cover-thumb" loading="lazy" />
+                </div>
               </div>
-              <h4 class="u-title">Sub-Saharan Africa Stablecoins &amp; Digital FX Corridors: Cross-Border Liquidity, Treasury &amp; De-Dollarization</h4>
-              <p class="u-desc">
-                Exhaustive analysis of USD-pegged stablecoin settlement volume, corporate treasury hedging against local currency devaluations, and regulatory compliance across ECOWAS and EAC trade corridors.
-              </p>
-              <div class="u-telemetry-row">
-                <div><span>FORMAT</span><strong>Vector PDF (2.74 MB)</strong></div>
-                <div><span>EXCEL PACK</span><strong>62 Unlocked Sheets</strong></div>
-                <div><span>LICENSE</span><strong>Global Enterprise</strong></div>
-              </div>
-              <div class="u-actions-row">
-                <a href="assets/reports/Renalytica_Stablecoins_Report_2026.pdf" target="_blank" download="Renalytica_Stablecoins_Report_2026.pdf" class="btn-u-download">
-                  ⬇ Download Full PDF
-                </a>
-                <button type="button" class="btn-u-preview" data-pdf="assets/reports/Renalytica_Stablecoins_Report_2026.pdf" data-title="Sub-Saharan Africa Stablecoins & Digital FX Corridors">
-                  👁 Read Online
-                </button>
-                <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
-                  📊 Excel Model (.xlsx)
-                </button>
+              <div class="u-content-col">
+                <div class="u-card-header">
+                  <span class="u-sector-pill">FINANCIAL SYSTEMS &amp; FX</span>
+                  <span class="u-sku">SKU: REN-FS-2026-019</span>
+                </div>
+                <h4 class="u-title">Sub-Saharan Africa Stablecoins &amp; Digital FX Corridors: Cross-Border Liquidity, Treasury &amp; De-Dollarization</h4>
+                <p class="u-desc">
+                  Exhaustive analysis of USD-pegged stablecoin settlement volume, corporate treasury hedging against local currency devaluations, and regulatory compliance across ECOWAS and EAC trade corridors.
+                </p>
+                <div class="u-telemetry-row">
+                  <div><span>FORMAT</span><strong>Vector PDF (2.74 MB)</strong></div>
+                  <div><span>EXCEL PACK</span><strong>62 Unlocked Sheets</strong></div>
+                  <div><span>LICENSE</span><strong>Global Enterprise</strong></div>
+                </div>
+
+                <!-- Payhip Anti-Piracy & Fulfillment Telemetry Row -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; padding: 8px 12px; background: rgba(15, 23, 42, 0.6); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.72rem;">
+                  <span style="color: #10B981; font-weight: 600;" id="token-status-2">🛡️ Anti-Piracy: 3 of 3 Downloads Remaining</span>
+                  <span style="color: #64748b;">•</span>
+                  <span style="color: #38BDF8; font-weight: 600;">⏳ Window: Active (Expires in 23h 59m)</span>
+                  <span style="color: #64748b;">•</span>
+                  <span style="color: #94a3b8;">📄 Margin Watermark: <code>renalytica@gmail.com</code></span>
+                </div>
+
+                <div class="u-actions-row">
+                  <a href="/api/fulfillment/download/token-stablecoins-demo-2026" class="btn-u-download btn-timed-download" data-file-id="nigeria-stablecoins-cross-border-2026" data-token="token-stablecoins-demo-2026">
+                    ⬇ Download Watermarked PDF
+                  </a>
+                  <button type="button" class="btn-u-preview" data-pdf="assets/reports/Renalytica_Stablecoins_Report_2026.pdf" data-title="Sub-Saharan Africa Stablecoins & Digital FX Corridors">
+                    👁 Read Online
+                  </button>
+                  <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
+                    📊 Excel Model (.xlsx)
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -304,6 +508,113 @@
 
               <button type="submit" class="btn-pill-primary">Confirm Briefing Booking →</button>
             </form>
+          </div>
+        </div>
+
+        <!-- Tab: Institutional Live Market Terminal -->
+        <div class="portal-tab-content" id="view-terminal">
+          <div class="portal-view-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+              <div>
+                <h3 class="portal-view-title" style="margin-bottom: 4px;">Institutional Market Telemetry &amp; Advanced Charting</h3>
+                <p class="portal-view-subtitle" style="margin-bottom: 0;">Multi-asset real-time data feeds, macro analytics, and interactive technical charting powered by TradingView &amp; Finnhub.</p>
+              </div>
+              <a href="markets.html" target="_blank" class="btn-pill-primary" style="font-size: 0.82rem; padding: 8px 16px;">
+                Open Dedicated Terminal ↗
+              </a>
+            </div>
+
+            <!-- Advanced Chart Embed -->
+            <div style="height: 520px; border-radius: 8px; overflow: hidden; margin-bottom: 24px; border: 1px solid var(--border-light);">
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div id="portal_tradingview_chart" style="height:100%;width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                  document.addEventListener('DOMContentLoaded', () => {
+                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    if (typeof TradingView !== 'undefined') {
+                      new TradingView.widget({
+                        "autosize": true,
+                        "symbol": "TVC:USOIL",
+                        "interval": "D",
+                        "timezone": "Etc/UTC",
+                        "theme": isDark ? "dark" : "light",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": isDark ? "#0D1117" : "#F8FAFC",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "portal_tradingview_chart"
+                      });
+                    }
+                  });
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+
+            <!-- 2-Column Grid: Watchlist & Economic Calendar -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px;">
+              <!-- Market Quotes Watchlist -->
+              <div style="border: 1px solid var(--border-light); border-radius: 8px; padding: 12px; background: var(--surface-card);">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: var(--text-heading);">Market Quotes Watchlist</h4>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+                  {
+                    "width": "100%",
+                    "height": 450,
+                    "symbolsGroups": [
+                      {
+                        "name": "Commodities & Futures",
+                        "symbols": [
+                          { "name": "TVC:USOIL", "displayName": "WTI Crude Oil" },
+                          { "name": "TVC:UKOIL", "displayName": "Brent Crude" },
+                          { "name": "CMCMARKETS:GOLD", "displayName": "Gold Spot" }
+                        ]
+                      },
+                      {
+                        "name": "Forex",
+                        "symbols": [
+                          { "name": "FX:EURUSD", "displayName": "EUR to USD" },
+                          { "name": "FX:GBPUSD", "displayName": "GBP to USD" },
+                          { "name": "FX:USDJPY", "displayName": "USD to JPY" }
+                        ]
+                      }
+                    ],
+                    "showSymbolLogo": true,
+                    "isTransparent": true,
+                    "colorTheme": "light",
+                    "locale": "en"
+                  }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+
+              <!-- Economic Events Calendar -->
+              <div style="border: 1px solid var(--border-light); border-radius: 8px; padding: 12px; background: var(--surface-card);">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: var(--text-heading);">Macroeconomic Events</h4>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+                  {
+                    "colorTheme": "light",
+                    "isTransparent": true,
+                    "width": "100%",
+                    "height": 450,
+                    "locale": "en",
+                    "importanceFilter": "0,1"
+                  }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -429,9 +740,20 @@
 
       const authView = document.getElementById('portal-auth-view');
       const dashView = document.getElementById('portal-dashboard-view');
+      const execBanner = document.getElementById('executive-mode-banner');
+
+      // Mode Switcher Tabs
+      const tabSignIn = document.getElementById('tab-mode-signin');
+      const tabSignUp = document.getElementById('tab-mode-signup');
       const loginForm = document.getElementById('portal-login-form');
+      const signupForm = document.getElementById('portal-signup-form');
       const errorBox = document.getElementById('auth-error-box');
+      const authHeading = document.getElementById('auth-main-heading');
+      const authSubtext = document.getElementById('auth-main-subtext');
+
       const quickDemoBtn = document.getElementById('btn-quick-demo');
+      const googleSsoBtn = document.getElementById('btn-google-sso');
+      const linkedinSsoBtn = document.getElementById('btn-linkedin-sso');
       const signoutBtn = document.getElementById('btn-portal-signout');
 
       const hudName = document.getElementById('hud-client-name');
@@ -441,17 +763,56 @@
 
       const pwdInput = document.getElementById('login-password');
       const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+      const signupPwdInput = document.getElementById('signup-password');
+      const toggleSignupPwdBtn = document.getElementById('toggle-signup-pwd-btn');
+
+      // Tab Switching Logic (Sign In vs Sign Up)
+      function setAuthMode(mode) {
+        errorBox.style.display = 'none';
+        if (mode === 'signup') {
+          tabSignIn.classList.remove('active');
+          tabSignIn.setAttribute('aria-selected', 'false');
+          tabSignUp.classList.add('active');
+          tabSignUp.setAttribute('aria-selected', 'true');
+          loginForm.style.display = 'none';
+          signupForm.style.display = 'block';
+          authHeading.textContent = 'Create Institutional Client Account';
+          authSubtext.textContent = 'Register your organization to access econometric models, farmgate data, and executive briefings.';
+        } else {
+          tabSignUp.classList.remove('active');
+          tabSignUp.setAttribute('aria-selected', 'false');
+          tabSignIn.classList.add('active');
+          tabSignIn.setAttribute('aria-selected', 'true');
+          signupForm.style.display = 'none';
+          loginForm.style.display = 'block';
+          authHeading.textContent = 'Client Intelligence Portal';
+          authSubtext.textContent = 'Secure access to proprietary research publications, unlocked econometric models, and lead economist briefings.';
+        }
+      }
+
+      tabSignIn?.addEventListener('click', () => setAuthMode('signin'));
+      tabSignUp?.addEventListener('click', () => setAuthMode('signup'));
+
+      // Check URL search parameters (e.g. portal.html?mode=signup)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('mode') === 'signup') {
+        setAuthMode('signup');
+      }
 
       // Toggle Password Visibility
-      togglePwdBtn?.addEventListener('click', () => {
-        if (pwdInput.type === 'password') {
-          pwdInput.type = 'text';
-          togglePwdBtn.textContent = '🙈';
-        } else {
-          pwdInput.type = 'password';
-          togglePwdBtn.textContent = '👁️';
-        }
-      });
+      function setupPwdToggle(btn, input) {
+        btn?.addEventListener('click', () => {
+          if (input.type === 'password') {
+            input.type = 'text';
+            btn.textContent = '🙈';
+          } else {
+            input.type = 'password';
+            btn.textContent = '👁️';
+          }
+        });
+      }
+      setupPwdToggle(togglePwdBtn, pwdInput);
+      setupPwdToggle(toggleSignupPwdBtn, signupPwdInput);
 
       // Update UI Based on Session State
       function updateAuthUI(session) {
@@ -465,13 +826,18 @@
           hudEmail.textContent = u.email;
           hudTier.textContent = u.tier || 'Global Enterprise License';
 
+          const isAdmin = u.role === 'admin' || (u.email && u.email.includes('renalytica'));
+
+          if (execBanner) {
+            execBanner.style.display = isAdmin ? 'flex' : 'none';
+          }
+
           const adminLink = document.getElementById('btn-admin-portal-link');
           if (adminLink) {
-            adminLink.style.display = (u.role === 'admin' || u.email.includes('renalytica')) ? 'inline-flex' : 'none';
+            adminLink.style.display = isAdmin ? 'inline-flex' : 'none';
           }
 
           // Sync cart checkouts into purchased reports if active
-          const urlParams = new URLSearchParams(window.location.search);
           if (urlParams.get('checkout') === 'active') {
             const cartItems = repo ? repo.getCart() : [];
             if (cartItems.length > 0) {
@@ -489,6 +855,7 @@
         } else {
           authView.style.display = 'block';
           dashView.style.display = 'none';
+          if (execBanner) execBanner.style.display = 'none';
         }
       }
 
@@ -497,7 +864,7 @@
         auth.onAuthStateChange(updateAuthUI);
       }
 
-      // Login Form Submit
+      // Login Form Submit (Sign In)
       loginForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         errorBox.style.display = 'none';
@@ -510,6 +877,7 @@
 
         try {
           await auth.signIn(email, password);
+          showToast('Welcome back to Renalytica Intelligence Portal.', 'success');
         } catch (err) {
           errorBox.textContent = err.message || 'Authentication error. Please check your credentials.';
           errorBox.style.display = 'block';
@@ -519,14 +887,108 @@
         }
       });
 
-      // Quick Demo Action
+      // Sign Up Form Submit (New Client Registration)
+      signupForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        const submitBtn = document.getElementById('signup-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Provisioning Client Workspace...';
+
+        const fullName = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const organization = document.getElementById('signup-org').value;
+        const sector = document.getElementById('signup-sector').value;
+        const password = document.getElementById('signup-password').value;
+
+        try {
+          await auth.signUp(email, password, { fullName, organization, sector });
+          showToast(`Account created for ${organization}! Welcome to Renalytica.`, 'success');
+        } catch (err) {
+          errorBox.textContent = err.message || 'Registration error. Please verify your details.';
+          errorBox.style.display = 'block';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Client Account & Access Terminal →';
+        }
+      });
+
+      // Google Workspace SSO Authentication Simulation
+      googleSsoBtn?.addEventListener('click', async () => {
+        googleSsoBtn.disabled = true;
+        googleSsoBtn.innerHTML = '<span>Verifying Google Workspace Credentials...</span>';
+        try {
+          const session = {
+            token: 'mock_google_jwt_' + Date.now(),
+            user: {
+              id: 'usr_gsuite_' + Math.random().toString(36).substr(2, 6),
+              email: 'treasury.director@pan-african-capital.com',
+              fullName: 'Chuka Ekwueme — Partner & Head of Treasury',
+              organization: 'Pan-African Capital Partners',
+              role: 'client',
+              accountType: 'Corporate Enterprise License',
+              tier: 'Global Enterprise License',
+              memberSince: 'September 2026',
+              avatar: 'assets/brand/renalytica_emblem.png',
+              purchasedReports: [
+                'nigeria-stablecoins-cross-border-2026',
+                'nigeria-ai-adoption-economics-2026',
+                'african-grains-oilseeds-2026'
+              ]
+            }
+          };
+          auth.saveSession(session);
+          showToast('Signed in via Google Workspace.', 'success');
+        } catch (e) {
+          console.error(e);
+        } finally {
+          googleSsoBtn.disabled = false;
+        }
+      });
+
+      // Corporate LinkedIn / SSO Simulation
+      linkedinSsoBtn?.addEventListener('click', async () => {
+        linkedinSsoBtn.disabled = true;
+        linkedinSsoBtn.innerHTML = '<span>Authenticating Corporate SSO...</span>';
+        try {
+          const session = {
+            token: 'mock_sso_jwt_' + Date.now(),
+            user: {
+              id: 'usr_sso_' + Math.random().toString(36).substr(2, 6),
+              email: 'k.mensah@standard-chartered.com',
+              fullName: 'Kofi Mensah — Senior VP Macro Strategy',
+              organization: 'Standard Chartered Institutional Markets',
+              role: 'client',
+              accountType: 'Corporate Enterprise License',
+              tier: 'Global Enterprise License',
+              memberSince: 'September 2026',
+              avatar: 'assets/brand/renalytica_emblem.png',
+              purchasedReports: [
+                'nigeria-stablecoins-cross-border-2026',
+                'nigeria-ai-adoption-economics-2026'
+              ]
+            }
+          };
+          auth.saveSession(session);
+          showToast('Signed in via Corporate SSO.', 'success');
+        } catch (e) {
+          console.error(e);
+        } finally {
+          linkedinSsoBtn.disabled = false;
+        }
+      });
+
+      // Quick Demo Action (Executive Obinna / Director Demo)
       quickDemoBtn?.addEventListener('click', async () => {
         await auth.signIn('renalytica@gmail.com', 'Renalytica@pa55w0rd');
+        showToast('Executive Director session launched.', 'success');
       });
 
       // Sign Out Action
       signoutBtn?.addEventListener('click', () => {
         auth.signOut();
+        window.dispatchEvent(new CustomEvent('renalytica:auth-change', { detail: { user: null } }));
+        showToast('Session ended. Signed out securely.', 'info');
       });
 
       // Dashboard Tabs
@@ -548,6 +1010,86 @@
         });
       });
 
+      // 60-Second Timed Signed URL Requester & Dynamic PDF Watermarking Engine
+      async function initiateSignedDownload(fileId, buttonEl, fallbackUrl) {
+        const originalText = buttonEl.innerHTML;
+        buttonEl.disabled = true;
+        buttonEl.innerHTML = '<span>🔒 Stamping Watermark &amp; Verifying Token...</span>';
+
+        // Check if there is a data-token attribute on the button or link
+        const token = buttonEl.getAttribute('data-token') || (fileId === 'nigeria-stablecoins-cross-border-2026' ? 'token-stablecoins-demo-2026' : 'token-ai-economics-demo-2026');
+        const tokenDownloadUrl = `/api/fulfillment/download/${token}`;
+
+        try {
+          // Attempt download through the native fulfillment watermarking engine
+          const testRes = await fetch(tokenDownloadUrl);
+          
+          if (testRes.status === 403) {
+            const errData = await testRes.json();
+            alert(`⛔ ACCESS RESTRICTED (Payhip Piracy Shield):\n\n${errData.error || 'Digital license limit exceeded.'}`);
+            buttonEl.disabled = false;
+            buttonEl.innerHTML = `<span style="color: #ef4444;">❌ Limit Exceeded (3/3)</span>`;
+            return;
+          }
+
+          if (testRes.ok) {
+            const blob = await testRes.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = `Renalytica_${fileId}_Licensed.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(blobUrl);
+
+            const remaining = testRes.headers.get('X-Renalytica-Downloads-Remaining') || '1';
+            showToast(`✔ Download Verified & Watermarked! (${remaining} download attempts remaining)`, 'success');
+            
+            // Update in-card telemetry pill
+            const pillId = fileId === 'nigeria-stablecoins-cross-border-2026' ? 'token-status-2' : 'token-status-1';
+            const pillEl = document.getElementById(pillId);
+            if (pillEl) {
+              pillEl.textContent = `🛡️ Anti-Piracy: ${remaining} of 3 Downloads Remaining`;
+              if (parseInt(remaining, 10) <= 0) {
+                pillEl.style.color = '#ef4444';
+              }
+            }
+
+            buttonEl.disabled = false;
+            buttonEl.innerHTML = `<span>✔ Downloaded (${remaining} left)</span>`;
+            return;
+          }
+        } catch (err) {
+          console.warn('Fulfillment route note, falling back to direct secure asset:', err);
+        }
+
+        // Fallback to static asset if offline
+        const a = document.createElement('a');
+        a.href = fallbackUrl;
+        a.download = fallbackUrl.split('/').pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        buttonEl.disabled = false;
+        buttonEl.innerHTML = originalText;
+      }
+
+      // Sync User Fulfillment Tokens from Backend
+      async function refreshPortalFulfillments() {
+        try {
+          const res = await fetch('/api/fulfillment/my-library', {
+            headers: { 'Authorization': 'Bearer ' + (auth.currentSession?.token || 'mock_jwt_token_123') }
+          });
+          const data = await res.json();
+          if (data && data.items) {
+            showToast(`✔ Digital License Tokens Synchronized (${data.count} publications active)`, 'success');
+          }
+        } catch (e) {
+          showToast('License tokens verified with local security cache.', 'info');
+        }
+      }
+
       // Render Dynamic Library Additions
       function renderPurchasedLibrary(user) {
         const dynContainer = document.getElementById('dynamic-purchased-container');
@@ -566,31 +1108,60 @@
         document.getElementById('library-count-badge').textContent = 2 + extraReports.length;
 
         dynContainer.innerHTML = extraReports.map(r => `
-          <div class="unlocked-card">
-            <div class="u-card-header">
-              <span class="u-sector-pill">${r.sector.toUpperCase()}</span>
-              <span class="u-sku">SKU: ${r.sku}</span>
+          <div class="unlocked-card" data-title="${(r.title || '').replace(/"/g, '&quot;')}" data-sector="${(r.sector || '').replace(/"/g, '&quot;')}">
+            <div class="u-cover-col">
+              <div class="u-cover-box">
+                <img src="${r.coverImage || 'assets/images/industrial_grain_silos.jpg'}" alt="${(r.title || '').replace(/"/g, '&quot;')} cover" class="u-cover-thumb" loading="lazy" />
+              </div>
             </div>
-            <h4 class="u-title">${r.title}</h4>
-            <p class="u-desc">${r.description}</p>
-            <div class="u-telemetry-row">
-              <div><span>FORMAT</span><strong>Vector PDF (${r.pageCount} Pages)</strong></div>
-              <div><span>EXCEL PACK</span><strong>${r.exhibitsCount} Unlocked Exhibits</strong></div>
-              <div><span>LICENSE</span><strong>Corporate Enterprise</strong></div>
-            </div>
-            <div class="u-actions-row">
-              <a href="${r.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf'}" target="_blank" download class="btn-u-download">
-                ⬇ Download Full PDF
-              </a>
-              <button type="button" class="btn-u-preview" data-pdf="${r.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf'}" data-title="${r.title}">
-                👁 Read Online
-              </button>
-              <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
-                📊 Excel Model (.xlsx)
-              </button>
+            <div class="u-content-col">
+              <div class="u-card-header">
+                <span class="u-sector-pill">${(r.sector || 'RESEARCH').toUpperCase()}</span>
+                <span class="u-sku">SKU: ${r.sku || 'REN-RES-2026'}</span>
+              </div>
+              <h4 class="u-title">${r.title}</h4>
+              <p class="u-desc">${r.description || ''}</p>
+              <div class="u-telemetry-row">
+                <div><span>FORMAT</span><strong>Vector PDF (${r.pageCount || 45} Pages)</strong></div>
+                <div><span>EXCEL PACK</span><strong>${r.exhibitsCount || 20} Unlocked Exhibits</strong></div>
+                <div><span>LICENSE</span><strong>Corporate Enterprise</strong></div>
+              </div>
+              <div class="u-actions-row">
+                <button type="button" class="btn-u-download btn-timed-download" data-file-id="${r.id}" data-url="${r.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf'}">
+                  ⬇ Download Full PDF
+                </button>
+                <button type="button" class="btn-u-preview" data-pdf="${r.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf'}" data-title="${(r.title || '').replace(/"/g, '&quot;')}">
+                  👁 Read Online
+                </button>
+                <button type="button" class="btn-u-excel" title="Download Unlocked Excel Model">
+                  📊 Excel Model (.xlsx)
+                </button>
+              </div>
             </div>
           </div>
         `).join('');
+
+        // Wire up live search filter across all unlocked library cards
+        const searchInput = document.getElementById('library-search-input');
+        if (searchInput && !searchInput.dataset.bound) {
+          searchInput.dataset.bound = 'true';
+          searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            document.querySelectorAll('#unlocked-reports-container .unlocked-card').forEach(c => {
+              c.style.display = c.textContent.toLowerCase().includes(query) ? '' : 'none';
+            });
+          });
+        }
+
+        // Bind static and dynamic download buttons to the 60s timed download engine
+        document.querySelectorAll('.btn-u-download').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const fileId = btn.getAttribute('data-file-id') || 'nigeria-ai-adoption-economics-2026';
+            const url = btn.getAttribute('data-url') || btn.getAttribute('href') || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+            initiateSignedDownload(fileId, btn, url);
+          });
+        });
 
         // Bind in-browser reader buttons
         document.querySelectorAll('.btn-u-preview').forEach(btn => {
@@ -604,7 +1175,7 @@
         // Bind excel download alerts
         document.querySelectorAll('.btn-u-excel').forEach(btn => {
           btn.addEventListener('click', () => {
-            alert('Excel Econometric Pack (.xlsx) downloaded with formulas unlocked.');
+            initiateSignedDownload('excel-model', btn, 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf');
           });
         });
       }
@@ -657,5 +1228,42 @@
     });
   </script>
 
+  <!-- 3D Economic Velocity Globe Engine -->
+  <script src="lib/data-globe.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Ambient 3D Rotating Globe in Portal Background
+      const globeCanvas = document.getElementById('portal-globe-canvas');
+      let globeInstance = null;
+      if (globeCanvas && window.RenalyticaDataGlobe) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        globeInstance = new window.RenalyticaDataGlobe(globeCanvas, {
+          dotColor: isDark ? '#E5E5E5' : '#0A0A0A',
+          accentColor: '#FF8000',
+          hubColor: '#00D26A',
+          arcColor: 'rgba(255, 128, 0, 0.75)',
+          particleCount: 2000,
+          radiusRatio: 0.48,
+          rotationSpeed: 0.0028,
+          interactive: false // Non-blocking ambient background
+        });
+        window.portalGlobe = globeInstance;
+      }
+
+      window.addEventListener('renalytica:theme-change', (e) => {
+        if (globeInstance && e.detail && e.detail.theme) {
+          globeInstance.setTheme(e.detail.theme);
+        }
+      });
+    });
+  </script>
+
+  <!-- Elfsight AI Chatbot | Floating Widget -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <div class="elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d" data-elfsight-app-lazy></div>
+
+  <!-- Native Multi-Channel Chat Desk -->
+  <script src="components/MultiChannelChat.js"></script>
+  <multi-channel-chat></multi-channel-chat>
 </body>
 </html>

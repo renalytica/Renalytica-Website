@@ -7,25 +7,67 @@
    1. AUTHENTICATION & LOGIN SCREEN
    ========================================================================== */
 .portal-auth-section {
+  position: relative;
   padding: 5rem 0 6rem;
-  background: var(--surface-tint);
+  background-color: var(--surface-tint);
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(255, 107, 0, 0.05) 0%, transparent 70%),
+    linear-gradient(rgba(88, 100, 114, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 100, 114, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
   min-height: calc(100vh - 160px);
   display: flex;
   align-items: center;
+  overflow: hidden;
+}
+
+/* Ambient 3D Rotating Globe Background */
+.portal-globe-bg-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+}
+
+[data-theme="dark"] .portal-globe-bg-wrap {
+  opacity: 0.70;
+}
+
+.portal-globe-canvas {
+  width: 920px;
+  height: 920px;
+  max-width: 140vw;
+  max-height: 140vw;
+  filter: drop-shadow(0 0 45px rgba(255, 128, 0, 0.18));
 }
 
 .portal-auth-container {
+  position: relative;
+  z-index: 2;
   max-width: 580px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
 .auth-card-wrap {
-  background: var(--canvas-surface);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-light);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 2.5rem;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .auth-card-wrap {
+  background: rgba(18, 18, 22, 0.88);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
 }
 
 .auth-header {
@@ -61,6 +103,138 @@
   color: var(--text-secondary);
   line-height: 1.55;
   margin: 0;
+}
+
+/* Dual-Mode Auth Switcher Tabs */
+.auth-mode-tabs {
+  display: flex;
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 1.5rem;
+  gap: 4px;
+}
+
+.auth-mode-tab {
+  flex: 1;
+  text-align: center;
+  padding: 9px 12px;
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-mode-tab.active {
+  background: var(--canvas-surface);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Social SSO Buttons */
+.auth-social-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.btn-social-sso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--canvas-primary);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-primary);
+}
+
+.btn-social-sso:hover {
+  border-color: var(--accent-momentum);
+  background: var(--surface-gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  margin: 1.25rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.auth-divider span {
+  padding: 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Omnipresent Executive Switcher Banner */
+.executive-switcher-banner {
+  background: #0A0A0A;
+  border-bottom: 2px solid #FF8000;
+  color: #FFF;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  position: sticky;
+  top: 0;
+  z-index: 101;
+}
+
+.executive-switcher-banner a {
+  background: #FF8000;
+  color: #000;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.executive-switcher-banner a:hover {
+  opacity: 0.9;
+}
+
+/* 60-Second Security Countdown Badge */
+.signed-countdown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid #22C55E;
+  color: #16A34A;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
 }
 
 /* Quick Demo Banner */
@@ -216,7 +390,12 @@
    ========================================================================== */
 .portal-dashboard-section {
   padding: 3.5rem 0 5rem;
-  background: var(--surface-tint);
+  background-color: var(--surface-tint);
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(255, 107, 0, 0.04) 0%, transparent 65%),
+    linear-gradient(rgba(88, 100, 114, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 100, 114, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
 }
 
 .portal-dashboard-container {
@@ -446,19 +625,69 @@
 .unlocked-card {
   background: var(--canvas-surface);
   border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
   position: relative;
   transition: all 0.25s ease;
+  align-items: stretch;
 }
 
 .unlocked-card:hover {
   border-color: var(--border-strong);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.u-cover-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-cover-box {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid var(--border-light);
+  box-shadow: 
+    -4px 0 0 -1px #1E293B,
+    -8px 0 0 -2px #0F172A,
+    0 12px 24px -4px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.u-cover-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none;
+}
+
+.u-cover-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.unlocked-card:hover .u-cover-thumb {
+  transform: scale(1.04);
+}
+
+.u-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .u-card-header {
@@ -844,5 +1073,14 @@
 
   .u-actions-row {
     grid-template-columns: 1fr;
+  }
+
+  .unlocked-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .u-cover-box {
+    max-width: 160px;
   }
 }

@@ -200,5 +200,5 @@ For questions regarding copyright permissions, enterprise sub-licensing, corpora
 
 * **Legal & Corporate Governance Desk:** `legal@renalytica.com`
 * **Licensing & Fair Use Clearances:** `licensing@renalytica.com`
-* **Direct Telephone / WhatsApp:** `+234 813 753 8723`
+* **Direct Telephone / WhatsApp:** `+234 902 084 6138`
 * **Corporate Address:** Renalytica Technologies & Research Advisory Limited, Victoria Island, Lagos, Nigeria.

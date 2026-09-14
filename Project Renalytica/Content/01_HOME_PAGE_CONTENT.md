@@ -15,7 +15,7 @@
 ## 2. Header & Global Navigation Bar
 * **Brand Wordmark:** `Renalytica` *(Tagline: powering smart decisions)*
 * **Top Utility Bar:**
-  * Direct Desk / WhatsApp: `+234 813 753 8723` | `info@renalytica.com`
+  * Direct Desk / WhatsApp: `+234 902 084 6138` | `info@renalytica.com`
   * Currency Selector: `USD ($) | EUR (€) | GBP (£) | NGN (₦)` (Default: USD)
   * Corporate Portal: `Client Login` | `Access Knowledge Terminal`
 * **Primary Navigation Menu:**
@@ -181,7 +181,7 @@
 * **Sub-Headline:** Explore our online store today, download a free sample, or chat directly with our team to find the exact intelligence you need.
 * **Action Buttons:**
   * `Browse the Full Research Store →` (Color: `#FF8000`)
-  * `Chat on WhatsApp (+234 813 753 8723)`
+  * `Chat on WhatsApp (+234 902 084 6138)`
 * **Newsletter Box:**
   * *Title:* Subscribe to **The Renalytica Weekly**
   * *Subtitle:* Three essential market numbers and trends in your email every Monday morning.
@@ -195,5 +195,5 @@
 * **Quick Links:** Research Store • Agriculture • Macroeconomics • Commerce & Retail • Energy
 * **Our Services:** Industry Reports • Custom Research • Corporate Subscriptions • Executive Briefings
 * **Support & Trust:** FAQ • Privacy Policy • Terms of Service • Report Delivery Guarantee
-* **Direct Contact:** WhatsApp: `+234 813 753 8723` | Email: `info@renalytica.com`
+* **Direct Contact:** WhatsApp: `+234 902 084 6138` | Email: `info@renalytica.com`
 * **Copyright:** `© 2026 Renalytica. All Rights Reserved.`

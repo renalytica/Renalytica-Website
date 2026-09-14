@@ -25,6 +25,7 @@ Desktop.ini
 # IDE & Editor files
 .vscode/
 .idea/
+.antigravity/
 *.swp
 *.swo
 
@@ -32,3 +33,7 @@ Desktop.ini
 node_modules/
 dist/
 build/
+
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars

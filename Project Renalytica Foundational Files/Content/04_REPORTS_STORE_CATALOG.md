@@ -197,4 +197,4 @@
 * 🔒 **256-Bit SSL Encrypted Corporate Transactions**
 * ⚡ **Instant Automated Fulfillment:** Watermarked PDF and Excel data files delivered immediately to your registered corporate email upon payment confirmation.
 * 📋 **Institutional Invoicing:** Corporate purchase orders (PO) and direct SWIFT wire transfer options available for enterprise teams.
-* 📞 **Direct Advisory Support:** Every purchased report includes 30 days of email-based analyst clarification. Need immediate guidance? Contact our WhatsApp Concierge at `+234 813 753 8723`.
+* 📞 **Direct Advisory Support:** Every purchased report includes 30 days of email-based analyst clarification. Need immediate guidance? Contact our WhatsApp Concierge at `+234 902 084 6138`.

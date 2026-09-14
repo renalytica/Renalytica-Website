@@ -77,7 +77,7 @@
 **Answer:** For security reasons, automated download links remain active for **72 hours** and allow up to 5 download attempts. If your link expires or your corporate firewall interrupts the download:
 * Simply reply to your order confirmation email.
 * Email our 24/7 client desk at `fulfillment@renalytica.com` with your Order Number (e.g., `#REN-2026-8942`).
-* Or message our instant WhatsApp Concierge at `+234 813 753 8723`.  
+* Or message our instant WhatsApp Concierge at `+234 902 084 6138`.  
 Our team will verify your purchase and issue a fresh, high-speed download link within 30 minutes.
 
 ---
@@ -241,7 +241,7 @@ At project kickoff, we establish clear milestone deliverables, weekly progress c
   * **General Inquiries:** `info@renalytica.com`
   * **Sales & Corporate Licensing:** `sales@renalytica.com`
   * **Billing & Accounts Payable:** `billing@renalytica.com`
-  * **Instant WhatsApp Concierge:** `+234 813 753 8723` (Available Monday – Friday, 08:00 to 18:00 WAT)
+  * **Instant WhatsApp Concierge:** `+234 902 084 6138` (Available Monday – Friday, 08:00 to 18:00 WAT)
   * **Headquarters:** Renalytica Technologies & Research Advisory, Victoria Island, Lagos, Nigeria.
 * **Primary Action Button:** `Contact Our Research Desk →` (Color: `#FF8000`)
 * **Secondary Action Button:** `Browse Research Store (2,500+ Reports)`

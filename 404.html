@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404: Page Not Found — Renalytica</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="The page you are looking for doesn't exist or has been moved. Return to Renalytica's verified market intelligence terminal.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  
+  <!-- 404 Stylesheet -->
+  <link rel="stylesheet" href="styles/not-found.css">
+</head>
+<body>
+
+  <div class="notfound-viewport">
+    
+    <!-- 1. Header Navigation / Telemetry -->
+    <header class="notfound-header">
+      <a href="index.html" class="notfound-brand" aria-label="Renalytica Home">
+        <img 
+          src="assets/brand/renalytica_logo_horizontal_white.png" 
+          alt="Renalytica" 
+          class="notfound-brand-logo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        >
+        <span style="display:none; font-weight:800; font-size:18px; letter-spacing:-0.02em; color:#FFFFFF;">
+          RENALYTICA<span style="color:#FF5C00;">.</span>
+        </span>
+      </a>
+
+      <div class="notfound-status-badge">
+        <span class="status-pulse-dot"></span>
+        <span>SYS_ERR // 0x404_NOT_FOUND</span>
+      </div>
+    </header>
+
+    <!-- 2. Central Motion Graphic & Recovery Stage -->
+    <main class="notfound-stage">
+      
+      <!-- Telemetry Triplet Labels (Inspired by 3200kelvin) -->
+      <div class="grid-telemetry-labels">
+        <span class="grid-telemetry-label" id="lbl-coord">HTTP // 404_NIL</span>
+        <span class="grid-telemetry-label grid-telemetry-label-center">RENALYTICA INTELLIGENCE MATRIX</span>
+        <span class="grid-telemetry-label" id="lbl-clock">GRID_SYNC // 0.00ms</span>
+      </div>
+
+      <!-- Canvas Container for Motion Graphic -->
+      <div class="notfound-canvas-wrap" id="canvas-container">
+        <canvas id="matrix-canvas" aria-label="Interactive 404 Motion Graphic"></canvas>
+      </div>
+
+      <!-- Action Wrap -->
+      <div class="notfound-action-wrap">
+        <p class="notfound-message">The page you are looking for doesn't exist or has been moved</p>
+
+        <!-- Inspo-Accurate Pill CTA Button -->
+        <a href="index.html" class="notfound-pill-btn" id="btn-go-home">
+          <span>Go to home</span>
+          <svg class="notfound-btn-arrow" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 1.5H8.5V8.5M8.5 1.5L1.5 8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <!-- Secondary Research Store Recovery Links -->
+        <nav class="notfound-recovery-nav" aria-label="Recovery links">
+          <a href="reports.html" class="recovery-link">Browse Research Store →</a>
+          <span class="recovery-sep">//</span>
+          <a href="javascript:history.back()" class="recovery-link">← Return to Previous Page</a>
+          <span class="recovery-sep">//</span>
+          <a href="contact.html" class="recovery-link">Contact Intelligence Desk</a>
+        </nav>
+      </div>
+
+    </main>
+
+    <!-- 3. Minimal Bottom Telemetry Footer -->
+    <footer class="notfound-footer">
+      <div>© 2026 Renalytica Technologies & Research Advisory Limited. Dual HQ New York & Lagos.</div>
+      <div class="footer-nav-links">
+        <a href="reports.html" class="footer-nav-link">Reports</a>
+        <a href="insights.html" class="footer-nav-link">Insights</a>
+        <a href="portal.html" class="footer-nav-link">Terminal Login</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Real-time Canvas Dot-Matrix Motion Engine -->
+  <script src="lib/not-found-matrix.js"></script>
+
+  <!-- Live Micro-Telemetry Clock Script -->
+  <script>
+    (function () {
+      const clockEl = document.getElementById('lbl-clock');
+      if (clockEl) {
+        function updateTelemetry() {
+          const now = new Date();
+          const ms = String(now.getMilliseconds()).padStart(3, '0');
+          const timeStr = now.toTimeString().split(' ')[0];
+          clockEl.textContent = `SYNC // ${timeStr}.${ms}`;
+        }
+        setInterval(updateTelemetry, 100);
+        updateTelemetry();
+      }
+    })();
+  </script>
+
+</body>
+</html>

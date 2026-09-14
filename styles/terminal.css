@@ -1,0 +1,714 @@
+/* ==========================================================================
+   RENALYTICA LIVE MARKET & MACRO TERMINAL STYLES (styles/terminal.css)
+   Institutional Bloomberg / Refinitiv Grade Financial Intelligence Interface
+   ========================================================================== */
+
+.terminal-page-wrap {
+  padding-top: clamp(24px, 3vw, 40px);
+  padding-bottom: clamp(60px, 8vw, 100px);
+  min-height: 80vh;
+}
+
+/* --------------------------------------------------------------------------
+   1. Terminal Hero & Header Bar
+   -------------------------------------------------------------------------- */
+.terminal-header-block {
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.terminal-headline-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.terminal-title-group {
+  max-width: 700px;
+}
+
+.terminal-badge-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.terminal-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  color: #0284c7;
+}
+
+[data-theme="dark"] .terminal-status-pill {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(14, 165, 233, 0.4);
+  color: #38bdf8;
+}
+
+.finnhub-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 210, 106, 0.08);
+  border: 1px solid rgba(0, 210, 106, 0.3);
+  color: #16a34a;
+}
+
+[data-theme="dark"] .finnhub-status-badge {
+  background: rgba(0, 210, 106, 0.15);
+  color: #4ade80;
+}
+
+.finnhub-status-badge.reconnecting {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #d97706;
+}
+
+.terminal-main-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+}
+
+.terminal-subtitle {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.terminal-meta-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.terminal-clock-chip {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-body);
+}
+
+/* --------------------------------------------------------------------------
+   2. Real-Time Telemetry Bar (Finnhub & Alpha Vantage Ticks)
+   -------------------------------------------------------------------------- */
+.terminal-live-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 28px;
+}
+
+.live-strip-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-strip-card:hover {
+  border-color: var(--primary-color, #FF5C00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.live-strip-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 4px;
+}
+
+.live-strip-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.live-strip-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tick-flash-up {
+  color: #10b981 !important;
+  text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.tick-flash-down {
+  color: #ef4444 !important;
+  text-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+.tick-dir.up, .change-pill.up {
+  color: #10b981;
+}
+
+.tick-dir.down, .change-pill.down {
+  color: #ef4444;
+}
+
+/* --------------------------------------------------------------------------
+   3. Terminal Navigation Tabs & Auto-Cycle Desk Controls
+   -------------------------------------------------------------------------- */
+.terminal-tabs-wrapper {
+  margin-bottom: 28px;
+}
+
+.terminal-tabs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .terminal-tabs-header {
+  background: rgba(18, 24, 38, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tabs-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-heading);
+}
+
+.live-cycle-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulseDot 1.8s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.tabs-status-pill.paused .live-cycle-dot {
+  background: #F59E0B;
+  box-shadow: 0 0 8px #F59E0B;
+  animation: none;
+}
+
+.cycle-timer-countdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.14);
+  color: #10B981;
+  font-size: 0.72rem;
+  font-weight: 800;
+  min-width: 32px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.tabs-status-pill.paused .cycle-timer-countdown {
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+}
+
+.tabs-cycle-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-cycle-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--border-medium, rgba(0, 0, 0, 0.15));
+  background: var(--surface-card, #FFFFFF);
+  color: var(--text-heading);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .btn-cycle-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #E2E8F0;
+}
+
+.btn-cycle-toggle:hover {
+  border-color: var(--primary-color, #FF5C00);
+  color: var(--primary-color, #FF5C00);
+}
+
+.cycle-speed-dropdown {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-medium, rgba(0, 0, 0, 0.15));
+  background: var(--surface-card, #FFFFFF);
+  color: var(--text-heading);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .cycle-speed-dropdown {
+  background: #0B0F17;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #E2E8F0;
+}
+
+.tabs-quick-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-tab-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid var(--border-medium, rgba(0, 0, 0, 0.15));
+  background: var(--surface-card, #FFFFFF);
+  color: var(--text-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .btn-tab-arrow {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #E2E8F0;
+}
+
+.btn-tab-arrow:hover {
+  border-color: var(--primary-color, #FF5C00);
+  color: var(--primary-color, #FF5C00);
+}
+
+/* Tab Bar */
+.terminal-tab-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-light);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.terminal-tab-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.terminal-tab-btn {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 8px 8px 0 0;
+  padding: 10px 18px 12px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.tab-index-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+.terminal-tab-btn:hover {
+  background: var(--surface-card);
+  border-color: var(--border-medium);
+  color: var(--text-heading);
+}
+
+.terminal-tab-btn.active {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  border-color: #0A0A0A;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.terminal-tab-btn.active .tab-index-tag {
+  color: #FF8000;
+  opacity: 1;
+}
+
+[data-theme="dark"] .terminal-tab-btn.active {
+  background: #151C28;
+  color: #FFFFFF;
+  border-color: rgba(255, 128, 0, 0.4);
+  box-shadow: 0 0 16px rgba(255, 92, 0, 0.25);
+}
+
+/* Glowing Countdown Progress Bar on Active Tab */
+.tab-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  display: none;
+}
+
+.terminal-tab-btn.active .tab-progress-track {
+  display: block;
+}
+
+.tab-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #FF8000;
+  box-shadow: 0 0 8px #FF8000;
+  transition: width 0.1s linear;
+}
+
+[data-theme="dark"] .tab-progress-fill {
+  background: #FF5C00;
+  box-shadow: 0 0 10px #FF5C00;
+}
+
+.terminal-tab-badge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Panel Bottom Next / Prev Navigation Desk */
+.terminal-panel-nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 16px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--surface-subtle);
+}
+
+[data-theme="dark"] .terminal-panel-nav-footer {
+  background: rgba(18, 24, 38, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.panel-step-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.panel-footer-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-prev-panel-step,
+.btn-next-panel-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill, 9999px);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-prev-panel-step {
+  background: var(--surface-card, #FFFFFF);
+  border: 1px solid var(--border-medium, rgba(0, 0, 0, 0.15));
+  color: var(--text-body);
+}
+
+[data-theme="dark"] .btn-prev-panel-step {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #CBD5E1;
+}
+
+.btn-prev-panel-step:hover {
+  border-color: var(--text-heading);
+  color: var(--text-heading);
+}
+
+.btn-next-panel-step {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  border: 1px solid #0A0A0A;
+}
+
+[data-theme="dark"] .btn-next-panel-step {
+  background: #FF5C00;
+  color: #FFFFFF;
+  border-color: #FF5C00;
+  box-shadow: 0 2px 10px rgba(255, 92, 0, 0.3);
+}
+
+.btn-next-panel-step:hover {
+  background: #FF5C00;
+  border-color: #FF5C00;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 92, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   4. Tab Panels & Widget Containers
+   -------------------------------------------------------------------------- */
+.terminal-panel {
+  display: none;
+  animation: panelFade 0.25s ease-out;
+}
+
+.terminal-panel.active {
+  display: block;
+}
+
+@keyframes panelFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.widget-card-shell {
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.widget-card-title {
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: var(--text-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.widget-card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Mini Charts Grid */
+.mini-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.mini-chart-tile {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-chart-tile h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-heading);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Heatmaps Dual Layout */
+.heatmaps-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .heatmaps-grid-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Commodity & Macro Intelligence Telemetry Cards */
+.macro-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.macro-card {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+}
+
+.macro-card-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 6px;
+}
+
+.macro-card-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-heading);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.macro-card-note {
+  font-size: 0.75rem;
+  color: var(--text-body);
+}
+
+/* TradingView Container Overrides */
+.tradingview-widget-container {
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tradingview-widget-copyright {
+  font-size: 0.72rem !important;
+  color: var(--text-muted) !important;
+  text-align: right;
+  margin-top: 6px;
+}
+
+.tradingview-widget-copyright a {
+  color: var(--text-muted) !important;
+  text-decoration: none;
+}
+
+.tradingview-widget-copyright a:hover {
+  color: var(--primary-color, #FF5C00) !important;
+}
+
+/* Fullscreen Chart Container */
+.advanced-chart-box {
+  width: 100%;
+  height: 620px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .advanced-chart-box {
+    height: 480px;
+  }
+}

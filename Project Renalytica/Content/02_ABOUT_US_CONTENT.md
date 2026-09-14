@@ -120,4 +120,4 @@
 * **Action Buttons:**
   * `Browse Published Market Reports →` (Color: `#FF8000`)
   * `Contact Our Advisory Team`
-  * `WhatsApp Us: +234 813 753 8723`
+  * `WhatsApp Us: +234 902 084 6138`

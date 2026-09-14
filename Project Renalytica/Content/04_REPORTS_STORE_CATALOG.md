@@ -153,6 +153,6 @@
 ---
 
 ## 5. Helpful Shopping Tips & Reassurance
-* **Looking for a specific country or topic?** If you cannot find what you are looking for, our team can quickly pull together a custom data cut. Send us a quick note via our [Contact Page](/contact) or message us on WhatsApp at `+234 813 753 8723`.
+* **Looking for a specific country or topic?** If you cannot find what you are looking for, our team can quickly pull together a custom data cut. Send us a quick note via our [Contact Page](/contact) or message us on WhatsApp at `+234 902 084 6138`.
 * **Download Instantly:** All credit card purchases are processed immediately, and your download links are emailed to you within seconds.
 * **Corporate Payment Options:** We also accept bank wire transfers and official company purchase orders for departmental and enterprise orders.

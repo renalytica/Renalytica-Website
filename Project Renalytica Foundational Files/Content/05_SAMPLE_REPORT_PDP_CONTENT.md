@@ -72,7 +72,7 @@
 1. **Primary Button:** `Instant Checkout / Add to Cart →` (Color: `#FF8000`)
 2. **Secondary High-Intent Button:** `Download Free Executive Sample Brief (PDF)` *(Triggers gated lead capture modal)*
 3. **Analyst Assistance Button:** `Inquire Before Buying / Ask an Analyst` *(Triggers direct inquiry modal)*
-4. **Instant Concierge Hotline:** Direct WhatsApp: `+234 813 753 8723` | Email: `sales@renalytica.com`
+4. **Instant Concierge Hotline:** Direct WhatsApp: `+234 902 084 6138` | Email: `sales@renalytica.com`
 
 ### Payment & Fulfillment Reassurance Microcopy
 * 🔒 **Secure Corporate Checkout:** Visa, Mastercard, AMEX, Stripe, Wire Transfer (SWIFT), and Institutional Purchase Orders (PO).

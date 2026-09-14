@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Financial &amp; Macro Terminal — Renalytica Market Intelligence</title>
+  <meta name="description" content="Institutional live financial market terminal. Real-time multi-asset streaming, advanced TradingView charting, market heatmaps, commodity benchmarks, and global macroeconomic indicators.">
+  <link rel="canonical" href="https://www.renalytica.com/markets.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Live Financial &amp; Macro Terminal — Renalytica">
+  <meta property="og:description" content="Real-time multi-asset streaming, advanced charting, sector heatmaps, and commodity intelligence.">
+  <meta property="og:image" content="assets/brand/renalytica_emblem.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/terminal.css">
+
+  <!-- Early Theme Initialization -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- Global Header Navigation -->
+  <header-nav></header-nav>
+
+  <main id="main-content" class="terminal-page-wrap">
+    <div class="container">
+
+      <!-- ====================================================================
+           1. TERMINAL HEADER & LIVE STATUS
+           ==================================================================== -->
+      <header class="terminal-header-block">
+        <div class="terminal-headline-row">
+          <div class="terminal-title-group">
+            <div class="terminal-badge-line">
+              <span class="terminal-status-pill">
+                <span class="pulse-green-dot"></span> INSTITUTIONAL MARKET TERMINAL
+              </span>
+              <div class="finnhub-status-badge">
+                <span class="pulse-green-dot"></span> <span class="badge-text">FINNHUB LIVE STREAM: ACTIVE</span>
+              </div>
+            </div>
+            <h1 class="terminal-main-title">Live Financial &amp; Macro Intelligence</h1>
+            <p class="terminal-subtitle">
+              Streaming real-time multi-asset quotes, advanced technical charting, visual heatmaps, commodity benchmarks, and macroeconomic event tracking.
+            </p>
+          </div>
+
+          <div class="terminal-meta-controls">
+            <div class="terminal-clock-chip" id="terminal-live-clock">
+              UTC: --:--:--
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Telemetry Bar (Finnhub WebSockets & Alpha Vantage Benchmarks) -->
+        <div class="terminal-live-strip">
+          <div class="live-strip-card" id="card-finnhub-btc">
+            <div class="live-strip-top">
+              <span>BTC / USD (LIVE)</span>
+              <span class="tick-dir" data-finnhub-dir="BINANCE:BTCUSDT">●</span>
+            </div>
+            <div class="live-strip-val" data-finnhub-price="BINANCE:BTCUSDT">$64,250.00</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">Finnhub Stream</span>
+              <span class="change-pill up">Live Tick</span>
+            </div>
+          </div>
+
+          <div class="live-strip-card" id="card-finnhub-aapl">
+            <div class="live-strip-top">
+              <span>AAPL (LIVE)</span>
+              <span class="tick-dir" data-finnhub-dir="AAPL">●</span>
+            </div>
+            <div class="live-strip-val" data-finnhub-price="AAPL">$228.40</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">US Equities</span>
+              <span class="change-pill up">Real-time</span>
+            </div>
+          </div>
+
+          <div class="live-strip-card" id="card-alpha-wti">
+            <div class="live-strip-top">
+              <span>WTI CRUDE OIL</span>
+              <span>USD/BBL</span>
+            </div>
+            <div class="live-strip-val" id="val-macro-wti">$76.45</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">Alpha Vantage</span>
+              <span class="change-pill up" id="pct-macro-wti">+1.35%</span>
+            </div>
+          </div>
+
+          <div class="live-strip-card" id="card-alpha-brent">
+            <div class="live-strip-top">
+              <span>BRENT CRUDE</span>
+              <span>USD/BBL</span>
+            </div>
+            <div class="live-strip-val" id="val-macro-brent">$80.20</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">Global Benchmark</span>
+              <span class="change-pill up" id="pct-macro-brent">+1.12%</span>
+            </div>
+          </div>
+
+          <div class="live-strip-card" id="card-alpha-usdngn">
+            <div class="live-strip-top">
+              <span>USD / NGN (NAFEM)</span>
+              <span>FX RATE</span>
+            </div>
+            <div class="live-strip-val" id="val-fx-usdngn">₦1,485.50</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">Market Reference</span>
+              <span class="change-pill down">-0.25%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TradingView Widget 6: Native Ticker Tape Embed -->
+        <div class="widget-card-shell" style="padding: 6px 12px; margin-bottom: 24px;">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+              "symbols": [
+                { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+                { "proName": "FX_IDC:EURUSD", "title": "EUR to USD" },
+                { "proName": "FX_IDC:GBPUSD", "title": "GBP to USD" },
+                { "proName": "TVC:USOIL", "title": "WTI Crude Oil" },
+                { "proName": "TVC:UKOIL", "title": "Brent Crude" },
+                { "proName": "CMCMARKETS:GOLD", "title": "Gold" },
+                { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" }
+              ],
+              "showSymbolLogo": true,
+              "isTransparent": true,
+              "displayMode": "adaptive",
+              "colorTheme": "light",
+              "locale": "en"
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+      </header>
+
+      <!-- ====================================================================
+           2. INTERACTIVE TERMINAL TAB NAVIGATION & LIVE AUTO-CYCLE DESK
+           ==================================================================== -->
+      <div class="terminal-tabs-wrapper" id="terminal-tabs-wrapper">
+        <div class="terminal-tabs-header">
+          <div class="tabs-status-pill" id="cycle-status-pill">
+            <span class="live-cycle-dot"></span>
+            <span class="cycle-status-label" id="cycle-status-text">DESK PATROL ACTIVE</span>
+            <span class="cycle-timer-countdown" id="cycle-timer-countdown" title="Seconds until next tab switch">60s</span>
+          </div>
+
+          <div class="tabs-cycle-controls">
+            <button type="button" class="btn-cycle-toggle" id="btn-toggle-cycle" title="Toggle Tab Auto-Switching">
+              <span class="cycle-icon" id="cycle-toggle-icon">⏸</span>
+              <span class="cycle-label" id="cycle-toggle-label">Pause Auto-Cycle</span>
+            </button>
+            <div class="cycle-speed-selector">
+              <select id="cycle-duration-select" class="cycle-speed-dropdown" title="Change Auto-Cycle Rotation Interval">
+                <option value="45">Rotation: 45s</option>
+                <option value="60" selected>Rotation: 60s (1 min)</option>
+                <option value="120">Rotation: 2 mins</option>
+                <option value="180">Rotation: 3 mins</option>
+              </select>
+            </div>
+            <div class="tabs-quick-arrows">
+              <button type="button" class="btn-tab-arrow" id="btn-tab-prev" title="Previous Desk (Alt+←)" aria-label="Previous Tab">‹</button>
+              <button type="button" class="btn-tab-arrow" id="btn-tab-next" title="Next Desk (Alt+→)" aria-label="Next Tab">›</button>
+            </div>
+          </div>
+        </div>
+
+        <nav class="terminal-tab-nav" aria-label="Terminal Navigation" id="terminal-tab-nav">
+          <button class="terminal-tab-btn active" data-tab="tab-charts" data-index="0">
+            <span class="tab-index-tag">01</span>
+            <span>📈</span> Charts &amp; Core Benchmarks <span class="terminal-tab-badge">PRO</span>
+            <div class="tab-progress-track"><div class="tab-progress-fill"></div></div>
+          </button>
+          <button class="terminal-tab-btn" data-tab="tab-watchlists" data-index="1">
+            <span class="tab-index-tag">02</span>
+            <span>📋</span> Market Overviews &amp; Watchlists
+            <div class="tab-progress-track"><div class="tab-progress-fill"></div></div>
+          </button>
+          <button class="terminal-tab-btn" data-tab="tab-heatmaps" data-index="2">
+            <span class="tab-index-tag">03</span>
+            <span>🔥</span> Market Heatmaps &amp; Cross-Rates
+            <div class="tab-progress-track"><div class="tab-progress-fill"></div></div>
+          </button>
+          <button class="terminal-tab-btn" data-tab="tab-screeners" data-index="3">
+            <span class="tab-index-tag">04</span>
+            <span>🧭</span> Screeners &amp; Global Macro
+            <div class="tab-progress-track"><div class="tab-progress-fill"></div></div>
+          </button>
+          <button class="terminal-tab-btn" data-tab="tab-news" data-index="4">
+            <span class="tab-index-tag">05</span>
+            <span>📰</span> Financial News &amp; Stories
+            <div class="tab-progress-track"><div class="tab-progress-fill"></div></div>
+          </button>
+        </nav>
+      </div>
+
+      <!-- ====================================================================
+           TAB 1: CHARTS & CORE BENCHMARKS
+           ==================================================================== -->
+      <section class="terminal-panel active" id="tab-charts">
+        <!-- Widget 1: Advanced Chart -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h2 class="widget-card-title"><span>📊</span> Advanced Technical Analysis Chart</h2>
+            <span class="widget-card-tag">TRADINGVIEW ADVANCED CHART • MULTI-TIMEFRAME</span>
+          </div>
+
+          <div class="advanced-chart-box">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div id="tradingview_advanced_chart" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+              <script type="text/javascript">
+                function renderAdvancedChart() {
+                  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                  if (typeof TradingView !== 'undefined') {
+                    new TradingView.widget({
+                      "autosize": true,
+                      "symbol": "TVC:USOIL",
+                      "interval": "D",
+                      "timezone": "Etc/UTC",
+                      "theme": isDark ? "dark" : "light",
+                      "style": "1",
+                      "locale": "en",
+                      "toolbar_bg": isDark ? "#0D1117" : "#F8FAFC",
+                      "enable_publishing": false,
+                      "allow_symbol_change": true,
+                      "container_id": "tradingview_advanced_chart"
+                    });
+                  }
+                }
+                document.addEventListener('DOMContentLoaded', renderAdvancedChart);
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+
+        <!-- Widget 2: Symbol Overview -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h3 class="widget-card-title"><span>🌐</span> Multi-Asset Symbol Overview</h3>
+            <span class="widget-card-tag">GLOBAL COMMODITIES, EQUITIES &amp; FOREX</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+              "symbols": [
+                ["Crude Oil", "TVC:USOIL|1D"],
+                ["Brent Oil", "TVC:UKOIL|1D"],
+                ["Gold", "CMCMARKETS:GOLD|1D"],
+                ["S&P 500", "FOREXCOM:SPXUSD|1D"],
+                ["EUR/USD", "FX:EURUSD|1D"],
+                ["Bitcoin", "BITSTAMP:BTCUSD|1D"]
+              ],
+              "chartOnly": false,
+              "width": "100%",
+              "height": "480",
+              "locale": "en",
+              "colorTheme": "light",
+              "autosize": true,
+              "showVolume": false,
+              "showMA": false,
+              "hideDateRanges": false,
+              "hideMarketStatus": false,
+              "hideSymbolLogo": false,
+              "scalePosition": "right",
+              "scaleMode": "Normal",
+              "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+              "fontSize": "10",
+              "noTimeScale": false,
+              "valuesTracking": "1",
+              "changeMode": "price-and-percent",
+              "chartType": "area",
+              "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"]
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- Widget 3: Mini Charts Grid -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h3 class="widget-card-title"><span>⚡</span> Key Macro Sparklines</h3>
+            <span class="widget-card-tag">HIGH-VELOCITY BENCHMARK MONITORS</span>
+          </div>
+
+          <div class="mini-charts-grid">
+            <!-- Mini Chart 1: WTI Crude Oil -->
+            <div class="mini-chart-tile">
+              <h4><span>WTI Crude Oil</span> <span class="text-muted">Energy</span></h4>
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol": "TVC:USOIL",
+                  "width": "100%",
+                  "height": 210,
+                  "locale": "en",
+                  "dateRange": "12M",
+                  "colorTheme": "light",
+                  "isTransparent": true,
+                  "autosize": true
+                }
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+
+            <!-- Mini Chart 2: Gold -->
+            <div class="mini-chart-tile">
+              <h4><span>Gold Bullion</span> <span class="text-muted">Metals</span></h4>
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol": "CMCMARKETS:GOLD",
+                  "width": "100%",
+                  "height": 210,
+                  "locale": "en",
+                  "dateRange": "12M",
+                  "colorTheme": "light",
+                  "isTransparent": true,
+                  "autosize": true
+                }
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+
+            <!-- Mini Chart 3: EUR/USD -->
+            <div class="mini-chart-tile">
+              <h4><span>EUR / USD</span> <span class="text-muted">Forex</span></h4>
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol": "FX:EURUSD",
+                  "width": "100%",
+                  "height": 210,
+                  "locale": "en",
+                  "dateRange": "12M",
+                  "colorTheme": "light",
+                  "isTransparent": true,
+                  "autosize": true
+                }
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+
+            <!-- Mini Chart 4: S&P 500 -->
+            <div class="mini-chart-tile">
+              <h4><span>S&amp;P 500 Index</span> <span class="text-muted">Equities</span></h4>
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol": "FOREXCOM:SPXUSD",
+                  "width": "100%",
+                  "height": 210,
+                  "locale": "en",
+                  "dateRange": "12M",
+                  "colorTheme": "light",
+                  "isTransparent": true,
+                  "autosize": true
+                }
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1 Navigation Footer -->
+        <div class="terminal-panel-nav-footer">
+          <div class="panel-step-label">DESK 01 OF 05 // CHARTS &amp; CORE BENCHMARKS</div>
+          <div class="panel-footer-actions">
+            <button type="button" class="btn-next-panel-step" data-target="tab-watchlists">
+              Proceed to Desk 02: Market Overviews &amp; Watchlists →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 2: MARKET OVERVIEWS & WATCHLISTS
+           ==================================================================== -->
+      <section class="terminal-panel" id="tab-watchlists">
+        <!-- Widget 4: Market Overview -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h2 class="widget-card-title"><span>📑</span> Multi-Sector Market Overview</h2>
+            <span class="widget-card-tag">INDICES • EQUITIES • DIGITAL ASSETS</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+              "colorTheme": "light",
+              "dateRange": "12M",
+              "showChart": true,
+              "locale": "en",
+              "isTransparent": true,
+              "showSymbolLogo": true,
+              "showFloatingTooltip": false,
+              "width": "100%",
+              "height": "640",
+              "plotLineColorGrowing": "#00D26A",
+              "plotLineColorFalling": "#EF4444",
+              "tabs": [
+                {
+                  "title": "Indices",
+                  "symbols": [
+                    { "s": "FOREXCOM:SPXUSD", "d": "S&P 500 Index" },
+                    { "s": "FOREXCOM:NSXUSD", "d": "US 100 Cash CFD" },
+                    { "s": "FOREXCOM:DJI", "d": "Dow Jones" },
+                    { "s": "FOREXCOM:UKXGBP", "d": "FTSE 100" }
+                  ]
+                },
+                {
+                  "title": "Stocks",
+                  "symbols": [
+                    { "s": "NASDAQ:AAPL", "d": "Apple" },
+                    { "s": "NASDAQ:ADBE", "d": "Adobe" },
+                    { "s": "NASDAQ:NVDA", "d": "NVIDIA" },
+                    { "s": "NASDAQ:TSLA", "d": "Tesla" }
+                  ]
+                },
+                {
+                  "title": "Crypto",
+                  "symbols": [
+                    { "s": "BITSTAMP:BTCUSD", "d": "BTC to USD" },
+                    { "s": "BITSTAMP:ETHUSD", "d": "ETH to USD" },
+                    { "s": "CRYPTO:XRPUSD", "d": "XRP to USD" }
+                  ]
+                }
+              ]
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- Widget 5: Market Data Watchlist -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h3 class="widget-card-title"><span>📋</span> Real-Time Market Data Watchlist</h3>
+            <span class="widget-card-tag">FUTURES • BONDS • COMMODITIES • FOREX</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+            {
+              "width": "100%",
+              "height": 550,
+              "symbolsGroups": [
+                {
+                  "name": "Indices",
+                  "originalName": "Indices",
+                  "symbols": [
+                    { "name": "FOREXCOM:SPXUSD", "displayName": "S&P 500" },
+                    { "name": "FOREXCOM:NSXUSD", "displayName": "US 100" },
+                    { "name": "FOREXCOM:DJI", "displayName": "Dow 30" },
+                    { "name": "INDEX:NKY", "displayName": "Nikkei 225" },
+                    { "name": "INDEX:DEU40", "displayName": "DAX 40" },
+                    { "name": "FOREXCOM:UKXGBP", "displayName": "FTSE 100" }
+                  ]
+                },
+                {
+                  "name": "Futures",
+                  "originalName": "Futures",
+                  "symbols": [
+                    { "name": "BMFBOVESPA:ISP1!", "displayName": "S&P 500 Future" },
+                    { "name": "BMFBOVESPA:EUR1!", "displayName": "Euro Future" },
+                    { "name": "CMCMARKETS:GOLD", "displayName": "Gold Spot" },
+                    { "name": "TVC:USOIL", "displayName": "WTI Crude Oil" },
+                    { "name": "BMFBOVESPA:CCM1!", "displayName": "Corn Future" }
+                  ]
+                },
+                {
+                  "name": "Bonds",
+                  "originalName": "Bonds",
+                  "symbols": [
+                    { "name": "EUREX:FGBL1!", "displayName": "Euro Bund" },
+                    { "name": "EUREX:FBTP1!", "displayName": "Euro BTP" },
+                    { "name": "EUREX:FGBM1!", "displayName": "Euro BOBL" }
+                  ]
+                },
+                {
+                  "name": "Forex",
+                  "originalName": "Forex",
+                  "symbols": [
+                    { "name": "FX:EURUSD", "displayName": "EUR to USD" },
+                    { "name": "FX:GBPUSD", "displayName": "GBP to USD" },
+                    { "name": "FX:USDJPY", "displayName": "USD to JPY" },
+                    { "name": "FX:USDCHF", "displayName": "USD to CHF" },
+                    { "name": "FX:AUDUSD", "displayName": "AUD to USD" },
+                    { "name": "FX:USDCAD", "displayName": "USD to CAD" }
+                  ]
+                }
+              ],
+              "showSymbolLogo": true,
+              "isTransparent": true,
+              "colorTheme": "light",
+              "locale": "en"
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- Section 2 Navigation Footer -->
+        <div class="terminal-panel-nav-footer">
+          <div class="panel-step-label">DESK 02 OF 05 // MARKET OVERVIEWS &amp; WATCHLISTS</div>
+          <div class="panel-footer-actions">
+            <button type="button" class="btn-prev-panel-step" data-target="tab-charts">
+              ← Desk 01: Charts &amp; Benchmarks
+            </button>
+            <button type="button" class="btn-next-panel-step" data-target="tab-heatmaps">
+              Proceed to Desk 03: Market Heatmaps &amp; Cross-Rates →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 3: HEATMAPS & CURRENCY MATRIX
+           ==================================================================== -->
+      <section class="terminal-panel" id="tab-heatmaps">
+        <!-- Widget 7: Stock Heatmap -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h2 class="widget-card-title"><span>🟩</span> Global Equities Stock Heatmap</h2>
+            <span class="widget-card-tag">S&amp;P 500 SECTOR ALLOCATION &amp; RETURNS</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+            {
+              "exchanges": [],
+              "dataSource": "SPX500",
+              "grouping": "sector",
+              "blockSize": "market_cap_calc",
+              "blockColor": "change",
+              "locale": "en",
+              "symbolUrl": "",
+              "colorTheme": "light",
+              "hasTopBar": true,
+              "isDataSetEnabled": true,
+              "isZoomEnabled": true,
+              "hasSymbolTooltip": true,
+              "isTransparent": true,
+              "width": "100%",
+              "height": "560"
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- 2-Column Grid: Crypto Heatmap & ETF Heatmap -->
+        <div class="heatmaps-grid-2col">
+          <!-- Widget 8: Crypto Heatmap -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>🪙</span> Crypto Coins Heatmap</h3>
+              <span class="widget-card-tag">DIGITAL ASSETS</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+              {
+                "dataSource": "Crypto",
+                "blockSize": "market_cap_calc",
+                "blockColor": "change",
+                "locale": "en",
+                "colorTheme": "light",
+                "hasTopBar": false,
+                "isDataSetEnabled": false,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "isTransparent": true,
+                "width": "100%",
+                "height": "450"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+
+          <!-- Widget 9: ETF Heatmap -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>📦</span> ETF Sector Heatmap</h3>
+              <span class="widget-card-tag">INDEX &amp; COMMODITY ETFS</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-etf-heatmap.js" async>
+              {
+                "dataSource": "AllUsEtfs",
+                "blockSize": "aum",
+                "blockColor": "change",
+                "grouping": "asset_class",
+                "locale": "en",
+                "colorTheme": "light",
+                "hasTopBar": false,
+                "isDataSetEnabled": false,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "isTransparent": true,
+                "width": "100%",
+                "height": "450"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+
+        <!-- 2-Column Grid: Forex Table Heatmap & Cross Rates -->
+        <div class="heatmaps-grid-2col" style="margin-top: 20px;">
+          <!-- Widget 10: Forex Heatmap Table -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>💱</span> Forex Currency Heatmap Table</h3>
+              <span class="widget-card-tag">DAILY CHANGE PRESET</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" async>
+              {
+                "width": "100%",
+                "height": 420,
+                "currencies": [
+                  "EUR",
+                  "USD",
+                  "JPY",
+                  "GBP",
+                  "CHF",
+                  "AUD",
+                  "CAD",
+                  "NZD",
+                  "CNY"
+                ],
+                "isTransparent": true,
+                "colorTheme": "light",
+                "locale": "en"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+
+          <!-- Widget 11: Forex Cross-Rates Matrix -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>📐</span> Forex Cross-Rates Matrix</h3>
+              <span class="widget-card-tag">INSTITUTIONAL CROSS-RATES</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+              {
+                "width": "100%",
+                "height": 420,
+                "currencies": [
+                  "EUR",
+                  "USD",
+                  "JPY",
+                  "GBP",
+                  "CHF",
+                  "AUD",
+                  "CAD",
+                  "NZD"
+                ],
+                "isTransparent": true,
+                "colorTheme": "light",
+                "locale": "en"
+              }
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 Navigation Footer -->
+        <div class="terminal-panel-nav-footer">
+          <div class="panel-step-label">DESK 03 OF 05 // HEATMAPS &amp; CURRENCY MATRIX</div>
+          <div class="panel-footer-actions">
+            <button type="button" class="btn-prev-panel-step" data-target="tab-watchlists">
+              ← Desk 02: Market Overviews &amp; Watchlists
+            </button>
+            <button type="button" class="btn-next-panel-step" data-target="tab-screeners">
+              Proceed to Desk 04: Screeners &amp; Global Macro →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 4: SCREENERS & GLOBAL MACRO
+           ==================================================================== -->
+      <section class="terminal-panel" id="tab-screeners">
+        <!-- Alpha Vantage Macro Telemetry Cards -->
+        <div class="macro-telemetry-grid">
+          <div class="macro-card">
+            <div class="macro-card-title">HENRY HUB NATURAL GAS</div>
+            <div class="macro-card-value" id="macro-val-gas">$2.45</div>
+            <div class="macro-card-note text-muted">Alpha Vantage Commodity Feed • USD/MMBtu</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">GLOBAL WHEAT BENCHMARK</div>
+            <div class="macro-card-value" id="macro-val-wheat">$585.20</div>
+            <div class="macro-card-note text-muted">Agribusiness Supply Index • USD/Bu</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">US 10-YEAR TREASURY YIELD</div>
+            <div class="macro-card-value">4.15%</div>
+            <div class="macro-card-note text-muted">Risk-Free Discount Benchmark Rate</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">REGIONAL SUB-SAHARAN GDP</div>
+            <div class="macro-card-value">3.8%</div>
+            <div class="macro-card-note text-muted">Renalytica Forecast Model • Annualized</div>
+          </div>
+        </div>
+
+        <!-- Widget 12: Crypto Screener -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h2 class="widget-card-title"><span>🧭</span> Digital Asset &amp; Market Screener</h2>
+            <span class="widget-card-tag">REAL-TIME MULTI-FACTOR SCREENER</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+            {
+              "width": "100%",
+              "height": 550,
+              "defaultColumn": "overview",
+              "screener_type": "crypto_mkt",
+              "displayCurrency": "USD",
+              "colorTheme": "light",
+              "locale": "en",
+              "isTransparent": true
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- Widget 14 & 15: Economic Calendar & Economic World Map -->
+        <div class="heatmaps-grid-2col">
+          <!-- Widget 14: Economic Calendar -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>📅</span> Macroeconomic Events Calendar</h3>
+              <span class="widget-card-tag">CENTRAL BANK &amp; INFLATION RELEASES</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+              {
+                "colorTheme": "light",
+                "isTransparent": true,
+                "width": "100%",
+                "height": "500",
+                "locale": "en",
+                "importanceFilter": "-1,0,1"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+
+          <!-- Widget 15: Economic World Map -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>🗺️</span> Global Economic Map</h3>
+              <span class="widget-card-tag">CROSS-COUNTRY MACRO INDICATORS</span>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-economic-calendar.js" async>
+              {
+                "colorTheme": "light",
+                "isTransparent": true,
+                "width": "100%",
+                "height": "500",
+                "locale": "en",
+                "importanceFilter": "0,1"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+
+        <!-- Section 4 Navigation Footer -->
+        <div class="terminal-panel-nav-footer">
+          <div class="panel-step-label">DESK 04 OF 05 // SCREENERS &amp; GLOBAL MACRO</div>
+          <div class="panel-footer-actions">
+            <button type="button" class="btn-prev-panel-step" data-target="tab-heatmaps">
+              ← Desk 03: Market Heatmaps &amp; Cross-Rates
+            </button>
+            <button type="button" class="btn-next-panel-step" data-target="tab-news">
+              Proceed to Desk 05: Financial News &amp; Stories →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 5: FINANCIAL NEWS & STORIES
+           ==================================================================== -->
+      <section class="terminal-panel" id="tab-news">
+        <!-- Widget 13: Top Stories Timeline -->
+        <div class="widget-card-shell">
+          <div class="widget-card-header">
+            <h2 class="widget-card-title"><span>📡</span> Real-Time Financial News &amp; Market Moving Stories</h2>
+            <span class="widget-card-tag">TRADINGVIEW TIMELINE • CURATED FINANCIAL WIRE</span>
+          </div>
+
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+            {
+              "feedMode": "all_symbols",
+              "isTransparent": true,
+              "displayMode": "regular",
+              "width": "100%",
+              "height": 650,
+              "colorTheme": "light",
+              "locale": "en"
+            }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+
+        <!-- Section 5 Navigation Footer -->
+        <div class="terminal-panel-nav-footer">
+          <div class="panel-step-label">DESK 05 OF 05 // FINANCIAL NEWS &amp; STORIES</div>
+          <div class="panel-footer-actions">
+            <button type="button" class="btn-prev-panel-step" data-target="tab-screeners">
+              ← Desk 04: Screeners &amp; Global Macro
+            </button>
+            <button type="button" class="btn-next-panel-step" data-target="tab-charts">
+              Cycle Back to Desk 01: Charts &amp; Benchmarks ⟳
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Global Mega Footer -->
+  <mega-footer></mega-footer>
+
+  <!-- Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/MegaFooter.js"></script>
+  <script src="lib/finnhub-stream.js"></script>
+  <script src="lib/alphavantage-service.js"></script>
+
+  <!-- Terminal Orchestrator Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Live Clock
+      const clockEl = document.getElementById('terminal-live-clock');
+      function updateClock() {
+        const now = new Date();
+        if (clockEl) {
+          clockEl.textContent = `UTC: ${now.toUTCString().slice(17, 25)} | LAGOS: ${now.toLocaleTimeString('en-US', { timeZone: 'Africa/Lagos' })}`;
+        }
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // 2. Initialize Finnhub WebSocket
+      if (window.finnhubStream) {
+        window.finnhubStream.init();
+      }
+
+      // 3. Initialize Alpha Vantage Benchmarks
+      if (window.alphaVantageService) {
+        window.alphaVantageService.getAllCommodities().then(data => {
+          if (data.wti) {
+            const wtiVal = document.getElementById('val-macro-wti');
+            const wtiPct = document.getElementById('pct-macro-wti');
+            if (wtiVal) wtiVal.textContent = `$${data.wti.price.toFixed(2)}`;
+            if (wtiPct) wtiPct.textContent = data.wti.change;
+          }
+          if (data.brent) {
+            const brentVal = document.getElementById('val-macro-brent');
+            const brentPct = document.getElementById('pct-macro-brent');
+            if (brentVal) brentVal.textContent = `$${data.brent.price.toFixed(2)}`;
+            if (brentPct) brentPct.textContent = data.brent.change;
+          }
+          if (data.natural_gas) {
+            const gasVal = document.getElementById('macro-val-gas');
+            if (gasVal) gasVal.textContent = `$${data.natural_gas.price.toFixed(2)}`;
+          }
+          if (data.wheat) {
+            const wheatVal = document.getElementById('macro-val-wheat');
+            if (wheatVal) wheatVal.textContent = `$${data.wheat.price.toFixed(2)}`;
+          }
+        });
+
+        window.alphaVantageService.getExchangeRate('USD', 'NGN').then(rateData => {
+          if (rateData && rateData.rate) {
+            const fxEl = document.getElementById('val-fx-usdngn');
+            if (fxEl) fxEl.textContent = `₦${rateData.rate.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+          }
+        });
+      }
+
+      // 4. Interactive Tab Navigation & Auto-Cycle Desk Patrol
+      const tabBtns = Array.from(document.querySelectorAll('.terminal-tab-btn'));
+      const panels = Array.from(document.querySelectorAll('.terminal-panel'));
+      const tabsWrapper = document.getElementById('terminal-tabs-wrapper');
+      const cycleStatusPill = document.getElementById('cycle-status-pill');
+      const cycleStatusText = document.getElementById('cycle-status-text');
+      const cycleCountdownEl = document.getElementById('cycle-timer-countdown');
+      const btnToggleCycle = document.getElementById('btn-toggle-cycle');
+      const cycleToggleIcon = document.getElementById('cycle-toggle-icon');
+      const cycleToggleLabel = document.getElementById('cycle-toggle-label');
+      const cycleDurationSelect = document.getElementById('cycle-duration-select');
+      const btnTabPrev = document.getElementById('btn-tab-prev');
+      const btnTabNext = document.getElementById('btn-tab-next');
+
+      let cycleDuration = 60; // default 60 seconds (1 minute)
+      let timeRemaining = cycleDuration;
+      let cycleEnabled = true;
+      let isPausedByHover = false;
+      let activeIndex = 0;
+
+      function switchTab(index, userInitiated = false, scrollIntoView = false) {
+        if (index < 0) index = tabBtns.length - 1;
+        if (index >= tabBtns.length) index = 0;
+        activeIndex = index;
+
+        const activeBtn = tabBtns[index];
+        const targetId = activeBtn.getAttribute('data-tab');
+
+        tabBtns.forEach((b, i) => {
+          const isActive = (i === index);
+          b.classList.toggle('active', isActive);
+          const fill = b.querySelector('.tab-progress-fill');
+          if (fill) {
+            fill.style.width = '0%';
+          }
+        });
+
+        panels.forEach(p => {
+          const isActive = (p.id === targetId);
+          p.classList.toggle('active', isActive);
+        });
+
+        // Ensure active tab is visible in horizontal overflow
+        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+        // If clicked from panel footer, smoothly scroll up to tabs
+        if (scrollIntoView && tabsWrapper) {
+          const topOffset = tabsWrapper.getBoundingClientRect().top + window.pageYOffset - 90;
+          window.scrollTo({ top: topOffset, behavior: 'smooth' });
+        }
+
+        // Trigger resize for TradingView charts
+        window.dispatchEvent(new Event('resize'));
+
+        // Reset countdown timer
+        timeRemaining = cycleDuration;
+        updateTimerDisplay();
+      }
+
+      function updateTimerDisplay() {
+        if (!cycleCountdownEl) return;
+        cycleCountdownEl.textContent = `${Math.ceil(timeRemaining)}s`;
+
+        // Update progress bar fill on active tab
+        const activeBtn = tabBtns[activeIndex];
+        if (activeBtn) {
+          const fill = activeBtn.querySelector('.tab-progress-fill');
+          if (fill) {
+            const pct = Math.min(100, Math.max(0, ((cycleDuration - timeRemaining) / cycleDuration) * 100));
+            fill.style.width = `${pct}%`;
+          }
+        }
+      }
+
+      // Tab button clicks
+      tabBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', () => switchTab(idx, true));
+      });
+
+      // Panel footer step buttons
+      document.querySelectorAll('.btn-next-panel-step, .btn-prev-panel-step').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const targetIdx = tabBtns.findIndex(b => b.getAttribute('data-tab') === targetId);
+          if (targetIdx !== -1) {
+            switchTab(targetIdx, true, true);
+          }
+        });
+      });
+
+      // Quick Arrow Buttons
+      btnTabPrev?.addEventListener('click', () => switchTab(activeIndex - 1, true));
+      btnTabNext?.addEventListener('click', () => switchTab(activeIndex + 1, true));
+
+      // Toggle Play / Pause
+      btnToggleCycle?.addEventListener('click', () => {
+        cycleEnabled = !cycleEnabled;
+        if (cycleEnabled) {
+          cycleToggleIcon.textContent = '⏸';
+          cycleToggleLabel.textContent = 'Pause Auto-Cycle';
+          cycleStatusPill?.classList.remove('paused');
+          if (cycleStatusText) cycleStatusText.textContent = 'DESK PATROL ACTIVE';
+        } else {
+          cycleToggleIcon.textContent = '▶';
+          cycleToggleLabel.textContent = 'Resume Auto-Cycle';
+          cycleStatusPill?.classList.add('paused');
+          if (cycleStatusText) cycleStatusText.textContent = 'AUTO-CYCLE PAUSED';
+        }
+      });
+
+      // Duration selector change
+      cycleDurationSelect?.addEventListener('change', (e) => {
+        cycleDuration = parseInt(e.target.value, 10) || 60;
+        timeRemaining = cycleDuration;
+        updateTimerDisplay();
+      });
+
+      // Pause when mouse is inspecting terminal panel
+      const terminalPageWrap = document.querySelector('.terminal-page-wrap');
+      terminalPageWrap?.addEventListener('mouseenter', () => {
+        if (cycleEnabled) {
+          isPausedByHover = true;
+          cycleStatusPill?.classList.add('paused');
+          if (cycleStatusText) cycleStatusText.textContent = 'PAUSED (INSPECTING)';
+        }
+      });
+      terminalPageWrap?.addEventListener('mouseleave', () => {
+        if (cycleEnabled) {
+          isPausedByHover = false;
+          cycleStatusPill?.classList.remove('paused');
+          if (cycleStatusText) cycleStatusText.textContent = 'DESK PATROL ACTIVE';
+        }
+      });
+
+      // Countdown loop (100ms interval for smooth progress bar)
+      setInterval(() => {
+        if (!cycleEnabled || isPausedByHover) return;
+
+        timeRemaining -= 0.1;
+        if (timeRemaining <= 0) {
+          switchTab((activeIndex + 1) % tabBtns.length);
+        } else {
+          updateTimerDisplay();
+        }
+      }, 100);
+
+      // Keyboard navigation (Alt+ArrowLeft / Alt+ArrowRight)
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.key === 'ArrowRight') {
+          e.preventDefault();
+          switchTab(activeIndex + 1, true);
+        } else if (e.altKey && e.key === 'ArrowLeft') {
+          e.preventDefault();
+          switchTab(activeIndex - 1, true);
+        }
+      });
+
+      // 5. URL Hash / Query Parameter Deep-Linking & Initial State
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialTabParam = urlParams.get('tab') || window.location.hash.replace('#', '');
+      if (initialTabParam) {
+        const foundIdx = tabBtns.findIndex(b => 
+          b.getAttribute('data-tab') === initialTabParam || 
+          b.getAttribute('data-tab') === `tab-${initialTabParam}`
+        );
+        if (foundIdx !== -1) {
+          switchTab(foundIdx, false);
+        }
+      }
+
+      if (urlParams.get('paused') === 'true') {
+        cycleEnabled = false;
+        cycleToggleIcon.textContent = '▶';
+        cycleToggleLabel.textContent = 'Resume Auto-Cycle';
+        cycleStatusPill?.classList.add('paused');
+        if (cycleStatusText) cycleStatusText.textContent = 'AUTO-CYCLE PAUSED';
+      }
+
+      if (urlParams.get('inspecting') === 'true') {
+        cycleStatusPill?.classList.add('paused');
+        if (cycleStatusText) cycleStatusText.textContent = 'PAUSED (INSPECTING)';
+      }
+
+      const scrollTarget = urlParams.get('scroll');
+      if (scrollTarget === 'tabs') {
+        setTimeout(() => {
+          if (tabsWrapper) {
+            const topOffset = tabsWrapper.getBoundingClientRect().top + window.pageYOffset - 90;
+            window.scrollTo({ top: topOffset, behavior: 'auto' });
+          }
+        }, 150);
+      } else if (scrollTarget === 'footer') {
+        setTimeout(() => {
+          const activePanelFooter = document.querySelector('.terminal-panel.active .terminal-panel-nav-footer');
+          if (activePanelFooter) {
+            const topOffset = activePanelFooter.getBoundingClientRect().top + window.pageYOffset - 180;
+            window.scrollTo({ top: topOffset, behavior: 'auto' });
+          }
+        }, 300);
+      }
+
+
+      // 5. Theme synchronization for TradingView
+      window.addEventListener('renalytica:theme-changed', (e) => {
+        const theme = e.detail?.theme || 'light';
+        document.querySelectorAll('.tradingview-widget-container script').forEach(s => {
+          // Notify chart instance if present
+          if (typeof renderAdvancedChart === 'function') {
+            renderAdvancedChart();
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Elfsight AI Chatbot | Floating Widget -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <div class="elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d" data-elfsight-app-lazy></div>
+</body>
+</html>

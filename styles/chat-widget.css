@@ -1,0 +1,429 @@
+/* ==========================================================================
+   RENALYTICA NATIVE MULTI-CHANNEL CHAT WIDGET STYLES
+   Direct Human Research & Data Analysis Support Desk
+   ========================================================================== */
+
+.renalytica-chat-widget {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  z-index: 99990;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Floating Launcher Button
+   -------------------------------------------------------------------------- */
+.chat-launcher-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-momentum, #FF8000);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 128, 0, 0.42), 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+}
+
+.chat-launcher-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 128, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chat-launcher-btn:active {
+  transform: scale(0.96);
+}
+
+.chat-launcher-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.chat-launcher-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* Red Notification Dot */
+.chat-launcher-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #EF4444;
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+  animation: pulseBadge 2s infinite;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Tooltip on Hover */
+.chat-launcher-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  background: #0A0A0A;
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.chat-launcher-btn:hover .chat-launcher-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   2. Chat Modal / Popup Card
+   -------------------------------------------------------------------------- */
+.chat-card-popup {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 350px;
+  max-width: calc(100vw - 32px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.12);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px) scale(0.92);
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.renalytica-chat-widget.is-open .chat-card-popup {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.renalytica-chat-widget.is-open .chat-launcher-btn {
+  background: #111827;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.renalytica-chat-widget.is-open .chat-launcher-badge {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Card Header
+   -------------------------------------------------------------------------- */
+.chat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: #F3F4F6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .chat-card-header {
+  background: #161B22;
+  border-bottom: 1px solid #30363D;
+}
+
+.chat-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar-frame {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.chat-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chat-online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  background-color: #00D26A;
+  border: 2.5px solid #FFFFFF;
+  border-radius: 50%;
+}
+
+[data-theme="dark"] .chat-online-dot {
+  border-color: #161B22;
+}
+
+.chat-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .chat-header-title {
+  color: #F9FAFB;
+}
+
+.chat-header-subtitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4B5563;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .chat-header-subtitle {
+  color: #9CA3AF;
+}
+
+.chat-close-btn {
+  background: none;
+  border: none;
+  color: #6B7280;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.15s ease;
+}
+
+.chat-close-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #111827;
+}
+
+[data-theme="dark"] .chat-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   4. Card Body (Vibrant Renalytica Orange)
+   -------------------------------------------------------------------------- */
+.chat-card-body {
+  background: var(--accent-momentum, #FF8000);
+  background: linear-gradient(180deg, #FF8A00 0%, #FF8000 100%);
+  padding: 18px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.chat-timestamp {
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: rgba(90, 45, 0, 0.55);
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+}
+
+/* Assistant Message Bubble */
+.chat-bubble-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.bubble-avatar-mini {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.bubble-avatar-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chat-message-bubble {
+  background: #FFFFFF;
+  color: #111827;
+  padding: 14px 18px;
+  border-radius: 4px 18px 18px 18px;
+  font-size: 0.94rem;
+  line-height: 1.45;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.chat-message-bubble::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 8px 6px 0;
+  border-color: transparent #FFFFFF transparent transparent;
+}
+
+/* Channel CTA & Icons */
+.chat-channels-heading {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.chat-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  justify-items: center;
+}
+
+.channel-pill-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #060D20;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(6, 13, 32, 0.35);
+}
+
+.channel-pill-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.channel-pill-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  background: #0F1D44;
+  box-shadow: 0 8px 20px rgba(6, 13, 32, 0.5);
+  color: #FFFFFF;
+}
+
+.channel-pill-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* Individual Channel Hover Accents */
+.channel-pill-btn.btn-twitter:hover { background: #000000; }
+.channel-pill-btn.btn-whatsapp:hover { background: #25D366; }
+.channel-pill-btn.btn-phone:hover { background: #0EA5E9; }
+.channel-pill-btn.btn-instagram:hover { background: #E1306C; }
+.channel-pill-btn.btn-email:hover { background: #EA4335; }
+.channel-pill-btn.btn-telegram:hover { background: #229ED9; }
+
+/* Micro Tooltip for channels */
+.channel-pill-btn[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #060D20;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.channel-pill-btn:hover[data-tip]::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   5. Responsive Behavior
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .renalytica-chat-widget {
+    bottom: 84px;
+    right: 16px;
+  }
+
+  .chat-card-popup {
+    width: calc(100vw - 32px);
+    right: 0;
+    bottom: 66px;
+  }
+
+  .chat-channels-grid {
+    gap: 6px;
+  }
+
+  .channel-pill-btn {
+    width: 40px;
+    height: 40px;
+  }
+}

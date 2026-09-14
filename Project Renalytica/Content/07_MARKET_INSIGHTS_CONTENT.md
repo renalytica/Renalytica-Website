@@ -276,7 +276,7 @@ To empower visiting strategy executives and financial analysts, the Market Insig
 * **Action Buttons:**
   * `Browse All Research Reports (2,500+ Reports) →` (Color: `#FF8000`)
   * `Commission a Custom Feasibility Study`
-  * `Direct WhatsApp Chat: +234 813 753 8723`
+  * `Direct WhatsApp Chat: +234 902 084 6138`
 * **Direct Office Contacts:**
   * **Editorial Desk:** `insights@renalytica.com`
   * **Research Store Support:** `sales@renalytica.com`

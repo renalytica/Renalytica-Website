@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institutional Checkout &amp; Settlement Desk — Renalytica</title>
+  <meta name="description" content="Authorize and settle commercial licenses for Renalytica institutional market research publications. Encrypted multi-gateway checkout with instant deliverable access.">
+  <link rel="canonical" href="https://www.renalytica.com/checkout">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/checkout.css">
+
+  <!-- Early Theme Initialization -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- 1. Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- 2. Global Sticky Header Navigation -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    <section class="checkout-page-section">
+      <div class="checkout-container">
+        
+        <!-- 3-Step Jay Gadgets Progress Stepper Bar -->
+        <div class="checkout-stepper-bar">
+          <div class="stepper-brand-box">
+            <img src="assets/brand/renalytica_emblem.png" alt="Renalytica" class="stepper-brand-logo" style="width:28px;height:28px;border-radius:6px;object-fit:contain;">
+            <span class="stepper-brand-name">Renalytica</span>
+            <span class="stepper-pipe">|</span>
+            <span class="stepper-subtitle">Institutional Settlement Desk</span>
+          </div>
+          
+          <div class="stepper-steps-wrap">
+            <a href="reports.html" class="step-node step-completed" id="stepper-step-1" title="Review publications">
+              <span class="step-check-icon">✓</span>
+              <span>1 Products Information</span>
+            </a>
+            <span class="step-chevron-divider">&gt;&gt;&gt;&gt;</span>
+            <div class="step-node step-active" id="stepper-step-2">
+              <span class="step-badge-num" id="step-2-badge">2</span>
+              <span>2 Payment Details</span>
+            </div>
+            <span class="step-chevron-divider">&gt;&gt;&gt;&gt;</span>
+            <div class="step-node" id="stepper-step-3">
+              <span class="step-badge-num" id="step-3-badge">3</span>
+              <span>3 Complete Order</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             STATE A: ACTIVE CHECKOUT VIEW (Step 2)
+             ==================================================================== -->
+        <div id="checkout-active-view">
+          <div class="checkout-inspo-grid">
+            
+            <!-- LEFT COLUMN: Payment Details Form -->
+            <div class="checkout-payment-col">
+              <div class="inspo-payment-card">
+                <div class="inspo-card-header">
+                  <h1 class="inspo-main-title">Payment Details</h1>
+                  <p class="inspo-subtitle">
+                    Complete your purchase quickly and securely with bank-grade 256-bit TLS encryption.
+                  </p>
+                </div>
+
+                <form id="checkout-procurement-form" autocomplete="on">
+                  
+                  <!-- Email Address -->
+                  <div class="checkout-form-group">
+                    <label class="checkout-form-label" for="buyer-email">Official Corporate Email *</label>
+                    <input type="email" id="buyer-email" class="checkout-form-input" placeholder="e.g. procurement@institutional-client.com" required>
+                  </div>
+
+                  <!-- Full Name & Organization Grid -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="checkout-form-group">
+                      <label class="checkout-form-label" for="buyer-name">Full Name *</label>
+                      <input type="text" id="buyer-name" class="checkout-form-input" placeholder="e.g. Dr. Kwame Mensah" required>
+                    </div>
+                    <div class="checkout-form-group">
+                      <label class="checkout-form-label" for="buyer-org">Organization / Department *</label>
+                      <input type="text" id="buyer-org" class="checkout-form-input" placeholder="e.g. Standard Bank Africa" required>
+                    </div>
+                  </div>
+
+                  <!-- Country / Operational Jurisdiction -->
+                  <div class="checkout-form-group">
+                    <label class="checkout-form-label" for="buyer-country">Country / Tax Jurisdiction</label>
+                    <select id="buyer-country" class="checkout-form-select">
+                      <option value="US" selected>United States &amp; International (USD)</option>
+                      <option value="NG">Nigeria (NGN)</option>
+                      <option value="GH">Ghana (GHS)</option>
+                      <option value="KE">Kenya (KES)</option>
+                      <option value="ZA">South Africa (ZAR)</option>
+                      <option value="GB">United Kingdom (GBP)</option>
+                      <option value="EU">European Union (EUR)</option>
+                    </select>
+                  </div>
+
+                  <!-- Payment Method Selector Grid -->
+                  <div style="margin-top: 1.25rem;">
+                    <label class="checkout-form-label">Select Payment Method *</label>
+                    <div class="pm-selector-grid">
+                      
+                      <!-- 1. Debit/Credit Card (Default) -->
+                      <div class="pm-select-card active" data-method="card" id="pm-card-btn" role="button" tabindex="0">
+                        <div class="pm-card-left">
+                          <span style="font-size: 1.2rem;">💳</span>
+                          <span>Debit/Credit Card</span>
+                        </div>
+                        <span class="pm-check-indicator">✓</span>
+                      </div>
+
+                      <!-- 2. Virtual Account / Bank Transfer -->
+                      <div class="pm-select-card" data-method="transfer" id="pm-transfer-btn" role="button" tabindex="0">
+                        <div class="pm-card-left">
+                          <span style="font-size: 1.2rem;">🏦</span>
+                          <span>Virtual Account / Transfer</span>
+                        </div>
+                        <span class="pm-check-indicator">✓</span>
+                      </div>
+
+                      <!-- 3. SWIFT Wire -->
+                      <div class="pm-select-card" data-method="wire" id="pm-wire-btn" role="button" tabindex="0">
+                        <div class="pm-card-left">
+                          <span style="font-size: 1.2rem;">🏛️</span>
+                          <span>SWIFT Wire</span>
+                        </div>
+                        <span class="pm-check-indicator">✓</span>
+                      </div>
+
+                      <!-- 4. Corporate PO -->
+                      <div class="pm-select-card" data-method="po" id="pm-po-btn" role="button" tabindex="0">
+                        <div class="pm-card-left">
+                          <span style="font-size: 1.2rem;">📄</span>
+                          <span>Purchase Order</span>
+                        </div>
+                        <span class="pm-check-indicator">✓</span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Card Brand Radio / Pills Row & Interactive Form -->
+                  <div id="card-method-container">
+                    <div class="card-brands-row">
+                      <label class="brand-radio-label">
+                        <input type="radio" name="card-brand" value="card_auto" checked>
+                        <span class="brand-pill-text verve">VERVE</span>
+                      </label>
+                      <label class="brand-radio-label">
+                        <input type="radio" name="card-brand" value="mastercard">
+                        <span class="brand-pill-text mastercard">Mastercard</span>
+                      </label>
+                      <label class="brand-radio-label">
+                        <input type="radio" name="card-brand" value="visa">
+                        <span class="brand-pill-text" style="background:#1A1F71;">VISA</span>
+                      </label>
+                      <label class="brand-radio-label">
+                        <input type="radio" name="card-brand" value="flutterwave">
+                        <span class="brand-pill-text flutterwave">Flutterwave</span>
+                      </label>
+                      <label class="brand-radio-label">
+                        <input type="radio" name="card-brand" value="paypal">
+                        <span class="brand-pill-text paypal">PayPal</span>
+                      </label>
+                    </div>
+
+                    <!-- Card Details Form Subbox -->
+                    <div class="card-details-subbox" id="card-fields-subbox">
+                      <div class="checkout-form-group" style="margin-bottom: 0.85rem;">
+                        <label class="checkout-form-label" for="card-num-input">Card Number</label>
+                        <input type="text" id="card-num-input" class="checkout-form-input" placeholder="•••• •••• •••• ••••" maxlength="19">
+                      </div>
+                      <div class="card-details-grid">
+                        <div class="checkout-form-group" style="margin-bottom: 0;">
+                          <label class="checkout-form-label" for="card-exp-input">Expiry Date</label>
+                          <input type="text" id="card-exp-input" class="checkout-form-input" placeholder="MM / YY" maxlength="5">
+                        </div>
+                        <div class="checkout-form-group" style="margin-bottom: 0;">
+                          <label class="checkout-form-label" for="card-cvv-input">CVV / CVC</label>
+                          <input type="password" id="card-cvv-input" class="checkout-form-input" placeholder="•••" maxlength="4">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bank Transfer Info Box -->
+                  <div id="transfer-info-box" style="display:none; background: var(--surface-gray, #F8FAFC); border: 1.5px dashed var(--border-strong, #CBD5E1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.55;">
+                    <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">🏦 Instant Dynamic Virtual Account:</strong>
+                    Selecting "Process Payment" will invoke our Flutterwave Settlement Engine to generate a dedicated single-use dynamic account number. Settle via mobile bank app for immediate deliverable release in 10–30 seconds.
+                  </div>
+
+                  <!-- SWIFT Wire Info Box -->
+                  <div id="wire-info-box" style="display:none; background: var(--surface-gray, #F8FAFC); border: 1.5px dashed var(--border-strong, #CBD5E1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.55;">
+                    <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">🏛️ Institutional SWIFT Wire Proforma:</strong>
+                    Direct settlement via Standard Bank / Correspondent clearing bank. An official Proforma Invoice with routing instructions (SWIFT / IBAN) and tax certificates will be generated for your Treasury team.
+                  </div>
+
+                  <!-- Corporate PO Info Box -->
+                  <div id="po-info-box" style="display:none; background: var(--surface-gray, #F8FAFC); border: 1.5px dashed var(--border-strong, #CBD5E1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.55;">
+                    <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">📄 Corporate Purchase Order (Net-30):</strong>
+                    For approved institutional subscribers. We dispatch an official VAT-compliant commercial invoice to Accounts Payable with Net-30 payment terms and provision provisional portal access.
+                  </div>
+
+                  <!-- Terms Agreement -->
+                  <div class="checkout-terms-row" style="margin: 1.25rem 0 1.5rem;">
+                    <input type="checkbox" id="checkout-terms-agree" required checked>
+                    <label for="checkout-terms-agree" style="font-size: 0.84rem; line-height: 1.5;">
+                      I agree to the Renalytica <a href="terms.html" target="_blank">Terms of Service</a>, commercial licensing agreement, and acknowledge our <a href="gdpr.html" target="_blank">GDPR Data Protection</a> &amp; <a href="privacy.html" target="_blank">Privacy Policy</a>.
+                    </label>
+                  </div>
+
+                  <!-- Primary CTA Button -->
+                  <button type="submit" id="checkout-execute-btn" class="btn-process-payment">
+                    <span>🔒 Process Payment</span>
+                  </button>
+
+                  <!-- Secondary Option: Request Proforma -->
+                  <button type="button" id="checkout-direct-proforma-btn" class="checkout-proforma-secondary-btn" style="margin-top: 0.85rem; width: 100%;">
+                    📄 Request Corporate Proforma (.pdf)
+                  </button>
+
+                </form>
+
+                <!-- Trust Strip -->
+                <div class="checkout-trust-strip" style="margin-top: 1.75rem;">
+                  <div class="trust-badge-item">
+                    <span>🔒</span>
+                    <span>256-Bit TLS Encryption</span>
+                  </div>
+                  <div class="trust-badge-item">
+                    <span>⚡</span>
+                    <span>Instant Portal Unlock</span>
+                  </div>
+                  <div class="trust-badge-item">
+                    <span>📋</span>
+                    <span>Official VAT Invoicing</span>
+                  </div>
+                  <div class="trust-badge-item">
+                    <span>🛡️</span>
+                    <span>Corporate NDA Protection</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Jay Gadgets Inspired Dark Order Summary Card -->
+            <div class="checkout-overview-col">
+              <div class="jay-gadget-card" id="jay-overview-card">
+                
+                <!-- Top Badge Row: License Bubble & Currency Switcher -->
+                <div class="jay-top-badge-row">
+                  <div class="jay-color-pill">
+                    <span class="jay-color-bubble" id="jay-license-bubble"></span>
+                    <span id="jay-license-label">DEPARTMENTAL LICENSE</span>
+                  </div>
+                  <div class="jay-currency-toggle">
+                    <button type="button" class="jay-currency-btn active" data-cur="USD" id="cur-usd-btn">USD $</button>
+                    <button type="button" class="jay-currency-btn" data-cur="NGN" id="cur-ngn-btn">NGN ₦</button>
+                  </div>
+                </div>
+
+                <!-- Product Visual Preview Box -->
+                <div class="jay-preview-visual-box">
+                  <img id="jay-product-img" src="assets/images/industrial_grain_silos.jpg" alt="Report Preview" class="jay-preview-img">
+                </div>
+
+                <!-- Product Title & Overview -->
+                <div class="jay-title-box">
+                  <h2 class="jay-product-title" id="jay-product-title">Institutional Research Report</h2>
+                  <p class="jay-product-desc" id="jay-product-desc">
+                    Includes unlocked econometric model, Monte Carlo scenario engine, and executive boardroom presentation suite.
+                  </p>
+                </div>
+
+                <!-- Multiple Items Badge / Expander if > 1 publication in cart -->
+                <div id="jay-cart-multi-list" style="display:none; margin-bottom: 1.25rem; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.75rem;">
+                  <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94A3B8; margin-bottom: 0.5rem;" id="jay-multi-badge">
+                    Cart Items (2 Publications):
+                  </div>
+                  <div id="jay-multi-items-container" style="display: flex; flex-direction: column; gap: 6px;"></div>
+                </div>
+
+                <!-- License Tier Selector -->
+                <div style="margin-bottom: 1.25rem;">
+                  <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94A3B8; display: block; margin-bottom: 0.35rem;">
+                    License Tier:
+                  </label>
+                  <select id="jay-license-select" class="checkout-license-dropdown" style="width:100%; background:#242731; color:#FFF; border-color:rgba(255,255,255,0.2);">
+                    <option value="single">Single User License</option>
+                    <option value="departmental" selected>Departmental License (Recommended)</option>
+                    <option value="enterprise">Global Enterprise License</option>
+                  </select>
+                </div>
+
+                <!-- Promo / Voucher Code Input -->
+                <div style="margin-bottom: 1.25rem;">
+                  <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94A3B8; display: block; margin-bottom: 0.35rem;">
+                    Institutional Promo / Voucher Code:
+                  </label>
+                  <div class="checkout-promo-box" style="display: flex; gap: 8px;">
+                    <input type="text" id="checkout-promo-input" class="checkout-promo-input" placeholder="e.g. INSTITUTION10" style="background: rgba(255,255,255,0.06); color: #FFF; border-color: rgba(255,255,255,0.15); font-size: 0.88rem;">
+                    <button type="button" id="checkout-promo-btn" class="checkout-promo-btn" style="background: var(--accent-momentum, #FF8000); color: #FFF; border: none; border-radius: 8px; padding: 0 1.15rem; font-weight: 800; cursor: pointer; transition: all 0.2s;">Apply</button>
+                  </div>
+                  <small id="promo-feedback-msg" style="display: block; font-size: 0.76rem; margin-top: 0.35rem; color: #94A3B8;">
+                    Try <code>INSTITUTION10</code> for an instant 10% institutional partner allowance.
+                  </small>
+                </div>
+
+                <!-- Price Breakdown Rows -->
+                <div class="jay-price-breakdown">
+                  <div class="jay-price-row">
+                    <span>Briefcase Subtotal</span>
+                    <span id="checkout-subtotal-val">$0 USD</span>
+                  </div>
+                  <div class="jay-price-row" id="checkout-discount-row" style="display:none; color: #10B981;">
+                    <span>Institutional Discount (10%)</span>
+                    <span id="checkout-discount-val">-$0 USD</span>
+                  </div>
+                  <div class="jay-price-row">
+                    <span>Cross-Border Advisory VAT</span>
+                    <span>EXEMPT (0%)</span>
+                  </div>
+                  <div class="jay-price-row total-row">
+                    <span>Total Due</span>
+                    <span class="jay-total-value accent" id="checkout-total-val">$0 USD</span>
+                  </div>
+                </div>
+
+                <!-- Deliverables Checklist -->
+                <div class="jay-deliverables-box">
+                  <ul>
+                    <li><span class="jay-check-green">✓</span> Institutional Watermarked PDF Dossier</li>
+                    <li><span class="jay-check-green">✓</span> Dynamic Financial Econometric Model (.xlsx)</li>
+                    <li><span class="jay-check-green">✓</span> Executive Boardroom Presentation (.pptx)</li>
+                    <li><span class="jay-check-green">✓</span> Direct Access in Client Intelligence Portal</li>
+                  </ul>
+                </div>
+
+                <!-- Back link -->
+                <div style="text-align: center; margin-top: 1.25rem;">
+                  <a href="reports.html" style="font-size: 0.82rem; color: #94A3B8; text-decoration: none; transition: color 0.2s;">
+                    ← Return to Research Store Catalog
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             STATE B: CELEBRATORY CONFIRMATION SCREEN (Step 3: Complete Order)
+             Triggered upon successful payment callback or verified transaction
+             ==================================================================== -->
+        <div id="payment-success-screen" style="display: none;">
+          <div class="checkout-success-view">
+            
+            <!-- Pulsing Green Animated Checkmark -->
+            <div class="success-badge-pulse">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            
+            <h2 class="success-title">Payment Successful!</h2>
+            <p class="success-desc">
+              Your commercial research license has been confirmed and provisioned. Official VAT commercial invoice and licensing certificates have been dispatched to your procurement email.
+            </p>
+
+            <!-- Order Reference & Transaction Details Card -->
+            <div class="success-meta-card">
+              <div class="success-meta-item">
+                <div class="meta-label">Order Reference</div>
+                <div class="meta-val" id="success-order-ref">#RNLY-ORD-849201</div>
+              </div>
+              <div class="success-meta-item">
+                <div class="meta-label">Settlement Amount</div>
+                <div class="meta-val" id="success-order-amount">$4,500 USD</div>
+              </div>
+              <div class="success-meta-item">
+                <div class="meta-label">Procurement Email</div>
+                <div class="meta-val" id="success-order-email">user@client.com</div>
+              </div>
+              <div class="success-meta-item">
+                <div class="meta-label">Deliverable Access</div>
+                <div class="meta-val" style="color: #10B981;">INSTANT UNLOCKED ✓</div>
+              </div>
+            </div>
+
+            <!-- Deliverables Ready -->
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.25rem; max-width: 620px; margin: 0 auto 2rem; text-align: left;">
+              <h4 style="margin: 0 0 0.5rem; color: #10B981; font-size: 0.95rem; font-weight: 800;">
+                📦 Your Deliverables Are Ready for Immediate Download:
+              </h4>
+              <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary, #52525B); line-height: 1.6;">
+                <li>Analytical Dossier (.pdf) with personalized institutional watermark</li>
+                <li>Dynamic Financial &amp; Econometric Model (.xlsx)</li>
+                <li>Executive Boardroom Briefing Slides (.pptx)</li>
+              </ul>
+            </div>
+
+            <!-- Action Buttons Row -->
+            <div class="success-actions-row">
+              <a href="portal.html?checkout=active" id="success-portal-btn" class="btn-success-portal">
+                <span>🚀 Open in Client Intelligence Portal</span>
+              </a>
+              <a href="reports.html" class="btn-success-store">
+                <span>← Continue Shopping</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <site-footer></site-footer>
+
+  <!-- Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/SiteFooter.js"></script>
+  <script src="lib/reports-repository.js"></script>
+  <script src="lib/flutterwave-checkout.js"></script>
+  <script src="lib/supabase-client.js"></script>
+
+  <!-- Checkout Logic & State Switcher -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const repo = window.ReportsRepository || window.RenalyticaReports;
+      if (!repo) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlReportId = urlParams.get('reportId');
+      const urlLicense = urlParams.get('license') || 'departmental';
+
+      // If arrived via direct "Buy Now", ensure report is present in cart
+      if (urlReportId) {
+        repo.addToCart(urlReportId, urlLicense);
+      }
+
+      // Check if arriving from a successful payment callback redirect
+      const isRedirectSuccess = urlParams.get('status') === 'successful' || urlParams.get('tx_ref') || urlParams.get('success') === 'true';
+
+      // DOM Elements
+      const activeView = document.getElementById('checkout-active-view');
+      const successView = document.getElementById('payment-success-screen');
+      const step1 = document.getElementById('stepper-step-1');
+      const step2 = document.getElementById('stepper-step-2');
+      const step3 = document.getElementById('stepper-step-3');
+
+      // Left Form
+      const procurementForm = document.getElementById('checkout-procurement-form');
+      const buyerEmail = document.getElementById('buyer-email');
+      const buyerName = document.getElementById('buyer-name');
+      const buyerOrg = document.getElementById('buyer-org');
+      const executeBtn = document.getElementById('checkout-execute-btn');
+      const proformaBtn = document.getElementById('checkout-direct-proforma-btn');
+
+      // Card Fields Box & PM Cards
+      const pmCards = document.querySelectorAll('.pm-select-card');
+      const cardContainer = document.getElementById('card-method-container');
+      const transferBox = document.getElementById('transfer-info-box');
+      const wireBox = document.getElementById('wire-info-box');
+      const poBox = document.getElementById('po-info-box');
+      const cardNumInput = document.getElementById('card-num-input');
+      const cardExpInput = document.getElementById('card-exp-input');
+      const cardCvvInput = document.getElementById('card-cvv-input');
+
+      // Right Overview Card Elements
+      const jayImg = document.getElementById('jay-product-img');
+      const jayTitle = document.getElementById('jay-product-title');
+      const jayDesc = document.getElementById('jay-product-desc');
+      const jayLicenseLabel = document.getElementById('jay-license-label');
+      const jayLicenseSelect = document.getElementById('jay-license-select');
+      const jayMultiList = document.getElementById('jay-cart-multi-list');
+      const jayMultiBadge = document.getElementById('jay-multi-badge');
+      const jayMultiContainer = document.getElementById('jay-multi-items-container');
+      
+      const subtotalVal = document.getElementById('checkout-subtotal-val');
+      const discountRow = document.getElementById('checkout-discount-row');
+      const discountVal = document.getElementById('checkout-discount-val');
+      const totalVal = document.getElementById('checkout-total-val');
+      
+      const promoInput = document.getElementById('checkout-promo-input');
+      const promoBtn = document.getElementById('checkout-promo-btn');
+      const promoMsg = document.getElementById('promo-feedback-msg');
+
+      // Success Elements
+      const successOrderRef = document.getElementById('success-order-ref');
+      const successOrderAmount = document.getElementById('success-order-amount');
+      const successOrderEmail = document.getElementById('success-order-email');
+      const successPortalBtn = document.getElementById('success-portal-btn');
+
+      // Currency Toggle Elements
+      const curUsdBtn = document.getElementById('cur-usd-btn');
+      const curNgnBtn = document.getElementById('cur-ngn-btn');
+
+      let discountRate = 0; // 0.10 for valid promo code
+      let currentPaymentMethod = 'card';
+
+      // Synchronize active currency UI
+      function updateCurrencyToggleUI() {
+        const activeCur = localStorage.getItem('renalytica_currency') || 'USD';
+        if (activeCur === 'NGN') {
+          curNgnBtn.classList.add('active');
+          curUsdBtn.classList.remove('active');
+        } else {
+          curUsdBtn.classList.add('active');
+          curNgnBtn.classList.remove('active');
+        }
+      }
+
+      curUsdBtn.addEventListener('click', () => {
+        localStorage.setItem('renalytica_currency', 'USD');
+        updateCurrencyToggleUI();
+        window.dispatchEvent(new CustomEvent('renalytica:currency-change', { detail: { currency: 'USD' } }));
+        renderCheckout();
+      });
+
+      curNgnBtn.addEventListener('click', () => {
+        localStorage.setItem('renalytica_currency', 'NGN');
+        updateCurrencyToggleUI();
+        window.dispatchEvent(new CustomEvent('renalytica:currency-change', { detail: { currency: 'NGN' } }));
+        renderCheckout();
+      });
+
+      // Price Formatter Helper
+      function formatPrice(usdAmount) {
+        if (typeof window.formatPriceWithActiveCurrency === 'function') {
+          return window.formatPriceWithActiveCurrency(usdAmount);
+        }
+        return '$' + Number(usdAmount || 0).toLocaleString() + ' USD';
+      }
+
+      // Format Card Number (adds spaces every 4 digits)
+      if (cardNumInput) {
+        cardNumInput.addEventListener('input', (e) => {
+          let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+          let formatted = v.match(/.{1,4}/g)?.join(' ') || v;
+          e.target.value = formatted;
+        });
+      }
+
+      // Format Expiry (MM / YY)
+      if (cardExpInput) {
+        cardExpInput.addEventListener('input', (e) => {
+          let v = e.target.value.replace(/\D/g, '').substring(0, 4);
+          if (v.length > 2) {
+            e.target.value = v.substring(0, 2) + ' / ' + v.substring(2);
+          } else {
+            e.target.value = v;
+          }
+        });
+      }
+
+      // Pre-fill user data if logged in
+      if (window.RenalyticaAuth) {
+        const u = window.RenalyticaAuth.getUser();
+        if (u) {
+          if (buyerEmail && !buyerEmail.value) buyerEmail.value = u.email || '';
+          if (buyerName && !buyerName.value) buyerName.value = u.fullName || '';
+          if (buyerOrg && !buyerOrg.value) buyerOrg.value = u.organization || '';
+        }
+      }
+
+      // Payment Method Selection Click
+      pmCards.forEach(card => {
+        card.addEventListener('click', () => {
+          pmCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          currentPaymentMethod = card.getAttribute('data-method') || 'card';
+
+          // Toggle visibility of subboxes
+          cardContainer.style.display = currentPaymentMethod === 'card' ? 'block' : 'none';
+          transferBox.style.display = currentPaymentMethod === 'transfer' ? 'block' : 'none';
+          wireBox.style.display = currentPaymentMethod === 'wire' ? 'block' : 'none';
+          poBox.style.display = currentPaymentMethod === 'po' ? 'block' : 'none';
+
+          // Update execute button text
+          updateExecuteBtnText();
+        });
+      });
+
+      function updateExecuteBtnText() {
+        const rawSubtotal = repo.getCartTotal();
+        const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
+        const formattedTotal = formatPrice(finalAmount);
+
+        if (currentPaymentMethod === 'card') {
+          executeBtn.innerHTML = `<span>🔒 Process Payment (${formattedTotal})</span>`;
+        } else if (currentPaymentMethod === 'transfer') {
+          executeBtn.innerHTML = `<span>⚡ Generate Virtual Account (${formattedTotal})</span>`;
+        } else if (currentPaymentMethod === 'wire') {
+          executeBtn.innerHTML = `<span>🏛️ Generate SWIFT Wire Proforma (${formattedTotal})</span>`;
+        } else {
+          executeBtn.innerHTML = `<span>📄 Issue Net-30 Purchase Order (${formattedTotal})</span>`;
+        }
+      }
+
+      // Render Checkout Overview & Items
+      function renderCheckout() {
+        updateCurrencyToggleUI();
+        let cart = repo.getCart();
+
+        // If cart is empty, fallback gracefully to default primary report for preview
+        if (cart.length === 0) {
+          const allReports = repo.getAll();
+          if (allReports && allReports.length > 0) {
+            // Auto-load premier report into cart
+            repo.addToCart(allReports[0].id, 'departmental');
+            cart = repo.getCart();
+          }
+        }
+
+        if (cart.length === 0) {
+          jayTitle.textContent = 'No Publication Selected';
+          jayDesc.textContent = 'Explore the research store to add institutional reports.';
+          subtotalVal.textContent = formatPrice(0);
+          totalVal.textContent = formatPrice(0);
+          executeBtn.disabled = true;
+          return;
+        }
+
+        executeBtn.disabled = false;
+
+        // Primary Item
+        const primaryItem = cart[0];
+        const rep = repo.getById(primaryItem.id);
+        
+        jayTitle.textContent = rep ? rep.title : primaryItem.title;
+        jayDesc.textContent = rep ? rep.executiveSummary : 'Institutional market intelligence, dynamic econometric models, and forecast datasets.';
+        
+        const cover = primaryItem.coverImage || (rep ? rep.coverImage : 'assets/images/industrial_grain_silos.jpg');
+        jayImg.src = cover;
+
+        // License label
+        const tierNameMap = {
+          single: 'SINGLE USER LICENSE',
+          departmental: 'DEPARTMENTAL LICENSE',
+          enterprise: 'GLOBAL ENTERPRISE LICENSE'
+        };
+        jayLicenseLabel.textContent = tierNameMap[primaryItem.licenseType] || 'DEPARTMENTAL LICENSE';
+        jayLicenseSelect.value = primaryItem.licenseType || 'departmental';
+
+        // If multiple items, show compact list
+        if (cart.length > 1) {
+          jayMultiList.style.display = 'block';
+          jayMultiBadge.textContent = `Cart Items (${cart.length} Publications):`;
+          jayMultiContainer.innerHTML = cart.map(i => {
+            const r = repo.getById(i.id);
+            const p = r ? (r.pricing[i.licenseType] || 4500) : 4500;
+            return `
+              <div style="display:flex; justify-content:space-between; align-items:center; color:#E2E8F0; font-size:0.8rem; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.06);">
+                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:280px;">• ${i.title}</span>
+                <span style="font-family:var(--font-mono, monospace); font-weight:700;">${formatPrice(p)}</span>
+              </div>
+            `;
+          }).join('');
+        } else {
+          jayMultiList.style.display = 'none';
+        }
+
+        // Totals Calculation
+        const rawSubtotal = repo.getCartTotal();
+        const discountAmount = Math.round(rawSubtotal * discountRate);
+        const finalTotal = rawSubtotal - discountAmount;
+
+        subtotalVal.textContent = formatPrice(rawSubtotal);
+        if (discountRate > 0) {
+          discountRow.style.display = 'flex';
+          discountVal.textContent = `-${formatPrice(discountAmount)}`;
+        } else {
+          discountRow.style.display = 'none';
+        }
+        totalVal.textContent = formatPrice(finalTotal);
+        updateExecuteBtnText();
+      }
+
+      // Handle license tier select changes in overview card
+      jayLicenseSelect.addEventListener('change', (e) => {
+        const cart = repo.getCart();
+        if (cart.length > 0) {
+          repo.updateLicense(cart[0].id, e.target.value);
+          renderCheckout();
+        }
+      });
+
+      // Promo Code Validation
+      promoBtn.addEventListener('click', () => {
+        const code = promoInput.value.trim().toUpperCase();
+        if (!code) return;
+        if (code === 'INSTITUTION10' || code === 'EXECUTIVE2026' || code === 'RENALYTICA') {
+          discountRate = 0.10;
+          promoMsg.textContent = `✓ Promo code '${code}' applied: 10% Institutional Discount verified!`;
+          promoMsg.style.color = '#10B981';
+          promoBtn.textContent = 'Applied ✓';
+          promoBtn.style.background = '#10B981';
+          renderCheckout();
+        } else {
+          promoMsg.textContent = `✕ Promo code '${code}' is invalid or expired.`;
+          promoMsg.style.color = '#EF4444';
+        }
+      });
+
+      // ======================================================================
+      // CELEBRATORY CONFIRMATION SCREEN TRIGGER (State Switcher)
+      // ======================================================================
+      function showPaymentSuccessScreen(orderDetails) {
+        // 1. Hide active view, reveal success view
+        activeView.style.display = 'none';
+        successView.style.display = 'block';
+
+        // 2. Update Stepper: Step 2 becomes completed, Step 3 becomes active
+        step2.classList.remove('step-active');
+        step2.classList.add('step-completed');
+        step2.innerHTML = `<span class="step-check-icon">✓</span> <span>2 Payment Details</span>`;
+
+        step3.classList.add('step-active');
+        step3.innerHTML = `<span class="step-badge-num" style="background:var(--signal-success, #10B981); color:#FFF;">✓</span> <span>3 Complete Order</span>`;
+
+        // 3. Populate Order Details in confirmation card
+        successOrderRef.textContent = orderDetails.ref || '#RNLY-ORD-' + Math.floor(100000 + Math.random() * 900000);
+        successOrderAmount.textContent = orderDetails.amount || '$4,500 USD';
+        successOrderEmail.textContent = orderDetails.email || 'procurement@client.com';
+        
+        if (orderDetails.ref) {
+          successPortalBtn.href = `portal.html?checkout=active&tx=${encodeURIComponent(orderDetails.ref)}`;
+        }
+
+        // 4. Scroll smoothly to top of confirmation card
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+
+        // 5. Clear cart
+        repo.clearCart();
+      }
+
+      // Check if page arrived with successful redirect status
+      if (isRedirectSuccess) {
+        const refParam = urlParams.get('tx_ref') || urlParams.get('transaction_id') || 'RNLY-ORD-' + Math.floor(100000 + Math.random() * 900000);
+        showPaymentSuccessScreen({
+          ref: refParam,
+          amount: '$4,500 USD',
+          email: 'procurement@client.com'
+        });
+        return;
+      }
+
+      // Form Submission -> Process Payment
+      procurementForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const cart = repo.getCart();
+        if (cart.length === 0) {
+          alert('Please select a publication before checking out.');
+          return;
+        }
+
+        const email = buyerEmail.value.trim();
+        const name = buyerName.value.trim();
+        const org = buyerOrg.value.trim();
+
+        const rawSubtotal = repo.getCartTotal();
+        const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
+        const activeCur = localStorage.getItem('renalytica_currency') || 'USD';
+        const reportIds = cart.map(i => i.id);
+        const title = cart.length === 1 ? cart[0].title : `Renalytica Research Briefcase (${cart.length} Publications)`;
+
+        if (currentPaymentMethod === 'card' || currentPaymentMethod === 'transfer') {
+          // Trigger Flutterwave Payment
+          if (window.RenalyticaPayment) {
+            window.RenalyticaPayment.pay({
+              amount: finalAmount,
+              currency: activeCur,
+              email: email,
+              customerName: name,
+              title: title,
+              reportIds: reportIds,
+              licenseType: cart[0].licenseType || 'departmental',
+              onSuccess: (rec) => {
+                // Trigger celebratory confirmation state switcher
+                showPaymentSuccessScreen({
+                  ref: rec.txRef || 'RNLY-ORD-' + Date.now(),
+                  amount: formatPrice(finalAmount),
+                  email: email
+                });
+              },
+              onClose: () => {
+                console.log('Payment modal closed');
+              }
+            });
+          } else {
+            // Fallback success transition
+            showPaymentSuccessScreen({
+              ref: 'RNLY-ORD-' + Date.now(),
+              amount: formatPrice(finalAmount),
+              email: email
+            });
+          }
+        } else if (currentPaymentMethod === 'wire') {
+          // SWIFT Wire Order Generation
+          const wireRef = 'SWIFT-' + Math.floor(100000 + Math.random() * 900000);
+          showPaymentSuccessScreen({
+            ref: wireRef,
+            amount: formatPrice(finalAmount),
+            email: email
+          });
+        } else {
+          // Corporate Purchase Order Net-30
+          const poRef = 'PO-' + Math.floor(100000 + Math.random() * 900000);
+          showPaymentSuccessScreen({
+            ref: poRef,
+            amount: formatPrice(finalAmount),
+            email: email
+          });
+        }
+      });
+
+      // Direct Proforma Generator Button
+      proformaBtn.addEventListener('click', () => {
+        const cart = repo.getCart();
+        const email = buyerEmail.value.trim() || 'procurement@client.com';
+        const rawSubtotal = repo.getCartTotal();
+        const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
+        const invRef = 'PF-' + Math.floor(100000 + Math.random() * 900000);
+
+        showPaymentSuccessScreen({
+          ref: invRef,
+          amount: formatPrice(finalAmount),
+          email: email
+        });
+      });
+
+      // Initial Render
+      renderCheckout();
+
+      // Listen for custom events
+      window.addEventListener('renalytica:currency-change', renderCheckout);
+      window.addEventListener('renalytica:cart-update', renderCheckout);
+    });
+  </script>
+</body>
+</html>

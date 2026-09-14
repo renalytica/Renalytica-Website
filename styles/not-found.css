@@ -1,0 +1,420 @@
+/**
+ * ==============================================================================
+ * RENALYTICA 404 STYLESHEET (styles/not-found.css)
+ * ==============================================================================
+ * Inspired by 3200kelvin.com & 404s.design.
+ * Features:
+ * - Rich warm terracotta gradient with ambient obsidian vignette falloff
+ * - Precision institutional telemetry labels
+ * - High-DPI responsive canvas container for the dot-matrix '404' motion graphic
+ * - Elegant rounded pill CTA button ('Go to home ↗') with hover lift
+ * - Ergonomic mobile responsive layout (390px - 768px - 1440px+)
+ * ==============================================================================
+ */
+
+:root {
+  --nf-terracotta-core: #C54016;
+  --nf-terracotta-mid: #9E2F0B;
+  --nf-terracotta-dark: #3E1104;
+  --nf-terracotta-deep: #140501;
+  
+  --nf-pill-bg: #E7C9BC;
+  --nf-pill-bg-hover: #FFFFFF;
+  --nf-pill-text: #701A03;
+  --nf-pill-text-hover: #5A1301;
+  
+  --nf-text-primary: #FFF1EB;
+  --nf-text-muted: rgba(255, 235, 225, 0.72);
+  --nf-text-subtle: rgba(255, 220, 205, 0.45);
+  
+  --nf-border-subtle: rgba(255, 255, 255, 0.12);
+  --nf-border-glow: rgba(255, 92, 0, 0.35);
+}
+
+/* Base Document Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--nf-terracotta-deep);
+  color: var(--nf-text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Master 404 Viewport Stage */
+.notfound-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(16px, 2.5vw, 32px);
+  background: 
+    radial-gradient(ellipse at 50% 42%, var(--nf-terracotta-core) 0%, var(--nf-terracotta-mid) 45%, var(--nf-terracotta-dark) 80%, var(--nf-terracotta-deep) 100%);
+  isolation: isolate;
+}
+
+/* Subtle Film Grain & Glow Backdrop */
+.notfound-viewport::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 30%, rgba(255, 120, 30, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==============================================================================
+   1. TOP TELEMETRY & BRAND HEADER
+   ============================================================================== */
+.notfound-header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--nf-border-subtle);
+}
+
+.notfound-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.notfound-brand:hover {
+  opacity: 0.88;
+}
+
+.notfound-brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.notfound-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(18, 5, 2, 0.55);
+  border: 1px solid var(--nf-border-subtle);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--nf-text-primary);
+  backdrop-filter: blur(8px);
+}
+
+.status-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FF5C00;
+  box-shadow: 0 0 8px #FF5C00;
+  animation: nfPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes nfPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==============================================================================
+   2. CENTRAL STAGE (GRID LABELS + CANVAS + CONTENT)
+   ============================================================================== */
+.notfound-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1080px;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Triplet Grid Telemetry Labels (Inspired by 3200kelvin) */
+.grid-telemetry-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--nf-text-subtle);
+  text-transform: uppercase;
+  padding: 0 12px 14px 12px;
+  user-select: none;
+}
+
+.grid-telemetry-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grid-telemetry-label-center {
+  text-align: center;
+  color: var(--nf-text-muted);
+}
+
+/* Canvas Motion Graphic Container */
+.notfound-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 44vh, 480px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: crosshair;
+  user-select: none;
+  touch-action: none;
+}
+
+#matrix-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Bottom Copy & Primary Action Group */
+.notfound-action-wrap {
+  margin-top: clamp(12px, 2vh, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  max-width: 640px;
+}
+
+.notfound-message {
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--nf-text-muted);
+  letter-spacing: -0.01em;
+}
+
+/* Inspo-Accurate Pill CTA Button */
+.notfound-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--nf-pill-bg);
+  color: var(--nf-pill-text);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.notfound-pill-btn:hover {
+  background-color: var(--nf-pill-bg-hover);
+  color: var(--nf-pill-text-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36), 0 0 16px rgba(255, 120, 30, 0.3);
+}
+
+.notfound-pill-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.notfound-btn-arrow {
+  width: 10px;
+  height: 10px;
+  transition: transform 0.2s ease;
+}
+
+.notfound-pill-btn:hover .notfound-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Secondary Navigation & Research Recovery */
+.notfound-recovery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.recovery-link {
+  color: var(--nf-text-subtle);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recovery-link:hover {
+  color: #FFFFFF;
+}
+
+.recovery-sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==============================================================================
+   3. BOTTOM FOOTER TELEMETRY
+   ============================================================================== */
+.notfound-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--nf-border-subtle);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--nf-text-subtle);
+}
+
+.footer-nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-nav-link {
+  color: var(--nf-text-subtle);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-link:hover {
+  color: var(--nf-text-primary);
+}
+
+/* ==============================================================================
+   4. RESPONSIVE MEDIA QUERIES (DESKTOP & MOBILE FIDELITY)
+   ============================================================================== */
+
+/* Tablet & Smaller Screens (< 992px) */
+@media (max-width: 991px) {
+  .notfound-viewport {
+    padding: 20px 16px;
+  }
+  
+  .notfound-canvas-wrap {
+    height: clamp(240px, 40vh, 380px);
+  }
+}
+
+/* Mobile Devices (< 768px) */
+@media (max-width: 767px) {
+  .notfound-header {
+    padding-bottom: 12px;
+  }
+
+  .notfound-brand-logo {
+    height: 24px;
+  }
+
+  .notfound-status-badge {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+
+  .grid-telemetry-labels {
+    font-size: 10px;
+    padding: 0 4px 10px 4px;
+  }
+
+  .grid-telemetry-label:first-child,
+  .grid-telemetry-label:last-child {
+    display: none; /* Keep center label clean on compact screens */
+  }
+
+  .grid-telemetry-label-center {
+    width: 100%;
+  }
+
+  .notfound-canvas-wrap {
+    height: clamp(220px, 36vh, 320px);
+  }
+
+  .notfound-message {
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  .notfound-pill-btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .recovery-sep {
+    display: none;
+  }
+
+  .notfound-recovery-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .notfound-footer {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding-top: 12px;
+  }
+}
+
+/* Small Smartphone Devices (< 480px, e.g. iPhone SE / Mini) */
+@media (max-width: 479px) {
+  .notfound-canvas-wrap {
+    height: 220px;
+  }
+
+  .notfound-action-wrap {
+    gap: 14px;
+  }
+
+  .recovery-sep {
+    display: none;
+  }
+
+  .notfound-recovery-nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -154,4 +154,4 @@ If you sell food, beverages, or personal care products, your distribution networ
 * **Action Buttons:**
   * `Browse All Research Reports →` (Color: `#FF8000`)
   * `Ask Our Research Team a Question`
-  * `Direct WhatsApp Chat: +234 813 753 8723`
+  * `Direct WhatsApp Chat: +234 902 084 6138`

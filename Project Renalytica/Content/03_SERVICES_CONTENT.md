@@ -252,7 +252,7 @@ If you are considering a Custom Research study or Corporate Subscription, our on
 * **Action Buttons:**
   * `Browse Research Store (2,500+ Reports) →` (Color: `#FF8000`)
   * `Request a Custom Quote (RFP)`
-  * `Instant WhatsApp Concierge: +234 813 753 8723`
+  * `Instant WhatsApp Concierge: +234 902 084 6138`
 * **Direct Office Contacts:**
   * **General Advisory:** `advisory@renalytica.com`
   * **Corporate Subscriptions:** `subscriptions@renalytica.com`

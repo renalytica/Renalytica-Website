@@ -178,7 +178,7 @@ export default function ThankYouPage() {
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://wa.me/2348137538723"
+              href="https://wa.me/2349020846138"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs transition-colors"

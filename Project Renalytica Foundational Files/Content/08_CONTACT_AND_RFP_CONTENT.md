@@ -22,7 +22,7 @@
   > Whether you need help choosing the right market report, want to commission a custom research project, or are looking for enterprise access for your entire team, we are ready to assist you.
 * **Quick Response Guarantee:**
   * ⚡ **Fast Turnaround:** We respond to all inquiries within **24 business hours**.
-  * 📱 **Need Immediate Help?** Chat with our team directly on WhatsApp at **+234 813 753 8723**.
+  * 📱 **Need Immediate Help?** Chat with our team directly on WhatsApp at **+234 902 084 6138**.
 
 ---
 
@@ -31,8 +31,8 @@
 ### Channel 1: WhatsApp Concierge (Fastest)
 * **Title:** Instant WhatsApp Chat
 * **Description:** Ideal for quick questions about report pricing, payment methods, or custom scopes.
-* **Contact:** `+234 813 753 8723`
-* **Button:** `Start WhatsApp Chat →` (Direct link to `https://wa.me/2348137538723`)
+* **Contact:** `+234 902 084 6138`
+* **Button:** `Start WhatsApp Chat →` (Direct link to `https://wa.me/2349020846138`)
 
 ### Channel 2: Email Us
 * **Title:** Direct Corporate Email
@@ -42,7 +42,7 @@
 
 ### Channel 3: Call Our Desk
 * **Title:** Telephone Support
-* **Main Desk:** `+234 813 753 8723`
+* **Main Desk:** `+234 902 084 6138`
 * **Hours:** Monday to Friday, 8:00 AM – 6:00 PM (WAT / GMT+1)
 
 ### Channel 4: Visit or Write to Us
@@ -100,7 +100,7 @@
 * **Body Copy:**
   > We have received your inquiry and assigned it to our client advisory desk. One of our team members will review your request and get back to you within 24 business hours.
   >
-  > If your request is urgent, you can also reach us immediately via WhatsApp at **+234 813 753 8723**.
+  > If your request is urgent, you can also reach us immediately via WhatsApp at **+234 902 084 6138**.
 * **Next Action:** `Browse Our Latest Market Reports While You Wait →`
 
 ### Automated Email Receipt (Sent to User's Inbox)
@@ -112,7 +112,7 @@
   >  
   > A member of our research advisory team is currently reviewing your details and will follow up with you within 24 business hours with answers or next steps.  
   >  
-  > In the meantime, feel free to explore our published research catalog at **www.renalytica.com/reports** or reach out directly on WhatsApp at **+234 813 753 8723**.  
+  > In the meantime, feel free to explore our published research catalog at **www.renalytica.com/reports** or reach out directly on WhatsApp at **+234 902 084 6138**.  
   >  
   > Best regards,  
   > **The Renalytica Client Support Team**  

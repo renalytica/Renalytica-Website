@@ -88,7 +88,7 @@ RENALYTICA PLATFORM
 │   └── File: 08_CONTACT_AND_RFP_CONTENT.md
 │   ├── 11.1 Direct Email & Telephone Support
 │   ├── 11.2 Interactive RFP & Custom Project Form
-│   └── 11.3 Instant WhatsApp Concierge (+234 813 753 8723)
+│   └── 11.3 Instant WhatsApp Concierge (+234 902 084 6138)
 │
 ├── 12.0 FREQUENTLY ASKED QUESTIONS (FAQ)
 │   └── File: 09_FAQ_CONTENT.md (/faq)
@@ -137,7 +137,7 @@ The complete suite of production-ready web copy is organized into dedicated file
 | **[`05_SAMPLE_REPORT_PDP_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/05_SAMPLE_REPORT_PDP_CONTENT.md)** | Flagship Report Detail Page (PDP): Complete e-commerce page for *Sub-Saharan Africa Grain Outlook 2026–2032* with 10-chapter TOC, 13+ sample tables, 3-tier license selector ($2,500 / $4,500 / $7,500), and sample brief download modal. | In Expansion |
 | **[`06_METHODOLOGY_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/06_METHODOLOGY_CONTENT.md)** | How We Verify Data: Simple 4-step explanation of primary field surveys, verified secondary resources, econometric testing, scenario modeling, and senior analyst verification. | Production Ready |
 | **[`07_MARKET_INSIGHTS_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/07_MARKET_INSIGHTS_CONTENT.md)** | Market Insights: 3 full practical articles (Grain Prices in 2026, Navigating Currency Swings, Supermarkets vs. Open Markets) plus newsletter opt-in. | In Expansion |
-| **[`08_CONTACT_AND_RFP_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/08_CONTACT_AND_RFP_CONTENT.md)** | Contact & RFP: Fast WhatsApp link (+234 813 753 8723), corporate emails, interactive custom project scoping form, and automated confirmation emails. | Production Ready |
+| **[`08_CONTACT_AND_RFP_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/08_CONTACT_AND_RFP_CONTENT.md)** | Contact & RFP: Fast WhatsApp link (+234 902 084 6138), corporate emails, interactive custom project scoping form, and automated confirmation emails. | Production Ready |
 | **[`09_FAQ_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/09_FAQ_CONTENT.md)** | Dedicated FAQ Page (`/faq`): 32+ exhaustive questions on instant fulfillment, licensing scopes, dual-track field verification, subscriptions, custom feasibility, and payments. | Production Ready |
 | **[`09_TERMS_OF_SERVICE_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/09_TERMS_OF_SERVICE_CONTENT.md)** | Dedicated Terms of Service Page (`/terms`): Enterprise-grade 16-section contract on digital licensing, IP ownership, permitted fair quoting, non-reliance disclaimers, and Lagos arbitration. | Production Ready |
 | **[`09_PRIVACY_POLICY_CONTENT.md`](file:///c:/Users/USER/Documents/Renalytica%20Website%20Project/Project%20Renalytica/Content/09_PRIVACY_POLICY_CONTENT.md)** | Dedicated Privacy Policy Page (`/privacy`): Full regulatory compliance under NDPA 2023 and GDPR, covering DPO contacts, lawful processing bases, sub-processors, and data subject rights. | Production Ready |

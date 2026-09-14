@@ -84,7 +84,7 @@
 2. **Gated Free Preview:** `Download Free Sample Brief (PDF)` *(Opens lead capture modal linking directly to the 10-page preview PDF)*
 3. **Analyst Desk Consultation:** `Ask an Analyst About This Report` *(Opens 24-hour question modal)*
 4. **Corporate Procurement Desk:** `Request Corporate Proforma Invoice` *(Opens proforma generator)*
-5. **Instant WhatsApp Concierge:** `Chat with Agribusiness Desk: +234 813 753 8723`
+5. **Instant WhatsApp Concierge:** `Chat with Agribusiness Desk: +234 902 084 6138`
 
 ---
 

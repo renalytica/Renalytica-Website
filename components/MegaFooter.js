@@ -8,6 +8,8 @@ class MegaFooter extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initTelemetryDataMatrix();
+    this.initElfsightChatbot();
+    this.initMultiChannelChat();
   }
 
   render() {
@@ -26,11 +28,8 @@ class MegaFooter extends HTMLElement {
                 Renalytica removes the guesswork from business decisions. We provide clear, high-quality market reports and data analysis across agriculture, commerce, and the economy.
               </p>
               <div class="footer-contact-block">
-                <a href="tel:+12128593320" class="contact-line">
-                  <span class="c-label">US Desk:</span> <strong>+1 (212) 859-3320</strong>
-                </a>
-                <a href="https://wa.me/2348137538723" class="contact-line">
-                  <span class="c-label">WhatsApp:</span> <strong>+234 813 753 8723</strong>
+                <a href="https://wa.me/2349020846138" class="contact-line">
+                  <span class="c-label">WhatsApp:</span> <strong>+234 902 084 6138</strong>
                 </a>
                 <a href="mailto:info@renalytica.com" class="contact-line">
                   <span class="c-label">Email:</span> <strong>info@renalytica.com</strong>
@@ -43,6 +42,7 @@ class MegaFooter extends HTMLElement {
               <h4 class="col-heading-v2">KEY SECTORS</h4>
               <ul class="footer-ul-v2">
                 <li><a href="reports.html">Research Store (All Reports)</a></li>
+                <li><a href="markets.html">Live Markets Terminal</a></li>
                 <li><a href="reports.html?sector=agriculture">Agriculture & Agribusiness</a></li>
                 <li><a href="reports.html?sector=economy">Macroeconomics & Currency</a></li>
                 <li><a href="reports.html?sector=retail">Commerce, Retail & Logistics</a></li>
@@ -73,6 +73,7 @@ class MegaFooter extends HTMLElement {
                 <li><a href="blog.html">Perspectives &amp; Op-Eds (Blog)</a></li>
                 <li><a href="news.html">Newsroom &amp; Market Wire</a></li>
                 <li><a href="faq.html">Frequently Asked Questions</a></li>
+                <li><a href="gdpr.html">GDPR Compliance</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
                 <li><a href="terms.html">Terms of Service</a></li>
                 <li><a href="faq.html#delivery">Report Delivery Guarantee</a></li>
@@ -551,6 +552,38 @@ class MegaFooter extends HTMLElement {
     resize();
     window.addEventListener('resize', resize);
     animate();
+  }
+
+  initElfsightChatbot() {
+    // 1. Ensure floating AI Chatbot widget container exists at document body level
+    if (!document.querySelector('.elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d')) {
+      const chatbotDiv = document.createElement('div');
+      chatbotDiv.className = 'elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d';
+      chatbotDiv.setAttribute('data-elfsight-app-lazy', '');
+      document.body.appendChild(chatbotDiv);
+    }
+
+    // 2. Ensure Elfsight platform script is loaded
+    if (!document.querySelector('script[src*="elfsightcdn.com/platform.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://elfsightcdn.com/platform.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }
+
+  initMultiChannelChat() {
+    // 1. Ensure MultiChannelChat script is loaded
+    if (!document.querySelector('script[src*="components/MultiChannelChat.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'components/MultiChannelChat.js';
+      document.head.appendChild(script);
+    }
+    // 2. Ensure <multi-channel-chat> element exists on document.body
+    if (!document.querySelector('multi-channel-chat')) {
+      const chatWidget = document.createElement('multi-channel-chat');
+      document.body.appendChild(chatWidget);
+    }
   }
 }
 

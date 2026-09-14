@@ -29,7 +29,7 @@
 * **Topic Filters:**
   * `[ All Updates ]` • `[ Company News ]` • `[ Research Releases ]` • `[ Press Releases ]` • `[ Events & Speaking ]`
 * **Media Desk Quick Contact:**
-  * 📰 *For Press & Interview Requests:* `press@renalytica.com` | WhatsApp: `+234 813 753 8723`
+  * 📰 *For Press & Interview Requests:* `press@renalytica.com` | WhatsApp: `+234 902 084 6138`
 
 ---
 
@@ -140,7 +140,7 @@
 
 ### How to Request an Expert Interview or Quote
 * **Media Relations Email:** `press@renalytica.com`
-* **Urgent Media WhatsApp Desk:** `+234 813 753 8723`
+* **Urgent Media WhatsApp Desk:** `+234 902 084 6138`
 * **Lead Time:** We typically fulfill broadcast, print, and digital media interview requests within **4 to 6 hours**.
 
 ---

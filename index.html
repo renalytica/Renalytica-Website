@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="styles/globals.css">
   <link rel="stylesheet" href="styles/shell.css">
   <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/chat-widget.css">
   <!-- Early Theme Initialization to Prevent Flash -->
   <script>
     (function() {
@@ -113,12 +114,33 @@
       </div>
     </section>
 
-    <!-- 4. Live Market Ticker Note Bar -->
-    <div class="ticker-helper-banner">
-      <div class="container text-center">
-        <p class="ticker-disclaimer">
-          *Key market benchmark indicators updated regularly from official and field observation nodes.
-        </p>
+    <!-- 4. Live Market Ticker Tape (TradingView Native HTML Embed) -->
+    <div class="ticker-helper-banner" style="padding: 4px 0; background: var(--surface-card); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+      <div class="container">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+          {
+            "symbols": [
+              { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+              { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+              { "proName": "FX_IDC:EURUSD", "title": "EUR to USD" },
+              { "proName": "FX_IDC:GBPUSD", "title": "GBP to USD" },
+              { "proName": "TVC:USOIL", "title": "WTI Crude Oil" },
+              { "proName": "TVC:UKOIL", "title": "Brent Crude" },
+              { "proName": "CMCMARKETS:GOLD", "title": "Gold" },
+              { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" }
+            ],
+            "showSymbolLogo": true,
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "colorTheme": "light",
+            "locale": "en"
+          }
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
       </div>
     </div>
 
@@ -304,7 +326,7 @@
                   <span class="price-sub">Departmental: $4,500</span>
                 </div>
                 <div class="card-action-btns">
-                  <a href="contact.html?sample=grains-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html?sample=grains-2026" class="btn-sample-brief">Download Free Sample Brief</a>
                   <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
                 </div>
               </div>
@@ -345,7 +367,7 @@
                   <span class="price-sub">Departmental: $5,000</span>
                 </div>
                 <div class="card-action-btns">
-                  <a href="contact.html?sample=wamz-fx-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html?sample=wamz-fx-2026" class="btn-sample-brief">Download Free Sample Brief</a>
                   <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
                 </div>
               </div>
@@ -386,7 +408,7 @@
                   <span class="price-sub">Departmental: $4,200</span>
                 </div>
                 <div class="card-action-btns">
-                  <a href="contact.html?sample=fmcg-retail-2026" class="btn-sample-brief">Download Free Sample Brief</a>
+                  <a href="reports.html?sample=fmcg-retail-2026" class="btn-sample-brief">Download Free Sample Brief</a>
                   <a href="reports.html" class="btn-pill-primary btn-buy-report">View Report Details & Buy →</a>
                 </div>
               </div>
@@ -410,6 +432,104 @@
 
     <!-- Smooth Flow Divider -->
     <div class="section-flow-divider"></div>
+
+    <!-- Live Market & Financial Intelligence Showcase -->
+    <section class="live-market-preview-section" style="padding: clamp(48px, 6vw, 80px) 0; background: var(--surface-subtle); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+      <div class="container">
+        <div class="section-header-v2 text-center" data-reveal="fade-up" style="margin-bottom: clamp(32px, 4vw, 48px);">
+          <span class="eyebrow-tag-orange">REAL-TIME TELEMETRY</span>
+          <h2 class="section-title-v2">Live Financial &amp; Macro Intelligence</h2>
+          <p class="section-intro-v2">
+            Real-time market tracking across global commodities, emerging foreign exchange, equities, and market-moving breaking news.
+          </p>
+          <div style="margin-top: 16px;">
+            <a href="markets.html" class="btn-pill-primary" style="font-size: 0.88rem; padding: 10px 22px;">
+              Launch Full Live Terminal (15 Interactive Analytics) →
+            </a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+          <!-- Card 1: Market Overview -->
+          <div style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin: 0;">Multi-Asset Market Overview</h3>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted);">LIVE QUOTES</span>
+            </div>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+              {
+                "colorTheme": "light",
+                "dateRange": "12M",
+                "showChart": true,
+                "locale": "en",
+                "isTransparent": true,
+                "showSymbolLogo": true,
+                "showFloatingTooltip": false,
+                "width": "100%",
+                "height": "520",
+                "plotLineColorGrowing": "#00D26A",
+                "plotLineColorFalling": "#EF4444",
+                "tabs": [
+                  {
+                    "title": "Indices",
+                    "symbols": [
+                      { "s": "FOREXCOM:SPXUSD", "d": "S&P 500" },
+                      { "s": "FOREXCOM:NSXUSD", "d": "Nasdaq 100" },
+                      { "s": "FOREXCOM:DJI", "d": "Dow Jones" },
+                      { "s": "FOREXCOM:UKXGBP", "d": "FTSE 100" }
+                    ]
+                  },
+                  {
+                    "title": "Stocks",
+                    "symbols": [
+                      { "s": "NASDAQ:AAPL", "d": "Apple" },
+                      { "s": "NASDAQ:NVDA", "d": "NVIDIA" },
+                      { "s": "NASDAQ:TSLA", "d": "Tesla" }
+                    ]
+                  },
+                  {
+                    "title": "Crypto",
+                    "symbols": [
+                      { "s": "BITSTAMP:BTCUSD", "d": "Bitcoin" },
+                      { "s": "BITSTAMP:ETHUSD", "d": "Ethereum" }
+                    ]
+                  }
+                ]
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+
+          <!-- Card 2: Top Stories Timeline -->
+          <div style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin: 0;">Market Moving News Wire</h3>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted);">REAL-TIME</span>
+            </div>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+              {
+                "feedMode": "all_symbols",
+                "isTransparent": true,
+                "displayMode": "regular",
+                "width": "100%",
+                "height": "520",
+                "colorTheme": "light",
+                "locale": "en"
+              }
+              </script>
+            </div>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 7. The Renalytica Difference: Why Leaders Choose Us -->
     <section class="difference-section-v2" id="difference">
@@ -677,8 +797,8 @@
             <a href="reports.html" class="btn-pill-primary cta-btn-lg">
               Browse the Full Research Store →
             </a>
-            <a href="https://wa.me/2348137538723" target="_blank" class="btn-pill-whatsapp">
-              <span class="wa-icon">💬</span> Chat on WhatsApp (+234 813 753 8723)
+            <a href="https://wa.me/2349020846138" target="_blank" class="btn-pill-whatsapp">
+              <span class="wa-icon">💬</span> Chat on WhatsApp (+234 902 084 6138)
             </a>
           </div>
 
@@ -799,6 +919,15 @@
         <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
       </svg>
     </div>
-  </div>
+  <!-- Elfsight AI Chatbot | Floating Widget -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <div class="elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d" data-elfsight-app-lazy></div>
+
+  <!-- Renalytica Native Multi-Channel Direct Support Desk -->
+  <script src="components/MultiChannelChat.js"></script>
+  <multi-channel-chat></multi-channel-chat>
+
+  <!-- Renalytica Native Cookie Consent Alert -->
+  <script src="components/CookieConsent.js"></script>
 </body>
 </html>

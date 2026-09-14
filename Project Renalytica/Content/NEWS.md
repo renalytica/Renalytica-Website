@@ -26,7 +26,7 @@
 * **Real-Time Feed Filter Tabs:**
   * `[ All News ]` • `[ Research Releases ]` • `[ Data Alerts & Telemetry ]` • `[ Insight News ]` • `[ Company Announcements ]` • `[ Events & Speaking ]`
 * **Media Desk Quick Contact:**
-  * 📰 *For Press Inquiries, Broadcast Bookings & Data Citations:* `press@renalytica.com` | WhatsApp Media Desk: `+234 813 753 8723` (Response SLA: Under 4 Hours)
+  * 📰 *For Press Inquiries, Broadcast Bookings & Data Citations:* `press@renalytica.com` | WhatsApp Media Desk: `+234 902 084 6138` (Response SLA: Under 4 Hours)
 
 ---
 
@@ -187,7 +187,7 @@
 
 ### Media Inquiry & Interview Protocol
 * **Dedicated Press Desk Email:** `press@renalytica.com`
-* **Urgent Media Line / WhatsApp:** `+234 813 753 8723`
+* **Urgent Media Line / WhatsApp:** `+234 902 084 6138`
 * **Interview Availability:** Television (live broadcast / remote studio), radio/podcasts, and print/digital interviews.
 * **Turnaround SLA:** We acknowledge all press requests within **60 minutes** and deliver verified quotes or on-air bookings within **4 to 6 hours**.
 * **Attribution Requirement:** All data citations must be credited to *"Renalytica Market Intelligence"* with a reference link to `www.renalytica.com`.

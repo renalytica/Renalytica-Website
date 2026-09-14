@@ -597,78 +597,112 @@
           return;
         }
 
-        reportsGrid.style.display = 'grid';
+        reportsGrid.style.display = 'flex';
+        reportsGrid.style.flexDirection = 'column';
         emptyState.style.display = 'none';
 
+        function formatPrice(usdAmount) {
+          if (typeof window.formatPriceWithActiveCurrency === 'function') {
+            return window.formatPriceWithActiveCurrency(usdAmount);
+          }
+          return `$${usdAmount.toLocaleString()} USD`;
+        }
+
         reportsGrid.innerHTML = reports.map(r => {
-          const hasRealPdf = r.samplePdfUrl && r.samplePdfUrl.includes('assets/reports/');
+          const coverImg = r.coverImage || 'assets/images/analyst_holding_market_chart.jpg';
+          const formatsText = (r.formats && r.formats.length) ? r.formats.join(' + ') : 'PDF + XLSX + DECK';
+
           return `
             <article class="report-card ${r.isFlagship ? 'flagship-card' : ''}" data-id="${r.id}">
-              <div class="card-header-meta">
-                <div class="meta-tag-group">
-                  <span class="report-sku-chip">${r.sku}</span>
-                  <span class="report-sector-chip">${r.sectorLabel}</span>
-                  ${r.isFlagship ? '<span class="flagship-badge">FLAGSHIP</span>' : ''}
-                </div>
-                <span class="report-pub-date">${r.pubDate} • ${r.pageCount} Pages</span>
-              </div>
-
-              <h2 class="report-card-title">
-                <a href="report.html?id=${r.id}">${r.title}</a>
-              </h2>
-
-              <p class="report-card-teaser">${r.teaser}</p>
-
-              <!-- Key Telemetry Metrics Banner -->
-              <div class="card-telemetry-banner">
-                <div class="telemetry-stat">
-                  <span class="stat-label">GROWTH // FORECAST</span>
-                  <strong class="stat-value">${r.keyTelemetry.cagr}</strong>
-                </div>
-                <div class="telemetry-stat">
-                  <span class="stat-label">MARKET VALUATION</span>
-                  <strong class="stat-value">${r.keyTelemetry.marketSize}</strong>
-                </div>
-                <div class="telemetry-stat">
-                  <span class="stat-label">EXECUTIVE HIGHLIGHT</span>
-                  <strong class="stat-value text-accent">${r.keyTelemetry.highlightMetric}</strong>
+              <!-- Left Column: Realistic 3D Publication Cover Art -->
+              <div class="report-card-cover-col">
+                <div class="report-cover-book-3d">
+                  <img src="${coverImg}" alt="${r.title}" class="report-cover-img" loading="lazy" />
+                  <div class="report-cover-spine"></div>
+                  <div class="report-cover-badges">
+                    <span class="report-format-pill">${formatsText}</span>
+                    ${r.isFlagship ? '<span class="report-flagship-tag">FLAGSHIP</span>' : ''}
+                  </div>
+                  <div class="report-cover-footer-bar">
+                    <span>VERIFIED INTEL // Q3 2026</span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Licensing Breakdown Box -->
-              <div class="card-licensing-box">
-                <div class="license-price-pill">
-                  <span class="l-label">Single User:</span>
-                  <strong>$${r.pricing.single.toLocaleString()}</strong>
+              <!-- Right Column: Executive Intelligence & Licensing -->
+              <div class="report-card-info-col">
+                <div class="card-header-meta">
+                  <div class="meta-tag-group">
+                    <span class="report-sku-chip">${r.sku}</span>
+                    <span class="report-sector-chip">${r.sectorLabel}</span>
+                  </div>
+                  <span class="report-pub-date">${r.pubDate} • ${r.pageCount} Pages</span>
                 </div>
-                <div class="license-price-pill featured-license">
-                  <span class="l-label">Departmental:</span>
-                  <strong>$${r.pricing.departmental.toLocaleString()}</strong>
-                </div>
-                <div class="license-price-pill">
-                  <span class="l-label">Enterprise:</span>
-                  <strong>$${r.pricing.enterprise.toLocaleString()}</strong>
-                </div>
-              </div>
 
-              <!-- Action Bar -->
-              <div class="card-action-bar">
-                <div class="primary-actions">
-                  <a href="report.html?id=${r.id}" class="btn-card-action primary">
-                    View Full Details &amp; Models →
-                  </a>
-                  <button type="button" class="btn-card-action outline sample-btn" data-id="${r.id}" data-title="${r.shortTitle || r.title}" data-pdf="${r.samplePdfUrl}">
-                    Free Sample Brief
+                <h2 class="report-card-title">
+                  <a href="report.html?id=${r.id}">${r.title}</a>
+                </h2>
+
+                <p class="report-card-teaser">${r.teaser}</p>
+
+                <!-- Key Telemetry Metrics Banner -->
+                <div class="card-telemetry-banner">
+                  <div class="telemetry-stat">
+                    <span class="stat-label">GROWTH // FORECAST</span>
+                    <strong class="stat-value">${r.keyTelemetry.cagr}</strong>
+                  </div>
+                  <div class="telemetry-stat">
+                    <span class="stat-label">MARKET VALUATION</span>
+                    <strong class="stat-value">${r.keyTelemetry.marketSize}</strong>
+                  </div>
+                  <div class="telemetry-stat">
+                    <span class="stat-label">EXECUTIVE HIGHLIGHT</span>
+                    <strong class="stat-value text-accent">${r.keyTelemetry.highlightMetric}</strong>
+                  </div>
+                </div>
+
+                <!-- Licensing Breakdown Box -->
+                <div class="card-licensing-box">
+                  <div class="license-price-pill">
+                    <span class="l-label">Single User:</span>
+                    <strong>${formatPrice(r.pricing.single)}</strong>
+                  </div>
+                  <div class="license-price-pill featured-license">
+                    <span class="l-label">Departmental:</span>
+                    <strong>${formatPrice(r.pricing.departmental)}</strong>
+                    <span class="license-rec-badge">RECOMMENDED</span>
+                  </div>
+                  <div class="license-price-pill">
+                    <span class="l-label">Enterprise:</span>
+                    <strong>${formatPrice(r.pricing.enterprise)}</strong>
+                  </div>
+                </div>
+
+                <!-- Action Bar: Separate Buy Now & Add to Cart Buttons -->
+                <div class="card-action-bar">
+                  <div class="primary-actions">
+                    <button type="button" class="btn-card-action buy-now-btn" data-id="${r.id}" title="Instant Purchase &amp; Download (Departmental License)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                      <span>Buy Now</span>
+                    </button>
+                    <button type="button" class="btn-card-action quick-add-cart-btn" data-id="${r.id}" title="Add Departmental License to Briefcase">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                      </svg>
+                      <span>+ Add to Cart</span>
+                    </button>
+                    <a href="report.html?id=${r.id}" class="btn-card-action outline" title="View Full Report Overview &amp; Models">
+                      Details →
+                    </a>
+                  </div>
+                  <button type="button" class="btn-card-action ghost sample-btn" data-id="${r.id}" data-title="${r.shortTitle || r.title}" data-pdf="${r.samplePdfUrl}">
+                    📄 Free Sample Brief
                   </button>
                 </div>
-                <button type="button" class="quick-add-cart-btn" data-id="${r.id}" title="Add Departmental License to Briefcase">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                  </svg>
-                  <span>+ Add to Cart</span>
-                </button>
               </div>
             </article>
           `;
@@ -677,6 +711,11 @@
         // Bind Card Action Events
         bindCardEvents();
       }
+
+      // Listen for currency selector changes across the application
+      window.addEventListener('renalytica:currency-change', () => {
+        renderCatalog();
+      });
 
       function renderActiveChips() {
         let chipsHtml = '';
@@ -732,6 +771,16 @@
       }
 
       function bindCardEvents() {
+        // Buy Now: Direct express checkout leading to checkout page
+        document.querySelectorAll('.buy-now-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const reportId = btn.getAttribute('data-id');
+            repo.addToCart(reportId, 'departmental');
+            window.location.href = `checkout.html?reportId=${encodeURIComponent(reportId)}&license=departmental`;
+          });
+        });
+
         // Quick Add to Cart
         document.querySelectorAll('.quick-add-cart-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
@@ -866,7 +915,15 @@
         const items = repo.getCart();
         drawerCountChip.textContent = items.length;
         const total = repo.getCartTotal();
-        briefcaseSubtotal.textContent = `$${total.toLocaleString()} USD`;
+        
+        function formatPrice(usdAmount) {
+          if (typeof window.formatPriceWithActiveCurrency === 'function') {
+            return window.formatPriceWithActiveCurrency(usdAmount);
+          }
+          return `$${usdAmount.toLocaleString()} USD`;
+        }
+
+        briefcaseSubtotal.textContent = formatPrice(total);
 
         if (items.length === 0) {
           briefcaseItemsContainer.innerHTML = `
@@ -899,15 +956,15 @@
               <div class="b-license-row">
                 <label class="b-license-label">License:</label>
                 <select class="b-license-select" data-id="${item.id}">
-                  <option value="single" ${item.licenseType === 'single' ? 'selected' : ''}>Single User ($${singleP.toLocaleString()})</option>
-                  <option value="departmental" ${item.licenseType === 'departmental' ? 'selected' : ''}>Departmental ($${deptP.toLocaleString()})</option>
-                  <option value="enterprise" ${item.licenseType === 'enterprise' ? 'selected' : ''}>Global Enterprise ($${entP.toLocaleString()})</option>
+                  <option value="single" ${item.licenseType === 'single' ? 'selected' : ''}>Single User (${formatPrice(singleP)})</option>
+                  <option value="departmental" ${item.licenseType === 'departmental' ? 'selected' : ''}>Departmental (${formatPrice(deptP)})</option>
+                  <option value="enterprise" ${item.licenseType === 'enterprise' ? 'selected' : ''}>Global Enterprise (${formatPrice(entP)})</option>
                 </select>
               </div>
 
               <div class="b-item-price-row">
-                <span>Total:</span>
-                <strong class="b-item-price">$${(item.price || 0).toLocaleString()} USD</strong>
+                <span>Tier Total:</span>
+                <strong class="b-item-price">${formatPrice(item.price || deptP)}</strong>
               </div>
             </div>
           `;
@@ -934,41 +991,59 @@
         });
       }
 
-      // Checkout Button with Flutterwave Gateway
+      // Promo Code Apply Logic
+      const promoInput = document.getElementById('promo-code-input');
+      const promoBtn = document.getElementById('apply-promo-btn');
+      if (promoBtn && promoInput) {
+        promoBtn.addEventListener('click', () => {
+          const code = promoInput.value.trim().toUpperCase();
+          if (!code) return;
+          if (code === 'INSTITUTION10' || code === 'EXECUTIVE2026' || code === 'RENALYTICA') {
+            showToast(`Promo code '${code}' applied: 10% Institutional Discount verified!`, 'success');
+            promoBtn.textContent = 'Applied ✓';
+            promoBtn.style.borderColor = '#10B981';
+            promoBtn.style.color = '#10B981';
+          } else {
+            showToast(`Promo code '${code}' is invalid or expired.`, 'warning');
+          }
+        });
+      }
+
+      // Automatically open briefcase if URL has #briefcase hash
+      if (window.location.hash === '#briefcase') {
+        setTimeout(openBriefcase, 150);
+      }
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash === '#briefcase') {
+          openBriefcase();
+        }
+      });
+
+      // Checkout Button leading to Dedicated Institutional Checkout Page
       checkoutBtn.addEventListener('click', () => {
         const cart = repo.getCart();
         if (cart.length === 0) {
           showToast('Please add at least one report to your briefcase.', 'warning');
           return;
         }
-
-        const totalAmount = repo.getCartTotal();
-        const reportIds = cart.map(i => i.id);
-        const title = cart.length === 1 ? cart[0].title : `Renalytica Intelligence Portfolio (${cart.length} Publications)`;
-
-        if (window.RenalyticaPayment) {
-          window.RenalyticaPayment.pay({
-            amount: totalAmount,
-            currency: 'USD',
-            title: title,
-            reportIds: reportIds,
-            licenseType: cart[0].licenseType || 'departmental',
-            onSuccess: (rec) => {
-              closeBriefcase();
-              window.location.href = 'portal.html?checkout=active&tx=' + encodeURIComponent(rec.txRef);
-            }
-          });
-        } else {
-          closeBriefcase();
-          window.location.href = 'portal.html?checkout=active';
-        }
+        closeBriefcase();
+        window.location.href = 'checkout.html';
       });
 
       // Corporate Proforma Generator
       proformaBtn.addEventListener('click', () => {
+        const cart = repo.getCart();
+        if (cart.length === 0) {
+          showToast('Please add items to briefcase to generate a proforma.', 'warning');
+          return;
+        }
         closeBriefcase();
-        showToast('Directing to Corporate Proforma Generator...', 'success');
-        window.location.href = 'contact.html#contact-form';
+        const total = repo.getCartTotal();
+        const invRef = 'PF-' + Math.floor(100000 + Math.random() * 900000);
+        showToast(`Corporate Proforma ${invRef} ($${total.toLocaleString()} USD) generated! Opening in Client Portal...`, 'success');
+        setTimeout(() => {
+          window.location.href = `portal.html?proforma=${invRef}&amount=${total}`;
+        }, 600);
       });
 
       // Sample Brief Form Submission
@@ -1005,6 +1080,26 @@
 
       // Initial Render
       renderCatalog();
+
+      // Check ?sample= query parameter from index.html or external links
+      const sampleParam = urlParams.get('sample');
+      if (sampleParam) {
+        let targetId = sampleParam;
+        if (sampleParam === 'grains-2026') targetId = 'sub-saharan-africa-commercial-grains-oilseeds-2026-2031';
+        if (sampleParam === 'wamz-fx-2026') targetId = 'west-african-monetary-zone-fx-liquidity-sovereign-debt-telemetry-2026-2030';
+        if (sampleParam === 'fmcg-retail-2026') targetId = 'next-gen-retail-logistics-fmcg-distribution-major-cities-2026-2031';
+
+        const rep = repo.getById(targetId) || repo.getAll()[0];
+        if (rep) {
+          modalReportId.value = rep.id;
+          modalReportTitle.textContent = `Download Sample Brief: ${rep.shortTitle || rep.title}`;
+          modalReportPdf.value = rep.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+          setTimeout(() => {
+            sampleModal.classList.add('active');
+            showToast(`Opening sample brief download for ${rep.shortTitle || rep.title}...`, 'success');
+          }, 350);
+        }
+      }
 
       // Listen for cart changes
       window.addEventListener('renalytica:cart-updated', (e) => {

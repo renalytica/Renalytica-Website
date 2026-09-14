@@ -294,13 +294,40 @@
   margin-bottom: 1.25rem;
 }
 
-.btn-pdp-buy {
+.btn-pdp-buy,
+.btn-pdp-buy-now {
   width: 100%;
   padding: 0.95rem;
   font-size: 0.98rem;
+  font-weight: 800;
+  background: var(--accent-momentum, #FF8000);
+  border: 1px solid var(--accent-momentum, #FF8000);
+  color: #FFFFFF;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px var(--accent-momentum-glow, rgba(255, 128, 0, 0.25));
+}
+
+.btn-pdp-buy:hover,
+.btn-pdp-buy-now:hover {
+  background: var(--accent-momentum-hover, #EA7300);
+  border-color: var(--accent-momentum-hover, #EA7300);
+  box-shadow: 0 6px 20px var(--accent-momentum-glow, rgba(255, 128, 0, 0.4));
+  transform: translateY(-1px);
+}
+
+.btn-pdp-add-cart {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  background: var(--accent-momentum);
-  border: 1px solid var(--accent-momentum);
+  background: #0E1626;
+  border: 1px solid #1E293B;
   color: #FFFFFF;
   border-radius: 8px;
   cursor: pointer;
@@ -311,9 +338,11 @@
   gap: 0.5rem;
 }
 
-.btn-pdp-buy:hover {
-  background: var(--accent-momentum-hover);
-  box-shadow: 0 6px 20px var(--accent-momentum-glow);
+.btn-pdp-add-cart:hover {
+  background: #182238;
+  border-color: var(--accent-momentum, #FF8000);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
 }
 
 .btn-pdp-preview {
