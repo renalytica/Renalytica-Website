@@ -763,7 +763,7 @@
 /* Articles Grid */
 .curated-articles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: clamp(24px, 3vw, 36px);
 }
 

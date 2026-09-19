@@ -133,6 +133,30 @@
               <span class="change-pill down">-0.25%</span>
             </div>
           </div>
+
+          <div class="live-strip-card" id="card-fmp-fx">
+            <div class="live-strip-top">
+              <span>EUR / USD (FMP)</span>
+              <span class="tick-dir" id="dir-fmp-fx" style="color: #10b981;">●</span>
+            </div>
+            <div class="live-strip-val" id="val-fmp-fx">1.1489</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">FMP FX Telemetry</span>
+              <span class="change-pill up" id="pct-fmp-fx">+0.08%</span>
+            </div>
+          </div>
+
+          <div class="live-strip-card" id="card-sharp-sports">
+            <div class="live-strip-top">
+              <span>SPORTS TELEMETRY</span>
+              <span class="tick-dir" id="dir-sharp-sports" style="color: #10b981;">●</span>
+            </div>
+            <div class="live-strip-val" id="val-sharp-sports">149 Live</div>
+            <div class="live-strip-bottom">
+              <span class="text-muted">Sharp API Continental</span>
+              <span class="change-pill up" id="pct-sharp-sports">6,980 Events</span>
+            </div>
+          </div>
         </div>
 
         <!-- TradingView Widget 6: Native Ticker Tape Embed -->
@@ -855,6 +879,110 @@
           </div>
         </div>
 
+        <!-- Dedicated Desk: FMP Real-Time FX & Sharp API Sports Intelligence Telemetry -->
+        <div class="telemetry-card-grid" style="margin-top: 24px;">
+          <!-- Desk A: Financial Modeling Prep (FMP) FX & Macro Desk -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>💱</span> FMP Real-Time Foreign Exchange &amp; Macro Feeds</h3>
+              <span class="widget-card-tag">FINANCIAL MODELING PREP • 60S SYNC</span>
+            </div>
+            <div class="telemetry-inner-panel">
+              <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.4;">
+                Direct telemetry synchronization across frontier foreign exchange benchmarks and global reference currencies from the FMP Institutional API gateway.
+              </p>
+              <div style="overflow-x: auto;">
+                <table class="telemetry-table" id="fmp-markets-table">
+                  <thead>
+                    <tr>
+                      <th>PAIR / TICKER</th>
+                      <th>PRICE</th>
+                      <th>24H CHG</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>EUR / USD</strong></td>
+                      <td id="fmp-tbl-eurusd-price">1.1489</td>
+                      <td><span class="telemetry-badge-up" id="fmp-tbl-eurusd-chg">+0.08%</span></td>
+                      <td style="color: #10B981; font-size: 0.72rem;">● Active</td>
+                    </tr>
+                    <tr>
+                      <td><strong>GBP / USD</strong></td>
+                      <td id="fmp-tbl-gbpusd-price">1.3392</td>
+                      <td><span class="telemetry-badge-up" id="fmp-tbl-gbpusd-chg">+0.15%</span></td>
+                      <td style="color: #10B981; font-size: 0.72rem;">● Active</td>
+                    </tr>
+                    <tr>
+                      <td><strong>USD / JPY</strong></td>
+                      <td id="fmp-tbl-usdjpy-price">156.85</td>
+                      <td><span class="telemetry-badge-up" id="fmp-tbl-usdjpy-chg">+0.12%</span></td>
+                      <td style="color: #10B981; font-size: 0.72rem;">● Active</td>
+                    </tr>
+                    <tr>
+                      <td><strong>USD / NGN</strong></td>
+                      <td>₦1,485.50</td>
+                      <td><span class="telemetry-badge-down">-0.25%</span></td>
+                      <td style="color: #10B981; font-size: 0.72rem;">● NAFEM Ref</td>
+                    </tr>
+                    <tr>
+                      <td><strong>USD / ZAR</strong></td>
+                      <td>18.24</td>
+                      <td><span class="telemetry-badge-down">-0.18%</span></td>
+                      <td style="color: #10B981; font-size: 0.72rem;">● JSE Prox</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desk B: Sharp API Sports Business Intelligence & Live Events -->
+          <div class="widget-card-shell">
+            <div class="widget-card-header">
+              <h3 class="widget-card-title"><span>⚽</span> Sharp API Sports Intelligence &amp; Live Match Feeds</h3>
+              <span class="widget-card-tag">SHARP API • CONTINENTAL SPORTS DESK</span>
+            </div>
+            <div class="telemetry-inner-panel">
+              <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.4;">
+                Continental sports analytics and match volume telemetry supporting Renalytica commercial sports valuation models, sponsorship ROI, and retail athletic spend.
+              </p>
+              <div class="sports-stat-grid">
+                <div class="sports-stat-tile">
+                  <div class="stat-name"><span>⚽</span> Football / NPFL</div>
+                  <div class="stat-val" id="sharp-stat-football">3,540</div>
+                  <div style="font-size: 0.72rem; color: #10B981; font-weight: 700; margin-top: 2px;" id="sharp-live-football">82 Live In-Play</div>
+                </div>
+                <div class="sports-stat-tile">
+                  <div class="stat-name"><span>🏀</span> Basketball / BAL</div>
+                  <div class="stat-val" id="sharp-stat-basketball">2,410</div>
+                  <div style="font-size: 0.72rem; color: #10B981; font-weight: 700; margin-top: 2px;" id="sharp-live-basketball">45 Live In-Play</div>
+                </div>
+                <div class="sports-stat-tile">
+                  <div class="stat-name"><span>🎾</span> Tennis Pro Tour</div>
+                  <div class="stat-val" id="sharp-stat-tennis">890</div>
+                  <div style="font-size: 0.72rem; color: #10B981; font-weight: 700; margin-top: 2px;" id="sharp-live-tennis">18 Live In-Play</div>
+                </div>
+                <div class="sports-stat-tile">
+                  <div class="stat-name"><span>🏃</span> Athletics &amp; Marathons</div>
+                  <div class="stat-val" id="sharp-stat-athletics">140</div>
+                  <div style="font-size: 0.72rem; color: #10B981; font-weight: 700; margin-top: 2px;" id="sharp-live-athletics">4 Live Circuits</div>
+                </div>
+              </div>
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; margin-top: 8px;">
+                Active African Sports Corridors
+              </div>
+              <div class="sports-leagues-pillbox" id="sharp-leagues-pillbox">
+                <span class="sports-league-tag">Nigeria NPFL Football Corridor</span>
+                <span class="sports-league-tag">Basketball Africa League (BAL)</span>
+                <span class="sports-league-tag">Kenya KBF Premier League</span>
+                <span class="sports-league-tag">Ghana ABL Division 1 Men</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Section 4 Navigation Footer -->
         <div class="terminal-panel-nav-footer">
           <div class="panel-step-label">DESK 04 OF 05 // SCREENERS &amp; GLOBAL MACRO</div>
@@ -924,6 +1052,8 @@
   <script src="components/MegaFooter.js"></script>
   <script src="lib/finnhub-stream.js"></script>
   <script src="lib/alphavantage-service.js"></script>
+  <script src="lib/fmp-service.js"></script>
+  <script src="lib/sharp-service.js"></script>
 
   <!-- Terminal Orchestrator Script -->
   <script>
@@ -973,6 +1103,102 @@
           if (rateData && rateData.rate) {
             const fxEl = document.getElementById('val-fx-usdngn');
             if (fxEl) fxEl.textContent = `₦${rateData.rate.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+          }
+        });
+      }
+
+      // 3b. Initialize FMP Real-Time FX & Macro Telemetry
+      if (window.fmpService) {
+        function syncFmpTelemetry() {
+          window.fmpService.getMacroFXSnapshot().then(fxQuotes => {
+            if (Array.isArray(fxQuotes) && fxQuotes.length > 0) {
+              const eurusd = fxQuotes.find(q => q.symbol.includes('EUR')) || fxQuotes[0];
+              const gbpusd = fxQuotes.find(q => q.symbol.includes('GBP')) || fxQuotes[1];
+              const usdjpy = fxQuotes.find(q => q.symbol.includes('JPY')) || fxQuotes[2];
+
+              // Update Live Strip Card
+              const stripVal = document.getElementById('val-fmp-fx');
+              const stripPct = document.getElementById('pct-fmp-fx');
+              const stripDir = document.getElementById('dir-fmp-fx');
+              if (stripVal && eurusd) stripVal.textContent = eurusd.price;
+              if (stripPct && eurusd) {
+                stripPct.textContent = eurusd.change;
+                stripPct.className = `change-pill ${eurusd.direction === 'down' ? 'down' : 'up'}`;
+              }
+              if (stripDir && eurusd) {
+                stripDir.style.color = eurusd.direction === 'down' ? '#EF4444' : '#10B981';
+              }
+
+              // Update Tab 4 Telemetry Table
+              if (eurusd) {
+                const pEl = document.getElementById('fmp-tbl-eurusd-price');
+                const cEl = document.getElementById('fmp-tbl-eurusd-chg');
+                if (pEl) pEl.textContent = eurusd.price;
+                if (cEl) {
+                  cEl.textContent = eurusd.change;
+                  cEl.className = eurusd.direction === 'down' ? 'telemetry-badge-down' : 'telemetry-badge-up';
+                }
+              }
+              if (gbpusd) {
+                const pEl = document.getElementById('fmp-tbl-gbpusd-price');
+                const cEl = document.getElementById('fmp-tbl-gbpusd-chg');
+                if (pEl) pEl.textContent = gbpusd.price;
+                if (cEl) {
+                  cEl.textContent = gbpusd.change;
+                  cEl.className = gbpusd.direction === 'down' ? 'telemetry-badge-down' : 'telemetry-badge-up';
+                }
+              }
+              if (usdjpy) {
+                const pEl = document.getElementById('fmp-tbl-usdjpy-price');
+                const cEl = document.getElementById('fmp-tbl-usdjpy-chg');
+                if (pEl) pEl.textContent = usdjpy.price;
+                if (cEl) {
+                  cEl.textContent = usdjpy.change;
+                  cEl.className = usdjpy.direction === 'down' ? 'telemetry-badge-down' : 'telemetry-badge-up';
+                }
+              }
+            }
+          });
+        }
+        syncFmpTelemetry();
+        setInterval(syncFmpTelemetry, 60000);
+      }
+
+      // 3c. Initialize Sharp API Continental Sports Telemetry
+      if (window.sharpService) {
+        window.sharpService.getSportsBusinessTelemetry().then(sportsData => {
+          if (sportsData) {
+            const stripVal = document.getElementById('val-sharp-sports');
+            const stripPct = document.getElementById('pct-sharp-sports');
+            if (stripVal) stripVal.textContent = `${sportsData.liveEvents} Live`;
+            if (stripPct) stripPct.textContent = `${sportsData.totalEvents.toLocaleString()} Events`;
+
+            if (Array.isArray(sportsData.leadCategories)) {
+              sportsData.leadCategories.forEach(cat => {
+                const lower = cat.name.toLowerCase();
+                if (lower.includes('foot') || lower.includes('soccer')) {
+                  const sEl = document.getElementById('sharp-stat-football');
+                  const lEl = document.getElementById('sharp-live-football');
+                  if (sEl) sEl.textContent = (cat.events || 3540).toLocaleString();
+                  if (lEl) lEl.textContent = `${cat.live || 82} Live In-Play`;
+                } else if (lower.includes('basket')) {
+                  const sEl = document.getElementById('sharp-stat-basketball');
+                  const lEl = document.getElementById('sharp-live-basketball');
+                  if (sEl) sEl.textContent = (cat.events || 2410).toLocaleString();
+                  if (lEl) lEl.textContent = `${cat.live || 45} Live In-Play`;
+                } else if (lower.includes('tennis')) {
+                  const sEl = document.getElementById('sharp-stat-tennis');
+                  const lEl = document.getElementById('sharp-live-tennis');
+                  if (sEl) sEl.textContent = (cat.events || 890).toLocaleString();
+                  if (lEl) lEl.textContent = `${cat.live || 18} Live In-Play`;
+                } else if (lower.includes('athlet') || lower.includes('marath')) {
+                  const sEl = document.getElementById('sharp-stat-athletics');
+                  const lEl = document.getElementById('sharp-live-athletics');
+                  if (sEl) sEl.textContent = (cat.events || 140).toLocaleString();
+                  if (lEl) lEl.textContent = `${cat.live || 4} Live Circuits`;
+                }
+              });
+            }
           }
         });
       }

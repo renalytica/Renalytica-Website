@@ -244,6 +244,16 @@
               <span>⚡ Watermarked Direct Download</span>
             </div>
 
+            <!-- Author / Lead Research Analyst Card -->
+            <div class="author-lead-card" style="margin-top: 1.25rem; padding: 1rem 1.25rem; background: var(--surface-card, #101626); border: 1px solid var(--border-light, rgba(255,255,255,0.08)); border-radius: 12px; display: flex; align-items: center; gap: 12px;">
+              <img id="pdp-author-avatar" src="assets/brand/renalytica_emblem.png" alt="Lead Author" style="width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-strong, rgba(255,255,255,0.15)); flex-shrink: 0;">
+              <div>
+                <span style="font-size: 0.68rem; text-transform: uppercase; color: var(--text-muted, #94A3B8); font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">Lead Research Analyst</span>
+                <strong id="pdp-author-name" style="color: var(--text-heading, #F8FAFC); font-size: 0.92rem; display: block; line-height: 1.3;">Obinna Ezeala</strong>
+                <span id="pdp-author-title" style="color: var(--text-secondary, #94A3B8); font-size: 0.76rem; display: block;">Chief Intelligence Officer</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -815,7 +825,7 @@
           <div class="pdp-faq-item">
             <h3 class="faq-q">Can we commission Renalytica to conduct a deeper dive on a specific country or state?</h3>
             <div class="faq-a">
-              <p>Yes. Many corporate clients begin with this published report to grasp the regional picture, and subsequently engage our Custom Advisory desk to conduct a localized outgrower feasibility study or commercial due diligence within a specific 100km radius. Contact <a href="contact.html">advisory@renalytica.com</a> to discuss bespoke scoping.</p>
+              <p>Yes. Many corporate clients begin with this published report to grasp the regional picture, and subsequently engage our Custom Advisory desk to conduct a localized outgrower feasibility study or commercial due diligence within a specific 100km radius. Contact <a href="contact.html">research@renalytica.com</a> to discuss bespoke scoping.</p>
             </div>
           </div>
 
@@ -1047,34 +1057,264 @@
         reportId = report.id;
       }
 
-      // Populate Page Elements
+      // Price Formatter Helper
+      function formatPrice(usdAmount) {
+        if (typeof window.formatPriceWithActiveCurrency === 'function') {
+          return window.formatPriceWithActiveCurrency(usdAmount);
+        }
+        return '$' + Number(usdAmount || 0).toLocaleString() + ' USD';
+      }
+
+      // Populate Page Metadata & Header Elements
+      const reportDesc = report.teaser || report.executiveSummary || 'Institutional research report by Renalytica.';
+      const exhibitsTotal = (report.vectorChartsCount || 0) + (report.tablesCount || 0);
+
       document.getElementById('page-meta-title').textContent = `${report.title} | Renalytica Store`;
-      document.getElementById('page-meta-desc').setAttribute('content', report.description);
-      document.getElementById('bc-sector-link').textContent = report.sector;
+      document.getElementById('page-meta-desc').setAttribute('content', reportDesc);
+      document.getElementById('bc-sector-link').textContent = report.sectorLabel || report.sector;
       document.getElementById('bc-report-sku').textContent = `Report #${report.sku}`;
 
-      document.getElementById('pdp-category-badge').textContent = `${report.sector.toUpperCase()} // COMMODITY INTELLIGENCE DESK`;
-      document.getElementById('pdp-status-badge').textContent = `UPDATED FOR ${report.horizon.toUpperCase()} // ${report.region.toUpperCase()}`;
+      document.getElementById('pdp-category-badge').textContent = report.categoryBadge || `${(report.sectorLabel || report.sector).toUpperCase()} // INTELLIGENCE DESK`;
+      document.getElementById('pdp-status-badge').textContent = report.statusPill || `UPDATED FOR ${(report.pubHorizon || 'Q3 2026').toUpperCase()} // ${(report.geography || 'AFRICA').toUpperCase()}`;
       document.getElementById('pdp-title').textContent = report.title;
-      document.getElementById('pdp-subtitle').textContent = report.description;
+      document.getElementById('pdp-subtitle').textContent = report.executiveSummary || report.teaser;
 
       document.getElementById('meta-sku').textContent = report.sku;
-      document.getElementById('meta-date').textContent = report.publishedDate;
-      document.getElementById('meta-pages').textContent = `${report.pageCount} Pages (${report.exhibitsCount} Exhibits)`;
-      document.getElementById('meta-formats').textContent = report.formats.join(' + ');
-      document.getElementById('meta-desk').textContent = report.researchDesk || 'Renalytica Advisory';
-      document.getElementById('meta-coverage').textContent = report.geographicCoverage || report.region;
+      document.getElementById('meta-date').textContent = report.pubDate || 'August 2026';
+      document.getElementById('meta-pages').textContent = `${report.pageCount} Pages (${exhibitsTotal} Exhibits, ${report.mapsCount || 0} Maps)`;
+      document.getElementById('meta-formats').textContent = (report.formats || ['PDF', 'XLSX']).join(' + ');
+      document.getElementById('meta-desk').textContent = report.categoryBadge ? report.categoryBadge.split('//')[1]?.trim() : 'Renalytica Research Desk';
+      document.getElementById('meta-coverage').textContent = report.geography || 'Sub-Saharan Africa';
 
-      // Update License Price Labels
-      document.getElementById('price-single').innerHTML = `$${report.pricing.single.toLocaleString()} <small>USD</small>`;
-      document.getElementById('price-departmental').innerHTML = `$${report.pricing.departmental.toLocaleString()} <small>USD</small>`;
-      document.getElementById('price-enterprise').innerHTML = `$${report.pricing.enterprise.toLocaleString()} <small>USD</small>`;
+      // Populate Lead Author Card
+      const author = report.author || { name: 'Obinna Ezeala', title: 'Managing Director & Chief Strategist', avatar: 'assets/brand/renalytica_emblem.png' };
+      const authorNameEl = document.getElementById('pdp-author-name');
+      const authorTitleEl = document.getElementById('pdp-author-title');
+      const authorAvatarEl = document.getElementById('pdp-author-avatar');
+      if (authorNameEl) authorNameEl.textContent = author.name || 'Obinna Ezeala';
+      if (authorTitleEl) authorTitleEl.textContent = author.title || author.role || 'Managing Director & Chief Strategist';
+      if (authorAvatarEl && author.avatar) authorAvatarEl.src = author.avatar;
+
+      // Update License Price Labels (Multi-currency formatted)
+      function updateLicensePriceLabels() {
+        document.getElementById('price-single').innerHTML = formatPrice(report.pricing.single);
+        document.getElementById('price-departmental').innerHTML = formatPrice(report.pricing.departmental);
+        document.getElementById('price-enterprise').innerHTML = formatPrice(report.pricing.enterprise);
+      }
+      updateLicensePriceLabels();
+      window.addEventListener('renalytica:currency-change', updateLicensePriceLabels);
 
       // Modal info
       document.getElementById('modal-report-name').textContent = report.title;
-      document.getElementById('modal-report-meta').textContent = `SKU: ${report.sku} • ${report.publishedDate}`;
+      document.getElementById('modal-report-meta').textContent = `SKU: ${report.sku} • ${report.pubDate || 'August 2026'}`;
       if (report.samplePdfUrl) {
         document.getElementById('modal-report-pdf').value = report.samplePdfUrl;
+      }
+
+      // 1. Dynamically Populate Macro Metrics Table (#macro-metrics-tbody)
+      const macroTbody = document.getElementById('macro-metrics-tbody');
+      if (macroTbody && report.macroMetrics && report.macroMetrics.length > 0) {
+        macroTbody.innerHTML = report.macroMetrics.map(m => `
+          <tr>
+            <td><strong>${m.metric}</strong></td>
+            <td>${m.baseline}</td>
+            <td><strong class="highlight-val">${m.forecast}</strong></td>
+            <td><span class="badge-growth ${m.cagr && m.cagr.startsWith('+') ? 'positive' : (m.cagr && m.cagr.startsWith('-') ? 'negative' : '')}">${m.cagr || 'N/A'}</span></td>
+            <td>${m.driver || 'Empirical field econometric model'}</td>
+          </tr>
+        `).join('');
+      }
+
+      // 2. Dynamically Populate Executive Summary Tab (#tab-summary)
+      const summaryPanel = document.getElementById('tab-summary');
+      if (summaryPanel) {
+        const findingsList = report.strategicFindings && report.strategicFindings.length > 0
+          ? report.strategicFindings.map((f, idx) => {
+              const parts = f.split(':');
+              const boldHeader = parts.length > 1 ? parts[0] + ':' : '';
+              const bodyText = parts.length > 1 ? parts.slice(1).join(':') : f;
+              return `
+                <div class="conclusion-item">
+                  <span class="conclusion-badge">${idx + 1}</span>
+                  <div class="conclusion-body">
+                    <strong>${boldHeader}</strong>
+                    ${bodyText}
+                  </div>
+                </div>
+              `;
+            }).join('')
+          : '<p class="tab-paragraph">Strategic conclusions available in the executive briefing suite.</p>';
+
+        summaryPanel.innerHTML = `
+          <div class="tab-content-card">
+            <h3 class="tab-sec-title">Executive Summary &amp; Ground-Truth Findings</h3>
+            <p class="tab-paragraph">${report.executiveSummary || report.teaser}</p>
+            
+            <div class="key-callout-box">
+              <strong>Core Investment Thesis:</strong> ${report.keyTelemetry ? report.keyTelemetry.summaryCallout : (report.teaser || 'Empirical data intelligence from Renalytica research desks.')}
+            </div>
+
+            <h3 class="tab-sec-title" style="margin-top: 2.5rem;">Core Strategic Takeaways for Executive Decision-Makers</h3>
+            <div class="strategic-conclusions-list">
+              ${findingsList}
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. Dynamically Populate Table of Contents Tab (#tab-toc)
+      const tocPanel = document.getElementById('tab-toc');
+      const rawChapters = report.tocChapters || report.table_of_contents || [
+        { chapter: 1, title: 'Macroeconomic Landscape, Trade Corridors & Baseline Dynamics', pages: '12–54' },
+        { chapter: 2, title: 'Production Economics, Margin Sensitivity & Input Tariffs', pages: '55–118' },
+        { chapter: 3, title: 'Institutional Player Benchmarking & Infrastructure Nodes', pages: '119–186' },
+        { chapter: 4, title: 'Regulatory Framework, AfCFTA Compliance & Currency Risks', pages: '187–242' },
+        { chapter: 5, title: 'Econometric Market Sizing & 10-Year Scenario Projections', pages: '243–' + (report.pageCount || 320) }
+      ];
+      if (tocPanel && rawChapters && rawChapters.length > 0) {
+        tocPanel.innerHTML = `
+          <div class="tab-content-card">
+            <h3 class="tab-sec-title">Exhaustive ${rawChapters.length}-Chapter Table of Contents (${report.pageCount} Pages)</h3>
+            <p class="tab-paragraph">
+              Every chapter incorporates quantitative models, field-enumerator audits, regulatory review, and scenario regressions.
+            </p>
+            <div class="toc-accordion" id="toc-accordion">
+              ${rawChapters.map(ch => `
+                <div class="toc-chapter-item">
+                  <div class="chapter-header">
+                    <span class="ch-num">CHAPTER ${String(ch.chapter).padStart(2, '0')}</span>
+                    <span class="ch-title">${ch.title}</span>
+                  </div>
+                  <div style="padding: 0.5rem 1rem 1rem; font-size: 0.88rem; color: var(--text-secondary);">
+                    <strong>Pages:</strong> ${ch.pages} &bull; Includes econometric tables, vector charts, and empirical field exhibits.
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      // 4. Dynamically Populate Figures and Tables Tab (#tab-figures)
+      const figuresPanel = document.getElementById('tab-figures');
+      if (figuresPanel) {
+        figuresPanel.innerHTML = `
+          <div class="tab-content-card">
+            <h3 class="tab-sec-title">Selected Tables, Exhibits &amp; Econometric Models (${exhibitsTotal} Total)</h3>
+            <p class="tab-paragraph">
+              All quantitative exhibits are included as unlocked spreadsheet worksheets in the Departmental and Enterprise licenses.
+            </p>
+            <div class="exhibits-grid">
+              <div class="exhibit-item">
+                <span class="exhibit-type">TABLE 1.1</span>
+                <p>Primary Field Enumeration Nodes: Distribution of Market Survey Locations across ${report.geography || 'African Corridors'}</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">CHART 1.2</span>
+                <p>Dual-Track Verification Engine: Triangulating Primary Surveys with Official Trade &amp; Regulatory Statistics</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">CHART 2.1</span>
+                <p>Market Value &amp; Foreign Exchange Parity Trajectory (2020–2026) across Primary National Currencies</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">TABLE 3.1</span>
+                <p>${report.shortTitle || report.title} Addressable Market Sizing by Value ($M) and Volume (2026–2032)</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">TABLE 3.2</span>
+                <p>Cost Structure Breakdown, Operating Margin Dispersion, and Sensitivity Scenarios</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">CHART 4.1</span>
+                <p>Corridor-by-Corridor Logistics &amp; Transport Tariffs vs. Rail/Road Evacuation Velocities</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">MAP 5.1</span>
+                <p>Regional Infrastructure Asset Map: Identifying Strategic Nodes, Deficits, and High-Yield Corridors</p>
+              </div>
+              <div class="exhibit-item">
+                <span class="exhibit-type">TABLE 6.1</span>
+                <p>Capital Expenditure Financial Model: Unit Economics, Working Capital, and Monte Carlo Payback</p>
+              </div>
+            </div>
+            <div class="more-exhibits-notice">
+              <em>+${Math.max(exhibitsTotal - 8, 12)} Additional Tables, Infographics, Route Maps, and Econometric Regressions in Full Report Pack</em>
+            </div>
+          </div>
+        `;
+      }
+
+      // 5. Dynamically Populate Companies Profiled Tab (#tab-companies)
+      const companiesPanel = document.getElementById('tab-companies');
+      if (companiesPanel) {
+        let companiesList = [];
+        if (report.sector === 'agriculture') {
+          companiesList = [
+            { name: 'Olam Agri', desc: 'Pan-African grain origination, flour milling, animal feed plants, and outgrower networks across Nigeria, Ghana, Cameroon, and Senegal.' },
+            { name: 'Flour Mills of Nigeria Plc (FMN)', desc: 'Nigeria’s largest food conglomerate; Golden Penny mills, backward integration farms, and Sorghum outgrower chains.' },
+            { name: 'Bakhresa Group', desc: 'East African milling leader dominating Tanzania, Kenya, Uganda, Rwanda, and Mozambique with modern coastal silo terminals.' },
+            { name: 'BUA Foods Plc', desc: 'Major commercial flour and pasta milling infrastructure in Port Harcourt and Lagos, industrial refining, and logistics assets.' },
+            { name: 'ETG (Export Trading Group)', desc: 'Pan-African agricultural supply chain manager; fertilizer blending plants, farmgate aggregation networks in 26 countries.' },
+            { name: 'AFEX Commodities Exchange', desc: 'Leading digital commodity exchange and collateral management network operating over 180 grain warehouses across West & East Africa.' }
+          ];
+        } else if (report.sector === 'sports') {
+          companiesList = [
+            { name: 'SuperSport / MultiChoice', desc: 'Primary pan-African sports broadcaster holding continental rights for football, athletics, rugby, and local premier leagues.' },
+            { name: 'Bet9ja (KC Gaming Networks)', desc: 'Leading sports betting operator in West Africa with extensive retail shop distribution and in-play mobile telemetry.' },
+            { name: 'Basketball Africa League (BAL)', desc: 'Joint venture between NBA and FIBA driving arena concessions, corporate sponsorships, and pan-African tournament monetization.' },
+            { name: 'SportPesa (Pevans East Africa)', desc: 'Pioneering mobile betting and sports entertainment brand across Kenya, Tanzania, and South Africa.' },
+            { name: 'Showmax / Comcast NBCUniversal', desc: 'Direct-to-consumer streaming service streaming the English Premier League on mobile across 44 African countries.' },
+            { name: 'AXiA Active', desc: 'Renalytica partner; athletic performance brand and sports intelligence stakeholder advancing active lifestyles and apparel commerce in Africa.' }
+          ];
+        } else if (report.sector === 'education') {
+          companiesList = [
+            { name: 'GoFar International Academy', desc: 'Renalytica institutional partner; premier hybrid international school delivering Cambridge IGCSE, AI literacy, and STEM excellence.' },
+            { name: 'uLesson Education', desc: 'Pan-African K-12 digital curriculum platform with interactive video lessons, live tutoring, and exam preparation engines.' },
+            { name: 'SPARK Schools', desc: 'Pioneering blended-learning affordable private school network operating across South Africa.' },
+            { name: 'Moringa School', desc: 'Leading tech and coding accelerator preparing African graduates for global software engineering careers.' },
+            { name: 'Curro Holdings Limited', desc: 'JSE-listed private education provider operating high schools, primary schools, and digital distance learning academies across Southern Africa.' },
+            { name: 'Bridge International Academies', desc: 'High-volume technology-driven academy system supporting low-fee primary schooling in Kenya, Uganda, and Nigeria.' }
+          ];
+        } else if (report.sector === 'fintech') {
+          companiesList = [
+            { name: 'Yellow Card Financial', desc: 'Leading pan-African fiat-crypto on/off ramp operating in 20 African nations with local banking licenses.' },
+            { name: 'PAPSS (Afreximbank)', desc: 'Pan-African Payment and Settlement System enabling multilateral instant cross-border settlement in local currencies.' },
+            { name: 'Chipper Cash', desc: 'Cross-border payment and remittance provider connecting African corporate treasuries and retail users.' },
+            { name: 'Busha Digital', desc: 'SEC-regulated Nigerian digital currency exchange providing institutional crypto-fiat treasury liquidity.' },
+            { name: 'Flutterwave', desc: 'Pan-African payment infrastructure powering enterprise merchant checkouts and multi-currency virtual accounts.' },
+            { name: 'Interswitch Group', desc: 'Pioneering African transaction switching company driving Verve card schemes and corporate treasury rails.' }
+          ];
+        } else {
+          companiesList = [
+            { name: 'Dangote Industries Limited', desc: 'Pan-African industrial conglomerate spanning cement, petrochemicals, sugar, and port terminal logistics.' },
+            { name: 'MTN Group', desc: 'Multinational telecom and digital infrastructure provider operating fiber networks and hyperscale data centers.' },
+            { name: 'Standard Bank Group', desc: 'Africa’s largest bank by assets, providing sovereign debt underwriting and corporate treasury solutions.' },
+            { name: 'United Carriers', desc: 'Renalytica partner; pan-regional logistics and freight operator managing bonded freight and cargo corridors.' },
+            { name: 'TotalEnergies Africa', desc: 'Major energy producer and expanding investor in commercial & industrial rooftop solar installations.' },
+            { name: 'Unilever Africa', desc: 'Fast-moving consumer goods titan with nationwide rural distribution and informal kiosk route-to-market.' }
+          ];
+        }
+
+        companiesPanel.innerHTML = `
+          <div class="tab-content-card">
+            <h3 class="tab-sec-title">In-Depth Commercial Profiles for Key Industry Leaders</h3>
+            <p class="tab-paragraph">
+              Each profile evaluates operational capacity, regulatory standing, distribution footprint, and competitive risk parameters.
+            </p>
+            <div class="companies-grid">
+              ${companiesList.map((c, i) => `
+                <div class="company-card">
+                  <strong>${String(i + 1).padStart(2, '0')}. ${c.name}</strong>
+                  <p>${c.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+            <div class="more-companies-note">
+              <em>Also includes comprehensive comparative matrices and executive interview dossiers in the full research suite.</em>
+            </div>
+          </div>
+        `;
       }
 
       // License Selection Interaction

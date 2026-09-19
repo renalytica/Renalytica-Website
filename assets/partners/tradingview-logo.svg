@@ -1,0 +1,11 @@
+<svg width="240" height="64" viewBox="0 0 240 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- TradingView Official Iconic Mark -->
+  <g transform="translate(10, 14)">
+    <!-- Cloud / TV Symbol Blocks -->
+    <rect x="0" y="8" width="8" height="20" rx="3" fill="#131722"/>
+    <path d="M12 12C12 9.79086 13.7909 8 16 8H20C22.2091 8 24 9.79086 24 12V25C24 26.6569 22.6569 28 21 28H15C13.3431 28 12 26.6569 12 25V12Z" fill="#2962FF"/>
+    <circle cx="32" cy="18" r="5" fill="#131722"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="56" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5px" fill="#131722">TradingView</text>
+</svg>

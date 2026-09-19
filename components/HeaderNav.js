@@ -77,7 +77,7 @@ class HeaderNav extends HTMLElement {
   render() {
     // Structured Mega-Navigation HTML
     const isPlatformActive = ['reports.html', 'markets.html', 'methodology.html', 'portal.html'].includes(this.currentPath);
-    const isCompanyActive = ['about.html', 'services.html', 'careers.html', 'contact.html'].includes(this.currentPath);
+    const isCompanyActive = ['about.html', 'services.html', 'careers.html', 'contact.html', 'partners.html'].includes(this.currentPath);
     const isResourcesActive = ['insights.html', 'community.html', 'faq.html', 'gdpr.html', 'privacy.html', 'terms.html', 'blog.html', 'news.html'].includes(this.currentPath);
 
     const linksHtml = `
@@ -231,6 +231,21 @@ class HeaderNav extends HTMLElement {
                 <div class="mega-text-box">
                   <div class="mega-item-title">Contact &amp; Inquiries</div>
                   <div class="mega-item-desc">Request customized research proposals, RFP quotes, or consultations.</div>
+                </div>
+              </a>
+
+              <a href="partners.html" class="mega-item-link" role="menuitem">
+                <div class="mega-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div class="mega-text-box">
+                  <div class="mega-item-title">Strategic Partners</div>
+                  <div class="mega-item-desc">Operating alliances, data telemetry providers &amp; research network.</div>
                 </div>
               </a>
             </div>
@@ -571,28 +586,33 @@ class HeaderNav extends HTMLElement {
               <span class="drawer-label">About Us</span>
               <span class="drawer-arrow">→</span>
             </a>
-            <a href="community.html" class="drawer-link ${this.currentPath === 'community.html' ? 'active' : ''}">
+            <a href="partners.html" class="drawer-link ${this.currentPath === 'partners.html' ? 'active' : ''}">
               <span class="drawer-num">10</span>
+              <span class="drawer-label">Strategic Partners</span>
+              <span class="drawer-chip">Network</span>
+            </a>
+            <a href="community.html" class="drawer-link ${this.currentPath === 'community.html' ? 'active' : ''}">
+              <span class="drawer-num">11</span>
               <span class="drawer-label">Community &amp; Guilds</span>
               <span class="drawer-arrow">→</span>
             </a>
             <a href="careers.html" class="drawer-link ${this.currentPath === 'careers.html' ? 'active' : ''}">
-              <span class="drawer-num">11</span>
+              <span class="drawer-num">12</span>
               <span class="drawer-label">Careers &amp; Opportunities</span>
               <span class="drawer-arrow">→</span>
             </a>
             <a href="contact.html" class="drawer-link ${this.currentPath === 'contact.html' ? 'active' : ''}">
-              <span class="drawer-num">12</span>
+              <span class="drawer-num">13</span>
               <span class="drawer-label">Contact &amp; Inquiries</span>
               <span class="drawer-arrow">→</span>
             </a>
             <a href="faq.html" class="drawer-link ${this.currentPath === 'faq.html' ? 'active' : ''}">
-              <span class="drawer-num">13</span>
+              <span class="drawer-num">14</span>
               <span class="drawer-label">FAQ &amp; Knowledge Desk</span>
               <span class="drawer-arrow">→</span>
             </a>
             <a href="gdpr.html" class="drawer-link ${this.currentPath === 'gdpr.html' ? 'active' : ''}">
-              <span class="drawer-num">14</span>
+              <span class="drawer-num">15</span>
               <span class="drawer-label">GDPR Compliance</span>
               <span class="drawer-arrow">→</span>
             </a>

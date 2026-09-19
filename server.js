@@ -67,10 +67,13 @@ const FLW_PUBLIC_KEY = process.env.FLUTTERWAVE_PUBLIC_KEY || process.env.NEXT_PU
 const FLW_SECRET_KEY = process.env.FLUTTERWAVE_SECRET_KEY || '';
 const FLW_ENCRYPTION_KEY = process.env.FLUTTERWAVE_ENCRYPTION_KEY || '';
 
+// Resend Transactional Email API
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+
 // Middlewares
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname)));
@@ -136,6 +139,347 @@ function requireAdmin(req, res, next) {
   }
   next();
 }
+
+// ==============================================================================
+// 1B. TRANSACTIONAL EMAIL DISPATCHER (Resend)
+// ==============================================================================
+async function sendAuthEmail(toEmail, subject, htmlContent) {
+  if (!RESEND_API_KEY) {
+    console.log(`[Email Notice] No RESEND_API_KEY present. Email intended for: ${toEmail}`);
+    return { success: false, preview: true };
+  }
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY.trim()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'Renalytica Security <onboarding@resend.dev>',
+        to: [toEmail],
+        subject: subject,
+        html: htmlContent
+      })
+    });
+    const resData = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      console.warn('[Resend API Notice]:', resData);
+      return { success: false, error: resData.message || 'Delivery error' };
+    }
+    return { success: true, id: resData.id };
+  } catch (err) {
+    console.error('Error sending email via Resend:', err);
+    return { success: false, error: err.message };
+  }
+}
+
+// ==============================================================================
+// 1C. NATIVE SUPABASE AUTHENTICATION ENDPOINTS
+// ==============================================================================
+
+// 1. Sign Up (Create new institutional client in Supabase Auth)
+app.post('/api/auth/signup', async (req, res) => {
+  try {
+    const { email, password, fullName, organization, sector } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Please provide both email and password.' });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (cleanEmail === 'renalytica@gmail.com') {
+      return res.status(400).json({ error: 'Administrative email cannot be registered through public portal.' });
+    }
+
+    let createdUser = null;
+    let accessToken = null;
+
+    if (supabaseAdmin) {
+      const { data, error } = await supabaseAdmin.auth.admin.createUser({
+        email: cleanEmail,
+        password: password,
+        email_confirm: true,
+        user_metadata: {
+          full_name: fullName || cleanEmail.split('@')[0],
+          organization: organization || 'Institutional Client',
+          sector: sector || 'General Research',
+          role: 'client',
+          accountType: 'Client Account',
+          tier: 'Standard Client'
+        }
+      });
+
+      if (error) {
+        if (error.message && (error.message.includes('already registered') || error.message.includes('unique constraint') || error.status === 422)) {
+          return res.status(400).json({ error: 'An account with this email address already exists. Please sign in.' });
+        }
+        return res.status(400).json({ error: error.message });
+      }
+
+      createdUser = data.user;
+
+      const { data: signInData } = await supabaseAdmin.auth.signInWithPassword({
+        email: cleanEmail,
+        password: password
+      });
+      if (signInData && signInData.session) {
+        accessToken = signInData.session.access_token;
+      }
+    }
+
+    const clientUser = {
+      id: createdUser ? createdUser.id : ('usr_' + Math.random().toString(36).substr(2, 8)),
+      email: cleanEmail,
+      fullName: fullName || cleanEmail.split('@')[0],
+      organization: organization || 'Institutional Client',
+      sector: sector || 'General Research',
+      role: 'client',
+      accountType: 'Client Account',
+      tier: 'Standard Client',
+      memberSince: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+      avatar: 'assets/brand/renalytica_emblem.png',
+      purchasedReports: [],
+      invoices: [],
+      briefingsRemaining: 0,
+      isAdmin: false
+    };
+
+    const session = {
+      token: accessToken || ('sess_' + Math.random().toString(36).substr(2, 9)),
+      user: clientUser
+    };
+
+    sendAuthEmail(
+      cleanEmail,
+      'Welcome to Renalytica Institutional Research',
+      `<div style="font-family: Arial, sans-serif; color: #0F172A; max-width: 600px; padding: 24px; border: 1px solid #E2E8F0; border-radius: 8px;">
+        <h2 style="color: #FF8000; margin-top: 0;">Welcome to Renalytica, ${clientUser.fullName}!</h2>
+        <p>Your institutional client workspace for <strong>${clientUser.organization}</strong> has been provisioned.</p>
+        <p>You can now access econometric models, farmgate commodity data, and lead economist briefings.</p>
+        <p style="font-size: 12px; color: #64748B; margin-top: 24px;">SOC-2 Type II Certified Gateway • Renalytica Technologies & Research Advisory Limited</p>
+      </div>`
+    ).catch(e => console.warn('Welcome email note:', e));
+
+    return res.status(200).json({ user: clientUser, session });
+  } catch (err) {
+    console.error('Signup error:', err);
+    return res.status(500).json({ error: err.message || 'Failed to create account.' });
+  }
+});
+
+// 2. Sign In (Email & Password)
+app.post('/api/auth/signin', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Please provide both email and password.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    // Check Executive Admin Credentials
+    if (cleanEmail === 'renalytica@gmail.com') {
+      if (password !== 'Renalytica@pa55w0rd') {
+        return res.status(401).json({ error: 'Invalid administrative credentials. Please verify your password.' });
+      }
+      const adminSession = {
+        token: 'admin_jwt_token_' + Date.now(),
+        user: {
+          id: 'usr_admin_obinna',
+          email: 'renalytica@gmail.com',
+          fullName: 'Obinna Ezeala',
+          organization: 'Renalytica Leadership & Administration',
+          role: 'admin',
+          accountType: 'Executive Administrator',
+          tier: 'Master Admin Access',
+          memberSince: 'Founding Director',
+          avatar: 'assets/brand/renalytica_emblem.png',
+          purchasedReports: ['all_reports_master_access'],
+          isAdmin: true
+        }
+      };
+      return res.status(200).json({ user: adminSession.user, session: adminSession });
+    }
+
+    if (supabaseAdmin) {
+      const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+        email: cleanEmail,
+        password: password
+      });
+
+      if (error) {
+        return res.status(401).json({ error: error.message || 'Invalid email or password.' });
+      }
+
+      const meta = data.user.user_metadata || {};
+      const clientUser = {
+        id: data.user.id,
+        email: data.user.email,
+        fullName: meta.full_name || cleanEmail.split('@')[0],
+        organization: meta.organization || 'Institutional Client',
+        sector: meta.sector || 'General Research',
+        role: 'client',
+        accountType: 'Client Account',
+        tier: meta.tier || 'Verified Client',
+        memberSince: new Date(data.user.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+        avatar: 'assets/brand/renalytica_emblem.png',
+        purchasedReports: meta.purchasedReports || [],
+        invoices: meta.invoices || [],
+        briefingsRemaining: meta.briefingsRemaining || 0,
+        isAdmin: false
+      };
+
+      const session = {
+        token: data.session ? data.session.access_token : ('sess_' + Math.random().toString(36).substr(2, 9)),
+        user: clientUser
+      };
+
+      return res.status(200).json({ user: clientUser, session });
+    }
+
+    return res.status(500).json({ error: 'Authentication service temporarily offline.' });
+  } catch (err) {
+    console.error('Signin error:', err);
+    return res.status(500).json({ error: err.message || 'Authentication failed.' });
+  }
+});
+
+// 3. Send Email OTP / Magic Link
+app.post('/api/auth/send-otp', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'Please provide your work email address.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!supabaseAdmin) {
+      return res.status(500).json({ error: 'Supabase authentication service unavailable.' });
+    }
+
+    const { data, error } = await supabaseAdmin.auth.admin.generateLink({
+      type: 'magiclink',
+      email: cleanEmail
+    });
+
+    if (error) {
+      return res.status(400).json({ error: error.message || 'Failed to generate one-time code.' });
+    }
+
+    const otpCode = data.properties.email_otp;
+    const actionLink = data.properties.action_link;
+
+    const emailResult = await sendAuthEmail(
+      cleanEmail,
+      'Your Renalytica One-Time Passcode (OTP)',
+      `<div style="font-family: Arial, sans-serif; color: #0F172A; max-width: 600px; padding: 24px; border: 1px solid #E2E8F0; border-radius: 8px;">
+        <h2 style="color: #FF8000; margin: 0 0 16px 0;">Renalytica Client Intelligence</h2>
+        <p>Hello,</p>
+        <p>Use the following secure 6-digit one-time passcode (OTP) to access your client portal:</p>
+        <div style="background: #F8FAFC; border: 2px dashed #CBD5E1; padding: 16px 24px; text-align: center; border-radius: 8px; margin: 24px 0;">
+          <span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #0F172A;">${otpCode}</span>
+        </div>
+        <p style="font-size: 13px; color: #64748B;">This code is valid for 10 minutes. Enter it in the client portal to verify your session.</p>
+        <p style="font-size: 12px; color: #94A3B8; margin-top: 32px; border-top: 1px solid #E2E8F0; padding-top: 12px;">
+          256-Bit Encrypted Gateway • Renalytica Technologies & Research Advisory Limited
+        </p>
+      </div>`
+    );
+
+    const responsePayload = {
+      success: true,
+      message: emailResult.success
+        ? `A 6-digit passcode has been dispatched to ${cleanEmail}.`
+        : `A 6-digit passcode has been generated for ${cleanEmail}.`
+    };
+
+    if (!emailResult.success) {
+      responsePayload.devOtp = otpCode;
+      responsePayload.note = 'Local development mode: code available in console.';
+    }
+
+    return res.status(200).json(responsePayload);
+  } catch (err) {
+    console.error('Send OTP error:', err);
+    return res.status(500).json({ error: err.message || 'Failed to send OTP.' });
+  }
+});
+
+// 4. Verify Email OTP Code
+app.post('/api/auth/verify-otp', async (req, res) => {
+  try {
+    const { email, token } = req.body;
+    if (!email || !token) {
+      return res.status(400).json({ error: 'Please provide both email and verification code.' });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanToken = token.trim();
+
+    if (!supabaseAdmin) {
+      return res.status(500).json({ error: 'Supabase authentication service unavailable.' });
+    }
+
+    const { data, error } = await supabaseAdmin.auth.verifyOtp({
+      email: cleanEmail,
+      token: cleanToken,
+      type: 'email'
+    });
+
+    if (error || !data || !data.user) {
+      return res.status(400).json({ error: error ? error.message : 'Invalid or expired verification code.' });
+    }
+
+    const meta = data.user.user_metadata || {};
+    const clientUser = {
+      id: data.user.id,
+      email: data.user.email,
+      fullName: meta.full_name || cleanEmail.split('@')[0],
+      organization: meta.organization || 'Institutional Client',
+      sector: meta.sector || 'General Research',
+      role: 'client',
+      accountType: 'Client Account',
+      tier: meta.tier || 'Verified Client',
+      memberSince: new Date(data.user.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+      avatar: 'assets/brand/renalytica_emblem.png',
+      purchasedReports: meta.purchasedReports || [],
+      invoices: meta.invoices || [],
+      briefingsRemaining: meta.briefingsRemaining || 0,
+      isAdmin: cleanEmail === 'renalytica@gmail.com'
+    };
+
+    const session = {
+      token: data.session ? data.session.access_token : ('sess_' + Math.random().toString(36).substr(2, 9)),
+      user: clientUser
+    };
+
+    return res.status(200).json({ user: clientUser, session });
+  } catch (err) {
+    console.error('Verify OTP error:', err);
+    return res.status(500).json({ error: err.message || 'Failed to verify OTP.' });
+  }
+});
+
+// 5. Password Reset Instructions
+app.post('/api/auth/reset-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'Please provide your work email address.' });
+    }
+    const cleanEmail = email.trim().toLowerCase();
+    if (supabaseAdmin) {
+      await supabaseAdmin.auth.resetPasswordForEmail(cleanEmail).catch(e => console.warn('Reset password notice:', e));
+    }
+    return res.status(200).json({ success: true, message: `Password reset instructions sent to ${cleanEmail}.` });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
 
 // ==============================================================================
 // 2. CHECKOUT API: Hosted Flutterwave Payment Link
@@ -641,11 +985,18 @@ async function watermarkPdfBuffer(pdfBuffer, metadata = {}) {
 const mockProducts = [
   {
     id: 'nigeria-ai-adoption-economics-2026',
+    sku: 'REN-AI-2026-042',
     title: 'The Economics of AI Adoption in Africa (2026)',
     description: '<p>Comprehensive 84-page macroeconomic model assessing generative AI productivity dividends across financial institutions, agribusiness, and cross-border digital trade in Nigeria, Kenya, and South Africa.</p>',
     category: 'Data Analysis',
     base_price: 150000,
     currency: 'NGN',
+    regional_pricing: {
+      NGN: 150000,
+      USD: 100,
+      GHS: 1550,
+      KES: 13000
+    },
     billing_type: 'one-time',
     file_path: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
     preview_file_url: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
@@ -657,11 +1008,18 @@ const mockProducts = [
   },
   {
     id: 'nigeria-stablecoins-cross-border-2026',
+    sku: 'REN-FS-2026-092',
     title: 'Sub-Saharan Africa Stablecoins & Digital FX Corridors (2026-2027)',
     description: '<p>92-page proprietary quantitative research report detailing USDT/USDC settlement volumes, FX liquidity pipelines, banking parity dynamics, and cross-border commercial clearing corridors.</p>',
     category: 'Market Insights',
     base_price: 450,
     currency: 'USD',
+    regional_pricing: {
+      NGN: 675000,
+      USD: 450,
+      GHS: 6975,
+      KES: 58500
+    },
     billing_type: 'one-time',
     file_path: 'assets/reports/Renalytica_Stablecoins_Report_2026.pdf',
     preview_file_url: 'assets/reports/Renalytica_Stablecoins_Report_2026.pdf',
@@ -673,11 +1031,18 @@ const mockProducts = [
   },
   {
     id: 'pan-african-fintech-venture-capital-2026',
+    sku: 'REN-FX-2026-119',
     title: 'Pan-African Sovereign Debt & Fintech Liquidity Monitor',
     description: '<p>High-frequency macroeconomic monitor analyzing sovereign debt maturities, currency depreciations, and early-stage venture liquidity trends in West and East Africa.</p>',
     category: 'Industry Research',
     base_price: 250000,
     currency: 'NGN',
+    regional_pricing: {
+      NGN: 250000,
+      USD: 165,
+      GHS: 2550,
+      KES: 21500
+    },
     billing_type: 'subscription',
     file_path: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
     preview_file_url: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
@@ -1023,61 +1388,169 @@ app.get('/api/admin/analytics', authenticateUser, requireAdmin, async (req, res)
 });
 
 // ==============================================================================
-// 10. ADMIN PRODUCT & INVENTORY MANAGER API (CRUD)
+// 10. ADMIN PRODUCT & INVENTORY MANAGER API (PAYHIP-BENCHMARKED CRUD ENGINE)
 // ==============================================================================
+
+// Relational safety routine for product deletion & order integrity
+async function calculateProductOrderSafety(productId, productSku = '') {
+  let orderCount = 0;
+  let fulfillmentCount = 0;
+
+  if (supabaseAdmin && isSupabaseOnline) {
+    try {
+      // Check orders in Supabase
+      const { data: dbOrders, error: orderErr } = await supabaseAdmin
+        .from('orders')
+        .select('id, metadata, product_id');
+      
+      if (!orderErr && dbOrders) {
+        orderCount = dbOrders.filter(o => {
+          const meta = o.metadata || {};
+          return o.product_id === productId ||
+                 meta.productId === productId ||
+                 meta.product_id === productId ||
+                 (productSku && (meta.sku === productSku || o.product_id === productSku));
+        }).length;
+      }
+
+      // Check fulfillments in Supabase
+      const { data: dbFulfillments, error: fulErr } = await supabaseAdmin
+        .from('digital_fulfillment')
+        .select('id, product_id');
+      
+      if (!fulErr && dbFulfillments) {
+        fulfillmentCount = dbFulfillments.filter(f => 
+          f.product_id === productId || (productSku && f.product_id === productSku)
+        ).length;
+      }
+    } catch (e) {
+      console.warn('Supabase safety check fallback to memory:', e.message);
+    }
+  }
+
+  // Also verify against in-memory mock datasets (guarantees local demo & test safety)
+  const mockOrderMatches = mockOrders.filter(o => 
+    o.product_id === productId || (productSku && o.product_id === productSku) || (o.metadata && o.metadata.productId === productId)
+  ).length;
+  const mockFulMatches = mockFulfillments.filter(f => 
+    f.product_id === productId || (productSku && f.product_id === productSku)
+  ).length;
+
+  orderCount = Math.max(orderCount, mockOrderMatches);
+  fulfillmentCount = Math.max(fulfillmentCount, mockFulMatches);
+
+  const canDelete = orderCount === 0 && fulfillmentCount === 0;
+
+  return {
+    orderCount,
+    fulfillmentCount,
+    canDelete,
+    recommendation: canDelete ? 'safe_to_purge' : 'archive_instead',
+    message: canDelete 
+      ? 'Product has 0 associated client orders and 0 issued fulfillment licenses. Safe to permanently erase.'
+      : `Hard deletion blocked: ${orderCount} verified client order(s) and ${fulfillmentCount} active license(s) exist. Deletion would revoke customer access. Archiving is recommended.`
+  };
+}
+
+// 10.1 GET ALL PRODUCTS (ADMIN INVENTORY TABLE)
 app.get('/api/admin/products', authenticateUser, requireAdmin, async (req, res) => {
   try {
     let products = [];
     if (supabaseAdmin && isSupabaseOnline) {
-      const { data } = await supabaseAdmin.from('products').select('*').order('created_at', { ascending: false });
-      if (data && data.length > 0) products = data;
+      const { data, error } = await supabaseAdmin
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (!error && data && data.length > 0) products = data;
     }
     if (products.length === 0) {
-      products = mockProducts;
+      products = [...mockProducts];
     }
-    res.json({ success: true, products });
+
+    // Enrich each product with live order/fulfillment telemetry & regional pricing
+    const enrichedProducts = await Promise.all(products.map(async (p) => {
+      const safety = await calculateProductOrderSafety(p.id, p.sku);
+      
+      // Ensure regional pricing object exists
+      const basePrice = Number(p.base_price) || 0;
+      const regionalPricing = p.regional_pricing || {
+        NGN: p.currency === 'NGN' ? basePrice : Math.round(basePrice * 1500),
+        USD: p.currency === 'USD' ? basePrice : Math.round(basePrice / 1500),
+        GHS: Math.round((p.currency === 'USD' ? basePrice : basePrice / 1500) * 15.5),
+        KES: Math.round((p.currency === 'USD' ? basePrice : basePrice / 1500) * 130)
+      };
+
+      return {
+        ...p,
+        sku: p.sku || p.id,
+        status: p.status || 'published',
+        regional_pricing: regionalPricing,
+        order_count: safety.orderCount,
+        fulfillment_count: safety.fulfillmentCount,
+        can_delete: safety.canDelete,
+        recommendation: safety.recommendation
+      };
+    }));
+
+    res.json({ success: true, count: enrichedProducts.length, products: enrichedProducts });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
+// 10.2 CREATE NEW REPORT PUBLICATION
 app.post('/api/admin/products', authenticateUser, requireAdmin, async (req, res) => {
   try {
     const {
       title,
+      sku,
       description,
       category = 'Market Insights',
       base_price = 150000,
       currency = 'NGN',
+      regional_pricing,
       billing_type = 'one-time',
       file_path = 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
       preview_file_url = 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
       download_limit = 3,
       download_expiry_days = 1,
-      gateways = 'FLW (NGN, USD, GHS)',
+      gateways = 'FLW (NGN, USD, GHS, KES)',
       status = 'published'
     } = req.body;
 
-    if (!title) {
+    if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Product title is required.' });
     }
 
-    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now().toString().slice(-4);
+    const id = title.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now().toString().slice(-4);
+    const parsedBasePrice = parseFloat(base_price) || 0;
+    const cleanCurrency = (currency || 'USD').toUpperCase();
+
+    const computedRegional = regional_pricing || {
+      NGN: cleanCurrency === 'NGN' ? parsedBasePrice : Math.round(parsedBasePrice * 1500),
+      USD: cleanCurrency === 'USD' ? parsedBasePrice : Math.round(parsedBasePrice / 1500),
+      GHS: Math.round((cleanCurrency === 'USD' ? parsedBasePrice : parsedBasePrice / 1500) * 15.5),
+      KES: Math.round((cleanCurrency === 'USD' ? parsedBasePrice : parsedBasePrice / 1500) * 130)
+    };
+
     const newProduct = {
       id,
-      title,
-      description,
+      sku: sku || ('REN-' + id.toUpperCase().slice(0, 8) + '-' + Math.floor(100 + Math.random() * 900)),
+      title: title.trim(),
+      description: description || '',
       category,
-      base_price: parseFloat(base_price),
-      currency: currency.toUpperCase(),
+      base_price: parsedBasePrice,
+      currency: cleanCurrency,
+      regional_pricing: computedRegional,
       billing_type,
       file_path,
       preview_file_url,
       download_limit: parseInt(download_limit, 10) || 3,
       download_expiry_days: parseInt(download_expiry_days, 10) || 1,
       gateways,
-      status,
-      created_at: new Date().toISOString()
+      status: ['draft', 'published', 'archived'].includes(status) ? status : 'published',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     };
 
     if (supabaseAdmin && isSupabaseOnline) {
@@ -1095,12 +1568,13 @@ app.post('/api/admin/products', authenticateUser, requireAdmin, async (req, res)
   }
 });
 
+// 10.3 UPDATE PRODUCT METADATA & MULTI-CURRENCY PRICING
 app.put('/api/admin/products/:id', authenticateUser, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = { ...req.body, updated_at: new Date().toISOString() };
 
-    let index = mockProducts.findIndex(p => p.id === id);
+    let index = mockProducts.findIndex(p => p.id === id || p.sku === id);
     if (index !== -1) {
       mockProducts[index] = { ...mockProducts[index], ...updates };
     }
@@ -1113,27 +1587,312 @@ app.put('/api/admin/products/:id', authenticateUser, requireAdmin, async (req, r
       }
     }
 
-    res.json({ success: true, product: index !== -1 ? mockProducts[index] : updates });
+    const updatedProd = index !== -1 ? mockProducts[index] : updates;
+    res.json({ success: true, product: updatedProd });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
+// 10.4 QUICK STATUS TOGGLE ('published' <-> 'draft' / 'archived')
+app.patch('/api/admin/products/:id/status', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!['published', 'draft', 'archived'].includes(status)) {
+      return res.status(400).json({ error: 'Invalid status. Must be published, draft, or archived.' });
+    }
+
+    let found = null;
+    let index = mockProducts.findIndex(p => p.id === id || p.sku === id);
+    if (index !== -1) {
+      mockProducts[index].status = status;
+      mockProducts[index].updated_at = new Date().toISOString();
+      found = mockProducts[index];
+    }
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('products').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+      } catch (dbErr) {
+        console.warn('Could not update product status in Supabase:', dbErr.message);
+      }
+    }
+
+    res.json({
+      success: true,
+      id,
+      status,
+      message: `Publication availability status successfully changed to '${status}'.`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 10.5 SMART FILE REPLACEMENT ENGINE WITH ORPHAN STORAGE PURGE
+app.post('/api/admin/products/:id/replace-file', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      targetType = 'premium', // 'premium' (reports-private) or 'preview' (public preview)
+      newFilePath,
+      fileBase64,
+      fileName,
+      purgeOld = true
+    } = req.body;
+
+    // 1. Locate current product record
+    let currentProd = mockProducts.find(p => p.id === id || p.sku === id);
+    if (supabaseAdmin && isSupabaseOnline) {
+      const { data } = await supabaseAdmin.from('products').select('*').eq('id', id).maybeSingle();
+      if (data) currentProd = data;
+    }
+
+    if (!currentProd) {
+      return res.status(404).json({ error: 'Target report publication not found.' });
+    }
+
+    const oldFilePath = targetType === 'premium' ? currentProd.file_path : currentProd.preview_file_url;
+    let finalPath = newFilePath;
+
+    // 2. Handle uploaded file content (base64)
+    if (fileBase64 && fileName) {
+      const buffer = Buffer.from(fileBase64.replace(/^data:.*?;base64,/, ''), 'base64');
+      const safeName = Date.now() + '_' + fileName.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const targetBucket = targetType === 'premium' ? 'reports-private' : 'public_assets';
+      const storageKey = `reports/${safeName}`;
+
+      // A. Write to local reports directory for high-speed streaming fallback
+      const localDir = path.join(__dirname, 'assets', 'reports');
+      if (!fs.existsSync(localDir)) fs.mkdirSync(localDir, { recursive: true });
+      const localFilePath = path.join(localDir, safeName);
+      fs.writeFileSync(localFilePath, buffer);
+      finalPath = `assets/reports/${safeName}`;
+
+      // B. Upload to Supabase Storage Bucket
+      if (supabaseAdmin && isSupabaseOnline) {
+        try {
+          const { error: uploadErr } = await supabaseAdmin.storage
+            .from(targetBucket)
+            .upload(storageKey, buffer, {
+              contentType: fileName.endsWith('.pdf') ? 'application/pdf' : 'application/octet-stream',
+              upsert: true
+            });
+          if (!uploadErr) {
+            finalPath = targetType === 'premium' ? storageKey : `assets/reports/${safeName}`;
+          }
+        } catch (uploadEx) {
+          console.warn('Supabase storage upload notice:', uploadEx.message);
+        }
+      }
+    }
+
+    if (!finalPath) {
+      return res.status(400).json({ error: 'New file path or uploaded file buffer is required.' });
+    }
+
+    // 3. Smart Orphan Purge: If old file is distinct and not a shared core seed asset, purge it!
+    let purgedOld = false;
+    const isSeedAsset = oldFilePath && (
+      oldFilePath.includes('Renalytica_Economics_AI_Adoption_2026.pdf') ||
+      oldFilePath.includes('Renalytica_Stablecoins_Report_2026.pdf')
+    );
+
+    if (purgeOld && oldFilePath && oldFilePath !== finalPath && !isSeedAsset) {
+      // Purge from Supabase Storage
+      if (supabaseAdmin && isSupabaseOnline) {
+        try {
+          const targetBucket = targetType === 'premium' ? 'reports-private' : 'public_assets';
+          const cleanOldKey = oldFilePath.replace(/^assets\/reports\//, 'reports/');
+          await supabaseAdmin.storage.from(targetBucket).remove([cleanOldKey, oldFilePath]);
+          purgedOld = true;
+        } catch (purgeErr) {
+          console.warn('Storage purge warning:', purgeErr.message);
+        }
+      }
+
+      // Purge from local disk if it was an uploaded file
+      try {
+        const localOld = path.join(__dirname, oldFilePath);
+        if (fs.existsSync(localOld) && oldFilePath.includes('assets/reports/')) {
+          fs.unlinkSync(localOld);
+          purgedOld = true;
+        }
+      } catch (diskErr) {
+        console.warn('Local disk purge warning:', diskErr.message);
+      }
+    }
+
+    // 4. Update product database record
+    const updates = { updated_at: new Date().toISOString() };
+    if (targetType === 'premium') {
+      updates.file_path = finalPath;
+    } else {
+      updates.preview_file_url = finalPath;
+    }
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('products').update(updates).eq('id', id);
+      } catch (dbErr) {
+        console.warn('Supabase product file reference update error:', dbErr.message);
+      }
+    }
+
+    const idx = mockProducts.findIndex(p => p.id === id || p.sku === id);
+    if (idx !== -1) {
+      mockProducts[idx] = { ...mockProducts[idx], ...updates };
+    }
+
+    res.json({
+      success: true,
+      targetType,
+      updatedFilePath: finalPath,
+      previousFilePath: oldFilePath,
+      orphanStoragePurged: purgedOld,
+      message: `Successfully swapped ${targetType} document for "${currentProd.title}". Storage orphan purge complete.`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 10.6 PRE-FLIGHT CHECK: REPORT DELETION SAFETY
+app.get('/api/admin/products/:id/check-delete', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    let currentProd = mockProducts.find(p => p.id === id || p.sku === id);
+    if (supabaseAdmin && isSupabaseOnline) {
+      const { data } = await supabaseAdmin.from('products').select('*').eq('id', id).maybeSingle();
+      if (data) currentProd = data;
+    }
+
+    const sku = currentProd ? currentProd.sku : '';
+    const safety = await calculateProductOrderSafety(id, sku);
+
+    res.json({
+      success: true,
+      id,
+      title: currentProd ? currentProd.title : id,
+      ...safety
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 10.7 SAFE ERASURE & PERMANENT PURGE ROUTINE
 app.delete('/api/admin/products/:id', authenticateUser, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    const index = mockProducts.findIndex(p => p.id === id);
-    if (index !== -1) {
-      mockProducts.splice(index, 1);
+    let currentProd = mockProducts.find(p => p.id === id || p.sku === id);
+    if (supabaseAdmin && isSupabaseOnline) {
+      const { data } = await supabaseAdmin.from('products').select('*').eq('id', id).maybeSingle();
+      if (data) currentProd = data;
     }
+
+    const sku = currentProd ? currentProd.sku : '';
+    const safety = await calculateProductOrderSafety(id, sku);
+
+    // BLOCK DELETION IF PURCHASES EXIST
+    if (!safety.canDelete) {
+      return res.status(409).json({
+        error: `Cannot delete publication with active purchase history (${safety.orderCount} order(s), ${safety.fulfillmentCount} active license(s)). Permanent deletion would revoke customer access. Please archive this report instead.`,
+        blocked: true,
+        order_count: safety.orderCount,
+        fulfillment_count: safety.fulfillmentCount,
+        recommendation: 'archive'
+      });
+    }
+
+    // SAFE TO PURGE: Clean up physical assets from storage
+    if (currentProd) {
+      const filesToPurge = [currentProd.file_path, currentProd.preview_file_url].filter(Boolean);
+      for (const f of filesToPurge) {
+        const isSeed = f.includes('Renalytica_Economics_AI_Adoption_2026.pdf') || f.includes('Renalytica_Stablecoins_Report_2026.pdf');
+        if (!isSeed && supabaseAdmin && isSupabaseOnline) {
+          try {
+            await supabaseAdmin.storage.from('reports-private').remove([f]);
+            await supabaseAdmin.storage.from('public_assets').remove([f]);
+          } catch (storageErr) {
+            console.warn('Storage purge error:', storageErr.message);
+          }
+        }
+      }
+    }
+
+    // Delete row from Supabase
     if (supabaseAdmin && isSupabaseOnline) {
       try {
         await supabaseAdmin.from('products').delete().eq('id', id);
       } catch (dbErr) {
-        console.warn('Could not delete product in Supabase:', dbErr.message);
+        console.warn('Supabase product delete warning:', dbErr.message);
       }
     }
-    res.json({ success: true, message: 'Product successfully deleted.' });
+
+    // Remove from in-memory mock catalog
+    const index = mockProducts.findIndex(p => p.id === id || p.sku === id);
+    if (index !== -1) {
+      mockProducts.splice(index, 1);
+    }
+
+    res.json({
+      success: true,
+      message: `Publication "${currentProd ? currentProd.title : id}" and associated physical storage assets permanently purged.`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 10.8 PUBLIC STOREFRONT PRODUCTS ENDPOINT (REAL-TIME STOREFRONT SYNC)
+app.get('/api/products', async (req, res) => {
+  try {
+    let products = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      const { data, error } = await supabaseAdmin
+        .from('products')
+        .select('*')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false });
+      if (!error && data && data.length > 0) products = data;
+    }
+
+    if (products.length === 0) {
+      products = mockProducts.filter(p => p.status === 'published');
+    }
+
+    // Return only active published products with multi-currency pricing
+    const catalog = products.map(p => {
+      const basePrice = Number(p.base_price) || 0;
+      const regional = p.regional_pricing || {
+        NGN: p.currency === 'NGN' ? basePrice : Math.round(basePrice * 1500),
+        USD: p.currency === 'USD' ? basePrice : Math.round(basePrice / 1500),
+        GHS: Math.round((p.currency === 'USD' ? basePrice : basePrice / 1500) * 15.5),
+        KES: Math.round((p.currency === 'USD' ? basePrice : basePrice / 1500) * 130)
+      };
+
+      return {
+        id: p.id,
+        sku: p.sku || p.id,
+        title: p.title,
+        description: p.description,
+        category: p.category,
+        base_price: basePrice,
+        currency: p.currency || 'USD',
+        regional_pricing: regional,
+        billing_type: p.billing_type || 'one-time',
+        preview_file_url: p.preview_file_url,
+        download_limit: p.download_limit || 3,
+        download_expiry_days: p.download_expiry_days || 1,
+        status: p.status,
+        created_at: p.created_at
+      };
+    });
+
+    res.json({ success: true, count: catalog.length, products: catalog });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -1192,6 +1951,377 @@ app.post('/api/admin/broadcast-revision', authenticateUser, requireAdmin, async 
   }
 });
 
+// ==============================================================================
+// 12. EXECUTIVE ANALYST BRIEFINGS API (FULL CRUD FOR ADMIN & CLIENT PORTAL)
+// ==============================================================================
+let mockBriefings = [
+  {
+    id: 'BRF-2026-001',
+    title: 'Q4 2026 Sub-Saharan Agro-Commodities & Fertilizer Import Parity Outlook',
+    sector: 'Agribusiness & Commodities',
+    host: 'Dr. Adeleke Ogunlesi (Lead Agricultural Economist)',
+    datetime: '2026-10-15T14:00',
+    datetimeFormatted: 'Thu, Oct 15, 2026 • 2:00 PM WAT',
+    capacity: 25,
+    bookedSeats: 7,
+    roomUrl: 'https://zoom.us/j/9842104921',
+    format: 'Interactive Video Roundtable (60 Min)',
+    status: 'Scheduled',
+    agenda: 'Review farmgate maize, wheat, and soybean harvest forecasts, FX landing cost disparities across Nigeria, Ghana, and Kenya, and outgrower margin dynamics.'
+  },
+  {
+    id: 'BRF-2026-002',
+    title: 'West African Sports Business & Athleisure Market Expansion',
+    sector: 'Sports Business & Analytics',
+    host: 'Obinna Ezeala (Managing Director & Chief Strategist)',
+    datetime: '2026-10-20T11:00',
+    datetimeFormatted: 'Tue, Oct 20, 2026 • 11:00 AM WAT',
+    capacity: 30,
+    bookedSeats: 6,
+    roomUrl: 'https://teams.microsoft.com/l/meetup-join/renalytica-sports-2026',
+    format: 'Executive Analyst Presentation + Q&A (45 Min)',
+    status: 'Scheduled',
+    agenda: 'Empirical market sizing of youth athletic apparel, grassroots football academy monetization, and domestic manufacturing partnerships featuring partner AXiA Active.'
+  },
+  {
+    id: 'BRF-2026-003',
+    title: 'Pan-African Digital Currency Liquidity & Cross-Border Treasury Arbitrage',
+    sector: 'Financial Systems & Fintech',
+    host: 'Chiamaka Nkemdirim (Fintech & FX Lead)',
+    datetime: '2026-10-27T15:00',
+    datetimeFormatted: 'Tue, Oct 27, 2026 • 3:00 PM WAT',
+    capacity: 20,
+    bookedSeats: 11,
+    roomUrl: 'https://zoom.us/j/9128391204',
+    format: 'Closed Boardroom Session (90 Min)',
+    status: 'Scheduled',
+    agenda: 'Analysis of USDT/NGN and crypto-fiat settlement spreads, central bank compliance frameworks, and institutional treasury hedging strategies.'
+  }
+];
+
+// GET all briefings
+app.get('/api/admin/briefings', authenticateUser, async (req, res) => {
+  res.json({ success: true, count: mockBriefings.length, briefings: mockBriefings });
+});
+
+// POST create briefing
+app.post('/api/admin/briefings', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { title, sector, host, datetime, capacity, roomUrl, format, agenda } = req.body;
+    if (!title || !datetime) {
+      return res.status(400).json({ error: 'Title and datetime are required.' });
+    }
+    const newId = 'BRF-2026-' + Math.floor(100 + Math.random() * 900);
+    const dtObj = new Date(datetime);
+    const dtFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
+
+    const newBriefing = {
+      id: newId,
+      title,
+      sector: sector || 'Agribusiness & Commodities',
+      host: host || 'Obinna Ezeala (Managing Director & Chief Strategist)',
+      datetime,
+      datetimeFormatted: dtFormatted,
+      capacity: parseInt(capacity, 10) || 25,
+      bookedSeats: 0,
+      roomUrl: roomUrl || 'https://zoom.us/j/9842104921',
+      format: format || 'Interactive Video Roundtable (60 Min)',
+      status: 'Scheduled',
+      agenda: agenda || ''
+    };
+    mockBriefings.unshift(newBriefing);
+    res.status(201).json({ success: true, briefing: newBriefing });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update / revise briefing
+app.put('/api/admin/briefings/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockBriefings.findIndex(b => b.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Briefing session not found.' });
+    }
+    const updates = req.body;
+    if (updates.datetime) {
+      const dtObj = new Date(updates.datetime);
+      updates.datetimeFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
+    }
+    mockBriefings[index] = { ...mockBriefings[index], ...updates };
+    res.json({ success: true, briefing: mockBriefings[index] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE briefing
+app.delete('/api/admin/briefings/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockBriefings.findIndex(b => b.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Briefing session not found.' });
+    }
+    const deleted = mockBriefings.splice(index, 1);
+    res.json({ success: true, message: 'Briefing successfully deleted.', briefing: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
+// 12. STRATEGIC INSTITUTIONAL PARTNERS & ALLIANCES DESK CRUD
+// ==============================================================================
+let mockPartners = [
+  {
+    id: 'united-carriers',
+    name: 'United Carriers',
+    category: 'operating',
+    sector: 'Logistics & Haulage',
+    pillClass: 'pill-logistics',
+    logoUrl: 'assets/partners/united-carriers-logo.svg',
+    tagline: 'Pan-African Freight & Cold-Chain Logistics',
+    desc: 'Premier pan-African multi-modal freight forwarder, cold-chain haulage leader, and bonded fleet operator connecting agricultural production basins to major urban industrial corridors.',
+    highlights: [
+      'Cross-Border Trade Corridors: Ground-truth diesel haulage and customs transit times along Lagos-Kano-Niamey and Abidjan routes.',
+      'Cold-Chain Telemetry: Real-time spoilage reduction metrics across perishable fruits, vegetables, and commercial poultry feeds.',
+      'Fleet Optimization: Joint transport cost modeling incorporated directly into Renalytica’s grain and commodity reports.'
+    ],
+    primaryActionUrl: 'reports.html?sector=retail',
+    primaryActionLabel: 'Logistics Economics Desk →',
+    secondaryActionUrl: 'reports.html?sector=retail',
+    secondaryActionLabel: 'View Corridor Reports →',
+    status: 'published',
+    order: 1
+  },
+  {
+    id: 'axia-active',
+    name: 'AXiA Active',
+    category: 'operating',
+    sector: 'Sports & Wellness',
+    pillClass: 'pill-sports',
+    logoUrl: 'assets/partners/axia-active-logo.png',
+    tagline: 'Athletic Gear, Activewear & Wellness Retail',
+    desc: 'Dynamic athletic performance gear and fitness lifestyle brand spearheading premium activewear retail, community athletic leagues, and corporate wellness programs across West Africa.',
+    highlights: [
+      'Sports Business Intelligence: High-frequency point-of-sale data informing consumer discretionary athletic spending and gym club expansion.',
+      'Apparel Supply Chain: Empirical import duty benchmarks and textile manufacturing feasibility across frontier retail hubs.',
+      'Athletic Sponsorship Telemetry: Commercial valuation models for domestic football, basketball (BAL), and marathon events.'
+    ],
+    primaryActionUrl: 'reports.html?sector=sports',
+    primaryActionLabel: 'Sports Economics Desk →',
+    secondaryActionUrl: 'reports.html?sector=sports',
+    secondaryActionLabel: 'Sports Intelligence Desk →',
+    status: 'published',
+    order: 2
+  },
+  {
+    id: 'gofar-academy',
+    name: 'GoFar International Academy',
+    category: 'operating',
+    sector: 'Global Education',
+    pillClass: 'pill-education',
+    logoUrl: 'assets/partners/gofar-academy-logo.webp',
+    tagline: 'Accredited STEM Education & Leadership Academy',
+    desc: 'Globally accredited preparatory institution and STEM excellence academy delivering world-standard curricula, coding bootcamps, and early leadership development programs.',
+    highlights: [
+      'Education Econometrics: Longitudinal tracking of private school tuition indexation, curriculum adoption, and household education spend.',
+      'EdTech Infrastructure: Benchmarking campus digital connectivity, device penetration, and interactive classroom technology ROI.',
+      'Talent Pipeline Incubator: Early data analytics training and economic fellowship programs in partnership with Renalytica analysts.'
+    ],
+    primaryActionUrl: 'reports.html?sector=education',
+    primaryActionLabel: 'Human Capital Reports →',
+    secondaryActionUrl: 'reports.html?sector=education',
+    secondaryActionLabel: 'Education Economics Desk →',
+    status: 'published',
+    order: 3
+  },
+  {
+    id: 'tradingview',
+    name: 'TradingView',
+    category: 'telemetry',
+    sector: 'Market Telemetry & Charting',
+    pillClass: 'pill-telemetry',
+    logoUrl: 'assets/partners/tradingview-logo.svg',
+    tagline: 'Institutional Charting & Telemetry Engine',
+    desc: 'Global leader in multi-asset financial charting, technical analysis indicators, and institutional WebGL market data visualization powering Renalytica\'s Live Market Terminal.',
+    highlights: [
+      'Advanced Charting Engine: Ultra-low latency interactive candlestick visualization, technical indicators, and multi-timeframe analysis across African and global equities.',
+      'Economic Calendar Feeds: Real-time global and regional macro announcements, central bank rate decisions, and geopolitical volatility schedules.',
+      'Institutional Screeners: Dynamic asset screening, relative strength matrices, and volume profile telemetry integrated across research workstations.'
+    ],
+    primaryActionUrl: 'markets.html',
+    primaryActionLabel: 'Launch Live Terminal →',
+    secondaryActionUrl: 'markets.html#tab-charts',
+    secondaryActionLabel: 'Advanced Charting Desk →',
+    status: 'published',
+    order: 4
+  },
+  {
+    id: 'finnhub',
+    name: 'Finnhub',
+    category: 'telemetry',
+    sector: 'Real-Time Market Data',
+    pillClass: 'pill-telemetry',
+    logoUrl: 'assets/partners/finnhub-logo.svg',
+    tagline: 'Real-Time WebSocket Trade & Quote Telemetry',
+    desc: 'Enterprise-grade financial API provider delivering institutional-speed WebSocket market data, tick-level price discovery, and corporate filings intelligence across African and global asset classes.',
+    highlights: [
+      'Sub-Millisecond Tick Feeds: Real-time streaming trades and bid/ask quotes syncing continuously to Renalytica\'s live market ticker and intelligence dashboards.',
+      'Cross-Asset Market Coverage: Real-time telemetry covering FX crosses, sovereign debt yields, and international ADR equity proxies.',
+      'Corporate Filings & Earnings: Automated ingestion of institutional company fundamentals, insider sentiment, and forward guidance metrics.'
+    ],
+    primaryActionUrl: 'markets.html#tab-watchlists',
+    primaryActionLabel: 'Explore Market Feeds →',
+    secondaryActionUrl: 'markets.html',
+    secondaryActionLabel: 'Live Ticker Telemetry →',
+    status: 'published',
+    order: 5
+  },
+  {
+    id: 'fmp',
+    name: 'Financial Modeling Prep (FMP)',
+    category: 'telemetry',
+    sector: 'Equities & Macro Telemetry',
+    pillClass: 'pill-telemetry',
+    logoUrl: 'assets/partners/fmp-logo.svg',
+    tagline: 'African & Frontier Market Telemetry API',
+    desc: 'Comprehensive market data and fundamental financial intelligence API providing deep historical financial statements, African FX cross-rates, and macroeconomic indicators.',
+    highlights: [
+      'African Equities & FX Sync: Automated syncing of NGX, JSE, and regional FX pairs (USD/NGN, USD/ZAR, USD/KES, USD/GHS) powering Renalytica valuation models.',
+      'Standardized Financials: Decades of balance sheets, cash flow statements, and earnings telemetry normalized for comparative frontier equity research.',
+      'Macroeconomic Series: Ingestion of inflation indices, trade balance data, and sovereign foreign exchange reserve trajectories.'
+    ],
+    primaryActionUrl: 'reports.html?sector=macro',
+    primaryActionLabel: 'Macro Intelligence Desk →',
+    secondaryActionUrl: 'markets.html#tab-heatmaps',
+    secondaryActionLabel: 'FX Telemetry Matrix →',
+    status: 'published',
+    order: 6
+  },
+  {
+    id: 'alphavantage',
+    name: 'Alpha Vantage',
+    category: 'telemetry',
+    sector: 'Commodities & Central Banking',
+    pillClass: 'pill-telemetry',
+    logoUrl: 'assets/partners/alphavantage-logo.svg',
+    tagline: 'Global Commodity Benchmarks & Macro Metrics',
+    desc: 'Premier cloud provider of enterprise financial market data, high-frequency commodity benchmarks, and global central bank economic indicators for quantitative research.',
+    highlights: [
+      'Crude & Energy Benchmarks: Real-time and historical pricing for Brent Crude, WTI, and Natural Gas informing African sovereign fiscal balance sheets.',
+      'Agricultural Soft Commodities: Empirical price telemetry for cocoa, coffee, wheat, palm oil, and fertilizer components directly impacting African trade corridors.',
+      'Central Bank Data Sync: Automated ingestion of US Federal Reserve, Bank of England, and ECB policy rates influencing frontier capital flows.'
+    ],
+    primaryActionUrl: 'reports.html?sector=macro',
+    primaryActionLabel: 'Commodity Desk Reports →',
+    secondaryActionUrl: 'reports.html?sector=energy',
+    secondaryActionLabel: 'Energy & Resources →',
+    status: 'published',
+    order: 7
+  },
+  {
+    id: 'sharpapi',
+    name: 'Sharp API',
+    category: 'telemetry',
+    sector: 'Sports Intelligence Telemetry',
+    pillClass: 'pill-telemetry',
+    logoUrl: 'assets/partners/sharpapi-logo.svg',
+    tagline: 'Live Sports Business Intelligence & Analytics',
+    desc: 'Next-generation sports analytics and live match telemetry platform powering empirical commercial modeling, fan engagement metrics, and sports business valuation across Africa.',
+    highlights: [
+      'Continental Football Telemetry: Real-time match data, tournament attendance metrics, and broadcasting viewership tracking across CAF, NPFL, and international competitions.',
+      'Commercial League Valuation: High-frequency sports economics data tracking franchise valuations, stadium concessions, and digital fan monetisation.',
+      'Athletic Performance Indexing: Synchronized with AXiA Active retail telemetry to correlate athletic performance trends with sporting goods consumer spending.'
+    ],
+    primaryActionUrl: 'reports.html?sector=sports',
+    primaryActionLabel: 'Sports Intelligence Desk →',
+    secondaryActionUrl: 'markets.html',
+    secondaryActionLabel: 'Live Match Telemetry →',
+    status: 'published',
+    order: 8
+  }
+];
+
+// GET public partners (only published)
+app.get('/api/partners', (req, res) => {
+  const published = mockPartners.filter(p => p.status === 'published').sort((a, b) => (a.order || 99) - (b.order || 99));
+  res.json({ success: true, count: published.length, partners: published });
+});
+
+// GET all partners (admin view)
+app.get('/api/admin/partners', authenticateUser, async (req, res) => {
+  res.json({ success: true, count: mockPartners.length, partners: mockPartners });
+});
+
+// POST create new partner
+app.post('/api/admin/partners', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { name, sector, logoUrl, desc, tagline, highlights, websiteUrl, reportDeskUrl, reportDeskLabel, status } = req.body;
+    if (!name) {
+      return res.status(400).json({ error: 'Partner name is required.' });
+    }
+    const slug = (req.body.id || name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const newPartner = {
+      id: slug || ('partner-' + Date.now()),
+      name,
+      sector: sector || 'Strategic Alliance',
+      pillClass: (sector && sector.toLowerCase().includes('logist')) ? 'pill-logistics' :
+                 (sector && sector.toLowerCase().includes('sport')) ? 'pill-sports' :
+                 (sector && sector.toLowerCase().includes('educ')) ? 'pill-education' : 'pill-logistics',
+      logoUrl: logoUrl || 'assets/brand/renalytica_emblem.png',
+      tagline: tagline || '',
+      desc: desc || '',
+      highlights: Array.isArray(highlights) ? highlights : (typeof highlights === 'string' ? highlights.split('\n').filter(Boolean) : []),
+      websiteUrl: websiteUrl || '#',
+      reportDeskUrl: reportDeskUrl || 'reports.html',
+      reportDeskLabel: reportDeskLabel || 'View Sector Reports →',
+      status: status || 'published',
+      order: mockPartners.length + 1
+    };
+    mockPartners.push(newPartner);
+    res.status(201).json({ success: true, partner: newPartner });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update partner
+app.put('/api/admin/partners/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockPartners.findIndex(p => p.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Partner alliance not found.' });
+    }
+    const updates = req.body;
+    if (updates.highlights && typeof updates.highlights === 'string') {
+      updates.highlights = updates.highlights.split('\n').filter(Boolean);
+    }
+    mockPartners[index] = { ...mockPartners[index], ...updates };
+    res.json({ success: true, partner: mockPartners[index] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE partner
+app.delete('/api/admin/partners/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockPartners.findIndex(p => p.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Partner alliance not found.' });
+    }
+    const deleted = mockPartners.splice(index, 1);
+    res.json({ success: true, message: 'Partner alliance successfully deleted.', partner: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // 404 Fallback Handler: Serve custom 404.html page
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) {
@@ -1210,6 +2340,12 @@ if (require.main === module) {
     console.log(`- 60-Second Signed URL Deliverables Engine: ACTIVE`);
     console.log(`- Dynamic CMS (Tiptap HTML) Engine: ACTIVE`);
     console.log(`========================================================`);
+
+    // Background Supabase Keep-Alive Ping
+    try {
+      const { runKeepAlive } = require('./scripts/supabase-keep-alive');
+      runKeepAlive().catch(e => console.warn('Supabase initial heartbeat notice:', e.message));
+    } catch (e) {}
   });
 }
 

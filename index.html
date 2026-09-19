@@ -144,6 +144,9 @@
       </div>
     </div>
 
+    <!-- Strategic Enterprise Partners Ticker -->
+    <partner-ticker></partner-ticker>
+
     <!-- 5. Four Key Sectors We Cover -->
     <section class="sectors-section-v2" id="sectors">
       <div class="container">
@@ -449,7 +452,7 @@
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px;">
           <!-- Card 1: Market Overview -->
           <div style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
@@ -919,6 +922,8 @@
         <polygon points="80,15 95,10 95,25" fill="#ef7d00" class="animate-arrow" />
       </svg>
     </div>
+  </div>
+
   <!-- Elfsight AI Chatbot | Floating Widget -->
   <script src="https://elfsightcdn.com/platform.js" async></script>
   <div class="elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d" data-elfsight-app-lazy></div>
@@ -928,6 +933,7 @@
   <multi-channel-chat></multi-channel-chat>
 
   <!-- Renalytica Native Cookie Consent Alert -->
+  <script src="components/PartnerTicker.js"></script>
   <script src="components/CookieConsent.js"></script>
 </body>
 </html>

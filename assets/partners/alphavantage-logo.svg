@@ -1,0 +1,11 @@
+<svg width="250" height="64" viewBox="0 0 250 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Alpha Vantage Prism Geometric Icon -->
+  <g transform="translate(8, 14)">
+    <path d="M18 2L34 32H2L18 2Z" fill="#1E293B"/>
+    <path d="M18 10L28 30H8L18 10Z" fill="#3B82F6"/>
+    <path d="M18 17L24 29H12L18 17Z" fill="#60A5FA"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="900" fill="#0F172A" letter-spacing="0.5px">ALPHA VANTAGE</text>
+  <text x="50" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" fill="#64748B" letter-spacing="0.8px">MARKET DATA &amp; APIS</text>
+</svg>

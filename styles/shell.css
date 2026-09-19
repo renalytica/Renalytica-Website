@@ -1387,6 +1387,12 @@ body.drawer-open div[id*="chat" i] {
   }
 }
 
+@media (max-width: 640px) {
+  .nav-cta {
+    display: none !important;
+  }
+}
+
 @media (max-width: 480px) {
   .mobile-drawer {
     max-width: 100%;
@@ -1574,6 +1580,9 @@ body.drawer-open div[id*="chat" i] {
   border-top: 1px solid var(--border-light);
   overflow: hidden;
   margin-top: 40px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  line-height: 0;
 }
 
 .matrix-hud-header {
@@ -1637,6 +1646,9 @@ body.drawer-open div[id*="chat" i] {
   width: 100%;
   height: 320px;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 #footer-data-matrix-canvas {

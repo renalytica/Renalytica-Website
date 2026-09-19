@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Institutional Partners &amp; Alliances — Renalytica</title>
+  <meta name="description" content="Renalytica collaborates with premier industry partners in cross-border logistics, athletic retail, and global education: United Carriers, AXiA Active, and GoFar International Academy.">
+  <meta name="keywords" content="Renalytica partners, United Carriers logistics, AXiA Active athletic wear, GoFar International Academy, African economic research alliances">
+  <link rel="canonical" href="https://www.renalytica.com/partners">
+  <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Strategic Institutional Partners &amp; Alliances — Renalytica">
+  <meta property="og:description" content="Collaborating with industry pioneers to deliver ground-truth telemetry across logistics, consumer wellness, and private education.">
+  <meta property="og:image" content="assets/brand/renalytica_emblem.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="styles/pdp.css">
+
+  <style>
+    .partners-hero {
+      padding: 4.5rem 0 3.5rem;
+      background: radial-gradient(circle at 85% 30%, rgba(255, 128, 0, 0.09) 0%, transparent 55%),
+                  radial-gradient(circle at 15% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 55%),
+                  var(--canvas-primary);
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .partners-hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .partners-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .partners-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(255, 128, 0, 0.1);
+      border: 1px solid rgba(255, 128, 0, 0.3);
+      color: var(--accent-momentum, #FF8000);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .partners-hero-title {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .partners-hero-subtitle {
+      font-size: 1.08rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    .partners-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .partners-hero-stats {
+      display: flex;
+      gap: 2.25rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-momentum);
+      line-height: 1.2;
+    }
+
+    .hero-stat-label {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--font-mono);
+    }
+
+    /* Hero Right Side Media & Card */
+    .partners-hero-media {
+      position: relative;
+    }
+
+    .partners-hero-image-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      background: var(--canvas-surface);
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 128, 0, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .partners-hero-image-wrapper:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -10px rgba(255, 128, 0, 0.22), 0 0 0 1px var(--accent-momentum);
+    }
+
+    .partners-hero-img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .partners-hero-image-wrapper:hover .partners-hero-img {
+      transform: scale(1.02);
+    }
+
+    .partners-hero-floating-card {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+      background: rgba(13, 21, 39, 0.90);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #FFF;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .floating-card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(255, 128, 0, 0.2);
+      border: 1px solid rgba(255, 128, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .floating-card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    .floating-card-subtitle {
+      font-size: 0.72rem;
+      color: #94A3B8;
+      font-family: var(--font-mono);
+      line-height: 1.3;
+    }
+
+    .partner-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 2rem;
+      margin: 3.5rem 0 5rem;
+    }
+
+    .partner-feature-card {
+      background: var(--canvas-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .partner-feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-momentum);
+      box-shadow: 0 12px 36px rgba(255, 128, 0, 0.12);
+    }
+
+    .partner-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .partner-logo-container {
+      width: 140px;
+      height: 64px;
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .partner-logo-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .partner-sector-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pill-logistics {
+      background: rgba(59, 130, 246, 0.12);
+      color: #38BDF8;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .pill-sports {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .pill-education {
+      background: rgba(245, 158, 11, 0.12);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .pill-telemetry {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284C7;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    [data-theme="dark"] .pill-telemetry {
+      color: #38BDF8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    /* Partner Category Filter Bar */
+    .partner-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 1.75rem 0 2.5rem;
+    }
+
+    .btn-partner-filter {
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border: 1px solid var(--border-light);
+      background: var(--surface-gray);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-primary);
+    }
+
+    .btn-partner-filter:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-partner-filter.active {
+      background: var(--accent-momentum);
+      color: #FFFFFF;
+      border-color: var(--accent-momentum);
+      box-shadow: 0 4px 14px var(--accent-momentum-glow);
+    }
+
+    .partner-body-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .partner-body-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .partner-highlights-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .partner-highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      line-height: 1.45;
+    }
+
+    .partner-highlights-list li span.check {
+      color: #10B981;
+      font-weight: 800;
+    }
+
+    .partner-btn-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .btn-partner-internal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0.75rem 1.15rem;
+      background: var(--surface-gray);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-partner-internal:hover {
+      background: var(--accent-momentum);
+      color: #FFF;
+      border-color: var(--accent-momentum);
+      box-shadow: 0 4px 12px var(--accent-momentum-glow);
+    }
+
+    @media (max-width: 640px) {
+      .partner-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 2rem 0 3.5rem;
+      }
+      .partner-feature-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .partner-btn-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-partner-internal,
+      .partner-btn-group .btn-table-action {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* Joint Telemetry CTA Card */
+    .partner-joint-card {
+      background: linear-gradient(135deg, rgba(13, 21, 39, 0.95), rgba(7, 13, 27, 0.98));
+      border: 1px solid rgba(255, 128, 0, 0.3);
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
+      color: #FFF;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 860px) {
+      .partner-joint-card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Early Theme Init -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('renalytica_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="light-canvas">
+
+  <!-- Top Utility Ticker Bar -->
+  <ticker-bar></ticker-bar>
+
+  <!-- Global Sticky Navigation Bar -->
+  <header-nav></header-nav>
+
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="partners-hero">
+      <div class="container pdp-container partners-hero-grid">
+        <div class="partners-hero-content">
+          <div class="partners-hero-badge">
+            <span class="pulse-green-dot"></span>
+            STRATEGIC ENTERPRISE ALLIANCES
+          </div>
+          <h1 class="partners-hero-title">
+            Collaborating with Sector Pioneers to Unlock African Ground Truth
+          </h1>
+          <p class="partners-hero-subtitle">
+            Renalytica partners with tier-one operators in continental logistics, athletic performance retail, and globally accredited education to ground our econometric forecasting in operational reality.
+          </p>
+
+          <div class="partners-hero-actions">
+            <a href="mailto:partnerships@renalytica.com" class="btn-pill-primary" style="padding: 0.85rem 1.6rem; font-size: 0.95rem;">
+              Propose Institutional Alliance →
+            </a>
+            <a href="#verified-partners" class="btn-table-action" style="padding: 0.85rem 1.35rem; font-weight: 700; text-decoration: none;">
+              Explore Partner Network ↓
+            </a>
+          </div>
+
+          <div class="partners-hero-stats">
+            <div class="hero-stat-item">
+              <span class="hero-stat-value">8</span>
+              <span class="hero-stat-label">Institutional Alliances</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-value">100%</span>
+              <span class="hero-stat-label">Telemetry Synchronized</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-value">Multi-Asset</span>
+              <span class="hero-stat-label">Live Market &amp; Trade Feeds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="partners-hero-media">
+          <div class="partners-hero-image-wrapper">
+            <img 
+              src="assets/images/strategic_partnerships_hero.jpg" 
+              alt="Strategic Institutional Partners &amp; Alliances Roundtable" 
+              class="partners-hero-img"
+              loading="eager"
+            />
+            <div class="partners-hero-floating-card">
+              <div class="floating-card-icon">🤝</div>
+              <div>
+                <div class="floating-card-title">Empirical &amp; Financial Telemetry</div>
+                <div class="floating-card-subtitle">Trade Corridors • Live Market Feeds • Sports • Education</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Ticker Strip -->
+    <partner-ticker></partner-ticker>
+
+    <!-- Main Content Grid -->
+    <section class="container pdp-container" style="padding-top: 3rem;" id="verified-partners">
+      <div class="section-heading-block" style="text-align: left; margin-bottom: 1.25rem;">
+        <span class="sub-heading-eyebrow">VERIFIED OPERATING &amp; TELEMETRY PARTNERS</span>
+        <h2 class="section-heading-title">Our Strategic Partner Network</h2>
+        <p class="section-heading-desc" style="margin-left: 0;">
+          Collaborating with premier logistics hauliers, consumer pioneers, and institutional financial data platforms to deliver live market telemetry and empirical ground-truth intelligence.
+        </p>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="partner-filter-bar" role="tablist" id="partner-filter-bar">
+        <button type="button" class="btn-partner-filter active" data-filter="all">All Alliances (8)</button>
+        <button type="button" class="btn-partner-filter" data-filter="operating">Field Operating Alliances (3)</button>
+        <button type="button" class="btn-partner-filter" data-filter="telemetry">Market Data &amp; Telemetry Platforms (5)</button>
+      </div>
+
+      <div class="partner-cards-grid" id="partner-cards-grid">
+        
+        <!-- Partner 1: United Carriers -->
+        <div class="partner-feature-card" id="united-carriers" data-category="operating">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/united-carriers-logo.svg" alt="United Carriers" />
+              </div>
+              <span class="partner-sector-pill pill-logistics">Logistics &amp; Haulage</span>
+            </div>
+
+            <h3 class="partner-body-title">United Carriers</h3>
+            <p class="partner-body-desc">
+              Premier pan-African multi-modal freight forwarder, cold-chain haulage leader, and bonded fleet operator connecting agricultural production basins to major urban industrial corridors.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Cross-Border Trade Corridors:</strong> Ground-truth diesel haulage and customs transit times along Lagos-Kano-Niamey and Abidjan routes.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Cold-Chain Telemetry:</strong> Real-time spoilage reduction metrics across perishable fruits, vegetables, and commercial poultry feeds.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Fleet Optimization:</strong> Joint transport cost modeling incorporated directly into Renalytica’s grain and commodity reports.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=retail" class="btn-partner-internal">
+              Logistics Economics Desk →
+            </a>
+            <a href="reports.html?sector=retail" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              View Corridor Reports →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 2: AXiA Active -->
+        <div class="partner-feature-card" id="axia-active" data-category="operating">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/axia-active-logo.png" alt="AXiA Active" />
+              </div>
+              <span class="partner-sector-pill pill-sports">Sports &amp; Wellness</span>
+            </div>
+
+            <h3 class="partner-body-title">AXiA Active</h3>
+            <p class="partner-body-desc">
+              Dynamic athletic performance gear and fitness lifestyle brand spearheading premium activewear retail, community athletic leagues, and corporate wellness programs across West Africa.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Sports Business Intelligence:</strong> High-frequency point-of-sale data informing consumer discretionary athletic spending and gym club expansion.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Apparel Supply Chain:</strong> Empirical import duty benchmarks and textile manufacturing feasibility across frontier retail hubs.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Athletic Sponsorship Telemetry:</strong> Commercial valuation models for domestic football, basketball (BAL), and marathon events.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=sports" class="btn-partner-internal">
+              Sports Economics Desk →
+            </a>
+            <a href="reports.html?sector=sports" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Sports Intelligence Desk →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 3: GoFar International Academy -->
+        <div class="partner-feature-card" id="gofar-academy" data-category="operating">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/gofar-academy-logo.webp" alt="GoFar International Academy" />
+              </div>
+              <span class="partner-sector-pill pill-education">Global Education</span>
+            </div>
+
+            <h3 class="partner-body-title">GoFar International Academy</h3>
+            <p class="partner-body-desc">
+              Globally accredited preparatory institution and STEM excellence academy delivering world-standard curricula, coding bootcamps, and early leadership development programs.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Education Econometrics:</strong> Longitudinal tracking of private school tuition indexation, curriculum adoption, and household education spend.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>EdTech Infrastructure:</strong> Benchmarking campus digital connectivity, device penetration, and interactive classroom technology ROI.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Talent Pipeline Incubator:</strong> Early data analytics training and economic fellowship programs in partnership with Renalytica analysts.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=education" class="btn-partner-internal">
+              Human Capital Reports →
+            </a>
+            <a href="reports.html?sector=education" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Education Economics Desk →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 4: TradingView -->
+        <div class="partner-feature-card" id="tradingview" data-category="telemetry">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/tradingview-logo.svg" alt="TradingView" />
+              </div>
+              <span class="partner-sector-pill pill-telemetry">Market Telemetry &amp; Charting</span>
+            </div>
+
+            <h3 class="partner-body-title">TradingView</h3>
+            <p class="partner-body-desc">
+              Global leader in multi-asset financial charting, technical analysis indicators, and institutional WebGL market data visualization powering Renalytica's Live Market Terminal.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Advanced Charting Engine:</strong> Ultra-low latency interactive candlestick visualization, technical indicators, and multi-timeframe analysis across African and global equities.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Economic Calendar Feeds:</strong> Real-time global and regional macro announcements, central bank rate decisions, and geopolitical volatility schedules.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Institutional Screeners:</strong> Dynamic asset screening, relative strength matrices, and volume profile telemetry integrated across research workstations.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="markets.html" class="btn-partner-internal">
+              Launch Live Terminal →
+            </a>
+            <a href="markets.html#tab-charts" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Advanced Charting Desk →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 5: Finnhub -->
+        <div class="partner-feature-card" id="finnhub" data-category="telemetry">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/finnhub-logo.svg" alt="Finnhub" />
+              </div>
+              <span class="partner-sector-pill pill-telemetry">Real-Time Market Data</span>
+            </div>
+
+            <h3 class="partner-body-title">Finnhub</h3>
+            <p class="partner-body-desc">
+              Enterprise-grade financial API provider delivering institutional-speed WebSocket market data, tick-level price discovery, and corporate filings intelligence across African and global asset classes.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Sub-Millisecond Tick Feeds:</strong> Real-time streaming trades and bid/ask quotes syncing continuously to Renalytica's live market ticker and intelligence dashboards.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Cross-Asset Market Coverage:</strong> Real-time telemetry covering FX crosses, sovereign debt yields, and international ADR equity proxies.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Corporate Filings &amp; Earnings:</strong> Automated ingestion of institutional company fundamentals, insider sentiment, and forward guidance metrics.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="markets.html#tab-watchlists" class="btn-partner-internal">
+              Explore Market Feeds →
+            </a>
+            <a href="markets.html" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Live Ticker Telemetry →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 6: Financial Modeling Prep (FMP) -->
+        <div class="partner-feature-card" id="fmp" data-category="telemetry">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/fmp-logo.svg" alt="Financial Modeling Prep" />
+              </div>
+              <span class="partner-sector-pill pill-telemetry">Equities &amp; Macro Telemetry</span>
+            </div>
+
+            <h3 class="partner-body-title">Financial Modeling Prep (FMP)</h3>
+            <p class="partner-body-desc">
+              Comprehensive market data and fundamental financial intelligence API providing deep historical financial statements, African FX cross-rates, and macroeconomic indicators.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>African Equities &amp; FX Sync:</strong> Automated syncing of NGX, JSE, and regional FX pairs (USD/NGN, USD/ZAR, USD/KES, USD/GHS) powering Renalytica valuation models.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Standardized Financials:</strong> Decades of balance sheets, cash flow statements, and earnings telemetry normalized for comparative frontier equity research.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Macroeconomic Series:</strong> Ingestion of inflation indices, trade balance data, and sovereign foreign exchange reserve trajectories.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=macro" class="btn-partner-internal">
+              Macro Intelligence Desk →
+            </a>
+            <a href="markets.html#tab-heatmaps" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              FX Telemetry Matrix →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 7: Alpha Vantage -->
+        <div class="partner-feature-card" id="alphavantage" data-category="telemetry">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/alphavantage-logo.svg" alt="Alpha Vantage" />
+              </div>
+              <span class="partner-sector-pill pill-telemetry">Commodities &amp; Central Banking</span>
+            </div>
+
+            <h3 class="partner-body-title">Alpha Vantage</h3>
+            <p class="partner-body-desc">
+              Premier cloud provider of enterprise financial market data, high-frequency commodity benchmarks, and global central bank economic indicators for quantitative research.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Crude &amp; Energy Benchmarks:</strong> Real-time and historical pricing for Brent Crude, WTI, and Natural Gas informing African sovereign fiscal balance sheets.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Agricultural Soft Commodities:</strong> Empirical price telemetry for cocoa, coffee, wheat, palm oil, and fertilizer components directly impacting African trade corridors.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Central Bank Data Sync:</strong> Automated ingestion of US Federal Reserve, Bank of England, and ECB policy rates influencing frontier capital flows.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=macro" class="btn-partner-internal">
+              Commodity Desk Reports →
+            </a>
+            <a href="reports.html?sector=energy" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Energy &amp; Resources →
+            </a>
+          </div>
+        </div>
+
+        <!-- Partner 8: Sharp API -->
+        <div class="partner-feature-card" id="sharpapi" data-category="telemetry">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-logo-container">
+                <img src="assets/partners/sharpapi-logo.svg" alt="Sharp API" />
+              </div>
+              <span class="partner-sector-pill pill-telemetry">Sports Intelligence Telemetry</span>
+            </div>
+
+            <h3 class="partner-body-title">Sharp API</h3>
+            <p class="partner-body-desc">
+              Next-generation sports analytics and live match telemetry platform powering empirical commercial modeling, fan engagement metrics, and sports business valuation across Africa.
+            </p>
+
+            <ul class="partner-highlights-list">
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Continental Football Telemetry:</strong> Real-time match data, tournament attendance metrics, and broadcasting viewership tracking across CAF, NPFL, and international competitions.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Commercial League Valuation:</strong> High-frequency sports economics data tracking franchise valuations, stadium concessions, and digital fan monetisation.</span>
+              </li>
+              <li>
+                <span class="check">✔</span>
+                <span><strong>Athletic Performance Indexing:</strong> Synchronized with AXiA Active retail telemetry to correlate athletic performance trends with sporting goods consumer spending.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="partner-btn-group">
+            <a href="reports.html?sector=sports" class="btn-partner-internal">
+              Sports Intelligence Desk →
+            </a>
+            <a href="markets.html" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              Live Match Telemetry →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Joint Enterprise Partnership CTA Box -->
+      <div class="partner-joint-card">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #F59E0B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">
+            INSTITUTIONAL ALLIANCE PROGRAM
+          </div>
+          <h3 style="font-size: 1.85rem; font-weight: 800; line-height: 1.25; margin-bottom: 1rem;">
+            Integrate Your Operational Data into Africa's Leading Research Matrix
+          </h3>
+          <p style="font-size: 0.95rem; color: #CBD5E1; line-height: 1.6; margin-bottom: 0;">
+            Become a Renalytica Institutional Partner. Gain strategic exposure across our executive subscriber base of commercial banks, private equity funds, and multinational corporations while contributing ground-truth sector telemetry.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <a href="mailto:partnerships@renalytica.com" class="btn-pill-primary" style="padding: 0.9rem 1.8rem; font-size: 0.95rem; width: 100%; text-align: center;">
+            Contact Partnerships Desk →
+          </a>
+          <span style="font-size: 0.78rem; color: #94A3B8; font-family: var(--font-mono);">
+            Direct Corridor: <strong>partnerships@renalytica.com</strong>
+          </span>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <site-footer></site-footer>
+
+  <!-- Scripts -->
+  <script src="components/TickerBar.js"></script>
+  <script src="components/HeaderNav.js"></script>
+  <script src="components/PartnerTicker.js"></script>
+  <script src="components/SiteFooter.js"></script>
+  <script src="lib/fmp-service.js"></script>
+  <script src="lib/sharp-service.js"></script>
+
+  <!-- Native Support Desk -->
+  <script src="components/MultiChannelChat.js"></script>
+  <multi-channel-chat></multi-channel-chat>
+
+  <!-- Dynamic Strategic Alliances Loader & Reactive Sync -->
+  <script>
+    (function() {
+      const DEFAULT_PARTNERS = [
+        {
+          id: 'united-carriers',
+          name: 'United Carriers',
+          category: 'operating',
+          sector: 'Logistics & Haulage',
+          pillClass: 'pill-logistics',
+          logoUrl: 'assets/partners/united-carriers-logo.svg',
+          tagline: 'Pan-African Freight & Cold-Chain Logistics',
+          desc: 'Premier pan-African multi-modal freight forwarder, cold-chain haulage leader, and bonded fleet operator connecting agricultural production basins to major urban industrial corridors.',
+          highlights: [
+            'Cross-Border Trade Corridors: Ground-truth diesel haulage and customs transit times along Lagos-Kano-Niamey and Abidjan routes.',
+            'Cold-Chain Telemetry: Real-time spoilage reduction metrics across perishable fruits, vegetables, and commercial poultry feeds.',
+            'Fleet Optimization: Joint transport cost modeling incorporated directly into Renalytica’s grain and commodity reports.'
+          ],
+          primaryActionUrl: 'reports.html?sector=retail',
+          primaryActionLabel: 'Logistics Economics Desk →',
+          secondaryActionUrl: 'reports.html?sector=retail',
+          secondaryActionLabel: 'View Corridor Reports →',
+          status: 'published',
+          order: 1
+        },
+        {
+          id: 'axia-active',
+          name: 'AXiA Active',
+          category: 'operating',
+          sector: 'Sports & Wellness',
+          pillClass: 'pill-sports',
+          logoUrl: 'assets/partners/axia-active-logo.png',
+          tagline: 'Athletic Gear, Activewear & Wellness Retail',
+          desc: 'Dynamic athletic performance gear and fitness lifestyle brand spearheading premium activewear retail, community athletic leagues, and corporate wellness programs across West Africa.',
+          highlights: [
+            'Sports Business Intelligence: High-frequency point-of-sale data informing consumer discretionary athletic spending and gym club expansion.',
+            'Apparel Supply Chain: Empirical import duty benchmarks and textile manufacturing feasibility across frontier retail hubs.',
+            'Athletic Sponsorship Telemetry: Commercial valuation models for domestic football, basketball (BAL), and marathon events.'
+          ],
+          primaryActionUrl: 'reports.html?sector=sports',
+          primaryActionLabel: 'Sports Economics Desk →',
+          secondaryActionUrl: 'reports.html?sector=sports',
+          secondaryActionLabel: 'Sports Intelligence Desk →',
+          status: 'published',
+          order: 2
+        },
+        {
+          id: 'gofar-academy',
+          name: 'GoFar International Academy',
+          category: 'operating',
+          sector: 'Global Education',
+          pillClass: 'pill-education',
+          logoUrl: 'assets/partners/gofar-academy-logo.webp',
+          tagline: 'Accredited STEM Education & Leadership Academy',
+          desc: 'Globally accredited preparatory institution and STEM excellence academy delivering world-standard curricula, coding bootcamps, and early leadership development programs.',
+          highlights: [
+            'Education Econometrics: Longitudinal tracking of private school tuition indexation, curriculum adoption, and household education spend.',
+            'EdTech Infrastructure: Benchmarking campus digital connectivity, device penetration, and interactive classroom technology ROI.',
+            'Talent Pipeline Incubator: Early data analytics training and economic fellowship programs in partnership with Renalytica analysts.'
+          ],
+          primaryActionUrl: 'reports.html?sector=education',
+          primaryActionLabel: 'Human Capital Reports →',
+          secondaryActionUrl: 'reports.html?sector=education',
+          secondaryActionLabel: 'Education Economics Desk →',
+          status: 'published',
+          order: 3
+        },
+        {
+          id: 'tradingview',
+          name: 'TradingView',
+          category: 'telemetry',
+          sector: 'Market Telemetry & Charting',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/tradingview-logo.svg',
+          tagline: 'Institutional Charting & Telemetry Engine',
+          desc: 'Global leader in multi-asset financial charting, technical analysis indicators, and institutional WebGL market data visualization powering Renalytica\'s Live Market Terminal.',
+          highlights: [
+            'Advanced Charting Engine: Ultra-low latency interactive candlestick visualization, technical indicators, and multi-timeframe analysis across African and global equities.',
+            'Economic Calendar Feeds: Real-time global and regional macro announcements, central bank rate decisions, and geopolitical volatility schedules.',
+            'Institutional Screeners: Dynamic asset screening, relative strength matrices, and volume profile telemetry integrated across research workstations.'
+          ],
+          primaryActionUrl: 'markets.html',
+          primaryActionLabel: 'Launch Live Terminal →',
+          secondaryActionUrl: 'markets.html#tab-charts',
+          secondaryActionLabel: 'Advanced Charting Desk →',
+          status: 'published',
+          order: 4
+        },
+        {
+          id: 'finnhub',
+          name: 'Finnhub',
+          category: 'telemetry',
+          sector: 'Real-Time Market Data',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/finnhub-logo.svg',
+          tagline: 'Real-Time WebSocket Trade & Quote Telemetry',
+          desc: 'Enterprise-grade financial API provider delivering institutional-speed WebSocket market data, tick-level price discovery, and corporate filings intelligence across African and global asset classes.',
+          highlights: [
+            'Sub-Millisecond Tick Feeds: Real-time streaming trades and bid/ask quotes syncing continuously to Renalytica\'s live market ticker and intelligence dashboards.',
+            'Cross-Asset Market Coverage: Real-time telemetry covering FX crosses, sovereign debt yields, and international ADR equity proxies.',
+            'Corporate Filings & Earnings: Automated ingestion of institutional company fundamentals, insider sentiment, and forward guidance metrics.'
+          ],
+          primaryActionUrl: 'markets.html#tab-watchlists',
+          primaryActionLabel: 'Explore Market Feeds →',
+          secondaryActionUrl: 'markets.html',
+          secondaryActionLabel: 'Live Ticker Telemetry →',
+          status: 'published',
+          order: 5
+        },
+        {
+          id: 'fmp',
+          name: 'Financial Modeling Prep (FMP)',
+          category: 'telemetry',
+          sector: 'Equities & Macro Telemetry',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/fmp-logo.svg',
+          tagline: 'African & Frontier Market Telemetry API',
+          desc: 'Comprehensive market data and fundamental financial intelligence API providing deep historical financial statements, African FX cross-rates, and macroeconomic indicators.',
+          highlights: [
+            'African Equities & FX Sync: Automated syncing of NGX, JSE, and regional FX pairs (USD/NGN, USD/ZAR, USD/KES, USD/GHS) powering Renalytica valuation models.',
+            'Standardized Financials: Decades of balance sheets, cash flow statements, and earnings telemetry normalized for comparative frontier equity research.',
+            'Macroeconomic Series: Ingestion of inflation indices, trade balance data, and sovereign foreign exchange reserve trajectories.'
+          ],
+          primaryActionUrl: 'reports.html?sector=macro',
+          primaryActionLabel: 'Macro Intelligence Desk →',
+          secondaryActionUrl: 'markets.html#tab-heatmaps',
+          secondaryActionLabel: 'FX Telemetry Matrix →',
+          status: 'published',
+          order: 6
+        },
+        {
+          id: 'alphavantage',
+          name: 'Alpha Vantage',
+          category: 'telemetry',
+          sector: 'Commodities & Central Banking',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/alphavantage-logo.svg',
+          tagline: 'Global Commodity Benchmarks & Macro Metrics',
+          desc: 'Premier cloud provider of enterprise financial market data, high-frequency commodity benchmarks, and global central bank economic indicators for quantitative research.',
+          highlights: [
+            'Crude & Energy Benchmarks: Real-time and historical pricing for Brent Crude, WTI, and Natural Gas informing African sovereign fiscal balance sheets.',
+            'Agricultural Soft Commodities: Empirical price telemetry for cocoa, coffee, wheat, palm oil, and fertilizer components directly impacting African trade corridors.',
+            'Central Bank Data Sync: Automated ingestion of US Federal Reserve, Bank of England, and ECB policy rates influencing frontier capital flows.'
+          ],
+          primaryActionUrl: 'reports.html?sector=macro',
+          primaryActionLabel: 'Commodity Desk Reports →',
+          secondaryActionUrl: 'reports.html?sector=energy',
+          secondaryActionLabel: 'Energy & Resources →',
+          status: 'published',
+          order: 7
+        },
+        {
+          id: 'sharpapi',
+          name: 'Sharp API',
+          category: 'telemetry',
+          sector: 'Sports Intelligence Telemetry',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/sharpapi-logo.svg',
+          tagline: 'Live Sports Business Intelligence & Analytics',
+          desc: 'Next-generation sports analytics and live match telemetry platform powering empirical commercial modeling, fan engagement metrics, and sports business valuation across Africa.',
+          highlights: [
+            'Continental Football Telemetry: Real-time match data, tournament attendance metrics, and broadcasting viewership tracking across CAF, NPFL, and international competitions.',
+            'Commercial League Valuation: High-frequency sports economics data tracking franchise valuations, stadium concessions, and digital fan monetisation.',
+            'Athletic Performance Indexing: Synchronized with AXiA Active retail telemetry to correlate athletic performance trends with sporting goods consumer spending.'
+          ],
+          primaryActionUrl: 'reports.html?sector=sports',
+          primaryActionLabel: 'Sports Intelligence Desk →',
+          secondaryActionUrl: 'markets.html',
+          secondaryActionLabel: 'Live Match Telemetry →',
+          status: 'published',
+          order: 8
+        }
+      ];
+
+      let currentCategoryFilter = 'all';
+
+      function sanitizePartner(p) {
+        // Enforce strictly internal links — never allow external outbound links
+        const defaults = DEFAULT_PARTNERS.find(d => d.id === p.id) || {};
+        return {
+          ...p,
+          primaryActionUrl: (p.primaryActionUrl && !p.primaryActionUrl.startsWith('http')) ? p.primaryActionUrl : (defaults.primaryActionUrl || 'markets.html'),
+          primaryActionLabel: p.primaryActionLabel || defaults.primaryActionLabel || 'Open Platform Desk →',
+          secondaryActionUrl: (p.secondaryActionUrl && !p.secondaryActionUrl.startsWith('http')) ? p.secondaryActionUrl : (defaults.secondaryActionUrl || p.reportDeskUrl || 'reports.html'),
+          secondaryActionLabel: p.secondaryActionLabel || defaults.secondaryActionLabel || p.reportDeskLabel || 'View Sector Reports →'
+        };
+      }
+
+      function getStoredPartners() {
+        try {
+          const raw = localStorage.getItem('renalytica_partners');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            const needsMigration = !Array.isArray(parsed) || 
+              parsed.length < 8 || 
+              parsed.some(p => p.websiteUrl || !p.primaryActionUrl || (p.primaryActionUrl && p.primaryActionUrl.startsWith('http')));
+            
+            if (!needsMigration) {
+              return parsed.map(sanitizePartner);
+            }
+            // Auto-upgrade to internal platform action routes
+            localStorage.setItem('renalytica_partners', JSON.stringify(DEFAULT_PARTNERS));
+            return DEFAULT_PARTNERS;
+          }
+        } catch (e) {}
+        try {
+          localStorage.setItem('renalytica_partners', JSON.stringify(DEFAULT_PARTNERS));
+        } catch (e) {}
+        return DEFAULT_PARTNERS;
+      }
+
+      function renderPartners() {
+        const grid = document.getElementById('partner-cards-grid');
+        if (!grid) return;
+        const allPartners = getStoredPartners().filter(p => p.status !== 'draft');
+        
+        const filteredPartners = currentCategoryFilter === 'all'
+          ? allPartners
+          : allPartners.filter(p => {
+              const cat = p.category || (['united-carriers', 'axia-active', 'gofar-academy'].includes(p.id) ? 'operating' : 'telemetry');
+              return cat === currentCategoryFilter;
+            });
+
+        if (!filteredPartners.length) {
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">No partner alliances found matching this filter.</div>';
+          return;
+        }
+
+        grid.innerHTML = filteredPartners.map(p => {
+          const highlightsList = (p.highlights || []).map(h => {
+            let label = '';
+            let text = h;
+            if (h.includes(':')) {
+              const colonIdx = h.indexOf(':');
+              label = `<strong>${h.substring(0, colonIdx + 1)}</strong> `;
+              text = h.substring(colonIdx + 1);
+            }
+            return `
+              <li>
+                <span class="check">✔</span>
+                <span>${label}${text}</span>
+              </li>
+            `;
+          }).join('');
+
+          const sectorClass = p.pillClass || (
+            (p.sector && p.sector.toLowerCase().includes('logist')) ? 'pill-logistics' :
+            (p.sector && p.sector.toLowerCase().includes('sport')) ? 'pill-sports' :
+            (p.sector && p.sector.toLowerCase().includes('educ')) ? 'pill-education' : 'pill-telemetry'
+          );
+
+          const primaryBtn = p.primaryActionUrl ? `
+            <a href="${p.primaryActionUrl}" class="btn-partner-internal">
+              ${p.primaryActionLabel || 'Open Platform Desk →'}
+            </a>
+          ` : '';
+
+          const secondaryBtn = p.secondaryActionUrl ? `
+            <a href="${p.secondaryActionUrl}" class="btn-table-action" style="padding: 0.75rem 1rem;">
+              ${p.secondaryActionLabel || 'View Sector Reports →'}
+            </a>
+          ` : '';
+
+          const categoryAttr = p.category || (['united-carriers', 'axia-active', 'gofar-academy'].includes(p.id) ? 'operating' : 'telemetry');
+
+          return `
+            <div class="partner-feature-card" id="${p.id || ''}" data-category="${categoryAttr}">
+              <div>
+                <div class="partner-card-header">
+                  <div class="partner-logo-container">
+                    <img src="${p.logoUrl || 'assets/brand/renalytica_emblem.png'}" alt="${p.name}" onerror="this.src='assets/brand/renalytica_emblem.png';" />
+                  </div>
+                  <span class="partner-sector-pill ${sectorClass}">${p.sector || 'Alliance'}</span>
+                </div>
+
+                <h3 class="partner-body-title">${p.name}</h3>
+                <p class="partner-body-desc">${p.desc || p.tagline || ''}</p>
+
+                <ul class="partner-highlights-list">
+                  ${highlightsList}
+                </ul>
+              </div>
+
+              <div class="partner-btn-group">
+                ${primaryBtn}
+                ${secondaryBtn}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function initFilterButtons() {
+        const filterBar = document.getElementById('partner-filter-bar');
+        if (!filterBar) return;
+        const buttons = filterBar.querySelectorAll('.btn-partner-filter');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', function() {
+            buttons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentCategoryFilter = this.getAttribute('data-filter') || 'all';
+            renderPartners();
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          initFilterButtons();
+          renderPartners();
+        });
+      } else {
+        initFilterButtons();
+        renderPartners();
+      }
+
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'renalytica_partners') renderPartners();
+      });
+      window.addEventListener('renalytica_partners_updated', renderPartners);
+
+      fetch('/api/partners')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.success && Array.isArray(data.partners) && data.partners.length > 0) {
+            const sanitized = data.partners.map(sanitizePartner);
+            localStorage.setItem('renalytica_partners', JSON.stringify(sanitized));
+            renderPartners();
+          }
+        })
+        .catch(() => {});
+    })();
+  </script>
+</body>
+</html>

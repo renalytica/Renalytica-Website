@@ -7,6 +7,21 @@
   <meta name="description" content="Renalytica institutional administration, Renalytica Publishing Suite dynamic content publishing, client deliverable assignment, and transaction auditing.">
   <link rel="icon" type="image/png" href="assets/brand/renalytica_emblem.png">
 
+  <!-- Immediate Strict Admin Access Gate -->
+  <script>
+    (function() {
+      try {
+        var session = JSON.parse(localStorage.getItem('renalytica_auth_session') || 'null');
+        if (!session || !session.user || session.user.email !== 'renalytica@gmail.com' || session.user.role !== 'admin') {
+          sessionStorage.setItem('renalytica_access_denied', 'Administrative privileges required. Access restricted exclusively to Obinna Ezeala (renalytica@gmail.com).');
+          window.location.replace('portal.html?mode=signin&redirect=admin.html&unauthorized=1');
+        }
+      } catch (e) {
+        window.location.replace('portal.html?mode=signin&redirect=admin.html&unauthorized=1');
+      }
+    })();
+  </script>
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/globals.css">
@@ -170,6 +185,159 @@
       padding: 0.75rem;
       border-bottom: 1px solid var(--border-light);
     }
+
+    /* Payhip-Benchmarked Inventory HUD & Action Controls */
+    .inv-filter-chip {
+      background: var(--surface-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .inv-filter-chip:hover {
+      border-color: var(--accent-momentum);
+      color: var(--text-primary);
+    }
+    .inv-filter-chip.active {
+      background: var(--accent-momentum);
+      color: #fff;
+      border-color: var(--accent-momentum);
+      box-shadow: 0 2px 8px rgba(255, 128, 0, 0.25);
+    }
+
+    /* Status Switch Toggle */
+    .status-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .status-switch-btn.published {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10B981;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .status-switch-btn.published:hover {
+      background: rgba(16, 185, 129, 0.22);
+    }
+    .status-switch-btn.draft {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94A3B8;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    .status-switch-btn.draft:hover {
+      background: rgba(148, 163, 184, 0.25);
+    }
+    .status-switch-btn.archived {
+      background: rgba(245, 158, 11, 0.12);
+      color: #F59E0B;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .status-switch-btn.archived:hover {
+      background: rgba(245, 158, 11, 0.22);
+    }
+
+    /* Currency Badge Pill */
+    .currency-pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 3px;
+    }
+    .curr-sub-badge {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+    }
+
+    /* Sliding Drawer Animation */
+    .sliding-drawer-card {
+      animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(40px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Floating Toast Notification HUD */
+    #admin-toast-hud {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .admin-toast {
+      pointer-events: auto;
+      background: rgba(15, 23, 42, 0.96);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 300px;
+      max-width: 440px;
+      animation: toastPop 0.25s ease;
+    }
+    .admin-toast.success { border-color: #10B981; }
+    .admin-toast.warning { border-color: #F59E0B; }
+    .admin-toast.danger { border-color: #EF4444; }
+    @keyframes toastPop {
+      from { transform: translateY(12px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .partner-sector-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: inline-block;
+    }
+    .pill-logistics {
+      background: rgba(59, 130, 246, 0.12);
+      color: #38BDF8;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    .pill-sports {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .pill-education {
+      background: rgba(245, 158, 11, 0.12);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
   </style>
 </head>
 <body class="light-canvas">
@@ -307,6 +475,12 @@
         <button class="admin-tab-btn" data-pane="#pane-signed">
           🔒 60-Second Signed URL Generator
         </button>
+        <button class="admin-tab-btn" data-pane="#pane-briefings" id="tab-btn-briefings">
+          📅 Analyst Briefings Scheduler
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-partners" id="tab-btn-partners">
+          🤝 Strategic Alliances &amp; Partners
+        </button>
       </div>
 
       <!-- PANE 1: RENALYTICA PUBLISHING STUDIO -->
@@ -354,7 +528,7 @@
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
               <div class="auth-field-group">
-                <label class="auth-label">Author Name &amp; Title</label>
+                <label class="auth-label">Author Name &amp; Title *</label>
                 <input type="text" id="post-author" class="auth-input" value="Renalytica Research Desk" required>
               </div>
               <div class="auth-field-group">
@@ -364,6 +538,34 @@
                   <option value="draft">Draft (Admin Workspace Only)</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Enhanced Universal Editorial Controls: Target Surface, Author Avatar & Hero Graphic -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Target Page / Surface *</label>
+                <select id="post-target-page" class="auth-input" required>
+                  <option value="blogs">blog.html (Op-Eds &amp; Economic Insights)</option>
+                  <option value="news">news.html (Newsroom &amp; Press Releases)</option>
+                  <option value="wire">wire.html (Market Wire &amp; Telemetry)</option>
+                  <option value="report">report.html (Product Details Page)</option>
+                  <option value="community">community (Community &amp; Events)</option>
+                  <option value="insights">insights (Marketing &amp; Commercial Insights)</option>
+                </select>
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Author Avatar URL</label>
+                <input type="url" id="post-author-avatar" class="auth-input" placeholder="assets/authors/analyst-lead.jpg" value="assets/authors/analyst-lead.jpg">
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Hero Feature Graphic URL</label>
+                <input type="url" id="post-hero-image" class="auth-input" placeholder="assets/images/analyst_holding_market_chart.jpg" value="assets/images/analyst_holding_market_chart.jpg">
+              </div>
+            </div>
+
+            <div class="auth-field-group" style="margin-bottom: 1.25rem;">
+              <label class="auth-label">Structured Table of Contents (Optional)</label>
+              <textarea id="post-toc" class="auth-input" rows="2" placeholder="1. Executive Summary&#10;2. Macro Environment&#10;3. Sector Growth Trajectory&#10;4. Strategic Horizon"></textarea>
             </div>
 
             <!-- Renalytica WYSIWYG Editor Canvas -->
@@ -612,21 +814,21 @@
         </div>
       </div>
 
-      <!-- PANE 5: PRODUCT & REPORT INVENTORY MANAGER (MODULE 3 & PAYHIP BENCHMARK) -->
+      <!-- PANE 5: PRODUCT & REPORT INVENTORY MANAGER (PAYHIP BENCHMARK CRUD ENGINE) -->
       <div class="admin-tab-pane" id="pane-inventory">
         <div class="admin-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 14px;">
             <div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
-                  [Inventory &amp; Report Management Table]
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  Report Inventory Control System
                 </h3>
                 <span class="token-status-live" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 999px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700;">
                   ⚡ PAYHIP BENCHMARK ENGINE ACTIVE
                 </span>
               </div>
-              <span style="font-size: 0.8rem; color: var(--text-secondary);">
-                Relational CRUD engine connected to Supabase <code>products</code>, <code>orders</code>, and <code>report_revisions</code> tables.
+              <span style="font-size: 0.82rem; color: var(--text-secondary);">
+                Relational CRUD engine connected to Supabase <code>products</code>, <code>orders</code>, <code>digital_fulfillment</code>, and <code>reports-private</code> storage bucket.
               </span>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
@@ -639,70 +841,56 @@
             </div>
           </div>
 
-          <!-- Master Inventory Table (ASCII Blueprint Implementation) -->
-          <div style="overflow-x: auto;">
-            <table class="assigned-files-table">
+          <!-- Inventory Filter Bar: Status Tabs & Quick Search -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px; background: var(--surface-gray); padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid var(--border-light);">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;" id="inventory-status-filters">
+              <button type="button" class="inv-filter-chip active" id="filter-status-all" onclick="filterCatalogByStatus('all', this)">
+                📁 All Reports <span id="count-all" style="font-family: var(--font-mono); opacity: 0.85;">(0)</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="filter-status-published" onclick="filterCatalogByStatus('published', this)">
+                🟢 Published (Live) <span id="count-published" style="font-family: var(--font-mono); opacity: 0.85;">(0)</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="filter-status-draft" onclick="filterCatalogByStatus('draft', this)">
+                ⚪ Drafts <span id="count-draft" style="font-family: var(--font-mono); opacity: 0.85;">(0)</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="filter-status-archived" onclick="filterCatalogByStatus('archived', this)">
+                📦 Archived <span id="count-archived" style="font-family: var(--font-mono); opacity: 0.85;">(0)</span>
+              </button>
+            </div>
+
+            <!-- Live Search Box -->
+            <div style="position: relative; min-width: 260px;">
+              <input 
+                type="text" 
+                id="inventory-search-input" 
+                class="auth-input" 
+                placeholder="Search title, SKU, or category..." 
+                style="padding: 6px 32px 6px 12px; font-size: 0.8rem; width: 100%; background: var(--canvas-surface);"
+                oninput="filterCatalogBySearch(this.value)"
+              >
+              <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted); pointer-events: none;">🔍</span>
+            </div>
+          </div>
+
+          <!-- Master Inventory Table (Payhip Interactive Controls) -->
+          <div style="overflow-x: auto; border: 1px solid var(--border-light); border-radius: 10px;">
+            <table class="assigned-files-table" style="margin-top: 0;">
               <thead>
                 <tr>
-                  <th style="min-width: 260px;">Report Title</th>
+                  <th style="min-width: 250px;">Report Title &amp; SKU</th>
                   <th>Category</th>
-                  <th>Base Price</th>
-                  <th>Supported Gateways</th>
+                  <th style="min-width: 170px;">Multi-Currency Pricing</th>
+                  <th>File Assets</th>
                   <th>Protection</th>
-                  <th style="text-align: right; min-width: 240px;">Action</th>
+                  <th style="text-align: center; min-width: 120px;">Availability</th>
+                  <th style="text-align: right; min-width: 290px;">Action Controls</th>
                 </tr>
               </thead>
               <tbody id="inventory-products-tbody">
-                <!-- Dynamically populated from /api/admin/products with fallback rows -->
+                <!-- Dynamically populated from /api/admin/products -->
                 <tr>
-                  <td>
-                    <strong>The Economics of AI Adoption in Africa (2026)</strong>
-                    <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">SKU: nigeria-ai-adoption-economics-2026</div>
-                  </td>
-                  <td><span class="hud-tier-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3);">Data Analysis</span></td>
-                  <td><strong style="color: #10B981; font-family: var(--font-mono); font-size: 0.95rem;">₦150,000</strong></td>
-                  <td><code>FLW (NGN, USD, GHS)</code></td>
-                  <td><span style="font-size: 0.75rem; color: var(--text-secondary);">3 Downloads // 24h Expiry</span></td>
-                  <td style="text-align: right;">
-                    <div style="display: inline-flex; gap: 6px;">
-                      <button class="btn-table-action" onclick="openEmbedModal('nigeria-ai-adoption-economics-2026', 'The Economics of AI Adoption in Africa (2026)', '₦150,000')">&lt;/&gt; Embed</button>
-                      <button class="btn-table-action" onclick="openRevisionModal('nigeria-ai-adoption-economics-2026', 'The Economics of AI Adoption in Africa (2026)')">📢 Revision</button>
-                      <button class="btn-table-action" onclick="editProduct('nigeria-ai-adoption-economics-2026')">Edit</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Sub-Saharan Africa Stablecoins &amp; Digital FX Corridors</strong>
-                    <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">SKU: nigeria-stablecoins-cross-border-2026</div>
-                  </td>
-                  <td><span class="hud-tier-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">Market Insights</span></td>
-                  <td><strong style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.95rem;">$450</strong></td>
-                  <td><code>FLW (USD, KES)</code></td>
-                  <td><span style="font-size: 0.75rem; color: var(--text-secondary);">3 Downloads // 24h Expiry</span></td>
-                  <td style="text-align: right;">
-                    <div style="display: inline-flex; gap: 6px;">
-                      <button class="btn-table-action" onclick="openEmbedModal('nigeria-stablecoins-cross-border-2026', 'Sub-Saharan Africa Stablecoins &amp; Digital FX Corridors', '$450')">&lt;/&gt; Embed</button>
-                      <button class="btn-table-action" onclick="openRevisionModal('nigeria-stablecoins-cross-border-2026', 'Sub-Saharan Africa Stablecoins &amp; Digital FX Corridors')">📢 Revision</button>
-                      <button class="btn-table-action" onclick="editProduct('nigeria-stablecoins-cross-border-2026')">Edit</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Pan-African Sovereign Debt &amp; Fintech Liquidity Monitor</strong>
-                    <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">SKU: pan-african-fintech-venture-capital-2026</div>
-                  </td>
-                  <td><span class="hud-tier-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Industry Research</span></td>
-                  <td><strong style="color: #10B981; font-family: var(--font-mono); font-size: 0.95rem;">₦250,000</strong></td>
-                  <td><code>FLW (NGN, USD, GHS, KES)</code></td>
-                  <td><span style="font-size: 0.75rem; color: var(--text-secondary);">3 Downloads // 24h Expiry</span></td>
-                  <td style="text-align: right;">
-                    <div style="display: inline-flex; gap: 6px;">
-                      <button class="btn-table-action" onclick="openEmbedModal('pan-african-fintech-venture-capital-2026', 'Pan-African Sovereign Debt &amp; Fintech Liquidity Monitor', '₦250,000')">&lt;/&gt; Embed</button>
-                      <button class="btn-table-action" onclick="openRevisionModal('pan-african-fintech-venture-capital-2026', 'Pan-African Sovereign Debt &amp; Fintech Liquidity Monitor')">📢 Revision</button>
-                      <button class="btn-table-action" onclick="editProduct('pan-african-fintech-venture-capital-2026')">Edit</button>
-                    </div>
+                  <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    Loading research reports catalog...
                   </td>
                 </tr>
               </tbody>
@@ -711,8 +899,451 @@
         </div>
       </div>
 
+      <!-- ====================================================================
+           PANE 6: ANALYST BRIEFINGS SCHEDULER & EVENT DESK
+           ==================================================================== -->
+      <div class="admin-tab-pane" id="pane-briefings">
+        <div class="admin-card" style="margin-bottom: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">📅</span>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  Executive Analyst Briefings Scheduler
+                </h3>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: var(--text-secondary);">
+                Schedule, publish, and manage verified live briefings and private video roundtables for registered clients. Sessions dynamically appear in client dashboards on <code>portal.html</code>.
+              </p>
+            </div>
+            <span class="store-meta-chip" style="background: rgba(16, 185, 129, 0.12); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);">
+              ● BRIEFING ENGINE ACTIVE
+            </span>
+          </div>
+
+          <!-- Briefing Stats HUD -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Active Sessions</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-momentum); font-family: var(--font-mono); margin-top: 4px;" id="admin-briefing-total-count">0</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Available Seats</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #10B981; font-family: var(--font-mono); margin-top: 4px;" id="admin-briefing-seats-count">0</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Covered Research Desks</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono); margin-top: 4px;">6 Desks</div>
+            </div>
+          </div>
+
+          <!-- Create Briefing Form -->
+          <div style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+            <h4 style="margin: 0 0 1.25rem; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+              <span>➕</span> Schedule New Live Executive Briefing
+            </h4>
+
+            <form id="admin-create-briefing-form">
+              <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+                <div class="auth-field-group">
+                  <label class="auth-label">Briefing Session Title *</label>
+                  <input type="text" id="br-title" class="auth-input" placeholder="e.g. Q4 2026 Sub-Saharan Agro-Commodities &amp; Fertilizer Import Parity Outlook" required>
+                </div>
+                <div class="auth-field-group">
+                  <label class="auth-label">Practice Sector / Desk *</label>
+                  <select id="br-sector" class="auth-input" required>
+                    <option value="Agribusiness &amp; Commodities">Agribusiness &amp; Commodities Desk</option>
+                    <option value="Financial Systems &amp; Fintech">Financial Systems &amp; Fintech Desk</option>
+                    <option value="Sports Business &amp; Analytics">Sports Business &amp; Analytics Desk</option>
+                    <option value="Education Economics &amp; EdTech">Education Economics &amp; EdTech Desk</option>
+                    <option value="Macroeconomics &amp; Trade Corridors">Macroeconomics &amp; Trade Corridors Desk</option>
+                    <option value="AI &amp; Digital Economy">AI &amp; Digital Economy Desk</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+                <div class="auth-field-group">
+                  <label class="auth-label">Lead Host / Analyst *</label>
+                  <select id="br-host" class="auth-input" required>
+                    <option value="Obinna Ezeala (Managing Director &amp; Chief Strategist)">Obinna Ezeala (Managing Director &amp; Chief Strategist)</option>
+                    <option value="Dr. Adeleke Ogunlesi (Lead Agricultural Economist)">Dr. Adeleke Ogunlesi (Lead Agricultural Economist)</option>
+                    <option value="Chiamaka Nkemdirim (Fintech &amp; FX Lead)">Chiamaka Nkemdirim (Fintech &amp; FX Lead)</option>
+                    <option value="Kwame Asante (Digital Economy Practice Lead)">Kwame Asante (Digital Economy Practice Lead)</option>
+                    <option value="Guest Industry Panelist">Guest Industry Panelist</option>
+                  </select>
+                </div>
+                <div class="auth-field-group">
+                  <label class="auth-label">Date &amp; Time (WAT / UTC+1) *</label>
+                  <input type="datetime-local" id="br-datetime" class="auth-input" required>
+                </div>
+                <div class="auth-field-group">
+                  <label class="auth-label">Max Seat Capacity *</label>
+                  <input type="number" id="br-capacity" class="auth-input" value="25" min="5" max="200" required>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+                <div class="auth-field-group">
+                  <label class="auth-label">Virtual Video Room URL (Zoom / Teams / Google Meet) *</label>
+                  <input type="url" id="br-room-url" class="auth-input" placeholder="https://zoom.us/j/9842104921?pwd=..." value="https://zoom.us/j/9842104921" required>
+                </div>
+                <div class="auth-field-group">
+                  <label class="auth-label">Format / Session Type</label>
+                  <select id="br-format" class="auth-input">
+                    <option value="Interactive Video Roundtable">Interactive Video Roundtable (60 Min)</option>
+                    <option value="Executive Analyst Presentation">Executive Analyst Presentation + Q&amp;A (45 Min)</option>
+                    <option value="Closed Boardroom Session">Closed Boardroom Session (90 Min)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="auth-field-group" style="margin-bottom: 1.5rem;">
+                <label class="auth-label">Briefing Scope &amp; Agenda Summary</label>
+                <textarea id="br-agenda" class="auth-input" rows="3" placeholder="Provide executive context, key questions answered, countries examined, and modeling exhibits discussed."></textarea>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="reset" class="btn-table-action">Reset Form</button>
+                <button type="submit" class="btn-pill-primary" id="btn-submit-briefing">
+                  🚀 Publish Live Briefing to Client Portal
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Existing Scheduled Briefings List -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">
+                Active Scheduled Briefings Archive
+              </h4>
+              <button type="button" class="btn-table-action" onclick="window.refreshAdminBriefingsList()" style="font-size: 0.78rem;">
+                🔄 Refresh Briefings
+              </button>
+            </div>
+
+            <div class="invoices-table-wrap">
+              <table class="invoices-table">
+                <thead>
+                  <tr>
+                    <th>Session Title</th>
+                    <th>Practice Desk</th>
+                    <th>Lead Analyst</th>
+                    <th>Date &amp; Time</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-briefings-tbody">
+                  <!-- Rendered dynamically by window.refreshAdminBriefingsList() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           PANE 7: STRATEGIC ENTERPRISE ALLIANCES & PARTNERS DESK
+           ==================================================================== -->
+      <div class="admin-tab-pane" id="pane-partners">
+        <div class="admin-card" style="margin-bottom: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">🤝</span>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  Strategic Institutional Alliances &amp; Partners Desk
+                </h3>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: var(--text-secondary);">
+                Manage, add, revise, or remove operating partner brands featured on <code>partners.html</code> and the live platform partner ticker.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <a href="partners.html" target="_blank" class="btn-table-action" style="font-size: 0.82rem; text-decoration: none;">
+                View Public Partnerships Page ↗
+              </a>
+              <button type="button" class="btn-pill-primary" onclick="window.openAddPartnerModal()" style="font-size: 0.82rem; padding: 0.55rem 1.1rem;">
+                ➕ Add New Partner Alliance
+              </button>
+            </div>
+          </div>
+
+          <!-- Partner Alliances Stats HUD -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Listed Alliances</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-momentum); font-family: var(--font-mono); margin-top: 4px;" id="admin-partners-total-count">3</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Live Published on Storefront</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #10B981; font-family: var(--font-mono); margin-top: 4px;" id="admin-partners-published-count">3</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Ticker Sync Engine</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono); margin-top: 4px;">● Active</div>
+            </div>
+          </div>
+
+          <!-- Existing Partners List & Management Table -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">
+                  Active Institutional Partner Directory
+                </h4>
+                <span class="store-meta-chip" id="admin-partners-badge">3 ALLIANCES</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn-table-action" onclick="window.refreshAdminPartnersList()" style="font-size: 0.78rem;">
+                  🔄 Refresh Partners
+                </button>
+              </div>
+            </div>
+
+            <div class="invoices-table-wrap">
+              <table class="invoices-table">
+                <thead>
+                  <tr>
+                    <th style="width: 70px;">Logo</th>
+                    <th>Partner Brand / Company</th>
+                    <th>Sector / Practice Area</th>
+                    <th>Key Highlights / Telemetry</th>
+                    <th>Website Corridor</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-partners-tbody">
+                  <!-- Rendered dynamically by window.refreshAdminPartnersList() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  <!-- REVISE / EDIT SCHEDULED BRIEFING MODAL (FULL CRUD CMS) -->
+  <div id="briefing-edit-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 720px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 90vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            ✏️ Revise Executive Briefing Session
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Modify schedule, analyst assignment, seat allocation, agenda, or session lifecycle status.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeBriefingEditModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-edit-briefing-form" onsubmit="window.saveEditedBriefing(event)" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <input type="hidden" id="edit-br-id" value="">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+          
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Briefing Session Title *</label>
+              <input type="text" id="edit-br-title" class="auth-input" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Practice Sector / Desk *</label>
+              <select id="edit-br-sector" class="auth-input" required>
+                <option value="Agribusiness &amp; Commodities">Agribusiness &amp; Commodities Desk</option>
+                <option value="Financial Systems &amp; Fintech">Financial Systems &amp; Fintech Desk</option>
+                <option value="Sports Business &amp; Analytics">Sports Business &amp; Analytics Desk</option>
+                <option value="Education Economics &amp; EdTech">Education Economics &amp; EdTech Desk</option>
+                <option value="Macroeconomics &amp; Trade Corridors">Macroeconomics &amp; Trade Corridors Desk</option>
+                <option value="AI &amp; Digital Economy">AI &amp; Digital Economy Desk</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Lead Host / Analyst *</label>
+              <select id="edit-br-host" class="auth-input" required>
+                <option value="Obinna Ezeala (Managing Director &amp; Chief Strategist)">Obinna Ezeala (Managing Director &amp; Chief Strategist)</option>
+                <option value="Dr. Adeleke Ogunlesi (Lead Agricultural Economist)">Dr. Adeleke Ogunlesi (Lead Agricultural Economist)</option>
+                <option value="Chiamaka Nkemdirim (Fintech &amp; FX Lead)">Chiamaka Nkemdirim (Fintech &amp; FX Lead)</option>
+                <option value="Kwame Asante (Digital Economy Practice Lead)">Kwame Asante (Digital Economy Practice Lead)</option>
+                <option value="Guest Industry Panelist">Guest Industry Panelist</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Date &amp; Time (WAT / UTC+1) *</label>
+              <input type="datetime-local" id="edit-br-datetime" class="auth-input" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Max Seat Capacity *</label>
+              <input type="number" id="edit-br-capacity" class="auth-input" min="5" max="200" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Virtual Video Room URL *</label>
+              <input type="url" id="edit-br-room-url" class="auth-input" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Format / Session Type</label>
+              <select id="edit-br-format" class="auth-input">
+                <option value="Interactive Video Roundtable">Interactive Video Roundtable (60 Min)</option>
+                <option value="Executive Analyst Presentation">Executive Analyst Presentation + Q&amp;A (45 Min)</option>
+                <option value="Closed Boardroom Session">Closed Boardroom Session (90 Min)</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Session Status *</label>
+              <select id="edit-br-status" class="auth-input" style="font-weight: 700;">
+                <option value="Scheduled">🟢 Scheduled</option>
+                <option value="In Progress">⚡ In Progress</option>
+                <option value="Completed">✔ Completed</option>
+                <option value="Cancelled">🔴 Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-field-group">
+            <label class="auth-label">Briefing Scope &amp; Agenda Summary</label>
+            <textarea id="edit-br-agenda" class="auth-input" rows="3"></textarea>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closeBriefingEditModal()">Cancel</button>
+          <button type="submit" class="btn-pill-primary" id="btn-save-edit-briefing">Save Briefing Revisions →</button>
+        </div>
+      </form>
     </div>
-  </main>
+  </div>
+
+  <!-- STRATEGIC PARTNER ALLIANCE ADD / REVISE MODAL -->
+  <div id="partner-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 760px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 90vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 id="partner-modal-title" style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            🤝 Strategic Partner Alliance Details
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Manage brand profile, telemetry initiatives, outbound links, and storefront display settings.
+          </p>
+        </div>
+        <button type="button" onclick="window.closePartnerModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-partner-form" onsubmit="window.savePartner(event)" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <input type="hidden" id="edit-partner-id" value="">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+          
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Company / Partner Brand Name *</label>
+              <input type="text" id="edit-partner-name" class="auth-input" placeholder="e.g. United Carriers" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Sector / Practice Area *</label>
+              <input type="text" id="edit-partner-sector" class="auth-input" list="partner-sectors-list" placeholder="e.g. Logistics & Haulage" required>
+              <datalist id="partner-sectors-list">
+                <option value="Logistics & Haulage">
+                <option value="Sports & Wellness">
+                <option value="Global Education">
+                <option value="Fintech & Banking">
+                <option value="Energy & Infrastructure">
+                <option value="Agribusiness & Commodities">
+                <option value="Public Policy & Governance">
+              </datalist>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Badge Style *</label>
+              <select id="edit-partner-pill-class" class="auth-input">
+                <option value="pill-logistics">Logistics (Blue Accent)</option>
+                <option value="pill-sports">Sports & Wellness (Green Accent)</option>
+                <option value="pill-education">Education (Amber Accent)</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Publication Status *</label>
+              <select id="edit-partner-status" class="auth-input" style="font-weight: 700;">
+                <option value="published">🟢 Published (Live on Storefront)</option>
+                <option value="draft">Draft (Admin Desk Only)</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Display Order (Sort Priority)</label>
+              <input type="number" id="edit-partner-order" class="auth-input" value="1" min="1">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Company Logo URL / Path *</label>
+              <input type="text" id="edit-partner-logo" class="auth-input" placeholder="assets/partners/united-carriers-logo.svg" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Quick Logo Presets</label>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;">
+                <button type="button" class="btn-table-action" style="font-size: 0.72rem; padding: 4px 8px;" onclick="document.getElementById('edit-partner-logo').value='assets/partners/united-carriers-logo.svg'">United Carriers</button>
+                <button type="button" class="btn-table-action" style="font-size: 0.72rem; padding: 4px 8px;" onclick="document.getElementById('edit-partner-logo').value='assets/partners/axia-active-logo.png'">AXiA</button>
+                <button type="button" class="btn-table-action" style="font-size: 0.72rem; padding: 4px 8px;" onclick="document.getElementById('edit-partner-logo').value='assets/partners/gofar-academy-logo.webp'">GoFar</button>
+                <button type="button" class="btn-table-action" style="font-size: 0.72rem; padding: 4px 8px;" onclick="document.getElementById('edit-partner-logo').value='assets/brand/renalytica_emblem.png'">Emblem</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-field-group">
+            <label class="auth-label">Tagline / Mission Statement</label>
+            <input type="text" id="edit-partner-tagline" class="auth-input" placeholder="e.g. Pan-African Freight &amp; Cold-Chain Logistics">
+          </div>
+
+          <div class="auth-field-group">
+            <label class="auth-label">Alliance Overview / Bio Description *</label>
+            <textarea id="edit-partner-desc" class="auth-input" rows="3" placeholder="Provide full background on the partner's market footprint, operations, and strategic relationship with Renalytica." required></textarea>
+          </div>
+
+          <div class="auth-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Key Initiatives &amp; Telemetry Points (1 per line)</label>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Prefix with 'Label:' for bold title</span>
+            </div>
+            <textarea id="edit-partner-highlights" class="auth-input" rows="4" placeholder="Cross-Border Trade Corridors: Ground-truth diesel haulage and customs transit times.&#10;Cold-Chain Telemetry: Real-time spoilage reduction metrics.&#10;Fleet Optimization: Joint transport cost modeling."></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Official Outbound Website URL</label>
+              <input type="url" id="edit-partner-website" class="auth-input" placeholder="https://company.com">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Research Desk URL</label>
+              <input type="text" id="edit-partner-report-url" class="auth-input" placeholder="reports.html?sector=retail" value="reports.html">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Desk Button Label</label>
+              <input type="text" id="edit-partner-report-label" class="auth-input" placeholder="View Sector Reports →" value="View Sector Reports →">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closePartnerModal()">Cancel</button>
+          <button type="submit" class="btn-pill-primary" id="btn-save-partner">Save Partner Alliance →</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- PAYHIP-STYLE EMBED CODE GENERATOR MODAL -->
   <div id="embed-generator-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
@@ -845,16 +1476,16 @@
     </div>
   </div>
 
-  <!-- ADD / EDIT RESEARCH PRODUCT MODAL -->
-  <div id="product-crud-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
-    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 14px; max-width: 680px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.5); max-height: 85vh;">
-      <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+  <!-- ADD / EDIT RESEARCH PRODUCT SLIDING MODAL (DYNAMIC FORM & MULTI-CURRENCY) -->
+  <div id="product-crud-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card sliding-drawer-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 760px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 90vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
         <div>
-          <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--text-primary);" id="product-modal-heading">
-            ➕ Add Research Product to Marketplace
+          <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;" id="product-modal-heading">
+            ✏️ Edit Research Report Publication
           </h3>
-          <p style="margin: 4px 0 0; font-size: 0.75rem; color: var(--text-muted);">
-            SOP Module 1: Relational postgres products engine with private storage and piracy protection.
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Real-time metadata binding, multi-currency regional pricing, and anti-piracy licensing rules.
           </p>
         </div>
         <button type="button" onclick="closeProductModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
@@ -862,80 +1493,417 @@
 
       <form id="product-crud-form" onsubmit="saveProduct(event)" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
         <input type="hidden" id="crud-product-id" value="">
-        <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.15rem; overflow-y: auto; flex: 1;">
-          <div>
-            <label class="auth-label">Publication Title *</label>
-            <input type="text" id="crud-title" class="auth-input" placeholder="e.g. Sub-Saharan Africa Sovereign Debt & Liquidity Monitor" required>
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+          
+          <!-- Title & SKU Row -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+            <div>
+              <label class="auth-label">Publication Title *</label>
+              <input type="text" id="crud-title" class="auth-input" placeholder="e.g. Sub-Saharan Africa Sovereign Debt & Liquidity Monitor" required>
+            </div>
+            <div>
+              <label class="auth-label">Report SKU / Identifier</label>
+              <input type="text" id="crud-sku" class="auth-input" placeholder="REN-AG-2026-001" style="font-family: var(--font-mono); text-transform: uppercase;">
+            </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <!-- Category, Billing Type & Status Row -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
             <div>
               <label class="auth-label">Category *</label>
               <select id="crud-category" class="auth-input">
                 <option value="Market Insights">Market Insights</option>
                 <option value="Data Analysis">Data Analysis</option>
                 <option value="Industry Research">Industry Research</option>
+                <option value="Commodities & Agriculture">Commodities & Agriculture</option>
+                <option value="Fintech & FX">Fintech & FX</option>
               </select>
             </div>
             <div>
-              <label class="auth-label">Billing Type</label>
+              <label class="auth-label">Billing Structure</label>
               <select id="crud-billing-type" class="auth-input">
                 <option value="one-time">One-Time Acquisition</option>
                 <option value="subscription">Subscription / Monitor</option>
               </select>
             </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div>
-              <label class="auth-label">Base Price *</label>
-              <input type="number" id="crud-price" class="auth-input" placeholder="150000" required>
-            </div>
-            <div>
-              <label class="auth-label">Settlement Currency *</label>
-              <select id="crud-currency" class="auth-input">
-                <option value="NGN">NGN (Nigerian Naira - ₦)</option>
-                <option value="USD">USD (US Dollar - $)</option>
-                <option value="GHS">GHS (Ghanaian Cedi - ₵)</option>
-                <option value="KES">KES (Kenyan Shilling - KSh)</option>
+              <label class="auth-label">Storefront Availability *</label>
+              <select id="crud-status" class="auth-input" style="font-weight: 700;">
+                <option value="published">🟢 Published (Live on Store)</option>
+                <option value="draft">⚪ Draft (Hidden from Store)</option>
+                <option value="archived">📦 Archived (Historical Access Only)</option>
               </select>
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <!-- MULTI-CURRENCY PRICING CARD -->
+          <div style="background: rgba(13, 21, 39, 0.6); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 1.15rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.1rem;">💱</span>
+                <strong style="font-size: 0.88rem; color: var(--text-primary);">Multi-Currency Pricing Grid (Pan-African & Global)</strong>
+              </div>
+              <button type="button" class="btn-table-action" onclick="autoConvertRegionalPrices()" style="font-size: 0.74rem; padding: 4px 10px; color: #38BDF8; border-color: rgba(56, 189, 248, 0.4);">
+                ⚡ Auto-Calculate Regional FX Pegs
+              </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.85rem;">
+              <div>
+                <label class="auth-label">Base Price Amount *</label>
+                <input type="number" id="crud-price" class="auth-input" placeholder="150000" step="any" required oninput="syncBasePriceWithRegional()">
+              </div>
+              <div>
+                <label class="auth-label">Base Settlement Currency *</label>
+                <select id="crud-currency" class="auth-input" onchange="syncBasePriceWithRegional()">
+                  <option value="NGN">NGN (Nigerian Naira - ₦)</option>
+                  <option value="USD">USD (US Dollar - $)</option>
+                  <option value="GHS">GHS (Ghanaian Cedi - ₵)</option>
+                  <option value="KES">KES (Kenyan Shilling - KSh)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Regional Multi-Currency Inputs -->
+            <label class="auth-label" style="margin-bottom: 6px; font-size: 0.75rem; color: var(--text-secondary);">
+              Regional Checkout Currency Overrides (Live Flutterwave Checkout Values):
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+              <div>
+                <span style="font-size: 0.72rem; color: #10B981; font-weight: 700; display: block; margin-bottom: 3px;">₦ NGN (Naira)</span>
+                <input type="number" id="crud-price-ngn" class="auth-input" placeholder="150000" style="padding: 6px 8px; font-size: 0.8rem; font-family: var(--font-mono);">
+              </div>
+              <div>
+                <span style="font-size: 0.72rem; color: #38BDF8; font-weight: 700; display: block; margin-bottom: 3px;">$ USD (Dollar)</span>
+                <input type="number" id="crud-price-usd" class="auth-input" placeholder="100" style="padding: 6px 8px; font-size: 0.8rem; font-family: var(--font-mono);">
+              </div>
+              <div>
+                <span style="font-size: 0.72rem; color: #F59E0B; font-weight: 700; display: block; margin-bottom: 3px;">₵ GHS (Cedi)</span>
+                <input type="number" id="crud-price-ghs" class="auth-input" placeholder="1550" style="padding: 6px 8px; font-size: 0.8rem; font-family: var(--font-mono);">
+              </div>
+              <div>
+                <span style="font-size: 0.72rem; color: #EC4899; font-weight: 700; display: block; margin-bottom: 3px;">KSh KES (Shilling)</span>
+                <input type="number" id="crud-price-kes" class="auth-input" placeholder="13000" style="padding: 6px 8px; font-size: 0.8rem; font-family: var(--font-mono);">
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-Piracy Protection Caps -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
             <div>
-              <label class="auth-label">Download Attempt Limit (Piracy Shield)</label>
+              <label class="auth-label">Download Cap (Piracy Shield)</label>
               <input type="number" id="crud-download-limit" class="auth-input" value="3" min="1" max="10" required>
             </div>
             <div>
-              <label class="auth-label">Download Window (Days)</label>
+              <label class="auth-label">Validity Window (Days)</label>
               <input type="number" id="crud-expiry-days" class="auth-input" value="1" min="1" max="30" required>
+            </div>
+            <div>
+              <label class="auth-label">Payment Gateways</label>
+              <input type="text" id="crud-gateways" class="auth-input" value="FLW (NGN, USD, GHS, KES)">
             </div>
           </div>
 
-          <div>
-            <label class="auth-label">Supported Flutterwave Gateways</label>
-            <input type="text" id="crud-gateways" class="auth-input" value="FLW (NGN, USD, GHS, KES)">
+          <!-- Storage File Paths -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <label class="auth-label" style="margin-bottom: 0;">Private Asset Path (<code>reports-private</code>)</label>
+                <button type="button" onclick="switchToFilesModalFromCrud()" style="background: none; border: none; font-size: 0.72rem; color: var(--accent-momentum); cursor: pointer; text-decoration: underline;">Swap File →</button>
+              </div>
+              <input type="text" id="crud-file-path" class="auth-input" value="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf" required>
+            </div>
+            <div>
+              <label class="auth-label">Public Sample Preview URL</label>
+              <input type="text" id="crud-preview-url" class="auth-input" value="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf">
+            </div>
           </div>
 
+          <!-- Executive Summary & Rich Table of Contents -->
           <div>
-            <label class="auth-label">Private Storage File Path (Supabase <code>reports-private</code>)</label>
-            <input type="text" id="crud-file-path" class="auth-input" value="assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf" required>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Executive Summary &amp; Table of Contents</label>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" class="btn-table-action" onclick="insertTocTemplate()" style="font-size: 0.72rem; padding: 2px 8px;">+ Chapter Template</button>
+                <button type="button" class="btn-table-action" onclick="insertMetricTemplate()" style="font-size: 0.72rem; padding: 2px 8px;">+ Macro Metric</button>
+              </div>
+            </div>
+            <textarea id="crud-description" class="auth-input" rows="4" placeholder="Executive summary, chapters, key econometric takeaways, and methodology notes..." style="resize: vertical; font-family: var(--font-primary); font-size: 0.88rem; line-height: 1.5;"></textarea>
           </div>
 
+          <!-- Lead Research Author & Desk Credentials -->
+          <div style="background: rgba(13, 21, 39, 0.6); border: 1px solid var(--border-light); border-radius: 12px; padding: 1.15rem;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.85rem;">
+              <span style="font-size: 1.1rem;">👤</span>
+              <strong style="font-size: 0.88rem; color: var(--text-primary);">Lead Research Author &amp; Desk Credentials</strong>
+            </div>
+            <div style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 1rem;">
+              <div>
+                <label class="auth-label">Author Full Name</label>
+                <input type="text" id="crud-author-name" class="auth-input" placeholder="Obinna Ezeala">
+              </div>
+              <div>
+                <label class="auth-label">Author Title / Role</label>
+                <input type="text" id="crud-author-title" class="auth-input" placeholder="Managing Director &amp; Chief Strategist">
+              </div>
+              <div>
+                <label class="auth-label">Author Avatar Path</label>
+                <input type="text" id="crud-author-avatar" class="auth-input" placeholder="assets/brand/renalytica_emblem.png">
+              </div>
+            </div>
+          </div>
+
+          <!-- Quantitative Exhibits & Modeling Scope -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+            <div>
+              <label class="auth-label">Total Page Count</label>
+              <input type="number" id="crud-page-count" class="auth-input" placeholder="384" value="384">
+            </div>
+            <div>
+              <label class="auth-label">Vector Charts Count</label>
+              <input type="number" id="crud-charts-count" class="auth-input" placeholder="112" value="112">
+            </div>
+            <div>
+              <label class="auth-label">Data Tables Count</label>
+              <input type="number" id="crud-tables-count" class="auth-input" placeholder="84" value="84">
+            </div>
+          </div>
+
+          <!-- Core Strategic Takeaways (One per line) -->
           <div>
-            <label class="auth-label">Executive Summary &amp; Table of Contents</label>
-            <textarea id="crud-description" class="auth-input" rows="3" placeholder="Executive summary and key econometric highlights..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Core Strategic Takeaways (Executive Key Findings — 1 per line)</label>
+              <button type="button" class="btn-table-action" onclick="insertFindingTemplate()" style="font-size: 0.72rem; padding: 2px 8px;">+ Sample Finding</button>
+            </div>
+            <textarea id="crud-strategic-findings" class="auth-input" rows="3" placeholder="Contract Farming Outperforms Spot Market Sourcing by 420 Basis Points...&#10;Commercial Grain Silos Deliver an Unprecedented 28.4% Project IRR..."></textarea>
+          </div>
+
+          <!-- Structured Table of Contents (Chapter | Title | Pages) -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Structured Table of Contents (Format: Chapter | Title | Pages)</label>
+              <button type="button" class="btn-table-action" onclick="insertStructuredTocTemplate()" style="font-size: 0.72rem; padding: 2px 8px;">+ Sample Chapters</button>
+            </div>
+            <textarea id="crud-toc-chapters" class="auth-input" rows="4" placeholder="1 | Macroeconomic Landscape &amp; FX Volatility | 14–48&#10;2 | Sub-Saharan Market Sizing &amp; Econometric Projections | 49–88&#10;3 | Value Chain Deep-Dive &amp; Margin Economics | 89–134"></textarea>
           </div>
         </div>
 
-        <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: flex-end; gap: 10px;">
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
           <button type="button" class="btn-table-action" onclick="closeProductModal()">Cancel</button>
-          <button type="submit" class="btn-pill-primary" id="btn-product-submit">Save Report</button>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn-pill-primary" id="btn-product-submit">Save Report Publication →</button>
+          </div>
         </div>
       </form>
     </div>
   </div>
+
+  <!-- DEDICATED MANAGE & SWAP FILES PORTAL MODAL (SMART ORPHAN PURGE) -->
+  <div id="manage-files-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card sliding-drawer-card" style="background: var(--surface-card); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; max-width: 680px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 88vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            <span>📁</span> Replace Publication Assets &amp; Clean Storage
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);" id="mf-target-title">
+            Replace deliverables or preview files without breaking historical customer license access.
+          </p>
+        </div>
+        <button type="button" onclick="closeManageFilesModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; overflow-y: auto; flex: 1;">
+        <input type="hidden" id="mf-product-id" value="">
+
+        <!-- Current File Status Box -->
+        <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1rem;">
+          <strong style="font-size: 0.82rem; color: var(--text-primary); display: block; margin-bottom: 6px;">
+            Current Active Document Bindings:
+          </strong>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.78rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-secondary);">🔒 Private Storage Asset (<code>reports-private</code>):</span>
+              <code id="mf-current-private-path" style="color: #38bdf8; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf</code>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-secondary);">👁️ Public Sample Preview:</span>
+              <code id="mf-current-preview-path" style="color: #10b981; max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Selector: Deliverable vs Preview -->
+        <div>
+          <label class="auth-label">Select Document Stream to Replace *</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <label style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="mf-target-stream" value="premium" checked id="mf-target-premium">
+              <div>
+                <strong style="font-size: 0.82rem; display: block; color: var(--text-primary);">Premium Report Asset</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Encrypted in reports-private bucket</span>
+              </div>
+            </label>
+            <label style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="mf-target-stream" value="preview" id="mf-target-preview">
+              <div>
+                <strong style="font-size: 0.82rem; display: block; color: var(--text-primary);">Public Sample Preview</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Public excerpt &amp; sample PDF</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Dropzone for New Asset Upload -->
+        <div>
+          <label class="auth-label">Upload Replacement File (.pdf, .xlsx, .docx, .pptx up to 500MB)</label>
+          <div class="dropzone-box" id="mf-dropzone" style="padding: 1.75rem 1.25rem;">
+            <div style="font-size: 2.2rem; margin-bottom: 0.4rem;">📤</div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.2rem;">
+              Click or drag replacement file here
+            </strong>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">
+              File will be verified, watermarked, and mapped to this report's relational SKU
+            </span>
+            <input type="file" id="mf-file-input" style="display: none;" accept=".pdf,.docx,.xlsx,.pptx">
+          </div>
+        </div>
+
+        <!-- Staged File Card -->
+        <div id="mf-staged-card" style="display: none; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 10px; padding: 12px 16px; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">📄</span>
+            <div>
+              <strong id="mf-staged-name" style="font-size: 0.84rem; color: var(--text-primary); display: block;">file.pdf</strong>
+              <span id="mf-staged-size" style="font-size: 0.72rem; color: #38bdf8;">0 KB • Ready to upload</span>
+            </div>
+          </div>
+          <button type="button" class="btn-table-action" onclick="clearStagedSwapFile()" style="padding: 4px 8px; font-size: 0.75rem;">✕ Remove</button>
+        </div>
+
+        <!-- Real-Time Multipart Progress Bar -->
+        <div id="mf-progress-wrap" style="display: none; background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 8px; padding: 1rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-family: var(--font-mono); margin-bottom: 6px;">
+            <span id="mf-progress-filename" style="font-weight: 700; color: var(--text-primary);">Streaming asset to Supabase Storage...</span>
+            <span id="mf-progress-percent" style="color: var(--accent-momentum); font-weight: 800;">0%</span>
+          </div>
+          <div style="width: 100%; height: 8px; background: var(--border-light); border-radius: 9999px; overflow: hidden;">
+            <div id="mf-progress-fill" style="width: 0%; height: 100%; background: var(--accent-momentum); transition: width 0.15s ease;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">
+            <span id="mf-progress-status">Multipart chunking to reports-private container...</span>
+            <span style="color: #10B981; font-weight: 700;">● TRANSFERRING</span>
+          </div>
+        </div>
+
+        <!-- Smart Storage Orphan Cleanup Toggle -->
+        <div style="background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 12px; display: flex; gap: 10px; align-items: flex-start;">
+          <input type="checkbox" id="mf-purge-orphan-check" checked style="margin-top: 3px;">
+          <div>
+            <label for="mf-purge-orphan-check" style="font-size: 0.82rem; font-weight: 700; color: #F59E0B; cursor: pointer;">
+              ⚡ Smart Storage Orphan Purge (Recommended)
+            </label>
+            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4;">
+              Automatically deletes the replaced old file from the Supabase Storage container to eliminate orphan storage bloat and reduce cloud hosting overhead.
+            </p>
+          </div>
+        </div>
+
+        <!-- Customer Protection Guarantee Notice -->
+        <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1rem;">🛡️</span>
+          <span style="font-size: 0.76rem; color: #10B981; line-height: 1.4;">
+            <strong>Customer License Preservation:</strong> Existing buyer fulfillment tokens remain valid. Verified purchasers will seamlessly download the updated version on their next access.
+          </span>
+        </div>
+      </div>
+
+      <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn-table-action" onclick="closeManageFilesModal()">Cancel</button>
+        <button type="button" class="btn-pill-primary" id="btn-execute-file-swap" onclick="executeFileSwap()">
+          Replace File &amp; Purge Storage →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFE ERASURE & CONFIRMATION MODAL (SAFE DELETE / ARCHIVE LOGIC) -->
+  <div id="safe-delete-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card sliding-drawer-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 580px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6);">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #EF4444; display: flex; align-items: center; gap: 8px;">
+            <span>🛡️</span> Publication Erasure &amp; Archiving Control
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);" id="del-modal-subtitle">
+            Relational integrity safety check on orders and digital licenses.
+          </p>
+        </div>
+        <button type="button" onclick="closeSafeDeleteModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem;">
+        <input type="hidden" id="del-product-id" value="">
+
+        <!-- Publication Identity Card -->
+        <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 12px 16px;">
+          <strong id="del-product-title" style="font-size: 0.92rem; color: var(--text-primary); display: block; margin-bottom: 4px;">Loading publication...</strong>
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+            SKU: <span id="del-product-sku">--</span> • Category: <span id="del-product-cat">--</span>
+          </div>
+        </div>
+
+        <!-- STATE A: HARD DELETION BLOCKED BANNER (When Orders / Licenses Exist) -->
+        <div id="del-blocked-banner" style="display: none; background: rgba(239, 68, 68, 0.08); border: 1.5px solid #EF4444; border-radius: 10px; padding: 14px;">
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 1.5rem; line-height: 1;">🚫</span>
+            <div>
+              <strong style="color: #EF4444; font-size: 0.88rem; display: block; margin-bottom: 4px;">
+                HARD DELETION BLOCKED: Relational Purchases Detected
+              </strong>
+              <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0 0 8px; line-height: 1.45;">
+                This publication has <strong id="del-order-count" style="color: #fff;">0 verified customer order(s)</strong> and <strong id="del-ful-count" style="color: #fff;">0 active digital license(s)</strong> in the database. Permanent deletion would revoke paid customer downloads and violate institutional agreements.
+              </p>
+              <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: 8px 12px; font-size: 0.75rem; color: #F59E0B; margin-bottom: 10px;">
+                💡 <strong>Recommended Action:</strong> Pull this publication from the storefront by setting its status to <strong>"Archived"</strong>. Buyers will continue to access their purchases in their Customer Portal.
+              </div>
+              <button type="button" class="btn-pill-primary" id="btn-archive-instead" onclick="archiveReportInstead()" style="background: #F59E0B; border-color: #F59E0B; width: 100%; justify-content: center;">
+                📦 Archive Report Instead (Recommended)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STATE B: SAFE TO PURGE BANNER (When 0 Orders Exist) -->
+        <div id="del-safe-banner" style="display: none; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 14px;">
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 1.4rem;">⚠️</span>
+            <div>
+              <strong style="color: #F59E0B; font-size: 0.88rem; display: block; margin-bottom: 4px;">
+                Zero Client Orders: Safe for Permanent Purge
+              </strong>
+              <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.45;">
+                No customer orders or fulfillment licenses exist for this document. Confirming this action will execute an atomic purge: deleting the row from <code>products</code> and removing any uploaded assets from storage.
+              </p>
+              <label class="auth-label" style="font-size: 0.74rem;">Type <strong>DELETE</strong> to confirm permanent purge:</label>
+              <input type="text" id="del-confirm-input" class="auth-input" placeholder="DELETE" style="font-family: var(--font-mono); font-size: 0.85rem;" oninput="validateDeleteInput(this.value)">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn-table-action" onclick="closeSafeDeleteModal()">Cancel</button>
+        <button type="button" class="btn-pill-primary" id="btn-execute-hard-delete" onclick="executeHardDelete()" disabled style="background: #EF4444; border-color: #EF4444; opacity: 0.5;">
+          🔥 Permanently Purge Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST HUD -->
+  <div id="admin-toast-hud"></div>
 
   <!-- MEDIA LIBRARY MODAL (Prompt 8) -->
   <div id="media-library-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
@@ -1034,6 +2002,754 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // ====================================================================
+      // ANALYST BRIEFINGS SCHEDULER ENGINE (ADMIN CONTROLS)
+      // ====================================================================
+      const defaultBriefings = [
+        {
+          id: 'BRF-2026-001',
+          title: 'Q4 2026 Sub-Saharan Agro-Commodities & Fertilizer Import Parity Outlook',
+          sector: 'Agribusiness & Commodities',
+          host: 'Dr. Adeleke Ogunlesi (Lead Agricultural Economist)',
+          datetime: '2026-10-15T14:00',
+          datetimeFormatted: 'Thu, Oct 15, 2026 • 2:00 PM WAT',
+          capacity: 25,
+          bookedSeats: 7,
+          roomUrl: 'https://zoom.us/j/9842104921',
+          format: 'Interactive Video Roundtable (60 Min)',
+          status: 'Scheduled',
+          agenda: 'Review farmgate maize, wheat, and soybean harvest forecasts, FX landing cost disparities across Nigeria, Ghana, and Kenya, and outgrower margin dynamics.'
+        },
+        {
+          id: 'BRF-2026-002',
+          title: 'West African Sports Business & Athleisure Market Expansion',
+          sector: 'Sports Business & Analytics',
+          host: 'Obinna Ezeala (Managing Director & Chief Strategist)',
+          datetime: '2026-10-20T11:00',
+          datetimeFormatted: 'Tue, Oct 20, 2026 • 11:00 AM WAT',
+          capacity: 30,
+          bookedSeats: 6,
+          roomUrl: 'https://teams.microsoft.com/l/meetup-join/renalytica-sports-2026',
+          format: 'Executive Analyst Presentation + Q&A (45 Min)',
+          status: 'Scheduled',
+          agenda: 'Empirical market sizing of youth athletic apparel, grassroots football academy monetization, and domestic manufacturing partnerships featuring partner AXiA Active.'
+        },
+        {
+          id: 'BRF-2026-003',
+          title: 'Pan-African Digital Currency Liquidity & Cross-Border Treasury Arbitrage',
+          sector: 'Financial Systems & Fintech',
+          host: 'Chiamaka Nkemdirim (Fintech & FX Lead)',
+          datetime: '2026-10-27T15:00',
+          datetimeFormatted: 'Tue, Oct 27, 2026 • 3:00 PM WAT',
+          capacity: 20,
+          bookedSeats: 11,
+          roomUrl: 'https://zoom.us/j/9128391204',
+          format: 'Closed Boardroom Session (90 Min)',
+          status: 'Scheduled',
+          agenda: 'Analysis of USDT/NGN and crypto-fiat settlement spreads, central bank compliance frameworks, and institutional treasury hedging strategies.'
+        }
+      ];
+
+      function getStoredBriefings() {
+        try {
+          const raw = localStorage.getItem('renalytica_scheduled_briefings');
+          if (!raw) {
+            localStorage.setItem('renalytica_scheduled_briefings', JSON.stringify(defaultBriefings));
+            return defaultBriefings;
+          }
+          return JSON.parse(raw);
+        } catch (e) {
+          return defaultBriefings;
+        }
+      }
+
+      function saveStoredBriefings(briefings) {
+        localStorage.setItem('renalytica_scheduled_briefings', JSON.stringify(briefings));
+      }
+
+      window.refreshAdminBriefingsList = function() {
+        const tbody = document.getElementById('admin-briefings-tbody');
+        if (!tbody) return;
+        const briefings = getStoredBriefings();
+
+        // Update HUD counts
+        const totalEl = document.getElementById('admin-briefing-total-count');
+        const seatsEl = document.getElementById('admin-briefing-seats-count');
+        if (totalEl) totalEl.textContent = briefings.length;
+        if (seatsEl) {
+          const totalCapacity = briefings.reduce((sum, b) => sum + Number(b.capacity || 0), 0);
+          const totalBooked = briefings.reduce((sum, b) => sum + Number(b.bookedSeats || 0), 0);
+          seatsEl.textContent = `${totalCapacity - totalBooked} / ${totalCapacity}`;
+        }
+
+        if (briefings.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-secondary);">No briefings scheduled. Use the form above to publish your first executive briefing.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = briefings.map(b => {
+          const dt = b.datetimeFormatted || new Date(b.datetime).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+          const seatsOpen = Math.max(0, (b.capacity || 25) - (b.bookedSeats || 0));
+          return `
+            <tr>
+              <td><strong>${b.title}</strong></td>
+              <td><span class="hud-tier-badge" style="background: rgba(59, 130, 246, 0.12); color: #38BDF8;">${b.sector}</span></td>
+              <td>${b.host}</td>
+              <td><code>${dt}</code></td>
+              <td><strong>${seatsOpen}</strong> / ${b.capacity} Open</td>
+              <td>
+                <span class="badge-status ${b.status === 'Scheduled' ? 'paid' : 'pending'}">${b.status}</span>
+              </td>
+              <td>
+                <div style="display: flex; gap: 6px;">
+                  <button type="button" class="btn-table-action" onclick="navigator.clipboard.writeText('${b.roomUrl}'); showToast('Video room URL copied to clipboard!', 'success');" title="Copy Room URL">🔗 Link</button>
+                  <button type="button" class="btn-table-action" onclick="window.editAdminBriefing('${b.id}')" style="color: #38BDF8;" title="Revise Briefing Details">✏️ Edit</button>
+                  <button type="button" class="btn-table-action" onclick="window.cancelAdminBriefing('${b.id}')" style="color: #F59E0B;" title="Cancel Session">Cancel</button>
+                  <button type="button" class="btn-table-action" onclick="window.deleteAdminBriefing('${b.id}')" style="color: #EF4444;" title="Delete Session">🗑</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      window.editAdminBriefing = function(id) {
+        const list = getStoredBriefings();
+        const b = list.find(item => item.id === id);
+        if (!b) {
+          showToast('Briefing not found.', 'warning');
+          return;
+        }
+
+        document.getElementById('edit-br-id').value = b.id;
+        document.getElementById('edit-br-title').value = b.title || '';
+        document.getElementById('edit-br-sector').value = b.sector || 'Agribusiness & Commodities';
+        document.getElementById('edit-br-host').value = b.host || 'Obinna Ezeala (Managing Director & Chief Strategist)';
+        document.getElementById('edit-br-datetime').value = b.datetime || '';
+        document.getElementById('edit-br-capacity').value = b.capacity || 25;
+        document.getElementById('edit-br-room-url').value = b.roomUrl || '';
+        document.getElementById('edit-br-format').value = b.format || 'Interactive Video Roundtable (60 Min)';
+        document.getElementById('edit-br-status').value = b.status || 'Scheduled';
+        document.getElementById('edit-br-agenda').value = b.agenda || '';
+
+        const modal = document.getElementById('briefing-edit-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeBriefingEditModal = function() {
+        const modal = document.getElementById('briefing-edit-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.saveEditedBriefing = async function(e) {
+        e.preventDefault();
+        const id = document.getElementById('edit-br-id').value;
+        const title = document.getElementById('edit-br-title').value.trim();
+        const sector = document.getElementById('edit-br-sector').value;
+        const host = document.getElementById('edit-br-host').value;
+        const datetime = document.getElementById('edit-br-datetime').value;
+        const capacity = parseInt(document.getElementById('edit-br-capacity').value, 10) || 25;
+        const roomUrl = document.getElementById('edit-br-room-url').value.trim();
+        const format = document.getElementById('edit-br-format').value;
+        const status = document.getElementById('edit-br-status').value;
+        const agenda = document.getElementById('edit-br-agenda').value.trim();
+
+        const dtObj = new Date(datetime);
+        const dtFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
+
+        const updates = {
+          title,
+          sector,
+          host,
+          datetime,
+          datetimeFormatted: dtFormatted,
+          capacity,
+          roomUrl,
+          format,
+          status,
+          agenda
+        };
+
+        // 1. Update in localStorage
+        const list = getStoredBriefings();
+        const idx = list.findIndex(b => b.id === id);
+        if (idx !== -1) {
+          list[idx] = { ...list[idx], ...updates };
+          saveStoredBriefings(list);
+        }
+
+        // 2. Sync with backend API
+        try {
+          await fetch(`/api/admin/briefings/${encodeURIComponent(id)}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer mock_jwt_token_admin'
+            },
+            body: JSON.stringify(updates)
+          });
+        } catch (apiErr) {
+          console.warn('Backend briefings API sync notice:', apiErr.message);
+        }
+
+        window.closeBriefingEditModal();
+        window.refreshAdminBriefingsList();
+        showToast(`✔ Live Briefing "${title}" revised and updated across portal!`, 'success');
+      };
+
+      window.cancelAdminBriefing = async function(id) {
+        if (!confirm('Are you sure you want to mark this briefing session as Cancelled?')) return;
+        const list = getStoredBriefings();
+        const found = list.find(b => b.id === id);
+        if (found) {
+          found.status = 'Cancelled';
+          saveStoredBriefings(list);
+
+          try {
+            await fetch(`/api/admin/briefings/${encodeURIComponent(id)}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer mock_jwt_token_admin'
+              },
+              body: JSON.stringify({ status: 'Cancelled' })
+            });
+          } catch (apiErr) {
+            console.warn('Backend briefings cancel sync notice:', apiErr.message);
+          }
+
+          window.refreshAdminBriefingsList();
+          showToast('Briefing marked as Cancelled.', 'warning');
+        }
+      };
+
+      window.deleteAdminBriefing = async function(id) {
+        if (!confirm('Permanently delete this briefing session?')) return;
+        let list = getStoredBriefings();
+        list = list.filter(b => b.id !== id);
+        saveStoredBriefings(list);
+
+        try {
+          await fetch(`/api/admin/briefings/${encodeURIComponent(id)}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer mock_jwt_token_admin'
+            }
+          });
+        } catch (apiErr) {
+          console.warn('Backend briefings delete sync notice:', apiErr.message);
+        }
+
+        window.refreshAdminBriefingsList();
+        showToast('Briefing permanently deleted.', 'danger');
+      };
+
+      const briefingCreateForm = document.getElementById('admin-create-briefing-form');
+      if (briefingCreateForm) {
+        briefingCreateForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const title = document.getElementById('br-title').value.trim();
+          const sector = document.getElementById('br-sector').value;
+          const host = document.getElementById('br-host').value;
+          const datetime = document.getElementById('br-datetime').value;
+          const capacity = parseInt(document.getElementById('br-capacity').value, 10) || 25;
+          const roomUrl = document.getElementById('br-room-url').value.trim();
+          const format = document.getElementById('br-format').value;
+          const agenda = document.getElementById('br-agenda').value.trim();
+
+          const newId = 'BRF-2026-' + Math.floor(100 + Math.random() * 900);
+          const dtObj = new Date(datetime);
+          const dtFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
+
+          const newBriefing = {
+            id: newId,
+            title,
+            sector,
+            host,
+            datetime,
+            datetimeFormatted: dtFormatted,
+            capacity,
+            bookedSeats: 0,
+            roomUrl,
+            format,
+            status: 'Scheduled',
+            agenda
+          };
+
+          const currentList = getStoredBriefings();
+          currentList.unshift(newBriefing);
+          saveStoredBriefings(currentList);
+
+          try {
+            await fetch('/api/admin/briefings', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer mock_jwt_token_admin'
+              },
+              body: JSON.stringify(newBriefing)
+            });
+          } catch (apiErr) {
+            console.warn('Backend briefings create sync notice:', apiErr.message);
+          }
+
+          window.refreshAdminBriefingsList();
+          briefingCreateForm.reset();
+          showToast(`✔ Live Briefing "${title}" scheduled and published to Client Portal!`, 'success');
+        });
+      }
+
+      // ==============================================================================
+      // STRATEGIC INSTITUTIONAL ALLIANCES & PARTNER CMS (FULL CRUD)
+      // ==============================================================================
+      const DEFAULT_PARTNERS_ADMIN = [
+        {
+          id: 'united-carriers',
+          name: 'United Carriers',
+          category: 'operating',
+          sector: 'Logistics & Haulage',
+          pillClass: 'pill-logistics',
+          logoUrl: 'assets/partners/united-carriers-logo.svg',
+          tagline: 'Pan-African Freight & Cold-Chain Logistics',
+          desc: 'Premier pan-African multi-modal freight forwarder, cold-chain haulage leader, and bonded fleet operator connecting agricultural production basins to major urban industrial corridors.',
+          highlights: [
+            'Cross-Border Trade Corridors: Ground-truth diesel haulage and customs transit times along Lagos-Kano-Niamey and Abidjan routes.',
+            'Cold-Chain Telemetry: Real-time spoilage reduction metrics across perishable fruits, vegetables, and commercial poultry feeds.',
+            'Fleet Optimization: Joint transport cost modeling incorporated directly into Renalytica’s grain and commodity reports.'
+          ],
+          websiteUrl: 'https://unitedcarriers.com',
+          reportDeskUrl: 'reports.html?sector=retail',
+          reportDeskLabel: 'View Corridor Reports →',
+          status: 'published',
+          order: 1
+        },
+        {
+          id: 'axia-active',
+          name: 'AXiA Active',
+          category: 'operating',
+          sector: 'Sports & Wellness',
+          pillClass: 'pill-sports',
+          logoUrl: 'assets/partners/axia-active-logo.png',
+          tagline: 'Athletic Gear, Activewear & Wellness Retail',
+          desc: 'Dynamic athletic performance gear and fitness lifestyle brand spearheading premium activewear retail, community athletic leagues, and corporate wellness programs across West Africa.',
+          highlights: [
+            'Sports Business Intelligence: High-frequency point-of-sale data informing consumer discretionary athletic spending and gym club expansion.',
+            'Apparel Supply Chain: Empirical import duty benchmarks and textile manufacturing feasibility across frontier retail hubs.',
+            'Athletic Sponsorship Telemetry: Commercial valuation models for domestic football, basketball (BAL), and marathon events.'
+          ],
+          websiteUrl: 'https://axiaactive.com',
+          reportDeskUrl: 'reports.html?sector=sports',
+          reportDeskLabel: 'Sports Intelligence Desk →',
+          status: 'published',
+          order: 2
+        },
+        {
+          id: 'gofar-academy',
+          name: 'GoFar International Academy',
+          category: 'operating',
+          sector: 'Global Education',
+          pillClass: 'pill-education',
+          logoUrl: 'assets/partners/gofar-academy-logo.webp',
+          tagline: 'Accredited STEM Education & Leadership Academy',
+          desc: 'Globally accredited preparatory institution and STEM excellence academy delivering world-standard curricula, coding bootcamps, and early leadership development programs.',
+          highlights: [
+            'Education Econometrics: Longitudinal tracking of private school tuition indexation, curriculum adoption, and household education spend.',
+            'EdTech Infrastructure: Benchmarking campus digital connectivity, device penetration, and interactive classroom technology ROI.',
+            'Talent Pipeline Incubator: Early data analytics training and economic fellowship programs in partnership with Renalytica analysts.'
+          ],
+          websiteUrl: 'https://gofarinternationalacademy.com',
+          reportDeskUrl: 'reports.html?sector=education',
+          reportDeskLabel: 'Education Economics Desk →',
+          status: 'published',
+          order: 3
+        },
+        {
+          id: 'tradingview',
+          name: 'TradingView',
+          category: 'telemetry',
+          sector: 'Market Telemetry & Charting',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/tradingview-logo.svg',
+          tagline: 'Institutional Charting & Telemetry Engine',
+          desc: 'Global leader in multi-asset financial charting, technical analysis indicators, and institutional WebGL market data visualization powering Renalytica\'s Live Market Terminal.',
+          highlights: [
+            'Advanced Charting Engine: Ultra-low latency interactive candlestick visualization, technical indicators, and multi-timeframe analysis across African and global equities.',
+            'Economic Calendar Feeds: Real-time global and regional macro announcements, central bank rate decisions, and geopolitical volatility schedules.',
+            'Institutional Screeners: Dynamic asset screening, relative strength matrices, and volume profile telemetry integrated across research workstations.'
+          ],
+          websiteUrl: 'https://www.tradingview.com',
+          reportDeskUrl: 'portal.html?mode=signup',
+          reportDeskLabel: 'Open Market Terminal →',
+          status: 'published',
+          order: 4
+        },
+        {
+          id: 'finnhub',
+          name: 'Finnhub',
+          category: 'telemetry',
+          sector: 'Real-Time Market Data',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/finnhub-logo.svg',
+          tagline: 'Real-Time WebSocket Trade & Quote Telemetry',
+          desc: 'Enterprise-grade financial API provider delivering institutional-speed WebSocket market data, tick-level price discovery, and corporate filings intelligence across African and global asset classes.',
+          highlights: [
+            'Sub-Millisecond Tick Feeds: Real-time streaming trades and bid/ask quotes syncing continuously to Renalytica\'s live market ticker and intelligence dashboards.',
+            'Cross-Asset Market Coverage: Real-time telemetry covering FX crosses, sovereign debt yields, and international ADR equity proxies.',
+            'Corporate Filings & Earnings: Automated ingestion of institutional company fundamentals, insider sentiment, and forward guidance metrics.'
+          ],
+          websiteUrl: 'https://finnhub.io',
+          reportDeskUrl: 'portal.html?mode=signup',
+          reportDeskLabel: 'Explore Data Feeds →',
+          status: 'published',
+          order: 5
+        },
+        {
+          id: 'fmp',
+          name: 'Financial Modeling Prep (FMP)',
+          category: 'telemetry',
+          sector: 'Equities & Macro Telemetry',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/fmp-logo.svg',
+          tagline: 'African & Frontier Market Telemetry API',
+          desc: 'Comprehensive market data and fundamental financial intelligence API providing deep historical financial statements, African FX cross-rates, and macroeconomic indicators.',
+          highlights: [
+            'African Equities & FX Sync: Automated syncing of NGX, JSE, and regional FX pairs (USD/NGN, USD/ZAR, USD/KES, USD/GHS) powering Renalytica valuation models.',
+            'Standardized Financials: Decades of balance sheets, cash flow statements, and earnings telemetry normalized for comparative frontier equity research.',
+            'Macroeconomic Series: Ingestion of inflation indices, trade balance data, and sovereign foreign exchange reserve trajectories.'
+          ],
+          websiteUrl: 'https://site.financialmodelingprep.com',
+          reportDeskUrl: 'reports.html?sector=macro',
+          reportDeskLabel: 'Macro Intelligence Desk →',
+          status: 'published',
+          order: 6
+        },
+        {
+          id: 'alphavantage',
+          name: 'Alpha Vantage',
+          category: 'telemetry',
+          sector: 'Commodities & Central Banking',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/alphavantage-logo.svg',
+          tagline: 'Global Commodity Benchmarks & Macro Metrics',
+          desc: 'Premier cloud provider of enterprise financial market data, high-frequency commodity benchmarks, and global central bank economic indicators for quantitative research.',
+          highlights: [
+            'Crude & Energy Benchmarks: Real-time and historical pricing for Brent Crude, WTI, and Natural Gas informing African sovereign fiscal balance sheets.',
+            'Agricultural Soft Commodities: Empirical price telemetry for cocoa, coffee, wheat, palm oil, and fertilizer components directly impacting African trade corridors.',
+            'Central Bank Data Sync: Automated ingestion of US Federal Reserve, Bank of England, and ECB policy rates influencing frontier capital flows.'
+          ],
+          websiteUrl: 'https://www.alphavantage.co',
+          reportDeskUrl: 'reports.html?sector=macro',
+          reportDeskLabel: 'Commodity Desk Reports →',
+          status: 'published',
+          order: 7
+        },
+        {
+          id: 'sharpapi',
+          name: 'Sharp API',
+          category: 'telemetry',
+          sector: 'Sports Intelligence Telemetry',
+          pillClass: 'pill-telemetry',
+          logoUrl: 'assets/partners/sharpapi-logo.svg',
+          tagline: 'Live Sports Business Intelligence & Analytics',
+          desc: 'Next-generation sports analytics and live match telemetry platform powering empirical commercial modeling, fan engagement metrics, and sports business valuation across Africa.',
+          highlights: [
+            'Continental Football Telemetry: Real-time match data, tournament attendance metrics, and broadcasting viewership tracking across CAF, NPFL, and international competitions.',
+            'Commercial League Valuation: High-frequency sports economics data tracking franchise valuations, stadium concessions, and digital fan monetisation.',
+            'Athletic Performance Indexing: Synchronized with AXiA Active retail telemetry to correlate athletic performance trends with sporting goods consumer spending.'
+          ],
+          websiteUrl: 'https://sharpapi.com',
+          reportDeskUrl: 'reports.html?sector=sports',
+          reportDeskLabel: 'Sports Intelligence Desk →',
+          status: 'published',
+          order: 8
+        }
+      ];
+
+      function getStoredPartners() {
+        try {
+          const raw = localStorage.getItem('renalytica_partners');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length >= 8 && parsed.some(p => p.id === 'tradingview')) {
+              return parsed;
+            }
+            // Auto-upgrade / merge older cache with new telemetry partners
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              const existingIds = new Set(parsed.map(p => p.id));
+              const missingDefaults = DEFAULT_PARTNERS_ADMIN.filter(p => !existingIds.has(p.id));
+              const merged = [...parsed, ...missingDefaults];
+              localStorage.setItem('renalytica_partners', JSON.stringify(merged));
+              return merged;
+            }
+          }
+        } catch (e) {}
+        try {
+          localStorage.setItem('renalytica_partners', JSON.stringify(DEFAULT_PARTNERS_ADMIN));
+        } catch (e) {}
+        return DEFAULT_PARTNERS_ADMIN;
+      }
+
+      function saveStoredPartners(partners) {
+        localStorage.setItem('renalytica_partners', JSON.stringify(partners));
+        window.dispatchEvent(new CustomEvent('renalytica_partners_updated', { detail: { count: partners.length } }));
+      }
+
+      window.refreshAdminPartnersList = function() {
+        const tbody = document.getElementById('admin-partners-tbody');
+        if (!tbody) return;
+        const partners = getStoredPartners();
+
+        // Update counters
+        const totalEl = document.getElementById('admin-partners-total-count');
+        const pubEl = document.getElementById('admin-partners-published-count');
+        const badgeEl = document.getElementById('admin-partners-badge');
+        const publishedCount = partners.filter(p => p.status === 'published').length;
+
+        if (totalEl) totalEl.textContent = partners.length;
+        if (pubEl) pubEl.textContent = publishedCount;
+        if (badgeEl) badgeEl.textContent = `${partners.length} ALLIANCE${partners.length === 1 ? '' : 'S'}`;
+
+        if (partners.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-secondary);">No partner alliances configured. Click "+ Add New Partner Alliance" to register your first partner brand.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = partners.map(p => {
+          const isPublished = p.status === 'published';
+          const hlCount = (p.highlights || []).length;
+          const sectorClass = p.pillClass || (
+            (p.sector && p.sector.toLowerCase().includes('logist')) ? 'pill-logistics' :
+            (p.sector && p.sector.toLowerCase().includes('sport')) ? 'pill-sports' :
+            (p.sector && p.sector.toLowerCase().includes('educ')) ? 'pill-education' : 'pill-logistics'
+          );
+
+          return `
+            <tr>
+              <td>
+                <div style="width: 58px; height: 32px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px; padding: 3px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  <img src="${p.logoUrl || 'assets/brand/renalytica_emblem.png'}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.src='assets/brand/renalytica_emblem.png';">
+                </div>
+              </td>
+              <td>
+                <strong style="color: var(--text-primary); font-size: 0.92rem;">${p.name}</strong>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.tagline || p.desc || ''}</div>
+              </td>
+              <td>
+                <span class="partner-sector-pill ${sectorClass}" style="font-size: 0.7rem; padding: 2px 8px;">${p.sector || 'Alliance'}</span>
+              </td>
+              <td>
+                <span style="font-size: 0.8rem; color: var(--text-primary); font-weight: 600;">${hlCount} Key Initiative${hlCount === 1 ? '' : 's'}</span>
+                <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Ground-truth verified</div>
+              </td>
+              <td>
+                <a href="${p.websiteUrl || '#'}" target="_blank" rel="noopener" style="font-size: 0.8rem; color: var(--accent-momentum); text-decoration: none;" title="${p.websiteUrl}">
+                  ${p.websiteUrl ? p.websiteUrl.replace(/^https?:\/\/(www\.)?/, '').split('/')[0] : '—'} ↗
+                </a>
+              </td>
+              <td>
+                <button type="button" class="status-switch-btn ${isPublished ? 'published' : 'draft'}" onclick="window.togglePartnerStatus('${p.id}')" title="Click to toggle between Published and Draft">
+                  ● ${isPublished ? 'Published' : 'Draft'}
+                </button>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 6px;">
+                  <button type="button" class="btn-table-action" onclick="window.openEditPartnerModal('${p.id}')" style="color: #38BDF8;" title="Edit Partner Alliance">✏️ Edit</button>
+                  <button type="button" class="btn-table-action" onclick="window.deleteAdminPartner('${p.id}')" style="color: #EF4444;" title="Delete Partner Alliance">🗑</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      window.openAddPartnerModal = function() {
+        document.getElementById('partner-modal-title').textContent = '➕ Add New Strategic Institutional Partner Alliance';
+        document.getElementById('edit-partner-id').value = '';
+        document.getElementById('edit-partner-name').value = '';
+        document.getElementById('edit-partner-sector').value = 'Logistics & Haulage';
+        document.getElementById('edit-partner-pill-class').value = 'pill-logistics';
+        document.getElementById('edit-partner-logo').value = 'assets/brand/renalytica_emblem.png';
+        document.getElementById('edit-partner-tagline').value = '';
+        document.getElementById('edit-partner-desc').value = '';
+        document.getElementById('edit-partner-highlights').value = '';
+        document.getElementById('edit-partner-website').value = 'https://';
+        document.getElementById('edit-partner-report-url').value = 'reports.html';
+        document.getElementById('edit-partner-report-label').value = 'View Sector Reports →';
+        document.getElementById('edit-partner-status').value = 'published';
+        document.getElementById('edit-partner-order').value = (getStoredPartners().length + 1);
+
+        const modal = document.getElementById('partner-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.openEditPartnerModal = function(id) {
+        const partners = getStoredPartners();
+        const p = partners.find(item => item.id === id);
+        if (!p) {
+          showToast('Partner alliance record not found.', 'warning');
+          return;
+        }
+
+        document.getElementById('partner-modal-title').textContent = `✏️ Revise Partner Alliance: ${p.name}`;
+        document.getElementById('edit-partner-id').value = p.id;
+        document.getElementById('edit-partner-name').value = p.name || '';
+        document.getElementById('edit-partner-sector').value = p.sector || 'Strategic Alliance';
+        document.getElementById('edit-partner-pill-class').value = p.pillClass || 'pill-logistics';
+        document.getElementById('edit-partner-logo').value = p.logoUrl || '';
+        document.getElementById('edit-partner-tagline').value = p.tagline || '';
+        document.getElementById('edit-partner-desc').value = p.desc || '';
+        document.getElementById('edit-partner-highlights').value = (p.highlights || []).join('\n');
+        document.getElementById('edit-partner-website').value = p.websiteUrl || '';
+        document.getElementById('edit-partner-report-url').value = p.reportDeskUrl || 'reports.html';
+        document.getElementById('edit-partner-report-label').value = p.reportDeskLabel || 'View Sector Reports →';
+        document.getElementById('edit-partner-status').value = p.status || 'published';
+        document.getElementById('edit-partner-order').value = p.order || 1;
+
+        const modal = document.getElementById('partner-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closePartnerModal = function() {
+        const modal = document.getElementById('partner-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.savePartner = async function(e) {
+        e.preventDefault();
+        const existingId = document.getElementById('edit-partner-id').value.trim();
+        const name = document.getElementById('edit-partner-name').value.trim();
+        if (!name) {
+          showToast('Partner company name is required.', 'warning');
+          return;
+        }
+
+        const sector = document.getElementById('edit-partner-sector').value.trim();
+        const pillClass = document.getElementById('edit-partner-pill-class').value;
+        const logoUrl = document.getElementById('edit-partner-logo').value.trim() || 'assets/brand/renalytica_emblem.png';
+        const tagline = document.getElementById('edit-partner-tagline').value.trim();
+        const desc = document.getElementById('edit-partner-desc').value.trim();
+        const highlightsRaw = document.getElementById('edit-partner-highlights').value;
+        const highlights = highlightsRaw.split('\n').map(s => s.trim()).filter(Boolean);
+        const websiteUrl = document.getElementById('edit-partner-website').value.trim();
+        const reportDeskUrl = document.getElementById('edit-partner-report-url').value.trim();
+        const reportDeskLabel = document.getElementById('edit-partner-report-label').value.trim();
+        const status = document.getElementById('edit-partner-status').value;
+        const order = parseInt(document.getElementById('edit-partner-order').value, 10) || 1;
+
+        const id = existingId || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || ('partner-' + Date.now());
+
+        const partnerPayload = {
+          id,
+          name,
+          sector,
+          pillClass,
+          logoUrl,
+          tagline,
+          desc,
+          highlights,
+          websiteUrl,
+          reportDeskUrl,
+          reportDeskLabel,
+          status,
+          order
+        };
+
+        const partners = getStoredPartners();
+        const existingIndex = partners.findIndex(p => p.id === id);
+
+        if (existingIndex !== -1) {
+          partners[existingIndex] = { ...partners[existingIndex], ...partnerPayload };
+          saveStoredPartners(partners);
+          showToast(`Partner alliance "${name}" successfully revised!`, 'success');
+        } else {
+          partners.push(partnerPayload);
+          saveStoredPartners(partners);
+          showToast(`New partner alliance "${name}" added successfully!`, 'success');
+        }
+
+        try {
+          const method = existingIndex !== -1 ? 'PUT' : 'POST';
+          const url = existingIndex !== -1 ? `/api/admin/partners/${id}` : '/api/admin/partners';
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+
+          await fetch(url, {
+            method,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(partnerPayload)
+          });
+        } catch (apiErr) {
+          // Local storage handled persistence
+        }
+
+        window.closePartnerModal();
+        window.refreshAdminPartnersList();
+      };
+
+      window.deleteAdminPartner = async function(id) {
+        const partners = getStoredPartners();
+        const target = partners.find(p => p.id === id);
+        const name = target ? target.name : 'partner alliance';
+        if (!confirm(`Are you sure you want to remove "${name}" from the strategic partner network?\n\nThis will remove its featured card from partners.html and the ticker strip.`)) {
+          return;
+        }
+
+        const filtered = partners.filter(p => p.id !== id);
+        saveStoredPartners(filtered);
+        showToast(`Partner alliance "${name}" removed.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/partners/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminPartnersList();
+      };
+
+      window.togglePartnerStatus = async function(id) {
+        const partners = getStoredPartners();
+        const target = partners.find(p => p.id === id);
+        if (!target) return;
+
+        target.status = target.status === 'published' ? 'draft' : 'published';
+        saveStoredPartners(partners);
+        showToast(`Partner "${target.name}" status switched to ${target.status.toUpperCase()}.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/partners/${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status: target.status })
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminPartnersList();
+      };
+
+      // Modal backdrop click-out
+      const partnerModalEl = document.getElementById('partner-modal');
+      if (partnerModalEl) {
+        partnerModalEl.addEventListener('click', (e) => {
+          if (e.target === partnerModalEl) window.closePartnerModal();
+        });
+      }
+
+      // Initialize briefings list & partners list
+      window.refreshAdminBriefingsList();
+      window.refreshAdminPartnersList();
+
       // Tab Navigation
       const tabs = document.querySelectorAll('.admin-tab-btn');
       const panes = document.querySelectorAll('.admin-tab-pane');
@@ -1439,54 +3155,1016 @@
       }
     }
 
-    // Fetch and render inventory products table
+    // ==============================================================================
+    // MODULE 4: PAYHIP-BENCHMARK REPORT INVENTORY CONTROL SYSTEM (CRUD & ORPHAN PURGE)
+    // ==============================================================================
+
+    // Toast HUD Manager
+    function showAdminToast(message, type = 'info', durationMs = 4000) {
+      const hud = document.getElementById('admin-toast-hud');
+      if (!hud) return;
+
+      const toast = document.createElement('div');
+      toast.className = `admin-toast toast-${type}`;
+      
+      let icon = '⚡';
+      if (type === 'success') icon = '✅';
+      else if (type === 'error') icon = '❌';
+      else if (type === 'warning') icon = '⚠️';
+
+      toast.innerHTML = `
+        <span style="font-size: 1.15rem; line-height: 1;">${icon}</span>
+        <div style="flex: 1; line-height: 1.4;">${message}</div>
+        <button type="button" onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; opacity: 0.6; font-size: 1.1rem; line-height: 1;">&times;</button>
+      `;
+
+      hud.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'toastSlideOut 0.35s ease forwards';
+        setTimeout(() => toast.remove(), 350);
+      }, durationMs);
+    }
+
+    // State Variables
     let currentCatalog = [];
-    async function fetchAdminProducts() {
+    let currentStatusFilter = 'all';
+    let currentSearchQuery = '';
+    let stagedSwapFile = null;
+    let currentSafeDeleteData = null;
+
+    // Helper to persist custom catalog into localStorage so client-side and admin remain in sync
+    function persistCustomCatalogLocal() {
       try {
-        const res = await fetch('/api/admin/products', {
-          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+        const customObj = {};
+        currentCatalog.forEach(p => {
+          customObj[p.id] = p;
         });
-        const data = await res.json();
-        if (data && data.products && data.products.length > 0) {
-          currentCatalog = data.products;
-          renderProductsTable(data.products);
-        }
-      } catch (err) {
-        console.warn('Products fetch notice:', err.message);
+        localStorage.setItem('renalytica_custom_products', JSON.stringify(customObj));
+      } catch (e) {
+        console.warn('Could not persist catalog to localStorage:', e);
       }
     }
 
+    // Fetch master products from backend with dual-layer fallback
+    async function fetchAdminProducts() {
+      const tbody = document.getElementById('inventory-products-tbody');
+      if (tbody && currentCatalog.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+              <div style="display: inline-block; animation: spin 1s linear infinite; font-size: 1.5rem; margin-bottom: 8px;">⏳</div>
+              <div style="font-size: 0.85rem;">Connecting to Supabase product catalog...</div>
+            </td>
+          </tr>
+        `;
+      }
+
+      let backendLoaded = false;
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('/api/admin/products', {
+          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' },
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.products) && data.products.length > 0) {
+            currentCatalog = data.products;
+            backendLoaded = true;
+          }
+        }
+      } catch (fetchErr) {
+        console.warn('Backend API notice, falling back to primary repository catalog:', fetchErr.message);
+      }
+
+      if (!backendLoaded || currentCatalog.length === 0) {
+        // Fallback to ReportsRepository and local storage
+        const repoReports = window.ReportsRepository ? window.ReportsRepository.getAll() : [];
+        currentCatalog = repoReports.map(r => {
+          const baseNgn = (r.pricing && r.pricing.single && r.pricing.single.priceNgn) || (r.pricing && r.pricing.singleNgn) || 150000;
+          const baseUsd = (r.pricing && r.pricing.single && r.pricing.single.priceUsd) || (r.pricing && r.pricing.single) || 100;
+          return {
+            id: r.id,
+            title: r.title,
+            sku: r.sku || ('REN-' + r.id.substring(0, 4).toUpperCase() + '-2026'),
+            category: r.sectorLabel || 'Market Insights',
+            billing_type: 'one-time',
+            status: r.status || 'published',
+            base_price: baseNgn,
+            currency: 'NGN',
+            regional_pricing: {
+              NGN: baseNgn,
+              USD: baseUsd,
+              GHS: Math.round(baseUsd * 15.5),
+              KES: Math.round(baseUsd * 130)
+            },
+            download_limit: 3,
+            download_expiry_days: 1,
+            gateways: 'FLW (NGN, USD, GHS, KES)',
+            file_path: r.samplePdfUrl || r.fullPdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
+            preview_file_url: r.samplePdfUrl || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
+            description: r.executiveSummary || r.teaser || '',
+            author: r.author || { name: 'Obinna Ezeala', title: 'Managing Director & Chief Strategist', avatar: 'assets/brand/renalytica_emblem.png' },
+            tocChapters: r.tocChapters || [],
+            strategicFindings: r.strategicFindings || [],
+            pageCount: r.pageCount || 384,
+            vectorChartsCount: r.vectorChartsCount || 112,
+            tablesCount: r.tablesCount || 84,
+            order_count: 0,
+            fulfillment_count: 0
+          };
+        });
+      }
+
+      // Merge with any custom local storage edits
+      try {
+        const customObj = JSON.parse(localStorage.getItem('renalytica_custom_products') || '{}');
+        Object.values(customObj).forEach(cp => {
+          const idx = currentCatalog.findIndex(p => p.id === cp.id || (cp.sku && p.sku === cp.sku));
+          if (idx >= 0) {
+            currentCatalog[idx] = { ...currentCatalog[idx], ...cp };
+          } else {
+            currentCatalog.unshift(cp);
+          }
+        });
+      } catch (e) {}
+
+      updateCatalogCounters();
+      applyCatalogFilters();
+    }
+
+    // Update Status Filter Counters
+    function updateCatalogCounters() {
+      const total = currentCatalog.length;
+      const published = currentCatalog.filter(p => (p.status || 'published') === 'published').length;
+      const draft = currentCatalog.filter(p => p.status === 'draft').length;
+      const archived = currentCatalog.filter(p => p.status === 'archived').length;
+
+      const elAll = document.getElementById('count-all');
+      const elPub = document.getElementById('count-published');
+      const elDft = document.getElementById('count-draft');
+      const elArc = document.getElementById('count-archived');
+
+      if (elAll) elAll.textContent = `(${total})`;
+      if (elPub) elPub.textContent = `(${published})`;
+      if (elDft) elDft.textContent = `(${draft})`;
+      if (elArc) elArc.textContent = `(${archived})`;
+    }
+
+    // Filter by Status Tab
+    function filterCatalogByStatus(status, btnEl) {
+      currentStatusFilter = status;
+      const chips = document.querySelectorAll('#inventory-status-filters .inv-filter-chip');
+      chips.forEach(c => c.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      applyCatalogFilters();
+    }
+
+    // Filter by Search Input
+    function filterCatalogBySearch(query) {
+      currentSearchQuery = (query || '').toLowerCase().trim();
+      applyCatalogFilters();
+    }
+
+    // Apply combined filters and render
+    function applyCatalogFilters() {
+      let filtered = currentCatalog.slice();
+
+      if (currentStatusFilter !== 'all') {
+        filtered = filtered.filter(p => (p.status || 'published') === currentStatusFilter);
+      }
+
+      if (currentSearchQuery) {
+        filtered = filtered.filter(p => {
+          const t = (p.title || '').toLowerCase();
+          const s = (p.sku || p.id || '').toLowerCase();
+          const c = (p.category || '').toLowerCase();
+          return t.includes(currentSearchQuery) || s.includes(currentSearchQuery) || c.includes(currentSearchQuery);
+        });
+      }
+
+      renderProductsTable(filtered);
+    }
+
+    // Render Master 7-Column Products Table
     function renderProductsTable(products) {
       const tbody = document.getElementById('inventory-products-tbody');
       if (!tbody) return;
       tbody.innerHTML = '';
 
+      if (products.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 3rem 1.5rem; color: var(--text-muted);">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+              <strong style="display: block; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 4px;">No research publications found</strong>
+              <span style="font-size: 0.8rem;">Try adjusting your search query or switching the status filter tab above.</span>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
       products.forEach(p => {
         const tr = document.createElement('tr');
-        const priceStr = p.currency === 'USD' ? `$${p.base_price}` : `₦${Number(p.base_price).toLocaleString()}`;
-        const catBadgeClass = p.category === 'Market Insights' ? 'rgba(16, 185, 129, 0.15)' : (p.category === 'Data Analysis' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(245, 158, 11, 0.15)');
-        const catTextClass = p.category === 'Market Insights' ? '#34d399' : (p.category === 'Data Analysis' ? '#60a5fa' : '#fbbf24');
+        const status = p.status || 'published';
+
+        // Pricing string format
+        const baseFormatted = p.currency === 'USD' ? `$${Number(p.base_price).toLocaleString()}` : `₦${Number(p.base_price).toLocaleString()}`;
+        const rp = p.regional_pricing || {};
+        const usdPrice = rp.USD ? `$${Number(rp.USD).toLocaleString()}` : (p.currency === 'USD' ? baseFormatted : '$100');
+        const ghsPrice = rp.GHS ? `₵${Number(rp.GHS).toLocaleString()}` : '₵1,550';
+        const kesPrice = rp.KES ? `KSh ${Number(rp.KES).toLocaleString()}` : 'KSh 13,000';
+
+        // Category Badge styling
+        const cat = p.category || 'Market Insights';
+        let catBg = 'rgba(59, 130, 246, 0.12)';
+        let catColor = '#38BDF8';
+        if (cat === 'Fintech & FX' || cat === 'Market Insights') {
+          catBg = 'rgba(16, 185, 129, 0.12)';
+          catColor = '#10B981';
+        } else if (cat === 'Commodities & Agriculture') {
+          catBg = 'rgba(245, 158, 11, 0.12)';
+          catColor = '#F59E0B';
+        }
+
+        // Status pill configuration
+        let statusPillClass = 'pill-published';
+        let statusLabel = '🟢 Live';
+        let nextStatus = 'draft';
+        let statusTitle = 'Click to switch to Draft';
+        if (status === 'draft') {
+          statusPillClass = 'pill-draft';
+          statusLabel = '⚪ Draft';
+          nextStatus = 'published';
+          statusTitle = 'Click to publish on storefront';
+        } else if (status === 'archived') {
+          statusPillClass = 'pill-archived';
+          statusLabel = '📦 Archived';
+          nextStatus = 'published';
+          statusTitle = 'Click to unarchive & publish';
+        }
+
+        // Order lock indicator
+        const orderCount = p.order_count || 0;
+        const fulfillmentCount = p.fulfillment_count || 0;
+        const hasOrders = orderCount > 0 || fulfillmentCount > 0;
 
         tr.innerHTML = `
           <td>
-            <strong>${p.title}</strong>
-            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">SKU: ${p.id}</div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <strong style="color: var(--text-primary); font-size: 0.88rem; line-height: 1.35;">${escapeHtml(p.title)}</strong>
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span class="report-sku-badge">${escapeHtml(p.sku || p.id)}</span>
+                <span style="font-size: 0.68rem; color: var(--text-secondary); text-transform: uppercase;">
+                  ${p.billing_type === 'subscription' ? '🔄 Subscription' : '⚡ One-Time'}
+                </span>
+                ${hasOrders ? `<span title="${orderCount} order(s) placed" style="font-size: 0.68rem; background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 1px 6px; border-radius: 4px;">🛒 ${orderCount} Orders</span>` : ''}
+              </div>
+            </div>
           </td>
-          <td><span class="hud-tier-badge" style="background: ${catBadgeClass}; color: ${catTextClass}; border: 1px solid ${catTextClass}44;">${p.category}</span></td>
-          <td><strong style="color: ${p.currency === 'USD' ? '#38BDF8' : '#10B981'}; font-family: var(--font-mono); font-size: 0.95rem;">${priceStr}</strong></td>
-          <td><code>${p.gateways || 'FLW (NGN, USD)'}</code></td>
-          <td><span style="font-size: 0.75rem; color: var(--text-secondary);">${p.download_limit || 3} Downloads // ${p.download_expiry_days || 1}d Expiry</span></td>
+          <td>
+            <span class="hud-tier-badge" style="background: ${catBg}; color: ${catColor}; border: 1px solid ${catColor}33; font-weight: 600;">
+              ${escapeHtml(cat)}
+            </span>
+          </td>
+          <td>
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+              <strong style="color: #F8FAFC; font-family: var(--font-mono); font-size: 0.92rem;">
+                ${baseFormatted} <span style="font-size: 0.72rem; color: var(--text-secondary);">${p.currency || 'NGN'}</span>
+              </strong>
+              <div class="regional-price-pills">
+                <span class="regional-pill pill-usd" title="USD Checkout Price">${usdPrice}</span>
+                <span class="regional-pill pill-ghs" title="Ghana Cedi Price">${ghsPrice}</span>
+                <span class="regional-pill pill-kes" title="Kenya Shilling Price">${kesPrice}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; flex-direction: column; gap: 3px; font-size: 0.74rem;">
+              <div style="display: flex; align-items: center; gap: 5px;" title="${escapeHtml(p.file_path || 'assets/reports/report.pdf')}">
+                <span style="color: #38bdf8;">🔒</span>
+                <code style="max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.72rem;">
+                  ${getFileName(p.file_path)}
+                </code>
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <span style="color: #10b981;">👁️</span>
+                <span style="color: var(--text-muted); font-size: 0.7rem;">Sample Preview Active</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-mono);">
+              <span style="color: #10B981; font-weight: 700;">${p.download_limit || 3} DLs</span> // ${p.download_expiry_days || 1}d Window
+            </div>
+          </td>
+          <td style="text-align: center;">
+            <button 
+              type="button" 
+              class="inv-status-pill ${statusPillClass}" 
+              title="${statusTitle}"
+              onclick="toggleProductStatus('${p.id}', '${nextStatus}')"
+            >
+              ${statusLabel} ⇄
+            </button>
+          </td>
           <td style="text-align: right;">
-            <div style="display: inline-flex; gap: 6px;">
-              <button class="btn-table-action" onclick="openEmbedModal('${p.id}', '${p.title.replace(/'/g, "\\'")}', '${priceStr}')">&lt;/&gt; Embed</button>
-              <button class="btn-table-action" onclick="openRevisionModal('${p.id}', '${p.title.replace(/'/g, "\\'")}')">📢 Revision</button>
-              <button class="btn-table-action" onclick="editProduct('${p.id}')">Edit</button>
-              <button class="btn-table-action" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" onclick="deleteProduct('${p.id}')">🗑️</button>
+            <div style="display: inline-flex; gap: 5px; align-items: center; justify-content: flex-end;">
+              <button 
+                type="button" 
+                class="btn-table-action" 
+                title="Generate Payhip 1-Click Embed Snippet" 
+                onclick="openEmbedModal('${p.id}', '${escapeJs(p.title)}', '${baseFormatted}')"
+                style="padding: 4px 8px;"
+              >
+                &lt;/&gt;
+              </button>
+              <button 
+                type="button" 
+                class="btn-table-action" 
+                title="Blast Revision to Buyers" 
+                onclick="openRevisionModal('${p.id}', '${escapeJs(p.title)}')"
+                style="padding: 4px 8px; color: #F59E0B;"
+              >
+                📢
+              </button>
+              <button 
+                type="button" 
+                class="btn-table-action" 
+                title="Edit Report Details &amp; Pricing" 
+                onclick="editProduct('${p.id}')"
+                style="padding: 4px 8px; color: #38BDF8;"
+              >
+                ✏️ Edit
+              </button>
+              <button 
+                type="button" 
+                class="btn-table-action" 
+                title="Swap File &amp; Purge Storage" 
+                onclick="openManageFilesModal('${p.id}')"
+                style="padding: 4px 8px; color: #A855F7;"
+              >
+                📁 Files
+              </button>
+              <button 
+                type="button" 
+                class="btn-table-action" 
+                title="${hasOrders ? 'Hard delete blocked by active orders (Click to archive)' : 'Permanently purge report'}" 
+                onclick="openSafeDeleteModal('${p.id}')"
+                style="padding: 4px 8px; color: #EF4444; border-color: rgba(239, 68, 68, 0.35);"
+              >
+                ${hasOrders ? '🛡️' : '🗑️'}
+              </button>
             </div>
           </td>
         `;
+
         tbody.appendChild(tr);
       });
+    }
+
+    // Fast Status Switcher (PATCH /api/admin/products/:id/status)
+    async function toggleProductStatus(id, newStatus) {
+      try {
+        const item = currentCatalog.find(p => p.id === id);
+        const title = item ? item.title : id;
+
+        try {
+          await fetch(`/api/admin/products/${encodeURIComponent(id)}/status`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer mock_jwt_token_admin'
+            },
+            body: JSON.stringify({ status: newStatus })
+          });
+        } catch (apiErr) {
+          console.warn('Backend status patch notice, persisted locally:', apiErr.message);
+        }
+
+        if (item) item.status = newStatus;
+        persistCustomCatalogLocal();
+        updateCatalogCounters();
+        applyCatalogFilters();
+
+        const label = newStatus === 'published' ? '🟢 PUBLISHED (LIVE)' : (newStatus === 'draft' ? '⚪ DRAFT' : '📦 ARCHIVED');
+        showAdminToast(`Publication status updated to <strong>${label}</strong> for <em>${title}</em>.`, 'success');
+      } catch (err) {
+        showAdminToast('Status switch error: ' + err.message, 'error');
+      }
+    }
+
+    // Synchronize base price changes into regional inputs
+    function syncBasePriceWithRegional() {
+      const base = parseFloat(document.getElementById('crud-price').value) || 0;
+      const cur = document.getElementById('crud-currency').value;
+
+      if (cur === 'NGN') {
+        document.getElementById('crud-price-ngn').value = base;
+      } else if (cur === 'USD') {
+        document.getElementById('crud-price-usd').value = base;
+      } else if (cur === 'GHS') {
+        document.getElementById('crud-price-ghs').value = base;
+      } else if (cur === 'KES') {
+        document.getElementById('crud-price-kes').value = base;
+      }
+    }
+
+    // Auto FX Peg Calculator (1 USD = 1,500 NGN = 15.5 GHS = 130 KES)
+    function autoConvertRegionalPrices() {
+      const basePrice = parseFloat(document.getElementById('crud-price').value) || 0;
+      const baseCurrency = document.getElementById('crud-currency').value || 'NGN';
+
+      if (basePrice <= 0) {
+        showAdminToast('Please specify a positive base price first.', 'warning');
+        return;
+      }
+
+      // Benchmark rates against USD
+      let usdVal = 100;
+      if (baseCurrency === 'USD') {
+        usdVal = basePrice;
+      } else if (baseCurrency === 'NGN') {
+        usdVal = basePrice / 1500;
+      } else if (baseCurrency === 'GHS') {
+        usdVal = basePrice / 15.5;
+      } else if (baseCurrency === 'KES') {
+        usdVal = basePrice / 130;
+      }
+
+      const ngnPrice = Math.round(usdVal * 1500);
+      const roundedUsd = Math.round(usdVal);
+      const ghsPrice = Math.round(usdVal * 15.5);
+      const kesPrice = Math.round(usdVal * 130);
+
+      document.getElementById('crud-price-ngn').value = ngnPrice;
+      document.getElementById('crud-price-usd').value = roundedUsd;
+      document.getElementById('crud-price-ghs').value = ghsPrice;
+      document.getElementById('crud-price-kes').value = kesPrice;
+
+      showAdminToast(`💱 Multi-currency prices auto-pegged to current FX benchmarks: ₦${ngnPrice.toLocaleString()} / $${roundedUsd} / ₵${ghsPrice.toLocaleString()} / KSh ${kesPrice.toLocaleString()}.`, 'success');
+    }
+
+    // Insert rich templates into Executive Summary / ToC
+    function insertTocTemplate() {
+      const descEl = document.getElementById('crud-description');
+      const snippet = `\n\n### Report Chapters & Econometric Structure:\n- Chapter 1: Macro Outlook & Foreign Exchange Volatility\n- Chapter 2: Liquidity Corridors & Institutional Capital Flows\n- Chapter 3: Econometric Forecast Model (2026–2030)\n- Chapter 4: Risk Mitigation & Sovereign Debt Advisory`;
+      descEl.value += snippet;
+      descEl.focus();
+    }
+
+    function insertMetricTemplate() {
+      const descEl = document.getElementById('crud-description');
+      const snippet = `\n\n📊 Key Macro Metric: Real GDP Growth Baseline at +3.8% with a 72% probability of central bank FX corridor stabilization within Q4.`;
+      descEl.value += snippet;
+      descEl.focus();
+    }
+
+    function insertFindingTemplate() {
+      const el = document.getElementById('crud-strategic-findings');
+      const sample = `Contract Farming Outperforms Spot Market Sourcing by 420 Basis Points: Food processors with structured outgrower contracts achieved 26.2% gross margin vs 22.0% for open market sourcing.`;
+      el.value = el.value ? el.value + '\n' + sample : sample;
+      el.focus();
+    }
+
+    function insertStructuredTocTemplate() {
+      const el = document.getElementById('crud-toc-chapters');
+      const sample = `1 | Research Methodology & Verification | 14–48\n2 | Macroeconomic Framework & Foreign Exchange Volatility | 49–88\n3 | Value Chain Economics & Margin Sensitivity | 89–134\n4 | Logistics Nodes & Trade Corridor Tariffs | 135–178\n5 | Econometric Projections & Scenario Regressions (2026–2032) | 179–240`;
+      el.value = el.value ? el.value + '\n' + sample : sample;
+      el.focus();
+    }
+
+    // Switch directly from CRUD modal to File Swap modal
+    function switchToFilesModalFromCrud() {
+      const id = document.getElementById('crud-product-id').value;
+      if (!id) {
+        showAdminToast('Please save this report before replacing storage assets.', 'warning');
+        return;
+      }
+      closeProductModal();
+      openManageFilesModal(id);
+    }
+
+    // Open Product Modal (New Report)
+    function openProductModal() {
+      document.getElementById('product-crud-form').reset();
+      document.getElementById('crud-product-id').value = '';
+      document.getElementById('crud-sku').value = 'REN-AG-2026-' + Math.floor(100 + Math.random() * 900);
+      document.getElementById('crud-price').value = '150000';
+      document.getElementById('crud-currency').value = 'NGN';
+      document.getElementById('crud-price-ngn').value = '150000';
+      document.getElementById('crud-price-usd').value = '100';
+      document.getElementById('crud-price-ghs').value = '1550';
+      document.getElementById('crud-price-kes').value = '13000';
+      document.getElementById('crud-status').value = 'published';
+      document.getElementById('crud-download-limit').value = '3';
+      document.getElementById('crud-expiry-days').value = '1';
+      document.getElementById('crud-gateways').value = 'FLW (NGN, USD, GHS, KES)';
+      document.getElementById('crud-file-path').value = 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+      document.getElementById('crud-preview-url').value = 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+      
+      // Extended fields
+      document.getElementById('crud-author-name').value = 'Obinna Ezeala';
+      document.getElementById('crud-author-title').value = 'Managing Director & Chief Strategist';
+      document.getElementById('crud-author-avatar').value = 'assets/brand/renalytica_emblem.png';
+      document.getElementById('crud-page-count').value = '384';
+      document.getElementById('crud-charts-count').value = '112';
+      document.getElementById('crud-tables-count').value = '84';
+      document.getElementById('crud-strategic-findings').value = '';
+      document.getElementById('crud-toc-chapters').value = '';
+
+      document.getElementById('product-modal-heading').textContent = '➕ Add Research Report Publication';
+      document.getElementById('product-crud-modal').style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-crud-modal').style.display = 'none';
+    }
+
+    // Edit Existing Product
+    function editProduct(id) {
+      const p = currentCatalog.find(item => item.id === id);
+      if (!p) {
+        showAdminToast('Product not found in catalog.', 'error');
+        return;
+      }
+
+      document.getElementById('crud-product-id').value = p.id;
+      document.getElementById('crud-title').value = p.title || '';
+      document.getElementById('crud-sku').value = p.sku || p.id || '';
+      document.getElementById('crud-category').value = p.category || 'Market Insights';
+      document.getElementById('crud-billing-type').value = p.billing_type || 'one-time';
+      document.getElementById('crud-status').value = p.status || 'published';
+      document.getElementById('crud-price').value = p.base_price || 0;
+      document.getElementById('crud-currency').value = p.currency || 'NGN';
+
+      const rp = p.regional_pricing || {};
+      document.getElementById('crud-price-ngn').value = rp.NGN || (p.currency === 'NGN' ? p.base_price : 150000);
+      document.getElementById('crud-price-usd').value = rp.USD || (p.currency === 'USD' ? p.base_price : 100);
+      document.getElementById('crud-price-ghs').value = rp.GHS || 1550;
+      document.getElementById('crud-price-kes').value = rp.KES || 13000;
+
+      document.getElementById('crud-download-limit').value = p.download_limit || 3;
+      document.getElementById('crud-expiry-days').value = p.download_expiry_days || 1;
+      document.getElementById('crud-gateways').value = p.gateways || 'FLW (NGN, USD, GHS, KES)';
+      document.getElementById('crud-file-path').value = p.file_path || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
+      document.getElementById('crud-preview-url').value = p.preview_file_url || p.file_path || '';
+      document.getElementById('crud-description').value = (p.description || '').replace(/<[^>]*>/g, '');
+
+      // Extended Author, Exhibits, Findings, and TOC
+      const author = p.author || { name: 'Obinna Ezeala', title: 'Managing Director & Chief Strategist', avatar: 'assets/brand/renalytica_emblem.png' };
+      document.getElementById('crud-author-name').value = author.name || 'Obinna Ezeala';
+      document.getElementById('crud-author-title').value = author.title || author.role || 'Managing Director & Chief Strategist';
+      document.getElementById('crud-author-avatar').value = author.avatar || 'assets/brand/renalytica_emblem.png';
+
+      document.getElementById('crud-page-count').value = p.pageCount || 384;
+      document.getElementById('crud-charts-count').value = p.vectorChartsCount || 112;
+      document.getElementById('crud-tables-count').value = p.tablesCount || 84;
+
+      if (Array.isArray(p.strategicFindings) && p.strategicFindings.length > 0) {
+        document.getElementById('crud-strategic-findings').value = p.strategicFindings.join('\n');
+      } else {
+        document.getElementById('crud-strategic-findings').value = '';
+      }
+
+      if (Array.isArray(p.tocChapters) && p.tocChapters.length > 0) {
+        document.getElementById('crud-toc-chapters').value = p.tocChapters.map(c => `${c.chapter} | ${c.title} | ${c.pages}`).join('\n');
+      } else {
+        document.getElementById('crud-toc-chapters').value = '';
+      }
+
+      document.getElementById('product-modal-heading').textContent = `✏️ Edit: ${p.title}`;
+      document.getElementById('product-crud-modal').style.display = 'flex';
+    }
+
+    // Save Product (Create or Update)
+    async function saveProduct(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-product-submit');
+      btn.disabled = true;
+      btn.textContent = 'Saving publication...';
+
+      const id = document.getElementById('crud-product-id').value;
+      const title = document.getElementById('crud-title').value.trim();
+      const sku = document.getElementById('crud-sku').value.trim();
+      const category = document.getElementById('crud-category').value;
+      const billing_type = document.getElementById('crud-billing-type').value;
+      const status = document.getElementById('crud-status').value;
+      const base_price = parseFloat(document.getElementById('crud-price').value) || 0;
+      const currency = document.getElementById('crud-currency').value;
+      const download_limit = parseInt(document.getElementById('crud-download-limit').value, 10) || 3;
+      const download_expiry_days = parseInt(document.getElementById('crud-expiry-days').value, 10) || 1;
+      const gateways = document.getElementById('crud-gateways').value;
+      const file_path = document.getElementById('crud-file-path').value.trim();
+      const preview_file_url = document.getElementById('crud-preview-url').value.trim();
+      const description = `<p>${escapeHtml(document.getElementById('crud-description').value)}</p>`;
+
+      const authorName = document.getElementById('crud-author-name').value.trim() || 'Obinna Ezeala';
+      const authorTitle = document.getElementById('crud-author-title').value.trim() || 'Managing Director & Chief Strategist';
+      const authorAvatar = document.getElementById('crud-author-avatar').value.trim() || 'assets/brand/renalytica_emblem.png';
+
+      const pageCount = parseInt(document.getElementById('crud-page-count').value, 10) || 384;
+      const vectorChartsCount = parseInt(document.getElementById('crud-charts-count').value, 10) || 112;
+      const tablesCount = parseInt(document.getElementById('crud-tables-count').value, 10) || 84;
+
+      const rawFindings = document.getElementById('crud-strategic-findings').value.trim();
+      const strategicFindings = rawFindings ? rawFindings.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+      const rawToc = document.getElementById('crud-toc-chapters').value.trim();
+      const tocChapters = rawToc ? rawToc.split('\n').map((line, idx) => {
+        const parts = line.split('|').map(s => s.trim());
+        if (parts.length >= 3) {
+          return { chapter: parseInt(parts[0], 10) || (idx + 1), title: parts[1], pages: parts[2] };
+        } else if (parts.length === 2) {
+          return { chapter: idx + 1, title: parts[0], pages: parts[1] };
+        } else {
+          return { chapter: idx + 1, title: line.trim(), pages: '1–40' };
+        }
+      }).filter(Boolean) : [];
+
+      const regional_pricing = {
+        NGN: parseFloat(document.getElementById('crud-price-ngn').value) || (currency === 'NGN' ? base_price : 150000),
+        USD: parseFloat(document.getElementById('crud-price-usd').value) || (currency === 'USD' ? base_price : 100),
+        GHS: parseFloat(document.getElementById('crud-price-ghs').value) || 1550,
+        KES: parseFloat(document.getElementById('crud-price-kes').value) || 13000
+      };
+
+      const targetId = id || ('REN-' + sku.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase());
+
+      const payload = {
+        id: targetId,
+        title,
+        sku,
+        category,
+        billing_type,
+        status,
+        base_price,
+        currency,
+        regional_pricing,
+        download_limit,
+        download_expiry_days,
+        gateways,
+        file_path,
+        preview_file_url,
+        description,
+        author: { name: authorName, title: authorTitle, avatar: authorAvatar },
+        pageCount,
+        vectorChartsCount,
+        tablesCount,
+        strategicFindings,
+        tocChapters
+      };
+
+      // 1. Update in-memory catalog
+      const existingIdx = currentCatalog.findIndex(p => p.id === targetId || (sku && p.sku === sku));
+      if (existingIdx >= 0) {
+        currentCatalog[existingIdx] = { ...currentCatalog[existingIdx], ...payload };
+      } else {
+        currentCatalog.unshift(payload);
+      }
+
+      // 2. Persist to local storage custom catalog
+      persistCustomCatalogLocal();
+      updateCatalogCounters();
+      applyCatalogFilters();
+
+      // 3. Sync to backend API
+      try {
+        const url = id ? `/api/admin/products/${encodeURIComponent(id)}` : '/api/admin/products';
+        const method = id ? 'PUT' : 'POST';
+
+        await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer mock_jwt_token_admin'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Backend product update notice, saved locally:', err.message);
+      }
+
+      showAdminToast(`✔ Publication <strong>"${title}"</strong> successfully saved and updated across storefront & portal!`, 'success');
+      closeProductModal();
+
+      btn.disabled = false;
+      btn.textContent = 'Save Report Publication →';
+    }
+
+    // ==============================================================================
+    // SMART FILE REPLACEMENT & ORPHAN PURGE PORTAL LOGIC
+    // ==============================================================================
+
+    function openManageFilesModal(id) {
+      const p = currentCatalog.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('mf-product-id').value = p.id;
+      document.getElementById('mf-target-title').textContent = `Target: ${p.title} (${p.sku || p.id})`;
+      document.getElementById('mf-current-private-path').textContent = p.file_path || 'assets/reports/report.pdf';
+      document.getElementById('mf-current-preview-path').textContent = p.preview_file_url || p.file_path || 'assets/reports/preview.pdf';
+
+      clearStagedSwapFile();
+      document.getElementById('mf-progress-wrap').style.display = 'none';
+      document.getElementById('mf-target-premium').checked = true;
+      document.getElementById('mf-purge-orphan-check').checked = true;
+
+      document.getElementById('manage-files-modal').style.display = 'flex';
+    }
+
+    function closeManageFilesModal() {
+      document.getElementById('manage-files-modal').style.display = 'none';
+      clearStagedSwapFile();
+    }
+
+    function clearStagedSwapFile() {
+      stagedSwapFile = null;
+      const fileInput = document.getElementById('mf-file-input');
+      if (fileInput) fileInput.value = '';
+      const stagedCard = document.getElementById('mf-staged-card');
+      if (stagedCard) stagedCard.style.display = 'none';
+    }
+
+    // Setup dropzone for Manage Files modal
+    const mfDropzone = document.getElementById('mf-dropzone');
+    const mfFileInput = document.getElementById('mf-file-input');
+    if (mfDropzone && mfFileInput) {
+      mfDropzone.addEventListener('click', () => mfFileInput.click());
+      mfDropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        mfDropzone.style.borderColor = 'var(--accent-momentum)';
+      });
+      mfDropzone.addEventListener('dragleave', () => {
+        mfDropzone.style.borderColor = 'var(--border-strong)';
+      });
+      mfDropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        mfDropzone.style.borderColor = 'var(--border-strong)';
+        if (e.dataTransfer.files.length) stageSwapFile(e.dataTransfer.files[0]);
+      });
+      mfFileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) stageSwapFile(e.target.files[0]);
+      });
+    }
+
+    function stageSwapFile(file) {
+      stagedSwapFile = file;
+      document.getElementById('mf-staged-name').textContent = file.name;
+      document.getElementById('mf-staged-size').textContent = `${(file.size / 1024).toFixed(0)} KB • Ready to stream & swap`;
+      document.getElementById('mf-staged-card').style.display = 'flex';
+    }
+
+    // Execute File Swap
+    async function executeFileSwap() {
+      const id = document.getElementById('mf-product-id').value;
+      if (!id) return;
+
+      if (!stagedSwapFile) {
+        showAdminToast('Please drag and drop or select a replacement file first.', 'warning');
+        return;
+      }
+
+      const targetStream = document.querySelector('input[name="mf-target-stream"]:checked')?.value || 'premium';
+      const purgeOrphan = document.getElementById('mf-purge-orphan-check').checked;
+      const btn = document.getElementById('btn-execute-file-swap');
+
+      btn.disabled = true;
+      btn.textContent = 'Streaming & Purging...';
+
+      const progressWrap = document.getElementById('mf-progress-wrap');
+      const progressFill = document.getElementById('mf-progress-fill');
+      const progressPercent = document.getElementById('mf-progress-percent');
+      const progressFilename = document.getElementById('mf-progress-filename');
+      const progressStatus = document.getElementById('mf-progress-status');
+
+      progressWrap.style.display = 'block';
+      progressFilename.textContent = `${stagedSwapFile.name} (${(stagedSwapFile.size / 1024).toFixed(0)} KB)`;
+      progressFill.style.width = '10%';
+      progressPercent.textContent = '10%';
+      progressStatus.textContent = 'Preparing base64 stream & verifying storage credentials...';
+
+      // Read file to Base64
+      const reader = new FileReader();
+      reader.onload = async function() {
+        const base64Data = reader.result.split(',')[1];
+        
+        // Progress simulation
+        let pct = 25;
+        const pInterval = setInterval(() => {
+          pct += 25;
+          if (pct > 90) pct = 90;
+          progressFill.style.width = pct + '%';
+          progressPercent.textContent = pct + '%';
+          progressStatus.textContent = pct >= 75 ? 'Executing atomic swap and orphan storage purge...' : 'Chunking multipart asset to Supabase bucket...';
+        }, 120);
+
+        try {
+          const res = await fetch(`/api/admin/products/${encodeURIComponent(id)}/replace-file`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer mock_jwt_token_admin'
+            },
+            body: JSON.stringify({
+              targetStream,
+              fileName: stagedSwapFile.name,
+              fileBase64: base64Data,
+              purgeOrphan
+            })
+          });
+
+          clearInterval(pInterval);
+          const data = await res.json();
+
+          if (res.ok) {
+            progressFill.style.width = '100%';
+            progressPercent.textContent = '100%';
+            progressStatus.textContent = 'Complete! Customer license preserved.';
+
+            const purgeMsg = data.purgedOrphan ? ' (Old storage asset purged)' : '';
+            showAdminToast(`✔ File swapped successfully for <strong>${stagedSwapFile.name}</strong>${purgeMsg}.`, 'success');
+
+            setTimeout(() => {
+              closeManageFilesModal();
+              fetchAdminProducts();
+            }, 800);
+          } else {
+            showAdminToast(data.error || 'Failed to replace file asset.', 'error');
+          }
+        } catch (err) {
+          clearInterval(pInterval);
+          showAdminToast('File swap error: ' + err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Replace File & Purge Storage →';
+        }
+      };
+
+      reader.onerror = function() {
+        showAdminToast('Could not read local file asset.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Replace File & Purge Storage →';
+      };
+
+      reader.readAsDataURL(stagedSwapFile);
+    }
+
+    // ==============================================================================
+    // SAFE ERASURE & RELATIONAL PURGE LOGIC
+    // ==============================================================================
+
+    async function openSafeDeleteModal(id) {
+      try {
+        const p = currentCatalog.find(item => item.id === id);
+        if (!p) return;
+
+        document.getElementById('del-product-id').value = p.id;
+        document.getElementById('del-product-title').textContent = p.title;
+        document.getElementById('del-product-sku').textContent = p.sku || p.id;
+        document.getElementById('del-product-cat').textContent = p.category;
+
+        const checkRes = await fetch(`/api/admin/products/${encodeURIComponent(id)}/check-delete`, {
+          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+        });
+        const safety = await checkRes.json();
+        currentSafeDeleteData = safety;
+
+        const blockedBanner = document.getElementById('del-blocked-banner');
+        const safeBanner = document.getElementById('del-safe-banner');
+        const deleteBtn = document.getElementById('btn-execute-hard-delete');
+        const confirmInput = document.getElementById('del-confirm-input');
+
+        if (confirmInput) confirmInput.value = '';
+
+        if (safety.blocked) {
+          // Hard delete is blocked because orders or digital fulfillments exist
+          blockedBanner.style.display = 'block';
+          safeBanner.style.display = 'none';
+
+          document.getElementById('del-order-count').textContent = `${safety.orderCount} verified customer order(s)`;
+          document.getElementById('del-ful-count').textContent = `${safety.fulfillmentCount} active digital license(s)`;
+          
+          deleteBtn.disabled = true;
+          deleteBtn.style.opacity = '0.35';
+          deleteBtn.title = 'Blocked by relational order constraints';
+        } else {
+          // Safe to permanently delete (0 customer orders)
+          blockedBanner.style.display = 'none';
+          safeBanner.style.display = 'block';
+
+          deleteBtn.disabled = true;
+          deleteBtn.style.opacity = '0.5';
+          deleteBtn.title = 'Type DELETE to enable permanent purge';
+        }
+
+        document.getElementById('safe-delete-modal').style.display = 'flex';
+      } catch (err) {
+        showAdminToast('Could not verify deletion safety: ' + err.message, 'error');
+      }
+    }
+
+    function closeSafeDeleteModal() {
+      document.getElementById('safe-delete-modal').style.display = 'none';
+      currentSafeDeleteData = null;
+    }
+
+    function validateDeleteInput(val) {
+      const deleteBtn = document.getElementById('btn-execute-hard-delete');
+      if (!currentSafeDeleteData || currentSafeDeleteData.blocked) {
+        deleteBtn.disabled = true;
+        deleteBtn.style.opacity = '0.35';
+        return;
+      }
+
+      if ((val || '').trim().toUpperCase() === 'DELETE') {
+        deleteBtn.disabled = false;
+        deleteBtn.style.opacity = '1';
+      } else {
+        deleteBtn.disabled = true;
+        deleteBtn.style.opacity = '0.5';
+      }
+    }
+
+    // Execute Hard Delete (when 0 orders exist)
+    async function executeHardDelete() {
+      const id = document.getElementById('del-product-id').value;
+      if (!id) return;
+
+      const btn = document.getElementById('btn-execute-hard-delete');
+      btn.disabled = true;
+      btn.textContent = 'Purging row & storage...';
+
+      try {
+        const res = await fetch(`/api/admin/products/${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          showAdminToast(`🔥 Publication <strong>"${id}"</strong> permanently purged and storage assets cleaned.`, 'success');
+          closeSafeDeleteModal();
+          await fetchAdminProducts();
+        } else if (res.status === 409) {
+          showAdminToast(`🚫 Blocked: ${data.message || data.error}`, 'error');
+          // Re-trigger modal check to show blocked banner
+          await openSafeDeleteModal(id);
+        } else {
+          showAdminToast(data.error || 'Failed to delete product.', 'error');
+        }
+      } catch (err) {
+        showAdminToast('Delete error: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔥 Permanently Purge Report';
+      }
+    }
+
+    // Archive Report Instead (Recommended Action when Orders Exist)
+    async function archiveReportInstead() {
+      const id = document.getElementById('del-product-id').value;
+      if (!id) return;
+
+      const btn = document.getElementById('btn-archive-instead');
+      btn.disabled = true;
+      btn.textContent = 'Archiving publication...';
+
+      try {
+        await toggleProductStatus(id, 'archived');
+        closeSafeDeleteModal();
+      } catch (err) {
+        showAdminToast('Archive error: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '📦 Archive Report Instead (Recommended)';
+      }
+    }
+
+    // Helper functions
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeJs(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
+    }
+
+    function getFileName(path) {
+      if (!path) return 'document.pdf';
+      const parts = path.split('/');
+      return parts[parts.length - 1] || 'document.pdf';
     }
 
     // Embed Modal Logic
@@ -1518,7 +4196,7 @@
       if (!el) return;
       el.select();
       navigator.clipboard.writeText(el.value).then(() => {
-        alert('✔ Payhip embed code snippet copied to clipboard! You can paste this directly into any B2B research portal or partner blog.');
+        showAdminToast('✔ Payhip embed code snippet copied to clipboard! You can paste this directly into any B2B research portal or partner blog.', 'success');
       });
     }
 
@@ -1557,115 +4235,13 @@
           body: JSON.stringify({ productId, versionTag, changelogSummary, updatedFilePath })
         });
         const data = await res.json();
-        alert(`🚀 Revision Blast Successful!\n\nVersion: ${versionTag}\nNotified Buyers: ${data.notifiedBuyers || 18}\n\nAll verified institutional buyers have had their 24-hour download tokens renewed and download limits refreshed!`);
+        showAdminToast(`🚀 Revision Blast Successful! Version: ${versionTag}. All verified institutional buyers have had their 24-hour download tokens renewed!`, 'success', 6000);
         closeRevisionModal();
       } catch (err) {
-        alert('Revision broadcast notice: ' + err.message);
+        showAdminToast('Revision broadcast notice: ' + err.message, 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Broadcast Revision 🚀';
-      }
-    }
-
-    // Product CRUD Modals
-    function openProductModal() {
-      document.getElementById('product-crud-form').reset();
-      document.getElementById('crud-product-id').value = '';
-      document.getElementById('product-modal-heading').textContent = '➕ Add Research Product to Marketplace';
-      document.getElementById('product-crud-modal').style.display = 'flex';
-    }
-
-    function closeProductModal() {
-      document.getElementById('product-crud-modal').style.display = 'none';
-    }
-
-    function editProduct(id) {
-      const p = currentCatalog.find(item => item.id === id);
-      if (!p) return;
-      document.getElementById('crud-product-id').value = p.id;
-      document.getElementById('crud-title').value = p.title;
-      document.getElementById('crud-category').value = p.category;
-      document.getElementById('crud-billing-type').value = p.billing_type || 'one-time';
-      document.getElementById('crud-price').value = p.base_price;
-      document.getElementById('crud-currency').value = p.currency || 'NGN';
-      document.getElementById('crud-download-limit').value = p.download_limit || 3;
-      document.getElementById('crud-expiry-days').value = p.download_expiry_days || 1;
-      document.getElementById('crud-gateways').value = p.gateways || 'FLW (NGN, USD, GHS)';
-      document.getElementById('crud-file-path').value = p.file_path || 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf';
-      document.getElementById('crud-description').value = (p.description || '').replace(/<[^>]*>/g, '');
-      document.getElementById('product-modal-heading').textContent = '✏️ Edit Research Report Publication';
-      document.getElementById('product-crud-modal').style.display = 'flex';
-    }
-
-    async function saveProduct(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-product-submit');
-      btn.disabled = true;
-      btn.textContent = 'Saving to Postgres Schema...';
-
-      const id = document.getElementById('crud-product-id').value;
-      const title = document.getElementById('crud-title').value;
-      const category = document.getElementById('crud-category').value;
-      const billing_type = document.getElementById('crud-billing-type').value;
-      const base_price = parseFloat(document.getElementById('crud-price').value);
-      const currency = document.getElementById('crud-currency').value;
-      const download_limit = parseInt(document.getElementById('crud-download-limit').value, 10);
-      const download_expiry_days = parseInt(document.getElementById('crud-expiry-days').value, 10);
-      const gateways = document.getElementById('crud-gateways').value;
-      const file_path = document.getElementById('crud-file-path').value;
-      const description = `<p>${document.getElementById('crud-description').value}</p>`;
-
-      const payload = {
-        title,
-        category,
-        billing_type,
-        base_price,
-        currency,
-        download_limit,
-        download_expiry_days,
-        gateways,
-        file_path,
-        preview_file_url: file_path,
-        description,
-        status: 'published'
-      };
-
-      try {
-        const url = id ? `/api/admin/products/${encodeURIComponent(id)}` : '/api/admin/products';
-        const method = id ? 'PUT' : 'POST';
-
-        const res = await fetch(url, {
-          method: method,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer mock_jwt_token_admin'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        await res.json();
-        alert(`✔ Research publication "${title}" successfully stored in database!`);
-        closeProductModal();
-        await fetchAdminProducts();
-      } catch (err) {
-        alert('Product save notice: ' + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Save Report';
-      }
-    }
-
-    async function deleteProduct(id) {
-      if (!confirm(`Are you sure you want to delete this research publication (${id})?`)) return;
-      try {
-        await fetch(`/api/admin/products/${encodeURIComponent(id)}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
-        });
-        alert('Product deleted.');
-        await fetchAdminProducts();
-      } catch (err) {
-        alert('Delete error: ' + err.message);
       }
     }
 

@@ -76,8 +76,9 @@ class MegaFooter extends HTMLElement {
                 <li><a href="gdpr.html">GDPR Compliance</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
                 <li><a href="terms.html">Terms of Service</a></li>
-                <li><a href="faq.html#delivery">Report Delivery Guarantee</a></li>
-                <li><a href="contact.html">Get in Touch & Custom Quotes</a></li>
+                <li><a href="partners.html">Partners &amp; Alliances</a></li>
+                <li><a href="404.html">404 Error Directory</a></li>
+                <li><a href="contact.html">Get in Touch &amp; Custom Quotes</a></li>
               </ul>
             </div>
           </div>

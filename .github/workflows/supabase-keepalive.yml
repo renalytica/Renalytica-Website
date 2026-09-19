@@ -1,0 +1,31 @@
+name: Supabase Inactivity Keep-Alive Cron
+
+on:
+  schedule:
+    # Run every 3 days at 06:00 UTC (well within the 7-day inactivity pause window)
+    - cron: '0 6 */3 * *'
+  workflow_dispatch:
+    # Allows manual trigger via GitHub Actions UI
+
+jobs:
+  keepalive:
+    name: Supabase Project Heartbeat
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Execute Supabase Keep-Alive Heartbeat
+        env:
+          SUPABASE_PROJECT_ID: coxgmruxamzcojgpaawh
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          node scripts/supabase-keep-alive.js

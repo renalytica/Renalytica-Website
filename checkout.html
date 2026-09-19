@@ -87,7 +87,7 @@
                   
                   <!-- Email Address -->
                   <div class="checkout-form-group">
-                    <label class="checkout-form-label" for="buyer-email">Official Corporate Email *</label>
+                    <label class="checkout-form-label" for="buyer-email">Contact Work Email *</label>
                     <input type="email" id="buyer-email" class="checkout-form-input" placeholder="e.g. procurement@institutional-client.com" required>
                   </div>
 
@@ -208,7 +208,7 @@
                   <!-- Bank Transfer Info Box -->
                   <div id="transfer-info-box" style="display:none; background: var(--surface-gray, #F8FAFC); border: 1.5px dashed var(--border-strong, #CBD5E1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.55;">
                     <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">🏦 Instant Dynamic Virtual Account:</strong>
-                    Selecting "Process Payment" will invoke our Flutterwave Settlement Engine to generate a dedicated single-use dynamic account number. Settle via mobile bank app for immediate deliverable release in 10–30 seconds.
+                    Selecting "Generate Virtual Account" will invoke our Flutterwave Settlement Engine to generate a dedicated single-use dynamic account number. Settle via mobile bank app for immediate deliverable release in 10–30 seconds.
                   </div>
 
                   <!-- SWIFT Wire Info Box -->
@@ -219,7 +219,7 @@
 
                   <!-- Corporate PO Info Box -->
                   <div id="po-info-box" style="display:none; background: var(--surface-gray, #F8FAFC); border: 1.5px dashed var(--border-strong, #CBD5E1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.55;">
-                    <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">📄 Corporate Purchase Order (Net-30):</strong>
+                    <strong style="color: var(--text-primary, #0A0A0A); display:block; margin-bottom: 0.35rem;">📄 Client Purchase Order (Net-30):</strong>
                     For approved institutional subscribers. We dispatch an official VAT-compliant commercial invoice to Accounts Payable with Net-30 payment terms and provision provisional portal access.
                   </div>
 
@@ -238,7 +238,7 @@
 
                   <!-- Secondary Option: Request Proforma -->
                   <button type="button" id="checkout-direct-proforma-btn" class="checkout-proforma-secondary-btn" style="margin-top: 0.85rem; width: 100%;">
-                    📄 Request Corporate Proforma (.pdf)
+                    📄 Request Proforma Invoice (.pdf)
                   </button>
 
                 </form>
@@ -259,7 +259,7 @@
                   </div>
                   <div class="trust-badge-item">
                     <span>🛡️</span>
-                    <span>Corporate NDA Protection</span>
+                    <span>Confidential NDA Protection</span>
                   </div>
                 </div>
 
@@ -630,6 +630,23 @@
         updateCurrencyToggleUI();
         let cart = repo.getCart();
 
+        // Check URL parameters for direct report binding (?reportId= or ?id=)
+        const targetReportId = urlParams.get('reportId') || urlParams.get('id');
+        const targetLicense = urlParams.get('license') || 'departmental';
+        if (targetReportId) {
+          const found = repo.getById(targetReportId);
+          if (found) {
+            // Check if cart already contains this exact report
+            const existingCart = repo.getCart();
+            const hasItem = existingCart.some(it => it.id === found.id);
+            if (!hasItem) {
+              repo.clearCart();
+              repo.addToCart(found.id, targetLicense);
+            }
+            cart = repo.getCart();
+          }
+        }
+
         // If cart is empty, fallback gracefully to default primary report for preview
         if (cart.length === 0) {
           const allReports = repo.getAll();
@@ -660,6 +677,7 @@
         
         const cover = primaryItem.coverImage || (rep ? rep.coverImage : 'assets/images/industrial_grain_silos.jpg');
         jayImg.src = cover;
+        jayImg.onerror = function() { this.src = 'assets/images/industrial_grain_silos.jpg'; };
 
         // License label
         const tierNameMap = {
@@ -846,10 +864,56 @@
       // Direct Proforma Generator Button
       proformaBtn.addEventListener('click', () => {
         const cart = repo.getCart();
+        if (cart.length === 0) {
+          alert('Please select a publication before requesting a proforma invoice.');
+          return;
+        }
         const email = buyerEmail.value.trim() || 'procurement@client.com';
+        const name = buyerName.value.trim() || 'Client';
+        const org = buyerOrg.value.trim() || 'Client Organization';
         const rawSubtotal = repo.getCartTotal();
         const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
-        const invRef = 'PF-' + Math.floor(100000 + Math.random() * 900000);
+        const activeCur = localStorage.getItem('renalytica_currency') || 'USD';
+        const invRef = 'PRO-2026-' + Math.floor(1000 + Math.random() * 9000);
+        const reportTitle = cart.length === 1 ? cart[0].title : `Renalytica Research Briefcase (${cart.length} Publications)`;
+
+        const proformaRecord = {
+          id: invRef,
+          date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          reportTitle: reportTitle,
+          amount: formatPrice(finalAmount),
+          amountRaw: finalAmount,
+          currency: activeCur,
+          status: 'PROFORMA PENDING',
+          recipient: email,
+          organization: org,
+          customerName: name,
+          items: cart.map(c => ({ id: c.id, title: c.title, price: c.price, license: c.licenseType }))
+        };
+
+        // 1. Persist to renalytica_proforma_invoices archive
+        try {
+          const proformas = JSON.parse(localStorage.getItem('renalytica_proforma_invoices') || '[]');
+          proformas.unshift(proformaRecord);
+          localStorage.setItem('renalytica_proforma_invoices', JSON.stringify(proformas));
+        } catch(e) { console.warn('Could not save proforma', e); }
+
+        // 2. Persist to active user session invoices if logged in
+        try {
+          const authSession = JSON.parse(localStorage.getItem('renalytica_auth_session') || 'null');
+          if (authSession && authSession.user) {
+            if (!authSession.user.invoices) authSession.user.invoices = [];
+            authSession.user.invoices.unshift({
+              id: invRef,
+              date: proformaRecord.date,
+              description: `${reportTitle} (Proforma Invoice Request)`,
+              amount: formatPrice(finalAmount),
+              status: 'PROFORMA PENDING',
+              proformaId: invRef
+            });
+            localStorage.setItem('renalytica_auth_session', JSON.stringify(authSession));
+          }
+        } catch(e) { console.warn('Could not update user invoices', e); }
 
         showPaymentSuccessScreen({
           ref: invRef,

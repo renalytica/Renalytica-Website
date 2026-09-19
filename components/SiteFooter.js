@@ -275,11 +275,13 @@ class SiteFooter extends HTMLElement {
               <a href="reports.html" class="footer-nav-link">Reports</a>
               <a href="services.html" class="footer-nav-link">Services</a>
               <a href="markets.html" class="footer-nav-link">Markets</a>
+              <a href="partners.html" class="footer-nav-link">Partners</a>
               <a href="portal.html" class="footer-nav-link">Portal</a>
               <a href="contact.html" class="footer-nav-link">Contact</a>
               <a href="gdpr.html" class="footer-nav-link">GDPR</a>
               <a href="privacy.html" class="footer-nav-link">Privacy</a>
               <a href="terms.html" class="footer-nav-link">Terms</a>
+              <a href="404.html" class="footer-nav-link">404</a>
             </nav>
           </div>
 
