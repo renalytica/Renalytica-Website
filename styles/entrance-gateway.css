@@ -1,0 +1,449 @@
+/**
+ * RENALYTICA CINEMATIC ENTRANCE GATEWAY STYLES
+ * Option B: Quantum Data Vortex & Hyper-Drive Reveal
+ * 60-30-10 Chromatic Matrix: Obsidian Navy (#070A10), Momentum Orange (#FF5C00), Crisp White (#FFFFFF)
+ */
+
+/* 1. Body Scroll Lock when Entrance Stage is Active */
+body.entrance-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none;
+}
+
+/* 2. Magnetic Cursor (Desktop) */
+.gateway-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #FF5C00;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100003;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 14px rgba(255, 92, 0, 0.9);
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+}
+
+.gateway-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 92, 0, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100002;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease,
+              opacity 0.3s ease;
+}
+
+body.gateway-hovering .gateway-cursor-dot {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+}
+
+body.gateway-hovering .gateway-cursor-ring {
+  width: 72px;
+  height: 72px;
+  background-color: rgba(255, 92, 0, 0.12);
+  border-color: #FF5C00;
+  box-shadow: 0 0 30px rgba(255, 92, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .gateway-cursor-dot,
+  .gateway-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* 3. Fullscreen Entrance Stage */
+#entrance-stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 45%, #101b2b 0%, #070A10 65%, #030508 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #F8FAFC;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#entrance-stage.stage-fading {
+  opacity: 0;
+  transform: scale(1.2);
+  pointer-events: none;
+}
+
+#entrance-stage.stage-hidden {
+  display: none !important;
+}
+
+/* 4. Canvas for Quantum Data Vortex Engine */
+#vortex-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 5. Cybernetic Grid & Noise Overlay */
+.gateway-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.7;
+}
+
+.gateway-ambient-halo {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: min(600px, 90vw);
+  background: radial-gradient(circle, rgba(255, 92, 0, 0.24) 0%, rgba(255, 128, 0, 0.08) 45%, transparent 72%);
+  border-radius: 50%;
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: 6;
+  animation: gatewayBreathingHalo 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes gatewayBreathingHalo {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.65; }
+  100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.95; }
+}
+
+/* 6. Centered Entrance Content Container */
+.gateway-content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 680px;
+  padding: 2.5rem 1.5rem;
+  user-select: none;
+}
+
+/* Telemetry Badge */
+.gateway-telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.gateway-telemetry-badge .status-ping {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: #22C55E;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22C55E;
+  animation: pulseGreen 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.5; }
+}
+
+/* 7. Cardiac Heartbeat Logo Epicenter */
+.gateway-logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.85rem;
+  padding: 1.25rem;
+  cursor: default;
+}
+
+/* Concentric Expanding Heartbeat Radar Waves */
+.gateway-radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 92, 0, 0.65);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  animation: cardiacRadarPulse 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.gateway-radar-ring.ring-2 {
+  animation-delay: 0.85s;
+}
+
+.gateway-radar-ring.ring-3 {
+  animation-delay: 1.7s;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+@keyframes cardiacRadarPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* The Heartbeat Pulsating Emblem */
+.gateway-heartbeat-logo {
+  position: relative;
+  width: 170px;
+  max-width: 48vw;
+  height: auto;
+  display: block;
+  z-index: 2;
+  animation: cardiacHeartbeat 2.8s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform, filter;
+  filter: drop-shadow(0 0 25px rgba(255, 92, 0, 0.45));
+}
+
+/* Specular Light Sweep Overlay across the logo */
+.gateway-logo-sheen {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0.05) 70%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 3;
+  animation: logoSpecularSheen 3.6s ease-in-out infinite;
+}
+
+@keyframes logoSpecularSheen {
+  0% { left: -100%; opacity: 0; }
+  25% { opacity: 0.8; }
+  50% { left: 180%; opacity: 0; }
+  100% { left: 180%; opacity: 0; }
+}
+
+/* Double-Beat Cardiac Rhythm (Lub-Dub scale & radiance) */
+@keyframes cardiacHeartbeat {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4)) drop-shadow(0 0 40px rgba(255, 92, 0, 0.2));
+  }
+  10% {
+    /* Lub */
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 35px rgba(255, 92, 0, 0.85)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.35));
+  }
+  20% {
+    transform: scale(1.01);
+    filter: drop-shadow(0 0 22px rgba(255, 92, 0, 0.5));
+  }
+  30% {
+    /* Dub (Stronger pulse) */
+    transform: scale(1.10);
+    filter: drop-shadow(0 0 50px rgba(255, 92, 0, 1)) drop-shadow(0 0 80px rgba(255, 255, 255, 0.55));
+  }
+  50% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4));
+  }
+}
+
+/* Tagline & Subtext */
+.gateway-tagline {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(234, 240, 246, 0.82);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.04em;
+  max-width: 460px;
+  line-height: 1.5;
+}
+
+.gateway-tagline strong {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 8. The High-Impact Enter CTA Button */
+.gateway-btn-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.gateway-btn-aura {
+  position: absolute;
+  inset: -14px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 92, 0, 0.85) 0%, rgba(255, 92, 0, 0) 70%);
+  filter: blur(20px);
+  opacity: 0.85;
+  pointer-events: none;
+  animation: btnAuraPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes btnAuraPulse {
+  0% { transform: scale(0.92); opacity: 0.65; }
+  100% { transform: scale(1.22); opacity: 1; filter: blur(24px); }
+}
+
+.gateway-enter-btn {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 1.15rem 3.4rem;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF5C00 50%, #EA4C00 100%);
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 
+    0 0 35px rgba(255, 92, 0, 0.75),
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.gateway-enter-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 
+    0 0 55px rgba(255, 92, 0, 1),
+    0 16px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.gateway-enter-btn:active {
+  transform: scale(0.96);
+}
+
+.gateway-enter-btn .btn-arrow-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gateway-enter-btn:hover .btn-arrow-icon {
+  transform: translateX(5px);
+}
+
+/* Subtle Skip Link for quick access */
+.gateway-skip-hint {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+}
+
+.gateway-skip-hint:hover {
+  color: #FF5C00;
+  text-decoration: underline;
+}
+
+/* 9. Hyper-Drive Shockwave Light Burst Overlay */
+#hyperdrive-shockwave {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100000;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.2);
+  background: radial-gradient(
+    circle at center,
+    #FFFFFF 0%,
+    rgba(255, 255, 255, 0.95) 15%,
+    rgba(255, 128, 0, 0.9) 45%,
+    rgba(255, 92, 0, 0.7) 65%,
+    rgba(7, 10, 16, 0.95) 85%,
+    #070A10 100%
+  );
+  transition: opacity 0.5s cubic-bezier(0.1, 0.9, 0.2, 1),
+              transform 0.85s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+#hyperdrive-shockwave.active {
+  opacity: 1;
+  transform: scale(3.5);
+}

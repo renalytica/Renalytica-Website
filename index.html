@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="styles/shell.css">
   <link rel="stylesheet" href="styles/home.css">
   <link rel="stylesheet" href="styles/chat-widget.css">
+  <link rel="stylesheet" href="styles/entrance-gateway.css">
+  
+  <!-- GSAP Core for Cinematic Timing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
   <!-- Early Theme Initialization to Prevent Flash -->
   <script>
     (function() {
@@ -28,7 +33,77 @@
     })();
   </script>
 </head>
-<body class="light-canvas">
+<body class="light-canvas entrance-locked">
+
+  <!-- ==========================================
+       CINEMATIC ENTRANCE GATEWAY (Option B: Quantum Data Vortex)
+       ========================================== -->
+  <!-- Magnetic Cursor Elements -->
+  <div class="gateway-cursor-dot" id="gateway-cursor-dot"></div>
+  <div class="gateway-cursor-ring" id="gateway-cursor-ring"></div>
+
+  <!-- Hyper-Drive Lens Burst Flash Overlay -->
+  <div id="hyperdrive-shockwave" aria-hidden="true"></div>
+
+  <!-- Fullscreen Entrance Stage -->
+  <div id="entrance-stage" role="dialog" aria-modal="true" aria-label="Renalytica Access Portal">
+    <!-- Quantum Data Vortex Canvas -->
+    <canvas id="vortex-canvas"></canvas>
+
+    <!-- Cybernetic Grid & Atmospheric Breathing Halo -->
+    <div class="gateway-grid"></div>
+    <div class="gateway-ambient-halo"></div>
+
+    <!-- Centered Gateway Content -->
+    <div class="gateway-content">
+      <!-- Telemetry Status Pill -->
+      <div class="gateway-telemetry-badge">
+        <span class="status-ping"></span>
+        <span>Verified Intelligence Telemetry // Node Active</span>
+      </div>
+
+      <!-- Cardiac Heartbeat Logo Epicenter -->
+      <div class="gateway-logo-wrapper">
+        <!-- Expanding Cardiac Radar Rings -->
+        <div class="gateway-radar-ring ring-1"></div>
+        <div class="gateway-radar-ring ring-2"></div>
+        <div class="gateway-radar-ring ring-3"></div>
+
+        <!-- Specular Shine Sweep Line -->
+        <div class="gateway-logo-sheen"></div>
+
+        <!-- Official Renalytica Emblem Solo -->
+        <img 
+          src="assets/brand/renalytica_emblem_solo.png" 
+          alt="Renalytica Emblem" 
+          class="gateway-heartbeat-logo"
+        />
+      </div>
+
+      <!-- Tagline & Description -->
+      <p class="gateway-tagline">
+        Precision market research & economic telemetry.<br>
+        <strong>Zero guesswork. Confident decisions.</strong>
+      </p>
+
+      <!-- High-Visibility Enter CTA Button -->
+      <div class="gateway-btn-container">
+        <div class="gateway-btn-aura"></div>
+        <button id="gateway-enter-btn" class="gateway-enter-btn gateway-magnetic-target" type="button">
+          <span>Enter Terminal</span>
+          <svg class="btn-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Discrete Bypass Link -->
+      <button id="gateway-skip-btn" class="gateway-skip-hint gateway-magnetic-target" type="button">
+        Direct Access →
+      </button>
+    </div>
+  </div>
 
   <!-- 1. Top Utility Ticker Bar -->
   <ticker-bar></ticker-bar>
@@ -935,5 +1010,8 @@
   <!-- Renalytica Native Cookie Consent Alert -->
   <script src="components/PartnerTicker.js"></script>
   <script src="components/CookieConsent.js"></script>
+
+  <!-- Renalytica Cinematic Entrance Gateway Engine (Option B) -->
+  <script src="lib/entrance-gateway.js"></script>
 </body>
 </html>
