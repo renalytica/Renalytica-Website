@@ -1,0 +1,198 @@
+[
+  {
+    "id": "united-carriers",
+    "name": "United Carriers",
+    "category": "operating",
+    "sector": "Logistics & Haulage",
+    "pillClass": "pill-logistics",
+    "logoUrl": "assets/partners/united-carriers-logo.svg",
+    "tagline": "Pan-African Freight & Cold-Chain Logistics",
+    "desc": "Premier pan-African multi-modal freight forwarder, cold-chain haulage leader, and bonded fleet operator connecting agricultural production basins to major urban industrial corridors.",
+    "highlights": [
+      "Cross-Border Trade Corridors: Ground-truth diesel haulage and customs transit times along Lagos-Kano-Niamey and Abidjan routes.",
+      "Cold-Chain Telemetry: Real-time spoilage reduction metrics across perishable fruits, vegetables, and commercial poultry feeds.",
+      "Fleet Optimization: Joint transport cost modeling incorporated directly into Renalytica’s grain and commodity reports."
+    ],
+    "websiteUrl": "https://unitedcarriers.com",
+    "reportDeskUrl": "reports.html?sector=retail",
+    "reportDeskLabel": "View Corridor Reports →",
+    "status": "published",
+    "order": 1
+  },
+  {
+    "id": "axia-active",
+    "name": "AXiA Active",
+    "category": "operating",
+    "sector": "Sports & Wellness",
+    "pillClass": "pill-sports",
+    "logoUrl": "assets/partners/axia-active-logo.png",
+    "tagline": "Athletic Gear, Activewear & Wellness Retail",
+    "desc": "Dynamic athletic performance gear and fitness lifestyle brand spearheading premium activewear retail, community athletic leagues, and corporate wellness programs across West Africa.",
+    "highlights": [
+      "Sports Business Intelligence: High-frequency point-of-sale data informing consumer discretionary athletic spending and gym club expansion.",
+      "Apparel Supply Chain: Empirical import duty benchmarks and textile manufacturing feasibility across frontier retail hubs.",
+      "Athletic Sponsorship Telemetry: Commercial valuation models for domestic football, basketball (BAL), and marathon events."
+    ],
+    "websiteUrl": "https://axiaactive.com",
+    "reportDeskUrl": "reports.html?sector=sports",
+    "reportDeskLabel": "Sports Intelligence Desk →",
+    "status": "published",
+    "order": 2
+  },
+  {
+    "id": "gofar-academy",
+    "name": "GoFar International Academy",
+    "category": "operating",
+    "sector": "Global Education",
+    "pillClass": "pill-education",
+    "logoUrl": "assets/partners/gofar-academy-logo.webp",
+    "tagline": "Accredited STEM Education & Leadership Academy",
+    "desc": "Globally accredited preparatory institution and STEM excellence academy delivering world-standard curricula, coding bootcamps, and early leadership development programs.",
+    "highlights": [
+      "Education Econometrics: Longitudinal tracking of private school tuition indexation, curriculum adoption, and household education spend.",
+      "EdTech Infrastructure: Benchmarking campus digital connectivity, device penetration, and interactive classroom technology ROI.",
+      "Talent Pipeline Incubator: Early data analytics training and economic fellowship programs in partnership with Renalytica analysts."
+    ],
+    "websiteUrl": "https://gofarinternationalacademy.com",
+    "reportDeskUrl": "reports.html?sector=education",
+    "reportDeskLabel": "Education Economics Desk →",
+    "status": "published",
+    "order": 3
+  },
+  {
+    "id": "tradingview",
+    "name": "TradingView",
+    "category": "telemetry",
+    "sector": "Market Telemetry & Charting",
+    "pillClass": "pill-telemetry",
+    "logoUrl": "assets/partners/tradingview-logo.svg",
+    "tagline": "Institutional Charting & Telemetry Engine",
+    "desc": "Global leader in multi-asset financial charting, technical analysis indicators, and institutional WebGL market data visualization powering Renalytica's Live Market Terminal.",
+    "highlights": [
+      "Advanced Charting Engine: Ultra-low latency interactive candlestick visualization, technical indicators, and multi-timeframe analysis across African and global equities.",
+      "Economic Calendar Feeds: Real-time global and regional macro announcements, central bank rate decisions, and geopolitical volatility schedules.",
+      "Institutional Screeners: Dynamic asset screening, relative strength matrices, and volume profile telemetry integrated across research workstations."
+    ],
+    "websiteUrl": "https://www.tradingview.com",
+    "reportDeskUrl": "portal.html?mode=signup",
+    "reportDeskLabel": "Open Market Terminal →",
+    "status": "published",
+    "order": 4
+  },
+  {
+    "id": "finnhub",
+    "name": "Finnhub",
+    "category": "telemetry",
+    "sector": "Real-Time Market Data",
+    "pillClass": "pill-telemetry",
+    "logoUrl": "assets/partners/finnhub-logo.svg",
+    "tagline": "Real-Time WebSocket Trade & Quote Telemetry",
+    "desc": "Enterprise-grade financial API provider delivering institutional-speed WebSocket market data, tick-level price discovery, and corporate filings intelligence across African and global asset classes.",
+    "highlights": [
+      "Sub-Millisecond Tick Feeds: Real-time streaming trades and bid/ask quotes syncing continuously to Renalytica's live market ticker and intelligence dashboards.",
+      "Cross-Asset Market Coverage: Real-time telemetry covering FX crosses, sovereign debt yields, and international ADR equity proxies.",
+      "Corporate Filings & Earnings: Automated ingestion of institutional company fundamentals, insider sentiment, and forward guidance metrics."
+    ],
+    "websiteUrl": "https://finnhub.io",
+    "reportDeskUrl": "portal.html?mode=signup",
+    "reportDeskLabel": "Explore Data Feeds →",
+    "status": "published",
+    "order": 5
+  },
+  {
+    "id": "fmp",
+    "name": "Financial Modeling Prep (FMP)",
+    "category": "telemetry",
+    "sector": "Equities & Macro Telemetry",
+    "pillClass": "pill-telemetry",
+    "logoUrl": "assets/partners/fmp-logo.svg",
+    "tagline": "African & Frontier Market Telemetry API",
+    "desc": "Comprehensive market data and fundamental financial intelligence API providing deep historical financial statements, African FX cross-rates, and macroeconomic indicators.",
+    "highlights": [
+      "African Equities & FX Sync: Automated syncing of NGX, JSE, and regional FX pairs (USD/NGN, USD/ZAR, USD/KES, USD/GHS) powering Renalytica valuation models.",
+      "Standardized Financials: Decades of balance sheets, cash flow statements, and earnings telemetry normalized for comparative frontier equity research.",
+      "Macroeconomic Series: Ingestion of inflation indices, trade balance data, and sovereign foreign exchange reserve trajectories."
+    ],
+    "websiteUrl": "https://site.financialmodelingprep.com",
+    "reportDeskUrl": "reports.html?sector=macro",
+    "reportDeskLabel": "Macro Intelligence Desk →",
+    "status": "published",
+    "order": 6
+  },
+  {
+    "id": "alphavantage",
+    "name": "Alpha Vantage",
+    "category": "telemetry",
+    "sector": "Commodities & Central Banking",
+    "pillClass": "pill-telemetry",
+    "logoUrl": "assets/partners/alphavantage-logo.svg",
+    "tagline": "Global Commodity Benchmarks & Macro Metrics",
+    "desc": "Premier cloud provider of enterprise financial market data, high-frequency commodity benchmarks, and global central bank economic indicators for quantitative research.",
+    "highlights": [
+      "Crude & Energy Benchmarks: Real-time and historical pricing for Brent Crude, WTI, and Natural Gas informing African sovereign fiscal balance sheets.",
+      "Agricultural Soft Commodities: Empirical price telemetry for cocoa, coffee, wheat, palm oil, and fertilizer components directly impacting African trade corridors.",
+      "Central Bank Data Sync: Automated ingestion of US Federal Reserve, Bank of England, and ECB policy rates influencing frontier capital flows."
+    ],
+    "websiteUrl": "https://www.alphavantage.co",
+    "reportDeskUrl": "reports.html?sector=macro",
+    "reportDeskLabel": "Commodity Desk Reports →",
+    "status": "published",
+    "order": 7
+  },
+  {
+    "id": "sharpapi",
+    "name": "Sharp API",
+    "category": "telemetry",
+    "sector": "Sports Intelligence Telemetry",
+    "pillClass": "pill-telemetry",
+    "logoUrl": "assets/partners/sharpapi-logo.svg",
+    "tagline": "Live Sports Business Intelligence & Analytics",
+    "desc": "Next-generation sports analytics and live match telemetry platform powering empirical commercial modeling, fan engagement metrics, and sports business valuation across Africa.",
+    "highlights": [
+      "Continental Football Telemetry: Real-time match data, tournament attendance metrics, and broadcasting viewership tracking across CAF, NPFL, and international competitions.",
+      "Commercial League Valuation: High-frequency sports economics data tracking franchise valuations, stadium concessions, and digital fan monetisation.",
+      "Athletic Performance Indexing: Synchronized with AXiA Active retail telemetry to correlate athletic performance trends with sporting goods consumer spending."
+    ],
+    "websiteUrl": "https://sharpapi.com",
+    "reportDeskUrl": "reports.html?sector=sports",
+    "reportDeskLabel": "Sports Intelligence Desk →",
+    "status": "published",
+    "order": 8
+  },
+  {
+    "id": "ptn-test-1790002899345",
+    "name": "Pan-African Agro Logistics Alliance",
+    "sector": "Logistics & Haulage",
+    "pillClass": "pill-logistics",
+    "logoUrl": "assets/brand/renalytica_emblem.png",
+    "tagline": "Cross-corridor cold chain & freight monitoring",
+    "desc": "Joint empirical telemetry on farmgate-to-port trade corridors.",
+    "highlights": [
+      "Corridor tracking",
+      "Demurrage telemetry"
+    ],
+    "websiteUrl": "https://agrologistics.africa",
+    "reportDeskUrl": "reports.html",
+    "reportDeskLabel": "View Sector Reports →",
+    "status": "published",
+    "order": 9
+  },
+  {
+    "id": "ptn-test-1790003154331",
+    "name": "Pan-African Agro Logistics Alliance",
+    "sector": "Logistics & Haulage",
+    "pillClass": "pill-logistics",
+    "logoUrl": "assets/brand/renalytica_emblem.png",
+    "tagline": "Cross-corridor cold chain & freight monitoring",
+    "desc": "Joint empirical telemetry on farmgate-to-port trade corridors.",
+    "highlights": [
+      "Corridor tracking",
+      "Demurrage telemetry"
+    ],
+    "websiteUrl": "https://agrologistics.africa",
+    "reportDeskUrl": "reports.html",
+    "reportDeskLabel": "View Sector Reports →",
+    "status": "published",
+    "order": 10
+  }
+]

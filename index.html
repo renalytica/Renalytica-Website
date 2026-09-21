@@ -56,14 +56,13 @@
 
     <!-- Centered Gateway Content -->
     <div class="gateway-content">
-      <!-- Telemetry Status Pill -->
-      <div class="gateway-telemetry-badge">
-        <span class="status-ping"></span>
-        <span>Verified Intelligence Telemetry // Node Active</span>
-      </div>
-
-      <!-- Cardiac Heartbeat Logo Epicenter -->
-      <div class="gateway-logo-wrapper">
+      <!-- Interactive Cardiac Heartbeat Logo Epicenter (Tap/Click to Enter) -->
+      <button 
+        id="gateway-logo-btn" 
+        class="gateway-logo-wrapper gateway-magnetic-target" 
+        type="button" 
+        aria-label="Enter Renalytica Terminal"
+      >
         <!-- Expanding Cardiac Radar Rings -->
         <div class="gateway-radar-ring ring-1"></div>
         <div class="gateway-radar-ring ring-2"></div>
@@ -78,29 +77,6 @@
           alt="Renalytica Emblem" 
           class="gateway-heartbeat-logo"
         />
-      </div>
-
-      <!-- Tagline & Description -->
-      <p class="gateway-tagline">
-        Precision market research & economic telemetry.<br>
-        <strong>Zero guesswork. Confident decisions.</strong>
-      </p>
-
-      <!-- High-Visibility Enter CTA Button -->
-      <div class="gateway-btn-container">
-        <div class="gateway-btn-aura"></div>
-        <button id="gateway-enter-btn" class="gateway-enter-btn gateway-magnetic-target" type="button">
-          <span>Enter Terminal</span>
-          <svg class="btn-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Discrete Bypass Link -->
-      <button id="gateway-skip-btn" class="gateway-skip-hint gateway-magnetic-target" type="button">
-        Direct Access →
       </button>
     </div>
   </div>
@@ -999,9 +975,42 @@
     </div>
   </div>
 
-  <!-- Elfsight AI Chatbot | Floating Widget -->
-  <script src="https://elfsightcdn.com/platform.js" async></script>
-  <div class="elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d" data-elfsight-app-lazy></div>
+  <!-- Elfsight AI Chatbot & Chat Widgets (Strictly deferred until Entrance Reveal completes) -->
+  <div id="elfsight-chat-container"></div>
+  <script>
+    (function() {
+      function initChatWidgets() {
+        if (window.__renalyticaChatInitialized) return;
+        window.__renalyticaChatInitialized = true;
+
+        // 1. Mount Elfsight AI Chatbot
+        const container = document.getElementById('elfsight-chat-container');
+        if (container) {
+          const elfsightDiv = document.createElement('div');
+          elfsightDiv.className = 'elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d';
+          elfsightDiv.setAttribute('data-elfsight-app-lazy', '');
+          container.appendChild(elfsightDiv);
+
+          const elfsightScript = document.createElement('script');
+          elfsightScript.src = 'https://elfsightcdn.com/platform.js';
+          elfsightScript.async = true;
+          document.body.appendChild(elfsightScript);
+        }
+      }
+
+      // Check if user already entered in this session
+      const hasEntered = sessionStorage.getItem('renalytica_gateway_entered') === 'true';
+      const stage = document.getElementById('entrance-stage');
+
+      if (!stage || hasEntered) {
+        initChatWidgets();
+      } else {
+        window.addEventListener('renalytica:gateway-revealed', () => {
+          setTimeout(initChatWidgets, 1400);
+        }, { once: true });
+      }
+    })();
+  </script>
 
   <!-- Renalytica Native Multi-Channel Direct Support Desk -->
   <script src="components/MultiChannelChat.js"></script>

@@ -2533,8 +2533,26 @@ input:checked + .pref-slider:before {
   background: #E05E00;
 }
 
+/* Strict Isolation: Suppress all cookie banners and chat widgets while entrance gateway is active */
+body.entrance-locked .renalytica-cookie-banner,
+body.entrance-locked cookie-consent,
+body.entrance-locked multi-channel-chat,
+body.entrance-locked #renalytica-chat-root,
+body.entrance-locked .chat-launcher-btn,
+body.entrance-locked .chat-card-popup,
+body.entrance-locked [class*="elfsight"],
+body.entrance-locked [id*="elfsight"],
+body.entrance-locked #elfsight-chat-container,
+body.entrance-locked div[style*="z-index: 214748364"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Shield floating widgets from obscuring cookie buttons */
 body:has(.renalytica-cookie-banner.is-visible) .elfsight-app-839fece5-17a4-4ca8-98e3-f09aa475eb37,
+body:has(.renalytica-cookie-banner.is-visible) .elfsight-app-6a8cc53e-5e41-4e07-b6c5-e7abeffce97d,
 body:has(.renalytica-cookie-banner.is-visible) multi-channel-chat,
 body:has(.renalytica-cookie-banner.is-visible) #chat-widget-container {
   bottom: 80px !important;

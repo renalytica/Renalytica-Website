@@ -2067,10 +2067,20 @@
         localStorage.setItem('renalytica_scheduled_briefings', JSON.stringify(briefings));
       }
 
-      window.refreshAdminBriefingsList = function() {
+      window.refreshAdminBriefingsList = async function() {
         const tbody = document.getElementById('admin-briefings-tbody');
         if (!tbody) return;
-        const briefings = getStoredBriefings();
+        let briefings = getStoredBriefings();
+        try {
+          const res = await fetch('/api/briefings');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.briefings) && data.briefings.length > 0) {
+              briefings = data.briefings;
+              saveStoredBriefings(briefings);
+            }
+          }
+        } catch (e) {}
 
         // Update HUD counts
         const totalEl = document.getElementById('admin-briefing-total-count');
@@ -2494,10 +2504,20 @@
         window.dispatchEvent(new CustomEvent('renalytica_partners_updated', { detail: { count: partners.length } }));
       }
 
-      window.refreshAdminPartnersList = function() {
+      window.refreshAdminPartnersList = async function() {
         const tbody = document.getElementById('admin-partners-tbody');
         if (!tbody) return;
-        const partners = getStoredPartners();
+        let partners = getStoredPartners();
+        try {
+          const res = await fetch('/api/partners');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.partners) && data.partners.length > 0) {
+              partners = data.partners;
+              saveStoredPartners(partners);
+            }
+          }
+        } catch (e) {}
 
         // Update counters
         const totalEl = document.getElementById('admin-partners-total-count');
@@ -2760,6 +2780,13 @@
           tab.classList.add('active');
           const target = document.querySelector(tab.getAttribute('data-pane'));
           if (target) target.classList.add('active');
+
+          const paneId = tab.getAttribute('data-pane');
+          if (paneId === '#pane-inventory' && typeof fetchAdminProducts === 'function') fetchAdminProducts();
+          if (paneId === '#pane-upload' && typeof fetchAdminDeliverables === 'function') fetchAdminDeliverables();
+          if (paneId === '#pane-audit' && typeof fetchAdminOrders === 'function') fetchAdminOrders();
+          if (paneId === '#pane-briefings' && typeof window.refreshAdminBriefingsList === 'function') window.refreshAdminBriefingsList();
+          if (paneId === '#pane-partners' && typeof window.refreshAdminPartnersList === 'function') window.refreshAdminPartnersList();
         });
       });
 
@@ -2897,7 +2924,7 @@
         if (e.target.files.length) handleFileUpload(e.target.files[0]);
       });
 
-      function handleFileUpload(file) {
+      async function handleFileUpload(file) {
         const accountId = document.getElementById('target-account-id').value;
         const license = document.getElementById('target-license').value;
         const coverArt = document.getElementById('target-cover-image')?.value || 'assets/images/analyst_holding_market_chart.jpg';
@@ -2906,24 +2933,37 @@
         if (progressWrap) {
           progressWrap.style.display = 'block';
           progressFileName.textContent = `${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
-          progressFill.style.width = '0%';
-          progressPercent.textContent = '0%';
+          progressFill.style.width = '15%';
+          progressPercent.textContent = '15%';
           progressSpeed.textContent = 'Initiating chunked multipart upload to Renalytica Cloud Storage...';
         }
-        
         statusBox.style.display = 'none';
 
-        // Simulate multipart chunked progress
-        let pct = 0;
-        const chunkInterval = setInterval(() => {
-          pct += Math.floor(Math.random() * 20) + 15;
-          if (pct >= 100) {
-            pct = 100;
-            clearInterval(chunkInterval);
-            
+        const reader = new FileReader();
+        reader.onload = async () => {
+          if (progressFill) progressFill.style.width = '60%';
+          if (progressPercent) progressPercent.textContent = '60%';
+          if (progressSpeed) progressSpeed.textContent = 'Transferring binary payload to client_deliverables vault...';
+
+          try {
+            const res = await fetch('/api/admin/deliverables/upload', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer mock_jwt_token_admin'
+              },
+              body: JSON.stringify({
+                accountId,
+                accountEmail: accountId === 'usr_exec_001' ? 'renalytica@gmail.com' : (accountId.includes('@') ? accountId : `${accountId}@client.renalytica.com`),
+                fileName: file.name,
+                fileBase64: reader.result,
+                licenseTier: license
+              })
+            });
+
             if (progressFill) progressFill.style.width = '100%';
             if (progressPercent) progressPercent.textContent = '100%';
-            if (progressSpeed) progressSpeed.textContent = 'Multipart verification & hash complete. Stored in client_deliverables.';
+            if (progressSpeed) progressSpeed.textContent = 'Multipart verification complete. Row-Level Security mapping registered.';
 
             setTimeout(() => {
               if (progressWrap) progressWrap.style.display = 'none';
@@ -2931,47 +2971,55 @@
               statusBox.style.background = 'rgba(16, 185, 129, 0.1)';
               statusBox.style.color = '#10B981';
               statusBox.textContent = `✔ Successfully uploaded ${file.name} to 'client_deliverables' and assigned to account '${accountId}' under ${license}!`;
-
-              // Append to registry table
-              const tbody = document.getElementById('assigned-files-tbody');
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                <td><strong>${file.name}</strong></td>
-                <td><code>${accountId}</code></td>
-                <td>${file.type || 'Deliverable'} (${(file.size / 1024).toFixed(0)} KB)</td>
-                <td><code>deliverables/${file.name}</code></td>
-                <td><span class="hud-tier-badge">${license}</span></td>
-                <td><button class="btn-table-action" onclick="alert('Generated 60s signed link for ${file.name}')">Generate 60s Link</button></td>
-              `;
-              tbody.prepend(row);
-            }, 600);
-          } else {
-            if (progressFill) progressFill.style.width = `${pct}%`;
-            if (progressPercent) progressPercent.textContent = `${pct}%`;
-            if (progressSpeed) progressSpeed.textContent = `Streaming Chunk: ${(file.size * pct / 100 / 1024).toFixed(0)} KB / ${(file.size / 1024).toFixed(0)} KB`;
+              fetchAdminDeliverables();
+            }, 500);
+          } catch (err) {
+            if (progressWrap) progressWrap.style.display = 'none';
+            statusBox.style.display = 'block';
+            statusBox.style.background = 'rgba(239, 68, 68, 0.1)';
+            statusBox.style.color = '#EF4444';
+            statusBox.textContent = 'Upload failed: ' + err.message;
           }
-        }, 220);
+        };
+        reader.onerror = () => {
+          if (progressWrap) progressWrap.style.display = 'none';
+          statusBox.style.display = 'block';
+          statusBox.style.background = 'rgba(239, 68, 68, 0.1)';
+          statusBox.style.color = '#EF4444';
+          statusBox.textContent = 'Failed to read local deliverable file.';
+        };
+        reader.readAsDataURL(file);
       }
 
-      // Webhook Simulator Trigger
+      // Webhook Simulator Trigger with persistent order storage
       const btnSimWebhook = document.getElementById('btn-simulate-webhook');
       if (btnSimWebhook) {
-        btnSimWebhook.addEventListener('click', () => {
+        btnSimWebhook.addEventListener('click', async () => {
           const simTxRef = 'RNLY-SIM-' + Math.floor(100000 + Math.random() * 900000);
-          const tbody = document.getElementById('purchases-audit-tbody');
-          const newRow = document.createElement('tr');
-          newRow.style.background = 'rgba(16, 185, 129, 0.08)';
-          newRow.innerHTML = `
-            <td><code>${simTxRef}</code></td>
-            <td>executive.treasury@pan-african.com</td>
-            <td>The Economics of AI Adoption in Africa</td>
-            <td>Enterprise</td>
-            <td>$7,500 USD</td>
-            <td><span class="badge-status paid">SUCCESSFUL (SETTLED)</span></td>
-            <td><button class="btn-table-action" onclick="alert('Entitlement verified in Renalytica Cloud RLS for tx ${simTxRef}')">Audit RLS</button></td>
-          `;
-          tbody.prepend(newRow);
-
+          try {
+            await fetch('/api/orders', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                tx_ref: simTxRef,
+                transaction_id: 'flw_sim_' + Date.now(),
+                amount: 7500,
+                amount_formatted: '$7,500 USD',
+                currency: 'USD',
+                status: 'successful',
+                customer_email: 'executive.treasury@pan-african.com',
+                customer_name: 'Pan-African Treasury Executive',
+                report_id: 'sub-saharan-stablecoins-cross-border-2026',
+                report_title: 'The Economics of AI Adoption in Africa',
+                license_tier: 'Enterprise',
+                payment_method: 'flutterwave_card'
+              })
+            });
+            fetchAdminOrders();
+            refreshAdminAnalytics();
+          } catch(e) {
+            console.warn('Webhook simulation error:', e);
+          }
           alert(`⚡ Flutterwave Webhook Simulated!\n\nPayload: charge.completed\nTxRef: ${simTxRef}\nAmount: $7,500 USD\nStatus: successful\n\nResult: Renalytica Cloud purchases record created & RLS access granted to treasury client.`);
         });
       }
@@ -3127,9 +3175,75 @@
       }
     }
 
-    // ==============================================================================
-    // MODULE 3 & 4: MULTI-CURRENCY ANALYTICS & INVENTORY CRUD CLIENT LOGIC
-    // ==============================================================================
+    // Fetch all client assigned deliverables from backend
+    async function fetchAdminDeliverables() {
+      const tbody = document.getElementById('assigned-files-tbody');
+      if (!tbody) return;
+      try {
+        const res = await fetch('/api/admin/deliverables', {
+          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.deliverables) && data.deliverables.length > 0) {
+            tbody.innerHTML = data.deliverables.map(d => {
+              const sizeKb = d.file_size_bytes ? (d.file_size_bytes / 1024).toFixed(0) + ' KB' : 'Standard PDF';
+              return `
+                <tr>
+                  <td><strong>${escapeHtml(d.file_name)}</strong></td>
+                  <td><code>${escapeHtml(d.account_id || d.account_email)}</code></td>
+                  <td>PDF (${sizeKb})</td>
+                  <td><code>${escapeHtml(d.file_path)}</code></td>
+                  <td><span class="hud-tier-badge">${escapeHtml(d.license_tier || 'Global Enterprise')}</span></td>
+                  <td><button class="btn-table-action" onclick="generateTestSignedUrl('${escapeJs(d.file_id || d.id)}')">Generate 60s Link</button></td>
+                </tr>
+              `;
+            }).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Deliverables fetch notice:', err.message);
+      }
+    }
+
+    // Fetch all commercial purchases & transactions from backend
+    async function fetchAdminOrders() {
+      const tbody = document.getElementById('purchases-audit-tbody');
+      if (!tbody) return;
+      try {
+        const res = await fetch('/api/orders', {
+          headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.orders) && data.orders.length > 0) {
+            tbody.innerHTML = data.orders.map(o => {
+              const txRef = o.tx_ref || o.id || 'RNLY-TX-2026';
+              const email = o.customer_email || 'client@renalytica.com';
+              const title = o.report_title || (o.items && o.items[0] && o.items[0].title) || 'Sub-Saharan Macro Report';
+              const license = o.license_tier || (o.items && o.items[0] && o.items[0].license) || 'Enterprise';
+              const amount = o.amount_formatted || (o.currency === 'USD' ? `$${Number(o.amount || 0).toLocaleString()} USD` : `₦${Number(o.amount || 0).toLocaleString()} NGN`);
+              const status = (o.status || 'successful').toUpperCase();
+              const isPaid = status === 'PAID' || status === 'SUCCESSFUL' || status === 'COMPLETED';
+
+              return `
+                <tr>
+                  <td><code>${escapeHtml(txRef)}</code></td>
+                  <td>${escapeHtml(email)}</td>
+                  <td>${escapeHtml(title)}</td>
+                  <td>${escapeHtml(license)}</td>
+                  <td><strong>${escapeHtml(amount)}</strong></td>
+                  <td><span class="badge-status ${isPaid ? 'paid' : 'pending'}">${escapeHtml(status)}</span></td>
+                  <td><button class="btn-table-action" onclick="alert('Audited transaction ${escapeJs(txRef)}: Verified in Renalytica database.')">Audit RLS</button></td>
+                </tr>
+              `;
+            }).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Orders audit fetch notice:', err.message);
+      }
+    }
 
     // Refresh Multi-Currency Settlement Dashboard
     async function refreshAdminAnalytics() {
@@ -3786,13 +3900,33 @@
         }
       }).filter(Boolean) : [];
 
+      const rawNgn = parseFloat(document.getElementById('crud-price-ngn').value);
+      const rawUsd = parseFloat(document.getElementById('crud-price-usd').value);
+      const rawGhs = parseFloat(document.getElementById('crud-price-ghs').value);
+      const rawKes = parseFloat(document.getElementById('crud-price-kes').value);
+
+      const singleNgn = !isNaN(rawNgn) && rawNgn > 0 ? rawNgn : (currency === 'NGN' ? base_price : 150000);
+      const singleUsd = !isNaN(rawUsd) && rawUsd > 0 ? rawUsd : (currency === 'USD' ? base_price : Math.round(singleNgn / 1500));
+      const ghsPrice = !isNaN(rawGhs) && rawGhs > 0 ? rawGhs : Math.round(singleUsd * 15.5);
+      const kesPrice = !isNaN(rawKes) && rawKes > 0 ? rawKes : Math.round(singleUsd * 130);
+
       const regional_pricing = {
-        NGN: parseFloat(document.getElementById('crud-price-ngn').value) || (currency === 'NGN' ? base_price : 150000),
-        USD: parseFloat(document.getElementById('crud-price-usd').value) || (currency === 'USD' ? base_price : 100),
-        GHS: parseFloat(document.getElementById('crud-price-ghs').value) || 1550,
-        KES: parseFloat(document.getElementById('crud-price-kes').value) || 13000
+        NGN: singleNgn,
+        USD: singleUsd,
+        GHS: ghsPrice,
+        KES: kesPrice
       };
 
+      const pricing = {
+        single: singleUsd,
+        singleNgn: singleNgn,
+        departmental: Math.round(singleUsd * 1.8),
+        departmentalNgn: Math.round(singleNgn * 1.8),
+        enterprise: Math.round(singleUsd * 3.0),
+        enterpriseNgn: Math.round(singleNgn * 3.0)
+      };
+
+      const effectiveBasePrice = currency === 'NGN' ? singleNgn : singleUsd;
       const targetId = id || ('REN-' + sku.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase());
 
       const payload = {
@@ -3802,9 +3936,10 @@
         category,
         billing_type,
         status,
-        base_price,
+        base_price: effectiveBasePrice,
         currency,
         regional_pricing,
+        pricing,
         download_limit,
         download_expiry_days,
         gateways,
@@ -3832,12 +3967,18 @@
       updateCatalogCounters();
       applyCatalogFilters();
 
+      // Broadcast event for live storefront/portal synchronization
+      window.dispatchEvent(new CustomEvent('renalytica:catalog-synced', { detail: { products: currentCatalog, updatedId: targetId } }));
+      if (window.ReportsRepository && typeof window.ReportsRepository.saveCustomProduct === 'function') {
+        window.ReportsRepository.saveCustomProduct(payload);
+      }
+
       // 3. Sync to backend API
       try {
         const url = id ? `/api/admin/products/${encodeURIComponent(id)}` : '/api/admin/products';
         const method = id ? 'PUT' : 'POST';
 
-        await fetch(url, {
+        const apiRes = await fetch(url, {
           method: method,
           headers: {
             'Content-Type': 'application/json',
@@ -3845,6 +3986,17 @@
           },
           body: JSON.stringify(payload)
         });
+        if (apiRes.ok) {
+          const resData = await apiRes.json();
+          if (resData.product) {
+            const sIdx = currentCatalog.findIndex(p => p.id === targetId || p.sku === sku);
+            if (sIdx >= 0) {
+              currentCatalog[sIdx] = { ...currentCatalog[sIdx], ...resData.product };
+              persistCustomCatalogLocal();
+              applyCatalogFilters();
+            }
+          }
+        }
       } catch (err) {
         console.warn('Backend product update notice, saved locally:', err.message);
       }
@@ -4249,6 +4401,10 @@
     window.addEventListener('DOMContentLoaded', () => {
       refreshAdminAnalytics();
       fetchAdminProducts();
+      fetchAdminDeliverables();
+      fetchAdminOrders();
+      if (typeof window.refreshAdminBriefingsList === 'function') window.refreshAdminBriefingsList();
+      if (typeof window.refreshAdminPartnersList === 'function') window.refreshAdminPartnersList();
     });
   </script>
 

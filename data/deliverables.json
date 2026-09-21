@@ -1,0 +1,58 @@
+[
+  {
+    "id": "deliv_rec_1790003153319",
+    "account_id": "usr_director_09",
+    "account_email": "director@agri-corp.ng",
+    "file_id": "deliv_1790003152982",
+    "file_name": "Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "file_path": "deliverables/deliv_1790003152982_Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "local_path": "assets/deliverables/deliv_1790003152982_Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "file_size_bytes": 38,
+    "license_tier": "Single User",
+    "assigned_by": "usr_exec_001",
+    "download_count": 0,
+    "created_at": "2026-09-21T15:05:53.319Z"
+  },
+  {
+    "id": "deliv_rec_1790002898452",
+    "account_id": "usr_director_09",
+    "account_email": "director@agri-corp.ng",
+    "file_id": "deliv_1790002898041",
+    "file_name": "Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "file_path": "deliverables/deliv_1790002898041_Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "local_path": "assets/deliverables/deliv_1790002898041_Renalytica_Grains_Outlook_2026_Licensed.pdf",
+    "file_size_bytes": 38,
+    "license_tier": "Single User",
+    "assigned_by": "usr_exec_001",
+    "download_count": 0,
+    "created_at": "2026-09-21T15:01:38.452Z"
+  },
+  {
+    "id": "deliv_rec_001",
+    "account_id": "usr_exec_001",
+    "account_email": "renalytica@gmail.com",
+    "file_id": "nigeria-ai-adoption-economics-2026",
+    "file_name": "Renalytica_Economics_AI_Adoption_2026.pdf",
+    "file_path": "deliverables/ai-adoption-2026.pdf",
+    "local_path": "assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf",
+    "file_size_bytes": 850944,
+    "license_tier": "Global Enterprise",
+    "assigned_by": "usr_exec_001",
+    "download_count": 2,
+    "created_at": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "id": "deliv_rec_002",
+    "account_id": "usr_exec_001",
+    "account_email": "renalytica@gmail.com",
+    "file_id": "nigeria-stablecoins-cross-border-2026",
+    "file_name": "Renalytica_Stablecoins_Report_2026.pdf",
+    "file_path": "deliverables/stablecoins-2026.pdf",
+    "local_path": "assets/reports/Renalytica_Stablecoins_Report_2026.pdf",
+    "file_size_bytes": 2873088,
+    "license_tier": "Global Enterprise",
+    "assigned_by": "usr_exec_001",
+    "download_count": 1,
+    "created_at": "2026-09-21T09:30:00.000Z"
+  }
+]

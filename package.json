@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "serve": "python -m http.server 8085 --bind 127.0.0.1",
+    "serve": "node server.js",
     "test": "node -e \"console.log('All backend & auth configurations validated successfully.')\""
   },
   "dependencies": {

@@ -1145,6 +1145,12 @@
               setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
               syncPortalTelemetry();
             }
+            const activeUser = auth ? auth.getUser() : null;
+            if (activeUser) {
+              if (targetId === '#view-library') renderPurchasedLibrary(activeUser);
+              if (targetId === '#view-invoices') renderInvoices(activeUser);
+              if (targetId === '#view-briefings') renderBriefings(activeUser);
+            }
           }
         });
       });
@@ -1387,19 +1393,60 @@
       }
 
       // Render Purchased Library Cleanly (With Clean Slate State for New Users)
-      function renderPurchasedLibrary(user) {
+      async function renderPurchasedLibrary(user) {
         const container = document.getElementById('unlocked-reports-container');
         if (!container || !repo) return;
 
         const allReports = repo.getAll() || [];
         const isAdmin = user.role === 'admin' && user.email === 'renalytica@gmail.com';
         
+        let purchasedIds = new Set(user.purchasedReports || []);
+
+        // Also fetch user's assigned deliverables from backend
+        try {
+          const res = await fetch('/api/deliverables/my-deliverables', {
+            headers: {
+              'Authorization': 'Bearer ' + (auth.currentSession?.token || 'mock_jwt_token_client'),
+              'x-user-email': user.email
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.deliverables)) {
+              data.deliverables.forEach(d => {
+                if (d.file_id) purchasedIds.add(d.file_id);
+                if (d.id) purchasedIds.add(d.id);
+              });
+            }
+          }
+        } catch (e) {}
+
+        // Also fetch user's purchased orders from backend
+        try {
+          const oRes = await fetch('/api/orders/my-orders', {
+            headers: {
+              'Authorization': 'Bearer ' + (auth.currentSession?.token || 'mock_jwt_token_client'),
+              'x-user-email': user.email
+            }
+          });
+          if (oRes.ok) {
+            const oData = await oRes.json();
+            if (oData && Array.isArray(oData.orders)) {
+              oData.orders.forEach(o => {
+                if (o.report_id) purchasedIds.add(o.report_id);
+                if (o.items && Array.isArray(o.items)) {
+                  o.items.forEach(it => { if (it.id) purchasedIds.add(it.id); });
+                }
+              });
+            }
+          }
+        } catch(e) {}
+
         let userReports = [];
         if (isAdmin) {
           userReports = allReports; // Master Admin has access to all reports
         } else {
-          const purchasedIds = user.purchasedReports || [];
-          userReports = allReports.filter(r => purchasedIds.includes(r.id) || purchasedIds.includes(r.sku));
+          userReports = allReports.filter(r => purchasedIds.has(r.id) || purchasedIds.has(r.sku));
         }
 
         // Update badge counts
@@ -1531,9 +1578,32 @@
       }
 
       // Render Invoices & Proformas Cleanly
-      function renderInvoices(user) {
+      async function renderInvoices(user) {
         const tbody = document.getElementById('invoices-table-body');
         if (!tbody) return;
+
+        let backendOrders = [];
+        try {
+          const res = await fetch('/api/orders/my-orders', {
+            headers: {
+              'Authorization': 'Bearer ' + (auth.currentSession?.token || 'mock_jwt_token_client'),
+              'x-user-email': user.email
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.orders)) {
+              backendOrders = data.orders.map(o => ({
+                id: o.tx_ref || o.id || 'RNLY-INV-2026',
+                date: o.created_at ? new Date(o.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                description: o.report_title || (o.items && o.items[0] && o.items[0].title) || 'Institutional Research License',
+                amountFormatted: o.amount_formatted || (o.currency === 'USD' ? `$${Number(o.amount || 0).toLocaleString()} USD` : `₦${Number(o.amount || 0).toLocaleString()} NGN`),
+                amount: o.amount,
+                status: (o.status || 'paid').toLowerCase()
+              }));
+            }
+          }
+        } catch (e) {}
 
         let proformas = [];
         try {
@@ -1544,7 +1614,17 @@
           }
         } catch (e) {}
 
-        const invoices = (user.invoices || []).concat(proformas);
+        const seen = new Set();
+        const invoices = [];
+        [...backendOrders, ...(user.invoices || []), ...proformas].forEach(inv => {
+          const key = inv.id || inv.ref;
+          if (key && !seen.has(key)) {
+            seen.add(key);
+            invoices.push(inv);
+          } else if (!key) {
+            invoices.push(inv);
+          }
+        });
 
         if (invoices.length === 0) {
           tbody.innerHTML = `
@@ -1575,7 +1655,7 @@
       }
 
       // Render Briefings Desk with Admin Synchronized Events
-      function renderBriefings(user) {
+      async function renderBriefings(user) {
         const briefingsRemainingEl = document.getElementById('briefings-remaining-count');
         const container = document.getElementById('portal-scheduled-briefings-container');
         const isAdm = user.role === 'admin' && user.email === 'renalytica@gmail.com';
@@ -1586,14 +1666,27 @@
 
         if (!container) return;
 
-        // Fetch admin scheduled briefings from localStorage
+        // Fetch admin scheduled briefings from live backend with localStorage fallback
         let briefings = [];
         try {
-          const raw = localStorage.getItem('renalytica_scheduled_briefings');
-          if (raw) {
-            briefings = JSON.parse(raw);
+          const res = await fetch('/api/briefings');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.briefings) && data.briefings.length > 0) {
+              briefings = data.briefings;
+              localStorage.setItem('renalytica_scheduled_briefings', JSON.stringify(briefings));
+            }
           }
-        } catch(e) { console.warn(e); }
+        } catch(e) {}
+
+        if (briefings.length === 0) {
+          try {
+            const raw = localStorage.getItem('renalytica_scheduled_briefings');
+            if (raw) {
+              briefings = JSON.parse(raw);
+            }
+          } catch(e) { console.warn(e); }
+        }
 
         // Filter active sessions (Scheduled or In Progress)
         const activeBriefings = briefings.filter(b => b.status !== 'Cancelled');

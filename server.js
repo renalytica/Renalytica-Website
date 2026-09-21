@@ -79,6 +79,36 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 app.use(express.static(path.join(__dirname)));
 
 // ==============================================================================
+// PERSISTENT FILE STORAGE LAYER (Resilient Local & Cloud Dual-Sync)
+// ==============================================================================
+const DATA_DIR = path.join(__dirname, 'data');
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+function loadJson(filename, fallback = []) {
+  const filepath = path.join(DATA_DIR, filename);
+  try {
+    if (fs.existsSync(filepath)) {
+      const content = fs.readFileSync(filepath, 'utf8');
+      if (content && content.trim()) {
+        return JSON.parse(content);
+      }
+    }
+  } catch (e) {
+    console.warn(`[Data Engine] Error reading ${filename}:`, e.message);
+  }
+  return fallback;
+}
+
+function saveJson(filename, data) {
+  const filepath = path.join(DATA_DIR, filename);
+  try {
+    fs.writeFileSync(filepath, JSON.stringify(data, null, 2), 'utf8');
+  } catch (e) {
+    console.error(`[Data Engine] Error writing ${filename}:`, e.message);
+  }
+}
+
+// ==============================================================================
 // 1. RBAC MIDDLEWARE: Verify Authenticated User & Admin Roles
 // ==============================================================================
 async function authenticateUser(req, res, next) {
@@ -91,20 +121,38 @@ async function authenticateUser(req, res, next) {
 
   // Demo fallback token check
   if (token.startsWith('mock_jwt_token_')) {
-    req.user = {
-      id: 'usr_exec_001',
-      email: 'renalytica@gmail.com',
-      role: 'admin'
-    };
+    const customEmail = req.headers['x-user-email'] || req.query.email;
+    if (customEmail && customEmail !== 'renalytica@gmail.com' && !token.includes('admin')) {
+      req.user = {
+        id: 'usr_' + customEmail.replace(/[^a-zA-Z0-9]/g, '_'),
+        email: customEmail,
+        role: 'client'
+      };
+    } else {
+      req.user = {
+        id: 'usr_exec_001',
+        email: 'renalytica@gmail.com',
+        role: 'admin'
+      };
+    }
     return next();
   }
 
   if (!isSupabaseOnline || !supabaseAdmin) {
-    req.user = {
-      id: 'usr_exec_001',
-      email: 'renalytica@gmail.com',
-      role: 'admin'
-    };
+    const customEmail = req.headers['x-user-email'] || req.query.email;
+    if (customEmail && customEmail !== 'renalytica@gmail.com' && !token.includes('admin')) {
+      req.user = {
+        id: 'usr_' + customEmail.replace(/[^a-zA-Z0-9]/g, '_'),
+        email: customEmail,
+        role: 'client'
+      };
+    } else {
+      req.user = {
+        id: 'usr_exec_001',
+        email: 'renalytica@gmail.com',
+        role: 'admin'
+      };
+    }
     return next();
   }
 
@@ -716,7 +764,7 @@ app.post('/api/deliverables/signed-url', authenticateUser, async (req, res) => {
 });
 
 // Mock Public Content Store (Resilient Demo & Offline Fallback)
-const mockContent = [
+let mockContent = loadJson('content.json', [
   {
     id: 'cnt_001',
     slug: 'african-trade-integration',
@@ -743,7 +791,7 @@ const mockContent = [
     view_count: 874,
     featured_image_url: 'assets/images/industrial_grain_silos.jpg'
   }
-];
+]);
 
 // ==============================================================================
 // 5. SOP 02: DYNAMIC CONTENT API (Tiptap & Public Content Table)
@@ -873,6 +921,7 @@ app.post('/api/content', authenticateUser, requireAdmin, async (req, res) => {
     } else {
       mockContent.unshift(record);
     }
+    saveJson('content.json', mockContent);
 
     res.json({ success: true, data: record });
   } catch (err) {
@@ -981,8 +1030,8 @@ async function watermarkPdfBuffer(pdfBuffer, metadata = {}) {
   }
 }
 
-// In-Memory Data Stores for Native E-Commerce & Payhip Engine (Resilient Demo & Fallback)
-const mockProducts = [
+// Persistent Data Stores for Native E-Commerce & Payhip Engine (Resilient Local & Supabase Dual-Sync)
+let mockProducts = loadJson('products.json', [
   {
     id: 'nigeria-ai-adoption-economics-2026',
     sku: 'REN-AI-2026-042',
@@ -1005,56 +1054,10 @@ const mockProducts = [
     status: 'published',
     gateways: 'FLW (NGN, USD, GHS)',
     created_at: new Date('2026-09-01T00:00:00Z').toISOString()
-  },
-  {
-    id: 'nigeria-stablecoins-cross-border-2026',
-    sku: 'REN-FS-2026-092',
-    title: 'Sub-Saharan Africa Stablecoins & Digital FX Corridors (2026-2027)',
-    description: '<p>92-page proprietary quantitative research report detailing USDT/USDC settlement volumes, FX liquidity pipelines, banking parity dynamics, and cross-border commercial clearing corridors.</p>',
-    category: 'Market Insights',
-    base_price: 450,
-    currency: 'USD',
-    regional_pricing: {
-      NGN: 675000,
-      USD: 450,
-      GHS: 6975,
-      KES: 58500
-    },
-    billing_type: 'one-time',
-    file_path: 'assets/reports/Renalytica_Stablecoins_Report_2026.pdf',
-    preview_file_url: 'assets/reports/Renalytica_Stablecoins_Report_2026.pdf',
-    download_limit: 3,
-    download_expiry_days: 1,
-    status: 'published',
-    gateways: 'FLW (USD, KES)',
-    created_at: new Date('2026-09-05T00:00:00Z').toISOString()
-  },
-  {
-    id: 'pan-african-fintech-venture-capital-2026',
-    sku: 'REN-FX-2026-119',
-    title: 'Pan-African Sovereign Debt & Fintech Liquidity Monitor',
-    description: '<p>High-frequency macroeconomic monitor analyzing sovereign debt maturities, currency depreciations, and early-stage venture liquidity trends in West and East Africa.</p>',
-    category: 'Industry Research',
-    base_price: 250000,
-    currency: 'NGN',
-    regional_pricing: {
-      NGN: 250000,
-      USD: 165,
-      GHS: 2550,
-      KES: 21500
-    },
-    billing_type: 'subscription',
-    file_path: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
-    preview_file_url: 'assets/reports/Renalytica_Economics_AI_Adoption_2026.pdf',
-    download_limit: 3,
-    download_expiry_days: 1,
-    status: 'published',
-    gateways: 'FLW (NGN, USD, GHS, KES)',
-    created_at: new Date('2026-09-10T00:00:00Z').toISOString()
   }
-];
+]);
 
-const mockOrders = [
+let mockOrders = loadJson('orders.json', [
   {
     id: 'ord_rnly_101',
     customer_id: 'usr_exec_001',
@@ -1069,55 +1072,10 @@ const mockOrders = [
     flw_tx_ref: 'RNLY-TX-NGN-4500K',
     flw_transaction_id: 'flw_trn_98231',
     created_at: new Date(Date.now() - 2 * 86400000).toISOString()
-  },
-  {
-    id: 'ord_rnly_102',
-    customer_id: 'usr_exec_002',
-    customer_email: 'client@standardbank.co.za',
-    customer_name: 'Standard Bank Research Desk',
-    company_name: 'Standard Bank Africa',
-    product_id: 'nigeria-stablecoins-cross-border-2026',
-    product_title: 'Sub-Saharan Africa Stablecoins & Digital FX Corridors (2026-2027)',
-    order_status: 'paid',
-    total_amount: 2450,
-    currency: 'USD',
-    flw_tx_ref: 'RNLY-TX-USD-2450',
-    flw_transaction_id: 'flw_trn_98232',
-    created_at: new Date(Date.now() - 5 * 86400000).toISOString()
-  },
-  {
-    id: 'ord_rnly_103',
-    customer_id: 'usr_exec_003',
-    customer_email: 'analytics@ecobank.com',
-    customer_name: 'Ecobank Treasury',
-    company_name: 'Ecobank Ghana',
-    product_id: 'nigeria-ai-adoption-economics-2026',
-    product_title: 'The Economics of AI Adoption in Africa (2026)',
-    order_status: 'paid',
-    total_amount: 12000,
-    currency: 'GHS',
-    flw_tx_ref: 'RNLY-TX-GHS-12000',
-    flw_transaction_id: 'flw_trn_98233',
-    created_at: new Date(Date.now() - 8 * 86400000).toISOString()
-  },
-  {
-    id: 'ord_rnly_104',
-    customer_id: 'usr_exec_004',
-    customer_email: 'research@kcbgroup.com',
-    customer_name: 'KCB Markets',
-    company_name: 'KCB Group Kenya',
-    product_id: 'nigeria-stablecoins-cross-border-2026',
-    product_title: 'Sub-Saharan Africa Stablecoins & Digital FX Corridors (2026-2027)',
-    order_status: 'paid',
-    total_amount: 85000,
-    currency: 'KES',
-    flw_tx_ref: 'RNLY-TX-KES-85000',
-    flw_transaction_id: 'flw_trn_98234',
-    created_at: new Date(Date.now() - 12 * 86400000).toISOString()
   }
-];
+]);
 
-const mockFulfillments = [
+let mockFulfillments = loadJson('fulfillments.json', [
   {
     id: 'ful_rnly_001',
     order_id: 'ord_rnly_101',
@@ -1128,34 +1086,13 @@ const mockFulfillments = [
     secure_token: 'token-ai-economics-demo-2026',
     current_download_count: 1,
     max_download_limit: 3,
-    expires_at: new Date(Date.now() + 86400000).toISOString(), // 24 hrs from now
-    created_at: new Date().toISOString()
-  },
-  {
-    id: 'ful_rnly_002',
-    order_id: 'ord_rnly_102',
-    product_id: 'nigeria-stablecoins-cross-border-2026',
-    customer_id: 'usr_exec_002',
-    customer_email: 'client@standardbank.co.za',
-    company_name: 'Standard Bank Africa',
-    secure_token: 'token-stablecoins-demo-2026',
-    current_download_count: 0,
-    max_download_limit: 3,
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     created_at: new Date().toISOString()
   }
-];
+]);
 
-const mockRevisions = [
-  {
-    id: 'rev_001',
-    product_id: 'nigeria-ai-adoption-economics-2026',
-    version_tag: 'v2.1',
-    changelog_summary: 'Incorporated Q3 central bank digital asset regulatory framework and updated macro multipliers.',
-    notified_buyers_count: 14,
-    created_at: new Date(Date.now() - 86400000).toISOString()
-  }
-];
+let mockRevisions = loadJson('revisions.json', []);
+let mockDeliverables = loadJson('deliverables.json', []);
 
 // ==============================================================================
 // 7. FULFILLMENT DOWNLOAD ROUTE WITH PIRACY SHIELD & MARGIN WATERMARKING
@@ -1562,6 +1499,7 @@ app.post('/api/admin/products', authenticateUser, requireAdmin, async (req, res)
     }
 
     mockProducts.unshift(newProduct);
+    saveJson('products.json', mockProducts);
     res.status(201).json({ success: true, product: newProduct });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -1574,9 +1512,19 @@ app.put('/api/admin/products/:id', authenticateUser, requireAdmin, async (req, r
     const { id } = req.params;
     const updates = { ...req.body, updated_at: new Date().toISOString() };
 
-    let index = mockProducts.findIndex(p => p.id === id || p.sku === id);
+    const cleanId = (id || '').toLowerCase();
+    let index = mockProducts.findIndex(p => 
+      (p.id && p.id.toLowerCase() === cleanId) || 
+      (p.sku && p.sku.toLowerCase() === cleanId) || 
+      (p.slug && p.slug.toLowerCase() === cleanId) ||
+      (updates.sku && p.sku && p.sku.toLowerCase() === updates.sku.toLowerCase())
+    );
+
     if (index !== -1) {
       mockProducts[index] = { ...mockProducts[index], ...updates };
+    } else {
+      mockProducts.push({ id, ...updates });
+      index = mockProducts.length - 1;
     }
 
     if (supabaseAdmin && isSupabaseOnline) {
@@ -1588,6 +1536,7 @@ app.put('/api/admin/products/:id', authenticateUser, requireAdmin, async (req, r
     }
 
     const updatedProd = index !== -1 ? mockProducts[index] : updates;
+    saveJson('products.json', mockProducts);
     res.json({ success: true, product: updatedProd });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -1620,6 +1569,7 @@ app.patch('/api/admin/products/:id/status', authenticateUser, requireAdmin, asyn
       }
     }
 
+    saveJson('products.json', mockProducts);
     res.json({
       success: true,
       id,
@@ -1745,6 +1695,7 @@ app.post('/api/admin/products/:id/replace-file', authenticateUser, requireAdmin,
     if (idx !== -1) {
       mockProducts[idx] = { ...mockProducts[idx], ...updates };
     }
+    saveJson('products.json', mockProducts);
 
     res.json({
       success: true,
@@ -1837,6 +1788,7 @@ app.delete('/api/admin/products/:id', authenticateUser, requireAdmin, async (req
     if (index !== -1) {
       mockProducts.splice(index, 1);
     }
+    saveJson('products.json', mockProducts);
 
     res.json({
       success: true,
@@ -1954,7 +1906,9 @@ app.post('/api/admin/broadcast-revision', authenticateUser, requireAdmin, async 
 // ==============================================================================
 // 12. EXECUTIVE ANALYST BRIEFINGS API (FULL CRUD FOR ADMIN & CLIENT PORTAL)
 // ==============================================================================
-let mockBriefings = [
+// 12. EXECUTIVE ANALYST BRIEFINGS API (FULL CRUD FOR ADMIN & CLIENT PORTAL)
+// ==============================================================================
+let mockBriefings = loadJson('briefings.json', [
   {
     id: 'BRF-2026-001',
     title: 'Q4 2026 Sub-Saharan Agro-Commodities & Fertilizer Import Parity Outlook',
@@ -1997,9 +1951,14 @@ let mockBriefings = [
     status: 'Scheduled',
     agenda: 'Analysis of USDT/NGN and crypto-fiat settlement spreads, central bank compliance frameworks, and institutional treasury hedging strategies.'
   }
-];
+]);
 
-// GET all briefings
+// Public / Client endpoint to fetch scheduled briefings
+app.get('/api/briefings', (req, res) => {
+  res.json({ success: true, count: mockBriefings.length, briefings: mockBriefings });
+});
+
+// GET all briefings (Admin)
 app.get('/api/admin/briefings', authenticateUser, async (req, res) => {
   res.json({ success: true, count: mockBriefings.length, briefings: mockBriefings });
 });
@@ -2007,13 +1966,13 @@ app.get('/api/admin/briefings', authenticateUser, async (req, res) => {
 // POST create briefing
 app.post('/api/admin/briefings', authenticateUser, requireAdmin, async (req, res) => {
   try {
-    const { title, sector, host, datetime, capacity, roomUrl, format, agenda } = req.body;
+    const { id, title, sector, host, datetime, datetimeFormatted, capacity, roomUrl, format, agenda, status } = req.body;
     if (!title || !datetime) {
       return res.status(400).json({ error: 'Title and datetime are required.' });
     }
-    const newId = 'BRF-2026-' + Math.floor(100 + Math.random() * 900);
+    const newId = id || ('BRF-2026-' + Math.floor(100 + Math.random() * 900));
     const dtObj = new Date(datetime);
-    const dtFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
+    const dtFormatted = datetimeFormatted || (dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT');
 
     const newBriefing = {
       id: newId,
@@ -2026,10 +1985,11 @@ app.post('/api/admin/briefings', authenticateUser, requireAdmin, async (req, res
       bookedSeats: 0,
       roomUrl: roomUrl || 'https://zoom.us/j/9842104921',
       format: format || 'Interactive Video Roundtable (60 Min)',
-      status: 'Scheduled',
+      status: status || 'Scheduled',
       agenda: agenda || ''
     };
     mockBriefings.unshift(newBriefing);
+    saveJson('briefings.json', mockBriefings);
     res.status(201).json({ success: true, briefing: newBriefing });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -2050,6 +2010,7 @@ app.put('/api/admin/briefings/:id', authenticateUser, requireAdmin, async (req, 
       updates.datetimeFormatted = dtObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + dtObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' WAT';
     }
     mockBriefings[index] = { ...mockBriefings[index], ...updates };
+    saveJson('briefings.json', mockBriefings);
     res.json({ success: true, briefing: mockBriefings[index] });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -2065,6 +2026,7 @@ app.delete('/api/admin/briefings/:id', authenticateUser, requireAdmin, async (re
       return res.status(404).json({ error: 'Briefing session not found.' });
     }
     const deleted = mockBriefings.splice(index, 1);
+    saveJson('briefings.json', mockBriefings);
     res.json({ success: true, message: 'Briefing successfully deleted.', briefing: deleted[0] });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -2074,7 +2036,7 @@ app.delete('/api/admin/briefings/:id', authenticateUser, requireAdmin, async (re
 // ==============================================================================
 // 12. STRATEGIC INSTITUTIONAL PARTNERS & ALLIANCES DESK CRUD
 // ==============================================================================
-let mockPartners = [
+let mockPartners = loadJson('partners.json', [
   {
     id: 'united-carriers',
     name: 'United Carriers',
@@ -2243,7 +2205,7 @@ let mockPartners = [
     status: 'published',
     order: 8
   }
-];
+]);
 
 // GET public partners (only published)
 app.get('/api/partners', (req, res) => {
@@ -2282,6 +2244,7 @@ app.post('/api/admin/partners', authenticateUser, requireAdmin, async (req, res)
       order: mockPartners.length + 1
     };
     mockPartners.push(newPartner);
+    saveJson('partners.json', mockPartners);
     res.status(201).json({ success: true, partner: newPartner });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -2301,6 +2264,7 @@ app.put('/api/admin/partners/:id', authenticateUser, requireAdmin, async (req, r
       updates.highlights = updates.highlights.split('\n').filter(Boolean);
     }
     mockPartners[index] = { ...mockPartners[index], ...updates };
+    saveJson('partners.json', mockPartners);
     res.json({ success: true, partner: mockPartners[index] });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -2316,7 +2280,308 @@ app.delete('/api/admin/partners/:id', authenticateUser, requireAdmin, async (req
       return res.status(404).json({ error: 'Partner alliance not found.' });
     }
     const deleted = mockPartners.splice(index, 1);
+    saveJson('partners.json', mockPartners);
     res.json({ success: true, message: 'Partner alliance successfully deleted.', partner: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
+// 13. MASTER ORDERS & TRANSACTIONS API (ADMIN AUDIT & CHECKOUT RECONCILIATION)
+// ==============================================================================
+
+// GET all orders (Admin Transaction & Webhook Audit Desk)
+app.get('/api/orders', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let orders = [...mockOrders];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin.from('orders').select('*').order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+          const seen = new Set(orders.map(o => o.tx_ref || o.flw_tx_ref || o.id));
+          data.forEach(item => {
+            const key = item.tx_ref || item.flw_tx_ref || item.id;
+            if (!seen.has(key)) {
+              orders.push(item);
+              seen.add(key);
+            }
+          });
+        }
+      } catch (e) {}
+    }
+    res.json({ success: true, count: orders.length, orders });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST record new order (from Flutterwave Checkout or Webhook)
+app.post('/api/orders', async (req, res) => {
+  try {
+    const {
+      id,
+      customer_id,
+      customer_email,
+      customer_name,
+      company_name,
+      product_id,
+      report_id,
+      product_title,
+      report_title,
+      total_amount,
+      amount,
+      amount_formatted,
+      currency = 'USD',
+      flw_tx_ref,
+      tx_ref,
+      flw_transaction_id,
+      payment_method = 'flutterwave',
+      license_tier = 'Single User',
+      order_status,
+      status,
+      metadata = {}
+    } = req.body;
+
+    const finalEmail = customer_email;
+    const finalAmount = total_amount !== undefined ? total_amount : amount;
+    const finalTxRef = flw_tx_ref || tx_ref || ('RNLY-TX-' + Date.now());
+    const finalProductId = product_id || report_id || 'renalytica-report';
+    const finalProductTitle = product_title || report_title || 'Institutional Research Publication';
+    const finalStatus = order_status || status || 'paid';
+
+    if (!finalEmail || finalAmount === undefined || !finalTxRef) {
+      return res.status(400).json({ error: 'Missing required order fields (customer_email, total_amount/amount, flw_tx_ref/tx_ref).' });
+    }
+
+    const newOrder = {
+      id: id || ('ord_' + Date.now().toString(36) + '_' + Math.floor(100 + Math.random() * 900)),
+      tx_ref: finalTxRef,
+      flw_tx_ref: finalTxRef,
+      customer_id: customer_id || 'usr_client_' + Date.now().toString(36),
+      customer_email: finalEmail,
+      customer_name: customer_name || 'Institutional Client',
+      company_name: company_name || 'Enterprise Client',
+      product_id: finalProductId,
+      report_id: finalProductId,
+      product_title: finalProductTitle,
+      report_title: finalProductTitle,
+      order_status: finalStatus,
+      status: finalStatus,
+      total_amount: Number(finalAmount),
+      amount: Number(finalAmount),
+      amount_formatted: amount_formatted || (`₦${Number(finalAmount).toLocaleString()} ${currency}`),
+      currency: (currency || 'USD').toUpperCase(),
+      flw_transaction_id: flw_transaction_id || `flw_${Date.now()}`,
+      payment_method,
+      license_tier,
+      metadata,
+      created_at: new Date().toISOString()
+    };
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('orders').insert([newOrder]);
+      } catch (dbErr) {
+        console.warn('Supabase order insert note:', dbErr.message);
+      }
+    }
+
+    mockOrders.unshift(newOrder);
+    saveJson('orders.json', mockOrders);
+
+    // Auto-create digital fulfillment token
+    const secureToken = 'tok_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    const fulfillment = {
+      id: 'ful_' + Date.now(),
+      order_id: newOrder.id,
+      product_id: newOrder.product_id,
+      customer_id: newOrder.customer_id,
+      customer_email: newOrder.customer_email,
+      company_name: newOrder.company_name,
+      secure_token: secureToken,
+      current_download_count: 0,
+      max_download_limit: 3,
+      expires_at: new Date(Date.now() + 86400000).toISOString(),
+      created_at: new Date().toISOString()
+    };
+
+    mockFulfillments.unshift(fulfillment);
+    saveJson('fulfillments.json', mockFulfillments);
+
+    res.status(201).json({ success: true, order: newOrder, fulfillment });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET customer orders (Client Portal Invoices & Proformas)
+app.get('/api/orders/my-orders', authenticateUser, async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+    const userId = req.user.id;
+    let orders = mockOrders.filter(o => o.customer_email === userEmail || o.customer_id === userId);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('orders')
+          .select('*')
+          .or(`customer_id.eq.${userId},customer_email.eq.${userEmail}`)
+          .order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+          const seen = new Set(orders.map(o => o.tx_ref || o.flw_tx_ref || o.id));
+          data.forEach(item => {
+            const key = item.tx_ref || item.flw_tx_ref || item.id;
+            if (!seen.has(key)) {
+              orders.push(item);
+              seen.add(key);
+            }
+          });
+        }
+      } catch (e) {}
+    }
+
+    if (req.user.role === 'admin' && orders.length === 0) {
+      orders = mockOrders;
+    }
+
+    res.json({ success: true, count: orders.length, orders });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
+// 14. CLIENT DELIVERABLES UPLOAD & REGISTRY ENGINE
+// ==============================================================================
+
+// POST upload deliverable (Admin Desk)
+app.post('/api/admin/deliverables/upload', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const {
+      accountId = 'usr_exec_001',
+      accountEmail = 'renalytica@gmail.com',
+      fileId,
+      fileName,
+      fileBase64,
+      licenseTier = 'Global Enterprise'
+    } = req.body;
+
+    if (!fileName || !fileBase64) {
+      return res.status(400).json({ error: 'fileName and fileBase64 are required.' });
+    }
+
+    const cleanFileId = fileId || 'deliv_' + Date.now();
+    const cleanPath = `deliverables/${cleanFileId}_${fileName.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const fileBuffer = Buffer.from(fileBase64.replace(/^data:[^;]+;base64,/, ''), 'base64');
+
+    // 1. Upload to Supabase Storage client_deliverables bucket
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.storage
+          .from('client_deliverables')
+          .upload(cleanPath, fileBuffer, {
+            contentType: fileName.endsWith('.pdf') ? 'application/pdf' : 'application/octet-stream',
+            upsert: true
+          });
+      } catch (sErr) {
+        console.warn('Supabase storage deliverable upload note:', sErr.message);
+      }
+    }
+
+    // 2. Save local backup to assets/deliverables/
+    const localDir = path.join(__dirname, 'assets', 'deliverables');
+    if (!fs.existsSync(localDir)) fs.mkdirSync(localDir, { recursive: true });
+    fs.writeFileSync(path.join(localDir, path.basename(cleanPath)), fileBuffer);
+
+    // 3. Register deliverable record
+    const assignment = {
+      id: 'deliv_rec_' + Date.now(),
+      account_id: accountId,
+      account_email: accountEmail,
+      file_id: cleanFileId,
+      file_name: fileName,
+      file_path: cleanPath,
+      local_path: `assets/deliverables/${path.basename(cleanPath)}`,
+      file_size_bytes: fileBuffer.length,
+      license_tier: licenseTier,
+      assigned_by: req.user.id,
+      download_count: 0,
+      created_at: new Date().toISOString()
+    };
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('client_deliverables').insert([assignment]);
+      } catch (e) {}
+    }
+
+    mockDeliverables.unshift(assignment);
+    saveJson('deliverables.json', mockDeliverables);
+
+    res.status(201).json({ success: true, deliverable: assignment });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all deliverables (Admin Deliverables Desk)
+app.get('/api/admin/deliverables', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let items = [...mockDeliverables];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin.from('client_deliverables').select('*').order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+          const seen = new Set(items.map(d => d.id || d.file_id));
+          data.forEach(d => {
+            const key = d.id || d.file_id;
+            if (!seen.has(key)) {
+              items.push(d);
+              seen.add(key);
+            }
+          });
+        }
+      } catch (e) {}
+    }
+    res.json({ success: true, count: items.length, deliverables: items });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET client's deliverables (Client Portal Library Desk)
+app.get('/api/deliverables/my-deliverables', authenticateUser, async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+    const userId = req.user.id;
+    let items = mockDeliverables.filter(d => d.account_email === userEmail || d.account_id === userId);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('client_deliverables')
+          .select('*')
+          .or(`account_id.eq.${userId},account_email.eq.${userEmail}`)
+          .order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+          const seen = new Set(items.map(d => d.id || d.file_id));
+          data.forEach(d => {
+            const key = d.id || d.file_id;
+            if (!seen.has(key)) {
+              items.push(d);
+              seen.add(key);
+            }
+          });
+        }
+      } catch (e) {}
+    }
+
+    if (req.user.role === 'admin' && items.length === 0) {
+      items = mockDeliverables;
+    }
+    res.json({ success: true, count: items.length, deliverables: items });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -150,55 +150,40 @@ body.gateway-hovering .gateway-cursor-ring {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 680px;
-  padding: 2.5rem 1.5rem;
   user-select: none;
 }
 
-/* Telemetry Badge */
-.gateway-telemetry-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.4rem 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #94A3B8;
-  margin-bottom: 2rem;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.gateway-telemetry-badge .status-ping {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background-color: #22C55E;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #22C55E;
-  animation: pulseGreen 1.8s infinite ease-in-out;
-}
-
-@keyframes pulseGreen {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.35); opacity: 0.5; }
-}
-
-/* 7. Cardiac Heartbeat Logo Epicenter */
+/* 7. Interactive Cardiac Heartbeat Logo Epicenter (The Portal Button) */
 .gateway-logo-wrapper {
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.85rem;
-  padding: 1.25rem;
-  cursor: default;
+  padding: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gateway-logo-wrapper:hover {
+  transform: scale(1.06);
+}
+
+.gateway-logo-wrapper:active {
+  transform: scale(0.95);
+  transition-duration: 0.12s;
+}
+
+.gateway-logo-wrapper:focus-visible {
+  outline: 2px solid rgba(255, 92, 0, 0.85);
+  outline-offset: 12px;
 }
 
 /* Concentric Expanding Heartbeat Radar Waves */
@@ -206,10 +191,10 @@ body.gateway-hovering .gateway-cursor-ring {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 175px;
-  height: 175px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 92, 0, 0.65);
+  border: 1.5px solid rgba(255, 92, 0, 0.7);
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.6);
   opacity: 0;
@@ -222,19 +207,24 @@ body.gateway-hovering .gateway-cursor-ring {
 
 .gateway-radar-ring.ring-3 {
   animation-delay: 1.7s;
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.gateway-logo-wrapper:hover .gateway-radar-ring {
+  border-color: rgba(255, 92, 0, 0.95);
+  filter: drop-shadow(0 0 12px rgba(255, 92, 0, 0.75));
 }
 
 @keyframes cardiacRadarPulse {
   0% {
     transform: translate(-50%, -50%) scale(0.6);
-    opacity: 0.9;
+    opacity: 0.95;
   }
   40% {
-    opacity: 0.6;
+    opacity: 0.7;
   }
   100% {
-    transform: translate(-50%, -50%) scale(2.8);
+    transform: translate(-50%, -50%) scale(3);
     opacity: 0;
   }
 }
@@ -242,15 +232,20 @@ body.gateway-hovering .gateway-cursor-ring {
 /* The Heartbeat Pulsating Emblem */
 .gateway-heartbeat-logo {
   position: relative;
-  width: 170px;
-  max-width: 48vw;
+  width: 195px;
+  max-width: 55vw;
   height: auto;
   display: block;
   z-index: 2;
   animation: cardiacHeartbeat 2.8s ease-in-out infinite;
   transform-origin: center center;
   will-change: transform, filter;
-  filter: drop-shadow(0 0 25px rgba(255, 92, 0, 0.45));
+  filter: drop-shadow(0 0 25px rgba(255, 92, 0, 0.5)) drop-shadow(0 0 45px rgba(255, 92, 0, 0.25));
+  transition: filter 0.35s ease;
+}
+
+.gateway-logo-wrapper:hover .gateway-heartbeat-logo {
+  filter: drop-shadow(0 0 35px rgba(255, 92, 0, 0.95)) drop-shadow(0 0 65px rgba(255, 255, 255, 0.6));
 }
 
 /* Specular Light Sweep Overlay across the logo */
@@ -264,7 +259,7 @@ body.gateway-hovering .gateway-cursor-ring {
     105deg,
     transparent 0%,
     rgba(255, 255, 255, 0.05) 30%,
-    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0.75) 50%,
     rgba(255, 255, 255, 0.05) 70%,
     transparent 100%
   );
@@ -276,7 +271,7 @@ body.gateway-hovering .gateway-cursor-ring {
 
 @keyframes logoSpecularSheen {
   0% { left: -100%; opacity: 0; }
-  25% { opacity: 0.8; }
+  25% { opacity: 0.85; }
   50% { left: 180%; opacity: 0; }
   100% { left: 180%; opacity: 0; }
 }
@@ -285,139 +280,51 @@ body.gateway-hovering .gateway-cursor-ring {
 @keyframes cardiacHeartbeat {
   0% {
     transform: scale(1);
-    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4)) drop-shadow(0 0 40px rgba(255, 92, 0, 0.2));
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.45)) drop-shadow(0 0 40px rgba(255, 92, 0, 0.2));
   }
   10% {
     /* Lub */
-    transform: scale(1.06);
-    filter: drop-shadow(0 0 35px rgba(255, 92, 0, 0.85)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.35));
+    transform: scale(1.07);
+    filter: drop-shadow(0 0 40px rgba(255, 92, 0, 0.9)) drop-shadow(0 0 65px rgba(255, 255, 255, 0.45));
   }
   20% {
     transform: scale(1.01);
-    filter: drop-shadow(0 0 22px rgba(255, 92, 0, 0.5));
+    filter: drop-shadow(0 0 24px rgba(255, 92, 0, 0.55));
   }
   30% {
     /* Dub (Stronger pulse) */
-    transform: scale(1.10);
-    filter: drop-shadow(0 0 50px rgba(255, 92, 0, 1)) drop-shadow(0 0 80px rgba(255, 255, 255, 0.55));
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 55px rgba(255, 92, 0, 1)) drop-shadow(0 0 85px rgba(255, 255, 255, 0.65));
   }
   50% {
     transform: scale(1);
-    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4));
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.45));
   }
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.4));
+    filter: drop-shadow(0 0 20px rgba(255, 92, 0, 0.45));
   }
 }
 
-/* Tagline & Subtext */
-.gateway-tagline {
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: rgba(234, 240, 246, 0.82);
-  margin-bottom: 2.5rem;
-  letter-spacing: 0.04em;
-  max-width: 460px;
-  line-height: 1.5;
-}
-
-.gateway-tagline strong {
-  color: #FFFFFF;
-  font-weight: 600;
-}
-
-/* 8. The High-Impact Enter CTA Button */
-.gateway-btn-container {
-  position: relative;
-  display: inline-block;
-  margin-top: 0.5rem;
-}
-
-.gateway-btn-aura {
-  position: absolute;
-  inset: -14px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(255, 92, 0, 0.85) 0%, rgba(255, 92, 0, 0) 70%);
-  filter: blur(20px);
-  opacity: 0.85;
-  pointer-events: none;
-  animation: btnAuraPulse 2s ease-in-out infinite alternate;
-}
-
-@keyframes btnAuraPulse {
-  0% { transform: scale(0.92); opacity: 0.65; }
-  100% { transform: scale(1.22); opacity: 1; filter: blur(24px); }
-}
-
-.gateway-enter-btn {
-  position: relative;
-  z-index: 10;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.85rem;
-  padding: 1.15rem 3.4rem;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF5C00 50%, #EA4C00 100%);
-  color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 9999px;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 
-    0 0 35px rgba(255, 92, 0, 0.75),
-    0 12px 30px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s ease,
-              border-color 0.25s ease;
-}
-
-.gateway-enter-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 
-    0 0 55px rgba(255, 92, 0, 1),
-    0 16px 40px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border-color: rgba(255, 255, 255, 0.7);
-}
-
-.gateway-enter-btn:active {
-  transform: scale(0.96);
-}
-
-.gateway-enter-btn .btn-arrow-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gateway-enter-btn:hover .btn-arrow-icon {
-  transform: translateX(5px);
-}
-
-/* Subtle Skip Link for quick access */
-.gateway-skip-hint {
-  display: block;
-  margin-top: 1.25rem;
-  font-size: 0.75rem;
-  color: rgba(148, 163, 184, 0.55);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  background: none;
-  border: none;
-}
-
-.gateway-skip-hint:hover {
-  color: #FF5C00;
-  text-decoration: underline;
+/* ==============================================================================
+   8. WIDGET & COOKIE BANNER ISOLATION (Strict Lockdown during Entrance Gateway)
+   ============================================================================== */
+body.entrance-locked .renalytica-cookie-banner,
+body.entrance-locked cookie-consent,
+body.entrance-locked multi-channel-chat,
+body.entrance-locked #renalytica-chat-root,
+body.entrance-locked .chat-launcher-btn,
+body.entrance-locked .chat-card-popup,
+body.entrance-locked [class*="elfsight"],
+body.entrance-locked [id*="elfsight"],
+body.entrance-locked div[style*="z-index: 214748364"],
+body.entrance-locked iframe[title*="chat" i],
+body.entrance-locked iframe[title*="cookie" i] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(150%) scale(0.8) !important;
 }
 
 /* 9. Hyper-Drive Shockwave Light Burst Overlay */

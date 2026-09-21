@@ -1058,7 +1058,12 @@
       }
 
       // Price Formatter Helper
-      function formatPrice(usdAmount) {
+      function formatPrice(usdAmount, ngnAmount = null) {
+        const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+        if (curr === 'NGN') {
+          const val = ngnAmount !== null ? ngnAmount : (usdAmount ? Math.round(usdAmount * 1500) : 0);
+          return `₦${Number(val).toLocaleString()} NGN`;
+        }
         if (typeof window.formatPriceWithActiveCurrency === 'function') {
           return window.formatPriceWithActiveCurrency(usdAmount);
         }
@@ -1097,12 +1102,24 @@
 
       // Update License Price Labels (Multi-currency formatted)
       function updateLicensePriceLabels() {
-        document.getElementById('price-single').innerHTML = formatPrice(report.pricing.single);
-        document.getElementById('price-departmental').innerHTML = formatPrice(report.pricing.departmental);
-        document.getElementById('price-enterprise').innerHTML = formatPrice(report.pricing.enterprise);
+        const singleNgn = (report.pricing && report.pricing.singleNgn) || (report.regional_pricing && report.regional_pricing.NGN) || (report.base_price && report.currency === 'NGN' ? report.base_price : 225000);
+        const deptNgn = (report.pricing && report.pricing.departmentalNgn) || Math.round(singleNgn * 3);
+        const entNgn = (report.pricing && report.pricing.enterpriseNgn) || Math.round(singleNgn * 6.333);
+
+        const singleUsd = (report.pricing && report.pricing.single) || 150;
+        const deptUsd = (report.pricing && report.pricing.departmental) || 450;
+        const entUsd = (report.pricing && report.pricing.enterprise) || 950;
+
+        document.getElementById('price-single').innerHTML = formatPrice(singleUsd, singleNgn);
+        document.getElementById('price-departmental').innerHTML = formatPrice(deptUsd, deptNgn);
+        document.getElementById('price-enterprise').innerHTML = formatPrice(entUsd, entNgn);
       }
       updateLicensePriceLabels();
       window.addEventListener('renalytica:currency-change', updateLicensePriceLabels);
+      window.addEventListener('renalytica:catalog-synced', () => {
+        report = repo.getById(reportId) || report;
+        updateLicensePriceLabels();
+      });
 
       // Modal info
       document.getElementById('modal-report-name').textContent = report.title;

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "BRF-TEST-1790003154321",
+    "title": "Executive Roundtable: 2026 Grain Parity Benchmarking",
+    "sector": "Agribusiness & Commodities",
+    "host": "Dr. Adeleke Ogunlesi (Lead Agricultural Economist)",
+    "datetime": "2026-10-15T14:00",
+    "datetimeFormatted": "Thu, Oct 15, 2026 • 2:00 PM WAT",
+    "capacity": 30,
+    "bookedSeats": 0,
+    "roomUrl": "https://zoom.us/j/9842104921",
+    "format": "Interactive Video Roundtable (60 Min)",
+    "status": "Scheduled",
+    "agenda": "In-depth farmgate price arbitration and FX pass-through modeling."
+  },
+  {
+    "id": "BRF-2026-330",
+    "title": "Executive Roundtable: 2026 Grain Parity Benchmarking",
+    "sector": "Agribusiness & Commodities",
+    "host": "Dr. Adeleke Ogunlesi (Lead Agricultural Economist)",
+    "datetime": "2026-10-15T14:00",
+    "datetimeFormatted": "Thu, Oct 15, 2026 • 2:00 PM WAT",
+    "capacity": 30,
+    "bookedSeats": 0,
+    "roomUrl": "https://zoom.us/j/9842104921",
+    "format": "Interactive Video Roundtable (60 Min)",
+    "status": "Scheduled",
+    "agenda": "In-depth farmgate price arbitration and FX pass-through modeling."
+  },
+  {
+    "id": "BRF-2026-001",
+    "title": "Q4 2026 Sub-Saharan Agro-Commodities & Fertilizer Import Parity Outlook",
+    "sector": "Agribusiness & Commodities",
+    "host": "Dr. Adeleke Ogunlesi (Lead Agricultural Economist)",
+    "datetime": "2026-10-15T14:00",
+    "datetimeFormatted": "Thu, Oct 15, 2026 • 2:00 PM WAT",
+    "capacity": 25,
+    "bookedSeats": 7,
+    "roomUrl": "https://zoom.us/j/9842104921",
+    "format": "Interactive Video Roundtable (60 Min)",
+    "status": "Scheduled",
+    "agenda": "Review farmgate maize, wheat, and soybean harvest forecasts, FX landing cost disparities across Nigeria, Ghana, and Kenya, and outgrower margin dynamics."
+  },
+  {
+    "id": "BRF-2026-002",
+    "title": "West African Sports Business & Athleisure Market Expansion",
+    "sector": "Sports Business & Analytics",
+    "host": "Obinna Ezeala (Managing Director & Chief Strategist)",
+    "datetime": "2026-10-20T11:00",
+    "datetimeFormatted": "Tue, Oct 20, 2026 • 11:00 AM WAT",
+    "capacity": 30,
+    "bookedSeats": 6,
+    "roomUrl": "https://teams.microsoft.com/l/meetup-join/renalytica-sports-2026",
+    "format": "Executive Analyst Presentation + Q&A (45 Min)",
+    "status": "Scheduled",
+    "agenda": "Empirical market sizing of youth athletic apparel, grassroots football academy monetization, and domestic manufacturing partnerships featuring partner AXiA Active."
+  },
+  {
+    "id": "BRF-2026-003",
+    "title": "Pan-African Digital Currency Liquidity & Cross-Border Treasury Arbitrage",
+    "sector": "Financial Systems & Fintech",
+    "host": "Chiamaka Nkemdirim (Fintech & FX Lead)",
+    "datetime": "2026-10-27T15:00",
+    "datetimeFormatted": "Tue, Oct 27, 2026 • 3:00 PM WAT",
+    "capacity": 20,
+    "bookedSeats": 11,
+    "roomUrl": "https://zoom.us/j/9128391204",
+    "format": "Closed Boardroom Session (90 Min)",
+    "status": "Scheduled",
+    "agenda": "Analysis of USDT/NGN and crypto-fiat settlement spreads, central bank compliance frameworks, and institutional treasury hedging strategies."
+  }
+]

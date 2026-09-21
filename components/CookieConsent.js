@@ -178,10 +178,27 @@ class CookieConsent extends HTMLElement {
       });
     }
 
-    // Pop-in animation with polite 650ms delay after initial paint
-    setTimeout(() => {
-      if (banner) banner.classList.add('is-visible');
-    }, 650);
+    // Pop-in animation: Strictly defer if the cinematic entrance gateway is active
+    const showBanner = (delay = 650) => {
+      setTimeout(() => {
+        // Guard: never show while entrance is locked
+        if (document.body.classList.contains('entrance-locked')) return;
+        if (banner) banner.classList.add('is-visible');
+      }, delay);
+    };
+
+    const entranceStage = document.getElementById('entrance-stage');
+    const isEntranceActive = entranceStage && 
+                             document.body.classList.contains('entrance-locked') && 
+                             sessionStorage.getItem('renalytica_gateway_entered') !== 'true';
+
+    if (isEntranceActive) {
+      window.addEventListener('renalytica:gateway-revealed', () => {
+        showBanner(1200);
+      }, { once: true });
+    } else {
+      showBanner(650);
+    }
 
     const closeBanner = (consentDecision, customPreferences = null) => {
       try {

@@ -604,16 +604,24 @@
         reportsGrid.style.flexDirection = 'column';
         emptyState.style.display = 'none';
 
-        function formatPrice(usdAmount) {
+        function formatPrice(usdAmount, ngnAmount = null) {
+          const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+          if (curr === 'NGN') {
+            const val = ngnAmount || (usdAmount ? Math.round(usdAmount * 1500) : 0);
+            return `₦${Number(val).toLocaleString()} NGN`;
+          }
           if (typeof window.formatPriceWithActiveCurrency === 'function') {
             return window.formatPriceWithActiveCurrency(usdAmount);
           }
-          return `$${usdAmount.toLocaleString()} USD`;
+          return `$${Number(usdAmount || 0).toLocaleString()} USD`;
         }
 
         reportsGrid.innerHTML = reports.map(r => {
           const coverImg = r.coverImage || 'assets/images/analyst_holding_market_chart.jpg';
           const formatsText = (r.formats && r.formats.length) ? r.formats.join(' + ') : 'PDF + XLSX + DECK';
+          const singleNgn = (r.pricing && r.pricing.singleNgn) || (r.regional_pricing && r.regional_pricing.NGN) || (r.base_price && r.currency === 'NGN' ? r.base_price : 225000);
+          const deptNgn = (r.pricing && r.pricing.departmentalNgn) || Math.round(singleNgn * 3);
+          const entNgn = (r.pricing && r.pricing.enterpriseNgn) || Math.round(singleNgn * 6.333);
 
           return `
             <article class="report-card ${r.isFlagship ? 'flagship-card' : ''}" data-id="${r.id}">
@@ -668,16 +676,16 @@
                 <div class="card-licensing-box">
                   <div class="license-price-pill">
                     <span class="l-label">Single User:</span>
-                    <strong>${formatPrice(r.pricing.single)}</strong>
+                    <strong>${formatPrice(r.pricing.single, singleNgn)}</strong>
                   </div>
                   <div class="license-price-pill featured-license">
                     <span class="l-label">Departmental:</span>
-                    <strong>${formatPrice(r.pricing.departmental)}</strong>
+                    <strong>${formatPrice(r.pricing.departmental, deptNgn)}</strong>
                     <span class="license-rec-badge">RECOMMENDED</span>
                   </div>
                   <div class="license-price-pill">
                     <span class="l-label">Enterprise:</span>
-                    <strong>${formatPrice(r.pricing.enterprise)}</strong>
+                    <strong>${formatPrice(r.pricing.enterprise, entNgn)}</strong>
                   </div>
                 </div>
 
@@ -917,16 +925,21 @@
       function renderBriefcaseDrawer() {
         const items = repo.getCart();
         drawerCountChip.textContent = items.length;
-        const total = repo.getCartTotal();
+        const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+        const total = repo.getCartTotal(curr);
         
-        function formatPrice(usdAmount) {
+        function formatItemPrice(usdAmount, ngnAmount = null) {
+          if (curr === 'NGN') {
+            const val = ngnAmount !== null ? ngnAmount : (usdAmount ? Math.round(usdAmount * 1500) : 0);
+            return `₦${Number(val).toLocaleString()} NGN`;
+          }
           if (typeof window.formatPriceWithActiveCurrency === 'function') {
             return window.formatPriceWithActiveCurrency(usdAmount);
           }
-          return `$${usdAmount.toLocaleString()} USD`;
+          return `$${Number(usdAmount || 0).toLocaleString()} USD`;
         }
 
-        briefcaseSubtotal.textContent = formatPrice(total);
+        briefcaseSubtotal.textContent = curr === 'NGN' ? `₦${Number(total).toLocaleString()} NGN` : formatItemPrice(total);
 
         if (items.length === 0) {
           briefcaseItemsContainer.innerHTML = `
@@ -943,9 +956,14 @@
 
         briefcaseItemsContainer.innerHTML = items.map(item => {
           const report = repo.getById(item.id);
-          const singleP = report ? report.pricing.single : 2500;
-          const deptP = report ? report.pricing.departmental : 4500;
-          const entP = report ? report.pricing.enterprise : 7500;
+          const singleP = report ? report.pricing.single : 150;
+          const singlePNgn = report ? (report.pricing.singleNgn || (report.regional_pricing && report.regional_pricing.NGN)) : 225000;
+          const deptP = report ? report.pricing.departmental : 450;
+          const deptPNgn = report ? (report.pricing.departmentalNgn || (singlePNgn * 3)) : 675000;
+          const entP = report ? report.pricing.enterprise : 950;
+          const entPNgn = report ? (report.pricing.enterpriseNgn || Math.round(singlePNgn * 6.333)) : 1425000;
+          const itemPriceNgn = item.licenseType === 'single' ? singlePNgn : (item.licenseType === 'enterprise' ? entPNgn : deptPNgn);
+          const itemPriceUsd = item.licenseType === 'single' ? singleP : (item.licenseType === 'enterprise' ? entP : deptP);
 
           return `
             <div class="briefcase-item" data-id="${item.id}">
@@ -959,15 +977,15 @@
               <div class="b-license-row">
                 <label class="b-license-label">License:</label>
                 <select class="b-license-select" data-id="${item.id}">
-                  <option value="single" ${item.licenseType === 'single' ? 'selected' : ''}>Single User (${formatPrice(singleP)})</option>
-                  <option value="departmental" ${item.licenseType === 'departmental' ? 'selected' : ''}>Departmental (${formatPrice(deptP)})</option>
-                  <option value="enterprise" ${item.licenseType === 'enterprise' ? 'selected' : ''}>Global Enterprise (${formatPrice(entP)})</option>
+                  <option value="single" ${item.licenseType === 'single' ? 'selected' : ''}>Single User (${formatItemPrice(singleP, singlePNgn)})</option>
+                  <option value="departmental" ${item.licenseType === 'departmental' ? 'selected' : ''}>Departmental (${formatItemPrice(deptP, deptPNgn)})</option>
+                  <option value="enterprise" ${item.licenseType === 'enterprise' ? 'selected' : ''}>Global Enterprise (${formatItemPrice(entP, entPNgn)})</option>
                 </select>
               </div>
 
               <div class="b-item-price-row">
                 <span>Tier Total:</span>
-                <strong class="b-item-price">${formatPrice(item.price || deptP)}</strong>
+                <strong class="b-item-price">${formatItemPrice(itemPriceUsd, itemPriceNgn)}</strong>
               </div>
             </div>
           `;

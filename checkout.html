@@ -553,7 +553,12 @@
       });
 
       // Price Formatter Helper
-      function formatPrice(usdAmount) {
+      function formatPrice(usdAmount, ngnAmount = null) {
+        const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+        if (curr === 'NGN') {
+          const val = ngnAmount !== null ? ngnAmount : (usdAmount ? Math.round(usdAmount * 1500) : 0);
+          return `₦${Number(val).toLocaleString()} NGN`;
+        }
         if (typeof window.formatPriceWithActiveCurrency === 'function') {
           return window.formatPriceWithActiveCurrency(usdAmount);
         }
@@ -610,9 +615,10 @@
       });
 
       function updateExecuteBtnText() {
-        const rawSubtotal = repo.getCartTotal();
+        const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+        const rawSubtotal = repo.getCartTotal(curr);
         const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
-        const formattedTotal = formatPrice(finalAmount);
+        const formattedTotal = curr === 'NGN' ? `₦${finalAmount.toLocaleString()} NGN` : formatPrice(finalAmount);
 
         if (currentPaymentMethod === 'card') {
           executeBtn.innerHTML = `<span>🔒 Process Payment (${formattedTotal})</span>`;
@@ -707,18 +713,19 @@
         }
 
         // Totals Calculation
-        const rawSubtotal = repo.getCartTotal();
+        const curr = (typeof localStorage !== 'undefined' && localStorage.getItem('renalytica_currency')) || 'USD';
+        const rawSubtotal = repo.getCartTotal(curr);
         const discountAmount = Math.round(rawSubtotal * discountRate);
         const finalTotal = rawSubtotal - discountAmount;
 
-        subtotalVal.textContent = formatPrice(rawSubtotal);
+        subtotalVal.textContent = curr === 'NGN' ? `₦${rawSubtotal.toLocaleString()} NGN` : formatPrice(rawSubtotal);
         if (discountRate > 0) {
           discountRow.style.display = 'flex';
-          discountVal.textContent = `-${formatPrice(discountAmount)}`;
+          discountVal.textContent = curr === 'NGN' ? `-₦${discountAmount.toLocaleString()} NGN` : `-${formatPrice(discountAmount)}`;
         } else {
           discountRow.style.display = 'none';
         }
-        totalVal.textContent = formatPrice(finalTotal);
+        totalVal.textContent = curr === 'NGN' ? `₦${finalTotal.toLocaleString()} NGN` : formatPrice(finalTotal);
         updateExecuteBtnText();
       }
 
@@ -738,34 +745,43 @@
         if (code === 'INSTITUTION10' || code === 'EXECUTIVE2026' || code === 'RENALYTICA') {
           discountRate = 0.10;
           promoMsg.textContent = `✓ Promo code '${code}' applied: 10% Institutional Discount verified!`;
-          promoMsg.style.color = '#10B981';
-          promoBtn.textContent = 'Applied ✓';
-          promoBtn.style.background = '#10B981';
-          renderCheckout();
+          promoMsg.className = 'promo-msg text-accent';
+          promoMsg.style.display = 'block';
         } else {
-          promoMsg.textContent = `✕ Promo code '${code}' is invalid or expired.`;
-          promoMsg.style.color = '#EF4444';
+          discountRate = 0;
+          promoMsg.textContent = `✕ Unrecognized institutional access code.`;
+          promoMsg.className = 'promo-msg text-error';
+          promoMsg.style.display = 'block';
         }
+        renderCheckout();
       });
+
+      // Helper to post completed or pending order to live backend
+      async function recordOrderToBackend(orderData) {
+        try {
+          await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+          });
+        } catch (e) {
+          console.warn('Backend order recording notice:', e.message);
+        }
+      }
 
       // ======================================================================
       // CELEBRATORY CONFIRMATION SCREEN TRIGGER (State Switcher)
       // ======================================================================
       function showPaymentSuccessScreen(orderDetails) {
-        // 1. Hide active view, reveal success view
-        activeView.style.display = 'none';
-        successView.style.display = 'block';
+        // 1. Hide form panel & overview card
+        procurementCard.style.display = 'none';
+        orderOverviewCard.style.display = 'none';
 
-        // 2. Update Stepper: Step 2 becomes completed, Step 3 becomes active
-        step2.classList.remove('step-active');
-        step2.classList.add('step-completed');
-        step2.innerHTML = `<span class="step-check-icon">✓</span> <span>2 Payment Details</span>`;
+        // 2. Reveal success confirmation card
+        successCard.style.display = 'block';
 
-        step3.classList.add('step-active');
-        step3.innerHTML = `<span class="step-badge-num" style="background:var(--signal-success, #10B981); color:#FFF;">✓</span> <span>3 Complete Order</span>`;
-
-        // 3. Populate Order Details in confirmation card
-        successOrderRef.textContent = orderDetails.ref || '#RNLY-ORD-' + Math.floor(100000 + Math.random() * 900000);
+        // 3. Inject transaction details
+        successOrderRef.textContent = orderDetails.ref || 'RNLY-ORD-849204';
         successOrderAmount.textContent = orderDetails.amount || '$4,500 USD';
         successOrderEmail.textContent = orderDetails.email || 'procurement@client.com';
         
@@ -805,11 +821,12 @@
         const name = buyerName.value.trim();
         const org = buyerOrg.value.trim();
 
-        const rawSubtotal = repo.getCartTotal();
-        const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
         const activeCur = localStorage.getItem('renalytica_currency') || 'USD';
+        const rawSubtotal = repo.getCartTotal(activeCur);
+        const finalAmount = Math.round(rawSubtotal * (1 - discountRate));
         const reportIds = cart.map(i => i.id);
         const title = cart.length === 1 ? cart[0].title : `Renalytica Research Briefcase (${cart.length} Publications)`;
+        const formattedTotalStr = activeCur === 'NGN' ? `₦${finalAmount.toLocaleString()} NGN` : formatPrice(finalAmount);
 
         if (currentPaymentMethod === 'card' || currentPaymentMethod === 'transfer') {
           // Trigger Flutterwave Payment
@@ -823,10 +840,21 @@
               reportIds: reportIds,
               licenseType: cart[0].licenseType || 'departmental',
               onSuccess: (rec) => {
-                // Trigger celebratory confirmation state switcher
+                recordOrderToBackend({
+                  order_id: rec.txRef || 'RNLY-ORD-' + Date.now(),
+                  customer_name: name || 'Institutional Client',
+                  customer_email: email,
+                  customer_org: org || 'Enterprise Research Desk',
+                  product_title: title,
+                  amount: finalAmount,
+                  currency: activeCur,
+                  status: 'completed',
+                  payment_method: currentPaymentMethod === 'card' ? 'Online Card (Flutterwave)' : 'Bank Transfer (Flutterwave)',
+                  license: cart[0].licenseType || 'departmental'
+                });
                 showPaymentSuccessScreen({
                   ref: rec.txRef || 'RNLY-ORD-' + Date.now(),
-                  amount: formatPrice(finalAmount),
+                  amount: formattedTotalStr,
                   email: email
                 });
               },
@@ -835,27 +863,62 @@
               }
             });
           } else {
-            // Fallback success transition
+            recordOrderToBackend({
+              order_id: 'RNLY-ORD-' + Date.now(),
+              customer_name: name || 'Institutional Client',
+              customer_email: email,
+              customer_org: org || 'Enterprise Research Desk',
+              product_title: title,
+              amount: finalAmount,
+              currency: activeCur,
+              status: 'completed',
+              payment_method: 'Online Card (Flutterwave)',
+              license: cart[0].licenseType || 'departmental'
+            });
             showPaymentSuccessScreen({
               ref: 'RNLY-ORD-' + Date.now(),
-              amount: formatPrice(finalAmount),
+              amount: formattedTotalStr,
               email: email
             });
           }
         } else if (currentPaymentMethod === 'wire') {
           // SWIFT Wire Order Generation
           const wireRef = 'SWIFT-' + Math.floor(100000 + Math.random() * 900000);
+          recordOrderToBackend({
+            order_id: wireRef,
+            customer_name: name || 'Institutional Client',
+            customer_email: email,
+            customer_org: org || 'Enterprise Research Desk',
+            product_title: title,
+            amount: finalAmount,
+            currency: activeCur,
+            status: 'pending',
+            payment_method: 'SWIFT Wire Transfer Proforma',
+            license: cart[0].licenseType || 'departmental'
+          });
           showPaymentSuccessScreen({
             ref: wireRef,
-            amount: formatPrice(finalAmount),
+            amount: formattedTotalStr,
             email: email
           });
         } else {
           // Corporate Purchase Order Net-30
           const poRef = 'PO-' + Math.floor(100000 + Math.random() * 900000);
+          recordOrderToBackend({
+            order_id: poRef,
+            customer_name: name || 'Institutional Client',
+            customer_email: email,
+            customer_org: org || 'Enterprise Research Desk',
+            product_title: title,
+            amount: finalAmount,
+            currency: activeCur,
+            status: 'pending',
+            payment_method: 'Corporate Net-30 Purchase Order',
+            license: cart[0].licenseType || 'departmental'
+          });
           showPaymentSuccessScreen({
             ref: poRef,
-            amount: formatPrice(finalAmount),
+            amount: formattedTotalStr,
             email: email
           });
         }

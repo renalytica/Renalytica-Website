@@ -12,6 +12,13 @@
   user-select: none;
 }
 
+body.entrance-locked .renalytica-chat-widget {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* --------------------------------------------------------------------------
    1. Floating Launcher Button
    -------------------------------------------------------------------------- */
