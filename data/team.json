@@ -1,0 +1,184 @@
+[
+  {
+    "id": "ezeala-obinna",
+    "name": "Ezeala Obinna",
+    "role": "Founder, Lead Researcher & Data Analyst",
+    "category": "executive",
+    "category_label": "Executive Leadership Spotlight",
+    "desk_badge": "FOUNDING EXECUTIVE",
+    "badge_pill": "FOUNDER & LEAD RESEARCHER",
+    "role_eyebrow": "RESEARCH LEADERSHIP & FOUNDER",
+    "photo_url": "assets/images/obinna_main_photo.png",
+    "tagline": "Research Consultant • Data Analyst • Business Analyst • Digital Strategist",
+    "bio": "A philanthropist, seasoned expert in finance, artificial intelligence, fintech, corporate governance, & strategic management. An international award winning author with research that integrates quantitative methods and emerging technologies to address challenges in financial markets, organizational performance and digital transformation.",
+    "social_links": {
+      "linkedin": "https://www.linkedin.com/in/ezeala-obinna-5821a8119/",
+      "facebook": "",
+      "website": "",
+      "twitter": "",
+      "scholar": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u5HHmVD_uO8C"
+    },
+    "credentials": [
+      "✔ International Award-Winning Author",
+      "✔ Quantitative Finance & AI"
+    ],
+    "papers": [
+      {
+        "title": "\"An Empirical Analysis of Capital Structure, Liquidity and Banking Sector Performance in Nigeria (2011–2021)\"",
+        "researchgate": "https://www.researchgate.net/publication/373618126_An_Empirical_Analysis_of_Capital_Structure_Liquidity_and_Banking_Sector_Performance_in_Nigeria_2011-2021",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u5HHmVD_uO8C"
+      },
+      {
+        "title": "\"Financial Technology Innovations and Banking Performance in Developing Economies\"",
+        "repec": "https://ideas.repec.org/a/aif/journl/v26y2023i1p207-223.html",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u-x6o8ySG0sC"
+      }
+    ],
+    "skills": [],
+    "status": "published",
+    "display_order": 1
+  },
+  {
+    "id": "alfred-williams",
+    "name": "Alfred Williams",
+    "role": "Chief Technology Officer (CTO)",
+    "category": "executive",
+    "category_label": "Executive Leadership Spotlight",
+    "desk_badge": "TECHNOLOGY & SYSTEMS",
+    "badge_pill": "CHIEF TECHNOLOGY OFFICER (CTO)",
+    "role_eyebrow": "EXECUTIVE LEADERSHIP & TECHNOLOGY",
+    "photo_url": "assets/images/alfred_brand_photo.jpg",
+    "tagline": "Digital Strategist • Writer • Editor • Research Consultant",
+    "bio": "Combining over five years of professional experience in Education Training, Media and Communications, with excellent researching, writing, editing, designing, and marketing skills, I help these SMEs both come up with winning strategies and implement them most practically.",
+    "social_links": {
+      "linkedin": "https://www.linkedin.com/in/williams-e-alfred/",
+      "facebook": "",
+      "website": "",
+      "twitter": "",
+      "scholar": ""
+    },
+    "credentials": [
+      "✔ 5+ Yrs Media & Comms Vet",
+      "✔ Digital Strategy & Systems"
+    ],
+    "papers": [],
+    "skills": [
+      "Content/Digital Strategy",
+      "Search Engine Optimization",
+      "Social Media Marketing",
+      "Lead Generation and Email Marketing",
+      "Content/Web Design and Development"
+    ],
+    "status": "published",
+    "display_order": 2
+  },
+  {
+    "id": "lead-economist",
+    "name": "Lead Economist & Head of Macroeconomic Research",
+    "role": "Lead Economist & Head of Macroeconomic Research",
+    "category": "specialist",
+    "category_label": "Senior Sector Specialists",
+    "desk_badge": "MACRO DESK",
+    "badge_pill": "MACRO DESK",
+    "role_eyebrow": "RESEARCH LEADERSHIP",
+    "photo_url": "assets/images/about/team_lead_economist.jpg",
+    "tagline": "Currency Trends • Budgets • Inflation",
+    "bio": "Over 18 years of experience advising commercial banks, government agencies, and investment funds across Africa and international capital centers on economic policy, monetary risk, and sovereign debt.",
+    "social_links": {
+      "linkedin": "",
+      "website": "",
+      "facebook": "",
+      "twitter": "",
+      "scholar": ""
+    },
+    "credentials": [
+      "✔ 18+ Yrs Institutional Advisory"
+    ],
+    "papers": [],
+    "skills": [],
+    "status": "published",
+    "display_order": 3,
+    "updated_at": "2026-09-22T04:06:43.176Z"
+  },
+  {
+    "id": "agri-sector-lead",
+    "name": "Senior Sector Lead — Agriculture & Commodities",
+    "role": "Senior Sector Lead — Agriculture & Commodities",
+    "category": "specialist",
+    "category_label": "Senior Sector Specialists",
+    "desk_badge": "AGRI & COMMODITIES",
+    "badge_pill": "AGRI & COMMODITIES",
+    "role_eyebrow": "SECTOR SPECIALIST",
+    "photo_url": "assets/images/about/team_agriculture_lead.jpg",
+    "tagline": "Farming Trends • Fertilizer • Grains",
+    "bio": "An agricultural economist with deep experience across grain storage, seed adoption, fertilizer import pricing, and farm-to-factory logistics throughout West and East Africa's primary food basins.",
+    "social_links": {
+      "linkedin": "",
+      "facebook": "",
+      "website": "",
+      "twitter": "",
+      "scholar": ""
+    },
+    "credentials": [
+      "✔ Agronomy & Silo Network Audit"
+    ],
+    "papers": [],
+    "skills": [],
+    "status": "published",
+    "display_order": 4
+  },
+  {
+    "id": "fmcg-sector-lead",
+    "name": "Senior Sector Lead — Retail, Commerce & FMCG",
+    "role": "Senior Sector Lead — Retail, Commerce & FMCG",
+    "category": "specialist",
+    "category_label": "Senior Sector Specialists",
+    "desk_badge": "COMMERCE & FMCG",
+    "badge_pill": "COMMERCE & FMCG",
+    "role_eyebrow": "COMMERCIAL SPECIALIST",
+    "photo_url": "assets/images/about/team_fmcg_lead.jpg",
+    "tagline": "Supermarkets • Open Markets • FMCG",
+    "bio": "Former supply chain strategist for top regional consumer goods manufacturers. Specializes in modern supermarket distribution routes, wholesale depot pricing, and neighborhood market consumer spending.",
+    "social_links": {
+      "linkedin": "",
+      "facebook": "",
+      "website": "",
+      "twitter": "",
+      "scholar": ""
+    },
+    "credentials": [
+      "✔ Consumer Route-to-Market Vet"
+    ],
+    "papers": [],
+    "skills": [],
+    "status": "published",
+    "display_order": 5
+  },
+  {
+    "id": "quant-modeling-lead",
+    "name": "Head of Data & Quantitative Modeling",
+    "role": "Head of Data & Quantitative Modeling",
+    "category": "specialist",
+    "category_label": "Senior Sector Specialists",
+    "desk_badge": "QUANTITATIVE DATA",
+    "badge_pill": "QUANTITATIVE DATA",
+    "role_eyebrow": "SYSTEMS & MODELING",
+    "photo_url": "assets/images/about/team_quant_lead.jpg",
+    "tagline": "Satellite NDVI • Systems • Models",
+    "bio": "Data specialist focused on satellite crop tracking, port customs trade registries, statistical Monte Carlo simulations, and engineering unlocked Excel forecast tools for corporate and risk desks.",
+    "social_links": {
+      "linkedin": "",
+      "facebook": "",
+      "website": "",
+      "twitter": "",
+      "scholar": ""
+    },
+    "credentials": [
+      "✔ Geospatial & Stochastic Models"
+    ],
+    "papers": [],
+    "skills": [],
+    "status": "published",
+    "display_order": 6
+  }
+]

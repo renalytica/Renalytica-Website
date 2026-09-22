@@ -66,7 +66,7 @@
               <button class="btn-community-primary open-join-modal-btn" id="hero-join-btn">
                 Apply for Guild Access →
               </button>
-              <a href="#working-groups" class="btn-community-secondary">
+              <a href="#working-groups" class="btn-community-secondary" id="hero-view-groups-btn">
                 Explore 6 Working Groups ↓
               </a>
             </div>
@@ -339,7 +339,7 @@
     <section class="working-groups-section" id="working-groups">
       <div class="container">
         <div class="section-head-center" data-reveal="fade-up">
-          <span class="section-eyebrow">
+          <span class="section-eyebrow" id="guilds-eyebrow">
             // SPECIALIZED SUB-COMMUNITIES
           </span>
           <h2>Active Guilds &amp; Research Working Groups</h2>
@@ -349,7 +349,7 @@
         </div>
 
         <!-- Filter Pill Navigation -->
-        <div class="filter-pills-bar" data-reveal="fade-up">
+        <div class="filter-pills-bar" id="guild-filter-pills-container" data-reveal="fade-up">
           <button class="filter-pill-btn active" data-filter="all">All Guilds (6)</button>
           <button class="filter-pill-btn" data-filter="macro">Macro &amp; Currency</button>
           <button class="filter-pill-btn" data-filter="agri">Agritech &amp; Logistics</button>
@@ -358,7 +358,7 @@
         </div>
 
         <!-- Working Groups Grid -->
-        <div class="working-groups-grid">
+        <div class="working-groups-grid" id="working-groups-container">
           <!-- Guild 1: FX Parallel Arbitrage -->
           <div class="guild-card" data-category="macro" data-reveal="card">
             <div class="guild-card-top">
@@ -486,7 +486,7 @@
     <section class="roundtables-section" id="roundtables">
       <div class="container">
         <div class="section-head-center" data-reveal="fade-up">
-          <span class="section-eyebrow">
+          <span class="section-eyebrow" id="roundtables-eyebrow">
             // LIVE KNOWLEDGE EXCHANGE
           </span>
           <h2>Upcoming Closed-Door Roundtables &amp; AMAs</h2>
@@ -495,7 +495,7 @@
           </p>
         </div>
 
-        <div class="roundtables-grid">
+        <div class="roundtables-grid" id="roundtables-container">
           <!-- Session 1 -->
           <div class="roundtable-card" data-reveal="card">
             <div>
@@ -1038,28 +1038,392 @@
   <!-- Community Page Interactive Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. WORKING GROUPS FILTERING LOGIC
-      const filterBtns = document.querySelectorAll('.filter-pill-btn');
-      const guildCards = document.querySelectorAll('.guild-card');
+      // 1. DYNAMIC COMMUNITY GUILDS & ROUNDTABLES CMS ENGINE
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
 
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
+      const DEFAULT_COMMUNITY = [
+        {
+          id: "fx-parallel-arbitrage-guild",
+          type: "guild",
+          title: "FX Parallel Arbitrage & Remittance Guild",
+          category: "macro",
+          category_label: "Macro & Currency",
+          mission: "Monitors daily street bureau de change (BDC) rates across Lagos, Abuja, Kano, and London. Tracks FX spread anomalies, crypto stablecoin liquidity, and importer demand.",
+          metric_1: "412 FELLOWS",
+          metric_2: "BI-WEEKLY BRIEFING",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "sahelian-grain-cereal-corridor-group",
+          type: "guild",
+          title: "Sahelian Grain & Cereal Corridor Group",
+          category: "commodity",
+          category_label: "Commodity Corridors",
+          mission: "Tracks cross-border sorghum, millet, and maize flows between Niger, Chad, and Northern Nigeria. Delivers early warnings on drought cycles and transport bottlenecks.",
+          metric_1: "340 FELLOWS",
+          metric_2: "WEEKLY TELEMETRY",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "last-mile-cold-chain-guild",
+          type: "guild",
+          title: "Last-Mile Cold-Chain & Spoilage Guild",
+          category: "agri",
+          category_label: "Agritech & Logistics",
+          mission: "Engineers and cold-hub managers quantifying perishability rates in tomato and leafy vegetable transport from Plateau State to coastal urban centers.",
+          metric_1: "528 FELLOWS",
+          metric_2: "MONTHLY FIELD STUDY",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 3
+        },
+        {
+          id: "sub-saharan-sovereign-debt-yield-guild",
+          type: "guild",
+          title: "Sub-Saharan Sovereign Debt & Yield Guild",
+          category: "macro",
+          category_label: "Macro & Currency",
+          mission: "Fixed-income analysts and sovereign debt specialists dissecting local currency treasury bill auctions, Eurobond spreads, and IMF debt sustainability metrics.",
+          metric_1: "290 FELLOWS",
+          metric_2: "MONTHLY AMA",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 4
+        },
+        {
+          id: "fmcg-shrinkflation-retail-basket-guild",
+          type: "guild",
+          title: "FMCG Shrinkflation & Retail Basket Guild",
+          category: "commodity",
+          category_label: "Commodity Corridors",
+          mission: "Supermarket brand auditors measuring pack-size reductions, sachetization trends, and household substitution behaviors across low-income informal retail points.",
+          metric_1: "670 FELLOWS",
+          metric_2: "WEEKLY CENSUS",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 5
+        },
+        {
+          id: "african-angel-diaspora-syndicate-guild",
+          type: "guild",
+          title: "African Angel & Diaspora Syndicate Guild",
+          category: "diaspora",
+          category_label: "Diaspora Capital",
+          mission: "High-net-worth diaspora professionals collaborating on direct investment syndicates in renewable energy mini-grids, export processing, and fintech infrastructure.",
+          metric_1: "845 FELLOWS",
+          metric_2: "QUARTERLY PITCH DECK",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 6
+        },
+        {
+          id: "parallel-fx-volatility-roundtable",
+          type: "roundtable",
+          title: "Parallel FX Volatility & Central Bank Pass-Through in West Africa",
+          category: "macro",
+          category_label: "Macro & Currency",
+          badge: "UPCOMING // 4 DAYS",
+          datetime: "MAR 18 • 16:00 WAT",
+          mission: "An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.",
+          speaker_name: "Dr. Tariq Adeleke",
+          speaker_role: "Lead Econometrician, Lagos Node",
+          speaker_photo: "assets/images/community/community_roundtable_charts.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "grains-fertilizer-wet-season-outlook",
+          type: "roundtable",
+          title: "Grains, Fertilizer & The 2026 Wet Season Outlook",
+          category: "agri",
+          category_label: "Agritech & Logistics",
+          badge: "UPCOMING // NEXT WEEK",
+          datetime: "MAR 25 • 15:00 WAT",
+          mission: "Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.",
+          speaker_name: "Chioma Okonjo-Briggs",
+          speaker_role: "Director of Agritech Telemetry",
+          speaker_photo: "assets/images/community/community_colleagues_laptop.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "diaspora-direct-investment-roundtable",
+          type: "roundtable",
+          title: "Diaspora Direct Investment: Navigating Real Estate & Agritech Yields",
+          category: "diaspora",
+          category_label: "Diaspora Capital",
+          badge: "CLOSED-DOOR BRIEFING",
+          datetime: "APR 02 • 17:00 WAT",
+          mission: "High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.",
+          speaker_name: "Babatunde Fayemi",
+          speaker_role: "Senior FX Corridor Strategist",
+          speaker_photo: "assets/images/community/community_strategy_conference.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 3
+        }
+      ];
 
-          const filterValue = btn.getAttribute('data-filter');
+      let activeGuildCategory = 'all';
 
-          guildCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-              card.style.display = 'flex';
-              card.style.opacity = '1';
-              card.style.transform = 'scale(1)';
-            } else {
-              card.style.display = 'none';
-            }
-          });
+      function getStoredCommunity() {
+        try {
+          const raw = localStorage.getItem('renalytica_community');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          }
+        } catch (e) {}
+        return DEFAULT_COMMUNITY;
+      }
+
+      function renderCommunityActivities() {
+        const allItems = getStoredCommunity();
+        const publishedItems = allItems.filter(i => i.status === 'published');
+
+        const guilds = publishedItems
+          .filter(i => i.type === 'guild')
+          .sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
+        const roundtables = publishedItems
+          .filter(i => i.type === 'roundtable')
+          .sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
+        // Update Section Headers
+        const heroBtn = document.getElementById('hero-view-groups-btn');
+        if (heroBtn) heroBtn.textContent = `Explore ${guilds.length} Working Groups ↓`;
+
+        const guildsEyebrow = document.getElementById('guilds-eyebrow');
+        if (guildsEyebrow) guildsEyebrow.textContent = `// SPECIALIZED SUB-COMMUNITIES (${guilds.length})`;
+
+        const roundtablesEyebrow = document.getElementById('roundtables-eyebrow');
+        if (roundtablesEyebrow) roundtablesEyebrow.textContent = `// LIVE KNOWLEDGE EXCHANGE (${roundtables.length})`;
+
+        // Build Guild Categories for Filter Pills
+        const catMap = new Map();
+        guilds.forEach(g => {
+          const cat = g.category || 'other';
+          const label = g.category_label || (cat.charAt(0).toUpperCase() + cat.slice(1));
+          if (!catMap.has(cat)) {
+            catMap.set(cat, { label: label, count: 0 });
+          }
+          catMap.get(cat).count++;
         });
+
+        if (activeGuildCategory !== 'all' && !catMap.has(activeGuildCategory)) {
+          activeGuildCategory = 'all';
+        }
+
+        // Render Filter Pills
+        const pillsBar = document.getElementById('guild-filter-pills-container');
+        if (pillsBar) {
+          let pillsHtml = `
+            <button class="filter-pill-btn ${activeGuildCategory === 'all' ? 'active' : ''}" data-filter="all">
+              All Guilds (${guilds.length})
+            </button>
+          `;
+          catMap.forEach((meta, catKey) => {
+            pillsHtml += `
+              <button class="filter-pill-btn ${activeGuildCategory === catKey ? 'active' : ''}" data-filter="${escapeHtml(catKey)}">
+                ${escapeHtml(meta.label)}
+              </button>
+            `;
+          });
+          pillsBar.innerHTML = pillsHtml;
+
+          pillsBar.querySelectorAll('.filter-pill-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              pillsBar.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              activeGuildCategory = btn.getAttribute('data-filter') || 'all';
+              applyGuildFilter();
+            });
+          });
+        }
+
+        // Render Guilds Grid
+        const workingGroupsGrid = document.getElementById('working-groups-container');
+        if (workingGroupsGrid) {
+          if (guilds.length === 0) {
+            workingGroupsGrid.innerHTML = `
+              <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: var(--surface-card); border: 1px dashed var(--border-subtle); border-radius: 12px;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem; color: var(--text-primary);">No Working Groups Currently Published</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">New guild charters are being ratified. Apply for guild access to be notified upon launch.</p>
+                <button class="btn-community-primary open-join-modal-btn" style="display: inline-block;">Apply for Guild Access →</button>
+              </div>
+            `;
+          } else {
+            workingGroupsGrid.innerHTML = guilds.map(g => {
+              let actionHtml = '';
+              if (g.action_url) {
+                actionHtml = `
+                  <a href="${escapeHtml(g.action_url)}" target="_blank" rel="noopener noreferrer" class="guild-action-btn" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">
+                    ${escapeHtml(g.action_label || 'View Guild Charter →')}
+                  </a>
+                `;
+              } else {
+                actionHtml = `
+                  <button class="guild-action-btn open-charter-btn" data-guild="${escapeHtml(g.title)}">
+                    ${escapeHtml(g.action_label || 'View Guild Charter →')}
+                  </button>
+                `;
+              }
+
+              return `
+                <div class="guild-card" data-category="${escapeHtml(g.category || 'other')}" data-reveal="card">
+                  <div class="guild-card-top">
+                    <span class="guild-category-badge">${escapeHtml(g.category_label || g.category)}</span>
+                    <h3 class="guild-title">${escapeHtml(g.title)}</h3>
+                    <p class="guild-mission">
+                      ${escapeHtml(g.mission || '')}
+                    </p>
+                  </div>
+                  <div>
+                    <div class="guild-stats-row">
+                      <span>${escapeHtml(g.metric_1 || '')}</span>
+                      <span>${escapeHtml(g.metric_2 || '')}</span>
+                    </div>
+                    ${actionHtml}
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+            applyGuildFilter();
+          }
+        }
+
+        // Render Roundtables Grid
+        const roundtablesGrid = document.getElementById('roundtables-container');
+        if (roundtablesGrid) {
+          if (roundtables.length === 0) {
+            roundtablesGrid.innerHTML = `
+              <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; background: var(--surface-card); border: 1px dashed var(--border-subtle); border-radius: 12px;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem; color: var(--text-primary);">No Closed-Door Sessions Scheduled</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Next quarter's executive briefing schedule is currently being finalized.</p>
+              </div>
+            `;
+          } else {
+            roundtablesGrid.innerHTML = roundtables.map(r => {
+              const isLive = r.badge && r.badge.toLowerCase().includes('live');
+              const badgeClass = isLive ? 'live' : 'upcoming';
+
+              let rsvpHtml = '';
+              if (r.action_url) {
+                rsvpHtml = `
+                  <a href="${escapeHtml(r.action_url)}" target="_blank" rel="noopener noreferrer" class="btn-rsvp-trigger" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">
+                    ${escapeHtml(r.action_label || 'RSVP for Seat (Free for Fellows) →')}
+                  </a>
+                `;
+              } else {
+                rsvpHtml = `
+                  <button class="btn-rsvp-trigger" data-session="${escapeHtml(r.title)}">
+                    ${escapeHtml(r.action_label || 'RSVP for Seat (Free for Fellows) →')}
+                  </button>
+                `;
+              }
+
+              let speakerHtml = '';
+              if (r.speaker_name) {
+                speakerHtml = `
+                  <div class="speaker-lockup">
+                    <img 
+                      src="${escapeHtml(r.speaker_photo || 'assets/brand/renalytica_emblem.png')}" 
+                      alt="${escapeHtml(r.speaker_name)}" 
+                      class="speaker-avatar-circle"
+                      onerror="this.src='assets/brand/renalytica_emblem.png';"
+                    >
+                    <div class="speaker-info">
+                      <h4>${escapeHtml(r.speaker_name)}</h4>
+                      <p>${escapeHtml(r.speaker_role || '')}</p>
+                    </div>
+                  </div>
+                `;
+              }
+
+              return `
+                <div class="roundtable-card" data-reveal="card">
+                  <div>
+                    <div class="roundtable-status-bar">
+                      <span class="roundtable-badge ${badgeClass}">
+                        ${isLive ? '<span class="pulse-dot-green"></span> ' : ''}${escapeHtml(r.badge || 'UPCOMING')}
+                      </span>
+                      <span class="roundtable-date-time">${escapeHtml(r.datetime || '')}</span>
+                    </div>
+                    <h3 class="roundtable-title">${escapeHtml(r.title)}</h3>
+                    <p class="roundtable-desc">
+                      ${escapeHtml(r.mission || '')}
+                    </p>
+                  </div>
+                  <div>
+                    ${speakerHtml}
+                    ${rsvpHtml}
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      }
+
+      function applyGuildFilter() {
+        const guildCards = document.querySelectorAll('#working-groups-container .guild-card');
+        guildCards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (activeGuildCategory === 'all' || cat === activeGuildCategory) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Initial execution
+      renderCommunityActivities();
+
+      // Real-Time Cross-Tab and In-Tab Sync Listeners
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'renalytica_community') {
+          renderCommunityActivities();
+        }
       });
+      window.addEventListener('renalytica_community_updated', renderCommunityActivities);
+
+      // Background Fetch & Hydration from Supabase / Backend API
+      fetch('/api/community')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.success && Array.isArray(data.activities) && data.activities.length > 0) {
+            localStorage.setItem('renalytica_community', JSON.stringify(data.activities));
+            renderCommunityActivities();
+          }
+        })
+        .catch(() => {});
 
       // 2. SCROLLYTELLING INTERACTIVE PIPELINE
       const stepCards = document.querySelectorAll('.scrolly-step-card');
@@ -1203,35 +1567,38 @@
         document.body.style.overflow = '';
       }
 
-      // Join Modal triggers
-      document.querySelectorAll('.open-join-modal-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+      // Join Modal triggers (Delegated)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-join-modal-btn');
+        if (btn) {
           const tier = btn.getAttribute('data-tier');
           if (tier) {
             const tierSelect = document.getElementById('member-tier');
             if (tierSelect) tierSelect.value = tier;
           }
           openModal(joinModal);
-        });
+        }
       });
 
       document.getElementById('close-join-modal')?.addEventListener('click', () => closeModal(joinModal));
 
-      // RSVP Modal triggers
-      document.querySelectorAll('.btn-rsvp-trigger').forEach(btn => {
-        btn.addEventListener('click', () => {
+      // RSVP Modal triggers (Delegated for dynamic & static cards)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-rsvp-trigger');
+        if (btn && btn.tagName.toLowerCase() === 'button') {
           const sessionName = btn.getAttribute('data-session') || 'Closed-Door Roundtable';
           const sessionInput = document.getElementById('rsvp-session-name');
           if (sessionInput) sessionInput.value = sessionName;
           openModal(rsvpModal);
-        });
+        }
       });
 
       document.getElementById('close-rsvp-modal')?.addEventListener('click', () => closeModal(rsvpModal));
 
-      // Charter Modal triggers
-      document.querySelectorAll('.open-charter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+      // Charter Modal triggers (Delegated for dynamic & static cards)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-charter-btn');
+        if (btn && btn.tagName.toLowerCase() === 'button') {
           const guildName = btn.getAttribute('data-guild') || 'Working Group';
           const charterTitle = document.getElementById('charter-guild-title');
           const charterSummary = document.getElementById('charter-guild-summary');
@@ -1240,7 +1607,7 @@
             charterSummary.textContent = `Operating charter and member guidelines for the ${guildName}. All discussions adhere to Chatham House Rule. Members actively publish consensus vectors and participate in bi-weekly sync sessions.`;
           }
           openModal(charterModal);
-        });
+        }
       });
 
       document.getElementById('close-charter-modal')?.addEventListener('click', () => closeModal(charterModal));

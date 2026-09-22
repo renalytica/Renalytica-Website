@@ -1427,6 +1427,88 @@
   gap: 4px;
 }
 
+/* Multi-Platform Social & Contact Corridor on Team Cards */
+.team-social-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-light);
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .team-social-bar {
+  border-top-color: var(--border-dark);
+}
+
+.team-social-link {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-gray);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  transition: all var(--duration-fast);
+}
+
+.team-social-link:hover {
+  transform: translateY(-2px);
+}
+
+.team-social-link.social-linkedin:hover {
+  background: #0A66C2;
+  border-color: #0A66C2;
+  color: #FFFFFF;
+}
+
+.team-social-link.social-facebook:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  color: #FFFFFF;
+}
+
+.team-social-link.social-website:hover {
+  background: var(--accent-momentum);
+  border-color: var(--accent-momentum);
+  color: #FFFFFF;
+}
+
+.team-social-link.social-twitter:hover {
+  background: #000000;
+  border-color: #333333;
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .team-social-link.social-twitter:hover {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #000000;
+}
+
+.team-social-link.social-scholar:hover {
+  background: #10B981;
+  border-color: #10B981;
+  color: #FFFFFF;
+}
+
+/* Dynamic Department Section for custom categories */
+.custom-department-section {
+  margin-top: 56px;
+}
+
+.custom-department-section .sector-leads-divider {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
 /* ==========================================================================
    7. WHERE WE OPERATE: INTERNATIONAL HUBS & REGIONAL DESKS
    ========================================================================== */

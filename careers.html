@@ -48,7 +48,7 @@
                 <span class="pulse-dot-green"></span>
                 CAREERS AT RENALYTICA // JOIN THE VANGUARD
               </span>
-              <span class="careers-pill accent">
+              <span class="careers-pill accent" id="hero-open-roles-pill">
                 4 OPEN ROLES // HYBRID &amp; REMOTE
               </span>
             </div>
@@ -63,7 +63,7 @@
             </p>
 
             <div class="careers-hero-actions" data-reveal="fade-up" style="--delay: 3">
-              <a href="#open-roles" class="btn-careers-primary">
+              <a href="#open-roles" class="btn-careers-primary" id="hero-view-roles-btn">
                 View 4 Open Positions ↓
               </a>
               <a href="#culture-values" class="btn-careers-secondary">
@@ -428,7 +428,7 @@
     <section class="careers-jobs-section" id="open-roles">
       <div class="container">
         <div class="section-head-center" data-reveal="fade-up">
-          <span class="section-eyebrow">
+          <span class="section-eyebrow" id="careers-roles-eyebrow">
             // OPEN POSITIONS (4)
           </span>
           <h2>Find Your Next High-Impact Role</h2>
@@ -438,7 +438,7 @@
         </div>
 
         <!-- Department Filter Pills -->
-        <div class="job-filter-pills" data-reveal="fade-up">
+        <div class="job-filter-pills" id="job-filter-pills-container" data-reveal="fade-up">
           <button class="job-filter-btn active" data-job-filter="all">All Roles (4)</button>
           <button class="job-filter-btn" data-job-filter="agri">Agriculture &amp; Commodities</button>
           <button class="job-filter-btn" data-job-filter="data">Data &amp; Quantitative Systems</button>
@@ -447,7 +447,7 @@
         </div>
 
         <!-- Open Roles Stack -->
-        <div class="open-roles-stack">
+        <div class="open-roles-stack" id="open-roles-container">
           <!-- Role 1: Senior Agribusiness Economist -->
           <div class="job-role-card" data-job-category="agri" data-reveal="card">
             <div class="job-role-header">
@@ -884,45 +884,343 @@
   <!-- Careers Interactive Client Logic -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. DEPARTMENT FILTERING FOR OPEN ROLES
-      const filterBtns = document.querySelectorAll('.job-filter-btn');
-      const roleCards = document.querySelectorAll('.job-role-card');
+      // 1. DYNAMIC CAREERS & OPEN POSITIONS CMS ENGINE
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
 
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
+      const DEFAULT_JOBS = [
+        {
+          id: "senior-agribusiness-economist",
+          title: "Senior Agribusiness Economist",
+          department: "Agriculture & Commodities Desk",
+          category: "agri",
+          category_label: "Agriculture & Commodities",
+          location: "Lagos, Nigeria (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "4–7 Years Exp",
+          overview: "Lead our crop forecasting models, fertilizer price tracking, and value-chain margin analysis across West and East Africa. You will turn raw agronomic and market price data into high-conviction decision frameworks for multinationals and agribusiness funds.",
+          responsibilities: [
+            "Design and manage field survey models for cereal grains, oilseeds, and farm inputs across 36 trade corridors.",
+            "Author flagship industry forecast reports and high-priority executive briefing notes.",
+            "Conduct quarterly briefings for agribusiness corporate clients, commercial lenders, and private equity investors.",
+            "Mentor junior research fellows on econometric time-series analysis and field sampling methodologies."
+          ],
+          qualifications: [
+            "Master's degree in Agricultural Economics, Quantitative Economics, or related discipline.",
+            "Proven track record with time-series modeling using Python, R, or advanced Excel econometric toolkits.",
+            "Deep contextual understanding of West African agro-climatic zones, logistics bottlenecks, and farmgate pricing dynamics.",
+            "Exceptional writing capability with an aptitude for crafting crystal-clear, executive-grade research summaries."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "quantitative-data-telemetry-engineer",
+          title: "Quantitative Data & Telemetry Engineer",
+          department: "Data Architecture & Quantitative Systems",
+          category: "data",
+          category_label: "Data & Quantitative Systems",
+          location: "Remote / Lagos (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "3–5 Years Exp",
+          overview: "Build and maintain automated data harvesting pipelines integrating port manifests, satellite vegetation indices (NDVI), and macroeconomic registers into our high-frequency intelligence engine.",
+          responsibilities: [
+            "Build robust, fault-tolerant ETL pipelines using Python and SQL to ingest and standardize multi-country economic and trade datasets.",
+            "Create automated statistical validation tests to identify data collection anomalies, outlier spikes, and currency conversion distortions.",
+            "Collaborate with senior econometricians to turn complex mathematical equations into automated, client-facing dashboard visualizations.",
+            "Architect scalable schema migrations and high-performance API endpoints for institutional enterprise subscribers."
+          ],
+          qualifications: [
+            "Strong proficiency in Python, PostgreSQL, Pandas, and modern orchestration tools (Airflow, Dagster, or Prefect).",
+            "Familiarity with geospatial GIS data, satellite imagery (NDVI/Sentinel), or shipping telemetry is a strong advantage.",
+            "Passion for immaculate data pipelines, automated testing, and comprehensive documentation.",
+            "Comfort working with hybrid pan-African and international development teams in an agile cadence."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "macroeconomic-research-analyst",
+          title: "Macroeconomic Research Analyst",
+          department: "Macroeconomic & Sovereign Policy Desk",
+          category: "macro",
+          category_label: "Macroeconomic Policy",
+          location: "Lagos, Nigeria (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "2–4 Years Exp",
+          overview: "Track central bank monetary policy shifts, inflation dynamics, foreign exchange liquidity, and sovereign debt across regional West and Central African trading blocs.",
+          responsibilities: [
+            "Monitor daily central bank bulletins, debt issuance calendars, treasury bill auctions, and headline inflation releases.",
+            "Maintain and update our proprietary macroeconomic scenario simulation models and interest rate sensitivity matrices.",
+            "Draft weekly analytical commentary for The Renalytica Weekly executive briefing newsletter distributed to C-suite subscribers.",
+            "Synthesize high-frequency price indices to evaluate real-time purchasing power parity and currency pass-through."
+          ],
+          qualifications: [
+            "Degree in Economics, Finance, Statistics, or Actuarial Science.",
+            "Sharp analytical mindset with deep curiosity for fiscal, monetary, and exchange rate mechanisms in frontier markets.",
+            "Outstanding writing and presentation skills, with the ability to explain complex quantitative theories in plain, engaging English.",
+            "Familiarity with financial databases, Bloomberg/Refinitiv terminals, or advanced financial modeling in Excel."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 3
+        },
+        {
+          id: "b2b-research-sales-client-manager",
+          title: "B2B Research Sales & Client Relationship Manager",
+          department: "Commercial & Client Advisory",
+          category: "sales",
+          category_label: "Commercial Advisory",
+          location: "Lagos, Nigeria",
+          employment_type: "Full-Time",
+          experience_level: "3–6 Years Exp",
+          overview: "Manage executive relationships with corporate clients, investment funds, commercial banks, and global consultancies purchasing Renalytica research reports and enterprise intelligence subscriptions.",
+          responsibilities: [
+            "Lead consultative demonstrations of the Renalytica research store, proprietary data feeds, and corporate subscription tiers.",
+            "Manage inbound corporate inquiries from senior corporate strategy heads, chief risk officers, and institutional treasurers.",
+            "Collaborate closely with research desk heads to scope custom feasibility proposals (RFPs) and bespoke market surveys.",
+            "Build enduring partnerships that drive annual subscription renewals and expand seat licenses across client teams."
+          ],
+          qualifications: [
+            "Proven track record in B2B corporate sales, financial services advisory, enterprise software, or consulting services.",
+            "Polished executive presence and stellar interpersonal communication skills when speaking with C-suite executives.",
+            "High emotional intelligence with a consultative, value-first mindset rather than transactional pushiness.",
+            "Strong organizational discipline, pipeline management acumen, and familiarity with modern CRM platforms."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 4
+        }
+      ];
 
-          const filterCategory = btn.getAttribute('data-job-filter');
+      let activeJobCategory = 'all';
 
-          roleCards.forEach(card => {
-            if (filterCategory === 'all' || card.getAttribute('data-job-category') === filterCategory) {
-              card.style.display = 'block';
-            } else {
-              card.style.display = 'none';
-            }
-          });
+      function getStoredJobs() {
+        try {
+          const raw = localStorage.getItem('renalytica_jobs');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          }
+        } catch (e) {}
+        return DEFAULT_JOBS;
+      }
+
+      function renderCareersJobs() {
+        const allJobs = getStoredJobs();
+        const publishedJobs = allJobs
+          .filter(j => j.status === 'published')
+          .sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
+        // Update counts in header & hero
+        const eyebrow = document.getElementById('careers-roles-eyebrow');
+        if (eyebrow) eyebrow.textContent = `// OPEN POSITIONS (${publishedJobs.length})`;
+
+        const heroPill = document.getElementById('hero-open-roles-pill');
+        if (heroPill) heroPill.textContent = `${publishedJobs.length} OPEN ROLES // HYBRID & REMOTE`;
+
+        const heroBtn = document.getElementById('hero-view-roles-btn');
+        if (heroBtn) heroBtn.textContent = `View ${publishedJobs.length} Open Positions ↓`;
+
+        // Build dynamic category list for filter pills
+        const catMap = new Map();
+        publishedJobs.forEach(job => {
+          const cat = job.category || 'other';
+          const label = job.category_label || (cat.charAt(0).toUpperCase() + cat.slice(1));
+          if (!catMap.has(cat)) {
+            catMap.set(cat, { label: label, count: 0 });
+          }
+          catMap.get(cat).count++;
         });
-      });
 
-      // 2. ACCORDION EXPANSION FOR JOB BREAKDOWNS
-      const accordionBtns = document.querySelectorAll('.btn-accordion-toggle');
+        // Ensure active filter is still valid
+        if (activeJobCategory !== 'all' && !catMap.has(activeJobCategory)) {
+          activeJobCategory = 'all';
+        }
 
-      accordionBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetId = btn.getAttribute('data-target');
-          const content = document.getElementById(targetId);
-          if (content) {
-            const isOpen = content.classList.contains('open');
-            content.classList.toggle('open');
-            const span = btn.querySelector('span');
-            if (span) {
-              span.textContent = isOpen 
-                ? 'View Full Role Breakdown & Qualifications' 
-                : 'Hide Role Breakdown & Qualifications';
-            }
+        // Render Filter Pills
+        const pillsContainer = document.getElementById('job-filter-pills-container');
+        if (pillsContainer) {
+          let pillsHtml = `
+            <button class="job-filter-btn ${activeJobCategory === 'all' ? 'active' : ''}" data-job-filter="all">
+              All Roles (${publishedJobs.length})
+            </button>
+          `;
+          catMap.forEach((meta, catKey) => {
+            pillsHtml += `
+              <button class="job-filter-btn ${activeJobCategory === catKey ? 'active' : ''}" data-job-filter="${escapeHtml(catKey)}">
+                ${escapeHtml(meta.label)}
+              </button>
+            `;
+          });
+          pillsContainer.innerHTML = pillsHtml;
+
+          // Wire filter click handlers
+          pillsContainer.querySelectorAll('.job-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              pillsContainer.querySelectorAll('.job-filter-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              activeJobCategory = btn.getAttribute('data-job-filter') || 'all';
+              applyJobFilter();
+            });
+          });
+        }
+
+        // Render Role Cards
+        const rolesContainer = document.getElementById('open-roles-container');
+        if (rolesContainer) {
+          if (publishedJobs.length === 0) {
+            rolesContainer.innerHTML = `
+              <div style="text-align: center; padding: 48px 24px; background: var(--surface-card); border: 1px dashed var(--border-subtle); border-radius: 12px;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem; color: var(--text-primary);">No Published Openings at This Moment</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Our research desks expand rapidly. Submit a speculative application below and our talent team will review your profile.</p>
+                <button class="btn-job-apply open-speculative-modal-btn" style="display: inline-block;">Submit Speculative Application →</button>
+              </div>
+            `;
+          } else {
+            const cardsHtml = publishedJobs.map(job => {
+              const resps = Array.isArray(job.responsibilities) ? job.responsibilities : [];
+              const quals = Array.isArray(job.qualifications) ? job.qualifications : [];
+
+              let applyBtnHtml = '';
+              if (job.apply_mode === 'external_url' && job.apply_url) {
+                applyBtnHtml = `
+                  <a href="${escapeHtml(job.apply_url)}" target="_blank" rel="noopener noreferrer" class="btn-job-apply" style="display:inline-flex;align-items:center;text-decoration:none;">
+                    ${escapeHtml(job.apply_button_label || 'Apply on Portal →')}
+                  </a>
+                `;
+              } else if (job.apply_mode === 'email' && job.apply_url) {
+                applyBtnHtml = `
+                  <a href="mailto:${escapeHtml(job.apply_url)}?subject=${encodeURIComponent('Application: ' + job.title)}" class="btn-job-apply" style="display:inline-flex;align-items:center;text-decoration:none;">
+                    ${escapeHtml(job.apply_button_label || 'Apply via Email →')}
+                  </a>
+                `;
+              } else {
+                applyBtnHtml = `
+                  <button class="btn-job-apply open-application-modal-btn" data-role="${escapeHtml(job.title)}" data-dept="${escapeHtml(job.department || '')}">
+                    ${escapeHtml(job.apply_button_label || 'Apply for This Role →')}
+                  </button>
+                `;
+              }
+
+              return `
+                <div class="job-role-card" data-job-category="${escapeHtml(job.category || 'other')}" data-reveal="card">
+                  <div class="job-role-header">
+                    <div>
+                      <h3 class="job-role-title">${escapeHtml(job.title)}</h3>
+                      <div class="job-meta-badges">
+                        <span class="job-meta-badge dept">${escapeHtml(job.department || 'Research & Analytics')}</span>
+                        ${job.location ? `<span class="job-meta-badge">${escapeHtml(job.location)}</span>` : ''}
+                        ${job.employment_type ? `<span class="job-meta-badge">${escapeHtml(job.employment_type)}</span>` : ''}
+                        ${job.experience_level ? `<span class="job-meta-badge">${escapeHtml(job.experience_level)}</span>` : ''}
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="job-role-overview">
+                    ${escapeHtml(job.overview || '')}
+                  </p>
+
+                  <!-- Expandable Accordion -->
+                  <div class="job-accordion-content" id="accordion-role-${escapeHtml(job.id)}">
+                    ${resps.length > 0 ? `
+                      <h4 class="job-subheading">What You Will Do:</h4>
+                      <ul class="job-bullets-list">
+                        ${resps.map(r => `<li>${escapeHtml(r)}</li>`).join('')}
+                      </ul>
+                    ` : ''}
+
+                    ${quals.length > 0 ? `
+                      <h4 class="job-subheading">What We Look For:</h4>
+                      <ul class="job-bullets-list">
+                        ${quals.map(q => `<li>${escapeHtml(q)}</li>`).join('')}
+                      </ul>
+                    ` : ''}
+                  </div>
+
+                  <div class="job-actions-row">
+                    <button class="btn-accordion-toggle" data-target="accordion-role-${escapeHtml(job.id)}">
+                      <span>View Full Role Breakdown &amp; Qualifications</span> ↓
+                    </button>
+                    ${applyBtnHtml}
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+            rolesContainer.innerHTML = cardsHtml;
+            applyJobFilter();
+          }
+        }
+      }
+
+      function applyJobFilter() {
+        const roleCards = document.querySelectorAll('#open-roles-container .job-role-card');
+        roleCards.forEach(card => {
+          const cardCat = card.getAttribute('data-job-category');
+          if (activeJobCategory === 'all' || cardCat === activeJobCategory) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
           }
         });
+      }
+
+      // Initial execution
+      renderCareersJobs();
+
+      // Real-Time Cross-Tab and In-Tab Sync Listeners
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'renalytica_jobs') {
+          renderCareersJobs();
+        }
+      });
+      window.addEventListener('renalytica_jobs_updated', renderCareersJobs);
+
+      // Background Fetch & Hydration from Supabase / Backend API
+      fetch('/api/jobs')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.success && Array.isArray(data.jobs) && data.jobs.length > 0) {
+            localStorage.setItem('renalytica_jobs', JSON.stringify(data.jobs));
+            renderCareersJobs();
+          }
+        })
+        .catch(() => {});
+
+      // 2. ACCORDION EXPANSION (EVENT-DELEGATED)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-accordion-toggle');
+        if (!btn) return;
+        const targetId = btn.getAttribute('data-target');
+        const content = document.getElementById(targetId);
+        if (content) {
+          const isOpen = content.classList.contains('open');
+          content.classList.toggle('open');
+          const span = btn.querySelector('span');
+          if (span) {
+            span.textContent = isOpen 
+              ? 'View Full Role Breakdown & Qualifications' 
+              : 'Hide Role Breakdown & Qualifications';
+          }
+        }
       });
 
       // 3. SCROLLYTELLING PIPELINE FOR "DAY IN THE LIFE"
@@ -1066,23 +1364,25 @@
         document.body.style.overflow = '';
       }
 
-      // Open Role Application modal
-      document.querySelectorAll('.open-application-modal-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+      // Open Role Application modal (Delegated for dynamically rendered & static cards)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-application-modal-btn');
+        if (btn) {
           const roleName = btn.getAttribute('data-role') || 'Quantitative Analyst';
           const roleInput = document.getElementById('app-role-name');
           if (roleInput) roleInput.value = roleName;
           openModal(appModal);
-        });
+        }
       });
 
-      // Open Speculative modal
-      document.querySelectorAll('.open-speculative-modal-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+      // Open Speculative modal (Delegated)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-speculative-modal-btn');
+        if (btn) {
           const roleInput = document.getElementById('app-role-name');
           if (roleInput) roleInput.value = 'General / Speculative Application';
           openModal(appModal);
-        });
+        }
       });
 
       // Open Fellowship modal

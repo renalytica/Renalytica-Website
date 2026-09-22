@@ -2288,6 +2288,720 @@ app.delete('/api/admin/partners/:id', authenticateUser, requireAdmin, async (req
 });
 
 // ==============================================================================
+// 12B. ABOUT US & TEAM MANAGEMENT CMS DESK CRUD (SUPABASE & DUAL-PERSISTENCE)
+// ==============================================================================
+let mockTeam = loadJson('team.json', []);
+let mockAboutContent = loadJson('about_content.json', {
+  hero: {
+    telemetry_badge_1: "AFRICAN MARKET INTELLIGENCE",
+    telemetry_badge_2: "DUAL HEADQUARTERS // NEW YORK • LAGOS",
+    title_main: "Clear Direction for Leaders in Unpredictable",
+    title_accent: "Markets.",
+    subtitle: "Renalytica provides high-frequency telemetry, structural macroeconomic research, and empirical ground-truth intelligence across West Africa and global frontier economies.",
+    cta_primary_text: "Schedule Briefing →",
+    cta_primary_url: "portal.html?mode=briefing",
+    cta_secondary_text: "Meet the Team ↓",
+    cta_secondary_url: "#leadership-team"
+  },
+  dual_hq: {
+    tag: "DUAL GLOBAL COORDINATION // HIGH-VELOCITY NETWORK",
+    title: "Bridging Global Capital & Ground Realities",
+    subtitle: "Our dual corporate and analytical headquarters link global institutional capital in Manhattan directly with street-level retail and commodities intelligence in Lagos.",
+    ny_office: {
+      title: "New York Analytical & Client Desk",
+      address: "445 Park Avenue, 9th Floor, New York, NY 10022",
+      desc: "Global client relations, institutional macro modeling, and capital corridor advisory."
+    },
+    lagos_office: {
+      title: "Lagos Field Research & Operations Center",
+      address: "Victoria Island Financial Corridor, Lagos, Nigeria",
+      desc: "Field data collection, wholesale commodity audits, trade corridor tracking, and local banking telemetry."
+    }
+  },
+  mission_vision: {
+    mission: {
+      title: "Our Mission",
+      desc: "To eradicate information asymmetry across African and frontier economies by equipping global institutions, multinational corporations, and sovereign policymakers with rigorous, empirical, and decision-grade intelligence."
+    },
+    vision: {
+      title: "Our Vision",
+      desc: "To become the undisputed sovereign standard and premier institutional benchmark for economic intelligence, quantitative data models, and business strategy in the developing world."
+    }
+  }
+});
+
+// Auto-sync seed data to Supabase if Supabase is connected
+async function syncTeamToSupabase() {
+  if (!supabaseAdmin || !isSupabaseOnline) return;
+  try {
+    const { data, error } = await supabaseAdmin.from('team_members').select('id');
+    if (!error && data && data.length === 0 && mockTeam.length > 0) {
+      console.log('[About CMS] Seeding initial team members into Supabase public.team_members...');
+      await supabaseAdmin.from('team_members').upsert(mockTeam);
+    }
+  } catch (err) {
+    // Silent fail if table not created yet
+  }
+}
+setTimeout(syncTeamToSupabase, 4000);
+
+// GET public team (only published members)
+app.get('/api/team', async (req, res) => {
+  try {
+    let team = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('team_members')
+          .select('*')
+          .eq('status', 'published')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          team = data;
+        }
+      } catch (e) {}
+    }
+    if (team.length === 0) {
+      team = mockTeam.filter(m => m.status === 'published').sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: team.length, team, members: team });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET public about narrative content
+app.get('/api/about', async (req, res) => {
+  try {
+    let content = mockAboutContent;
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin.from('about_content').select('*');
+        if (!error && Array.isArray(data) && data.length > 0) {
+          const map = {};
+          data.forEach(row => { map[row.section_key] = row.content; });
+          content = { ...mockAboutContent, ...map };
+        }
+      } catch (e) {}
+    }
+    res.json({ success: true, content });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all team members (admin view, includes drafts & archived)
+app.get('/api/admin/team', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let team = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('team_members')
+          .select('*')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          team = data;
+        }
+      } catch (e) {}
+    }
+    if (team.length === 0) {
+      team = [...mockTeam].sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: team.length, team, members: team });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST create new team member (admin)
+app.post('/api/admin/team', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const {
+      name,
+      role,
+      category,
+      category_label,
+      desk_badge,
+      badge_pill,
+      role_eyebrow,
+      photo_url,
+      tagline,
+      bio,
+      social_links,
+      credentials,
+      papers,
+      skills,
+      status,
+      display_order
+    } = req.body;
+
+    if (!name || !role) {
+      return res.status(400).json({ error: 'Full name and role/title are required.' });
+    }
+
+    const slug = (req.body.id || name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const memberId = slug || ('member-' + Date.now());
+
+    const newMember = {
+      id: memberId,
+      name,
+      role,
+      category: category || 'specialist',
+      category_label: category_label || (category === 'executive' ? 'Executive Leadership Spotlight' : 'Senior Sector Specialists'),
+      desk_badge: desk_badge || '',
+      badge_pill: badge_pill || desk_badge || role,
+      role_eyebrow: role_eyebrow || '',
+      photo_url: photo_url || 'assets/images/obinna_main_photo.png',
+      tagline: tagline || '',
+      bio: bio || '',
+      social_links: (social_links && typeof social_links === 'object') ? social_links : {},
+      credentials: Array.isArray(credentials) ? credentials : (typeof credentials === 'string' ? credentials.split('\n').map(s => s.trim()).filter(Boolean) : []),
+      papers: Array.isArray(papers) ? papers : [],
+      skills: Array.isArray(skills) ? skills : (typeof skills === 'string' ? skills.split('\n').map(s => s.trim()).filter(Boolean) : []),
+      status: status || 'published',
+      display_order: parseInt(display_order, 10) || (mockTeam.length + 1),
+      updated_at: new Date().toISOString()
+    };
+
+    // Dual persistence: Supabase + JSON
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('team_members').upsert(newMember);
+      } catch (sbErr) {
+        console.warn('[About CMS] Supabase upsert error:', sbErr.message);
+      }
+    }
+
+    const existingIdx = mockTeam.findIndex(m => m.id === memberId);
+    if (existingIdx !== -1) {
+      mockTeam[existingIdx] = newMember;
+    } else {
+      mockTeam.push(newMember);
+    }
+    saveJson('team.json', mockTeam);
+
+    res.status(201).json({ success: true, member: newMember });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update team member (admin)
+app.put('/api/admin/team/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockTeam.findIndex(m => m.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Team member record not found.' });
+    }
+
+    const updates = { ...req.body };
+    if (updates.credentials && typeof updates.credentials === 'string') {
+      updates.credentials = updates.credentials.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (updates.skills && typeof updates.skills === 'string') {
+      updates.skills = updates.skills.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (updates.display_order !== undefined) {
+      updates.display_order = parseInt(updates.display_order, 10) || mockTeam[index].display_order;
+    }
+    updates.updated_at = new Date().toISOString();
+
+    mockTeam[index] = { ...mockTeam[index], ...updates };
+    saveJson('team.json', mockTeam);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('team_members').upsert(mockTeam[index]);
+      } catch (sbErr) {
+        console.warn('[About CMS] Supabase update error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, member: mockTeam[index] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE team member (admin)
+app.delete('/api/admin/team/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockTeam.findIndex(m => m.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Team member record not found.' });
+    }
+
+    const deleted = mockTeam.splice(index, 1);
+    saveJson('team.json', mockTeam);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('team_members').delete().eq('id', id);
+      } catch (sbErr) {
+        console.warn('[About CMS] Supabase delete error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, message: 'Team member record permanently removed.', member: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all about page narrative sections (admin)
+app.get('/api/admin/about', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let content = mockAboutContent;
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin.from('about_content').select('*');
+        if (!error && Array.isArray(data) && data.length > 0) {
+          const map = {};
+          data.forEach(row => { map[row.section_key] = row.content; });
+          content = { ...mockAboutContent, ...map };
+        }
+      } catch (e) {}
+    }
+    res.json({ success: true, content });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update about page narrative sections (admin)
+app.put('/api/admin/about', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const updates = req.body;
+    mockAboutContent = { ...mockAboutContent, ...updates };
+    saveJson('about_content.json', mockAboutContent);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        for (const [key, val] of Object.entries(updates)) {
+          await supabaseAdmin.from('about_content').upsert({
+            id: 'section-' + key,
+            section_key: key,
+            content: val,
+            updated_at: new Date().toISOString()
+          });
+        }
+      } catch (sbErr) {
+        console.warn('[About CMS] Supabase about_content update error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, content: mockAboutContent });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
+// 12C. CAREERS & JOB OPENINGS CMS DESK CRUD (SUPABASE & DUAL-PERSISTENCE)
+// ==============================================================================
+let mockJobs = loadJson('jobs.json', []);
+
+async function syncJobsToSupabase() {
+  if (!supabaseAdmin || !isSupabaseOnline) return;
+  try {
+    const { data, error } = await supabaseAdmin.from('careers_jobs').select('id');
+    if (!error && data && data.length === 0 && mockJobs.length > 0) {
+      console.log('[Careers CMS] Seeding initial jobs into Supabase public.careers_jobs...');
+      await supabaseAdmin.from('careers_jobs').upsert(mockJobs);
+    }
+  } catch (err) {
+    // Silent fail if table not created yet
+  }
+}
+setTimeout(syncJobsToSupabase, 4500);
+
+// GET public jobs (only published)
+app.get('/api/jobs', async (req, res) => {
+  try {
+    let jobs = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('careers_jobs')
+          .select('*')
+          .eq('status', 'published')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          jobs = data;
+        }
+      } catch (e) {}
+    }
+    if (jobs.length === 0) {
+      jobs = mockJobs.filter(j => j.status === 'published').sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: jobs.length, jobs });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all jobs (admin view, includes drafts & archived)
+app.get('/api/admin/jobs', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let jobs = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('careers_jobs')
+          .select('*')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          jobs = data;
+        }
+      } catch (e) {}
+    }
+    if (jobs.length === 0) {
+      jobs = [...mockJobs].sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: jobs.length, jobs });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST create job (admin)
+app.post('/api/admin/jobs', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const {
+      title,
+      department,
+      category,
+      category_label,
+      location,
+      employment_type,
+      experience_level,
+      overview,
+      responsibilities,
+      qualifications,
+      apply_mode,
+      apply_url,
+      apply_button_label,
+      status,
+      display_order
+    } = req.body;
+
+    if (!title || !department) {
+      return res.status(400).json({ error: 'Job title and department are required.' });
+    }
+
+    const slug = (req.body.id || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const jobId = slug || ('job-' + Date.now());
+
+    const newJob = {
+      id: jobId,
+      title,
+      department,
+      category: category || 'agri',
+      category_label: category_label || department,
+      location: location || 'Lagos, Nigeria (Hybrid)',
+      employment_type: employment_type || 'Full-Time',
+      experience_level: experience_level || '3–5 Years Exp',
+      overview: overview || '',
+      responsibilities: Array.isArray(responsibilities) ? responsibilities : (typeof responsibilities === 'string' ? responsibilities.split('\n').map(s => s.trim()).filter(Boolean) : []),
+      qualifications: Array.isArray(qualifications) ? qualifications : (typeof qualifications === 'string' ? qualifications.split('\n').map(s => s.trim()).filter(Boolean) : []),
+      apply_mode: apply_mode || 'modal',
+      apply_url: apply_url || '',
+      apply_button_label: apply_button_label || 'Apply for This Role →',
+      status: status || 'published',
+      display_order: parseInt(display_order, 10) || (mockJobs.length + 1),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('careers_jobs').upsert(newJob);
+      } catch (sbErr) {
+        console.warn('[Careers CMS] Supabase upsert error:', sbErr.message);
+      }
+    }
+
+    const existingIdx = mockJobs.findIndex(j => j.id === jobId);
+    if (existingIdx !== -1) {
+      mockJobs[existingIdx] = newJob;
+    } else {
+      mockJobs.push(newJob);
+    }
+    saveJson('jobs.json', mockJobs);
+
+    res.status(201).json({ success: true, job: newJob });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update job (admin)
+app.put('/api/admin/jobs/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockJobs.findIndex(j => j.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Job opening not found.' });
+    }
+
+    const updates = { ...req.body };
+    if (updates.responsibilities && typeof updates.responsibilities === 'string') {
+      updates.responsibilities = updates.responsibilities.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (updates.qualifications && typeof updates.qualifications === 'string') {
+      updates.qualifications = updates.qualifications.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (updates.display_order !== undefined) {
+      updates.display_order = parseInt(updates.display_order, 10) || mockJobs[index].display_order;
+    }
+    updates.updated_at = new Date().toISOString();
+
+    mockJobs[index] = { ...mockJobs[index], ...updates };
+    saveJson('jobs.json', mockJobs);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('careers_jobs').upsert(mockJobs[index]);
+      } catch (sbErr) {
+        console.warn('[Careers CMS] Supabase update error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, job: mockJobs[index] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE job (admin)
+app.delete('/api/admin/jobs/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockJobs.findIndex(j => j.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Job opening not found.' });
+    }
+
+    const deleted = mockJobs.splice(index, 1);
+    saveJson('jobs.json', mockJobs);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('careers_jobs').delete().eq('id', id);
+      } catch (sbErr) {
+        console.warn('[Careers CMS] Supabase delete error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, message: 'Job opening permanently removed.', job: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
+// 12D. COMMUNITY ACTIVITIES & GUILDS CMS DESK CRUD (SUPABASE & DUAL-PERSISTENCE)
+// ==============================================================================
+let mockCommunity = loadJson('community.json', []);
+
+async function syncCommunityToSupabase() {
+  if (!supabaseAdmin || !isSupabaseOnline) return;
+  try {
+    const { data, error } = await supabaseAdmin.from('community_activities').select('id');
+    if (!error && data && data.length === 0 && mockCommunity.length > 0) {
+      console.log('[Community CMS] Seeding initial community activities into Supabase public.community_activities...');
+      await supabaseAdmin.from('community_activities').upsert(mockCommunity);
+    }
+  } catch (err) {
+    // Silent fail if table not created yet
+  }
+}
+setTimeout(syncCommunityToSupabase, 5000);
+
+// GET public community activities (only published)
+app.get('/api/community', async (req, res) => {
+  try {
+    let activities = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('community_activities')
+          .select('*')
+          .eq('status', 'published')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          activities = data;
+        }
+      } catch (e) {}
+    }
+    if (activities.length === 0) {
+      activities = mockCommunity.filter(c => c.status === 'published').sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: activities.length, activities });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all community activities (admin view, includes drafts)
+app.get('/api/admin/community', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    let activities = [];
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('community_activities')
+          .select('*')
+          .order('display_order', { ascending: true });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          activities = data;
+        }
+      } catch (e) {}
+    }
+    if (activities.length === 0) {
+      activities = [...mockCommunity].sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+    }
+    res.json({ success: true, count: activities.length, activities });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST create community activity (admin)
+app.post('/api/admin/community', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const {
+      type,
+      title,
+      category,
+      category_label,
+      badge,
+      datetime,
+      mission,
+      speaker_name,
+      speaker_role,
+      speaker_photo,
+      metric_1,
+      metric_2,
+      action_label,
+      action_url,
+      status,
+      display_order
+    } = req.body;
+
+    if (!title) {
+      return res.status(400).json({ error: 'Title is required for community activity.' });
+    }
+
+    const slug = (req.body.id || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const actId = slug || ('comm-' + Date.now());
+
+    const newActivity = {
+      id: actId,
+      type: type || 'guild',
+      title,
+      category: category || 'macro',
+      category_label: category_label || 'Macro & Currency',
+      badge: badge || null,
+      datetime: datetime || null,
+      mission: mission || '',
+      speaker_name: speaker_name || null,
+      speaker_role: speaker_role || null,
+      speaker_photo: speaker_photo || null,
+      metric_1: metric_1 || null,
+      metric_2: metric_2 || null,
+      action_label: action_label || (type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →'),
+      action_url: action_url || '',
+      status: status || 'published',
+      display_order: parseInt(display_order, 10) || (mockCommunity.length + 1),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('community_activities').upsert(newActivity);
+      } catch (sbErr) {
+        console.warn('[Community CMS] Supabase upsert error:', sbErr.message);
+      }
+    }
+
+    const existingIdx = mockCommunity.findIndex(c => c.id === actId);
+    if (existingIdx !== -1) {
+      mockCommunity[existingIdx] = newActivity;
+    } else {
+      mockCommunity.push(newActivity);
+    }
+    saveJson('community.json', mockCommunity);
+
+    res.status(201).json({ success: true, activity: newActivity });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update community activity (admin)
+app.put('/api/admin/community/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockCommunity.findIndex(c => c.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Community activity not found.' });
+    }
+
+    const updates = { ...req.body };
+    if (updates.display_order !== undefined) {
+      updates.display_order = parseInt(updates.display_order, 10) || mockCommunity[index].display_order;
+    }
+    updates.updated_at = new Date().toISOString();
+
+    mockCommunity[index] = { ...mockCommunity[index], ...updates };
+    saveJson('community.json', mockCommunity);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('community_activities').upsert(mockCommunity[index]);
+      } catch (sbErr) {
+        console.warn('[Community CMS] Supabase update error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, activity: mockCommunity[index] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE community activity (admin)
+app.delete('/api/admin/community/:id', authenticateUser, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = mockCommunity.findIndex(c => c.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Community activity not found.' });
+    }
+
+    const deleted = mockCommunity.splice(index, 1);
+    saveJson('community.json', mockCommunity);
+
+    if (supabaseAdmin && isSupabaseOnline) {
+      try {
+        await supabaseAdmin.from('community_activities').delete().eq('id', id);
+      } catch (sbErr) {
+        console.warn('[Community CMS] Supabase delete error:', sbErr.message);
+      }
+    }
+
+    res.json({ success: true, message: 'Community activity permanently removed.', activity: deleted[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==============================================================================
 // 13. MASTER ORDERS & TRANSACTIONS API (ADMIN AUDIT & CHECKOUT RECONCILIATION)
 // ==============================================================================
 

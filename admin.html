@@ -481,6 +481,15 @@
         <button class="admin-tab-btn" data-pane="#pane-partners" id="tab-btn-partners">
           🤝 Strategic Alliances &amp; Partners
         </button>
+        <button class="admin-tab-btn" data-pane="#pane-about" id="tab-btn-about">
+          👥 About Us &amp; Team Management
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-careers" id="tab-btn-careers">
+          💼 Careers &amp; Open Roles
+        </button>
+        <button class="admin-tab-btn" data-pane="#pane-community" id="tab-btn-community">
+          🌐 Community &amp; Guilds
+        </button>
       </div>
 
       <!-- PANE 1: RENALYTICA PUBLISHING STUDIO -->
@@ -1128,6 +1137,314 @@
         </div>
       </div>
 
+      <!-- ====================================================================
+           PANE 8: ABOUT US & EXECUTIVE TEAM MANAGEMENT DESK (CMS & REAL-TIME SYNC)
+           ==================================================================== -->
+      <div class="admin-tab-pane" id="pane-about">
+        <div class="admin-card" style="margin-bottom: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">👥</span>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  About Us &amp; Executive Team Management Desk
+                </h3>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: var(--text-secondary);">
+                Manage executive leaders, senior sector specialists, and dynamically created departments on <code>about.html</code> with Supabase cloud storage &amp; zero-lag frontend sync.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a href="about.html" target="_blank" class="btn-table-action" style="font-size: 0.82rem; text-decoration: none;">
+                View Public About Us Page ↗
+              </a>
+              <button type="button" class="btn-table-action" onclick="window.openAboutNarrativeModal()" style="font-size: 0.82rem; padding: 0.55rem 0.95rem; color: #F59E0B; border-color: rgba(245, 158, 11, 0.3);">
+                ✏️ Edit Page Narrative Sections
+              </button>
+              <button type="button" class="btn-pill-primary" onclick="window.openAddTeamModal()" style="font-size: 0.82rem; padding: 0.55rem 1.1rem;">
+                ➕ Add New Team Member
+              </button>
+            </div>
+          </div>
+
+          <!-- Team Profiles HUD Metrics -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.75rem;">
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Listed Profiles</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-momentum); font-family: var(--font-mono); margin-top: 4px;" id="admin-team-total-count">6</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Live Published</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #10B981; font-family: var(--font-mono); margin-top: 4px;" id="admin-team-published-count">6</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Executive Leaders</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #8B5CF6; font-family: var(--font-mono); margin-top: 4px;" id="admin-team-exec-count">2</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Sector Specialists</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono); margin-top: 4px;" id="admin-team-specialist-count">4</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Custom Departments</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #EC4899; font-family: var(--font-mono); margin-top: 4px;" id="admin-team-custom-count">0</div>
+            </div>
+          </div>
+
+          <!-- Directory Filter Chips & Action Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;" id="team-filter-chips-bar">
+              <button type="button" class="inv-filter-chip active" id="chip-team-all" onclick="window.filterTeamDirectory('all', this)">
+                <span>All Profiles</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-team-executive" onclick="window.filterTeamDirectory('executive', this)">
+                <span>👑 Executive Leadership</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-team-specialist" onclick="window.filterTeamDirectory('specialist', this)">
+                <span>📊 Sector Specialists</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-team-custom" onclick="window.filterTeamDirectory('custom', this)">
+                <span>🏷 Custom Departments</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-team-drafts" onclick="window.filterTeamDirectory('draft', this)">
+                <span>📝 Drafts Only</span>
+              </button>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button type="button" class="btn-table-action" onclick="window.promptAddCustomDepartment()" style="font-size: 0.78rem; border-style: dashed; border-color: var(--accent-momentum); color: var(--accent-momentum); font-weight: 700;">
+                🏷 Add Custom Department
+              </button>
+              <button type="button" class="btn-table-action" onclick="window.refreshAdminTeamList()" style="font-size: 0.78rem;">
+                🔄 Refresh Directory
+              </button>
+            </div>
+          </div>
+
+          <!-- Team Profiles Directory Table -->
+          <div class="invoices-table-wrap">
+            <table class="invoices-table">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">Photo</th>
+                  <th>Member Name &amp; Role Title</th>
+                  <th>Department / Category</th>
+                  <th>Desk Badge</th>
+                  <th>Social &amp; Web Links</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-team-tbody">
+                <!-- Rendered dynamically by window.refreshAdminTeamList() -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           PANE 9: CAREERS & JOB OPENINGS MANAGEMENT DESK (CMS & REAL-TIME SYNC)
+           ==================================================================== -->
+      <div class="admin-tab-pane" id="pane-careers">
+        <div class="admin-card" style="margin-bottom: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">💼</span>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  Careers &amp; Job Openings Management Desk
+                </h3>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: var(--text-secondary);">
+                Manage job openings, responsibilities, qualifications, and application destinations on <code>careers.html</code> with Supabase cloud persistence &amp; instant live sync.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a href="careers.html" target="_blank" class="btn-table-action" style="font-size: 0.82rem; text-decoration: none;">
+                View Public Careers Page ↗
+              </a>
+              <button type="button" class="btn-pill-primary" onclick="window.openAddJobModal()" style="font-size: 0.82rem; padding: 0.55rem 1.1rem;">
+                ➕ Post New Career Role
+              </button>
+            </div>
+          </div>
+
+          <!-- Careers HUD Metrics -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.75rem;">
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Listed Roles</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-momentum); font-family: var(--font-mono); margin-top: 4px;" id="admin-jobs-total-count">4</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Live Published</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #10B981; font-family: var(--font-mono); margin-top: 4px;" id="admin-jobs-published-count">4</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Full-Time Roles</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono); margin-top: 4px;" id="admin-jobs-fulltime-count">4</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Hybrid / Remote</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #8B5CF6; font-family: var(--font-mono); margin-top: 4px;" id="admin-jobs-hybrid-count">3</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Departments / Desks</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #EC4899; font-family: var(--font-mono); margin-top: 4px;" id="admin-jobs-dept-count">4</div>
+            </div>
+          </div>
+
+          <!-- Directory Filter Chips & Action Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;" id="jobs-filter-chips-bar">
+              <button type="button" class="inv-filter-chip active" id="chip-jobs-all" onclick="window.filterJobsDirectory('all', this)">
+                <span>All Roles</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-jobs-agri" onclick="window.filterJobsDirectory('agri', this)">
+                <span>🌾 Agriculture &amp; Commodities</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-jobs-data" onclick="window.filterJobsDirectory('data', this)">
+                <span>⚡ Data &amp; Quant Systems</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-jobs-macro" onclick="window.filterJobsDirectory('macro', this)">
+                <span>📊 Macro Policy</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-jobs-sales" onclick="window.filterJobsDirectory('sales', this)">
+                <span>🤝 Commercial Advisory</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-jobs-drafts" onclick="window.filterJobsDirectory('draft', this)">
+                <span>📝 Drafts Only</span>
+              </button>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button type="button" class="btn-table-action" onclick="window.promptAddCustomJobCategory()" style="font-size: 0.78rem; border-style: dashed; border-color: var(--accent-momentum); color: var(--accent-momentum); font-weight: 700;">
+                🏷 Add Custom Department
+              </button>
+              <button type="button" class="btn-table-action" onclick="window.refreshAdminJobsList()" style="font-size: 0.78rem;">
+                🔄 Refresh Directory
+              </button>
+            </div>
+          </div>
+
+          <!-- Jobs Directory Table -->
+          <div class="invoices-table-wrap">
+            <table class="invoices-table">
+              <thead>
+                <tr>
+                  <th>Job Title &amp; Level</th>
+                  <th>Department / Practice</th>
+                  <th>Location &amp; Type</th>
+                  <th>Apply Trigger</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-jobs-tbody">
+                <!-- Rendered dynamically by window.refreshAdminJobsList() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           PANE 10: COMMUNITY ACTIVITIES & GUILDS MANAGEMENT DESK (CMS & REAL-TIME SYNC)
+           ==================================================================== -->
+      <div class="admin-tab-pane" id="pane-community">
+        <div class="admin-card" style="margin-bottom: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">🌐</span>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-primary);">
+                  Community &amp; Guilds Management Desk
+                </h3>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: var(--text-secondary);">
+                Manage working groups, specialized research circles, and closed-door roundtables/AMAs on <code>community.html</code> with instant cloud sync &amp; custom RSVP/charter links.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a href="community.html" target="_blank" class="btn-table-action" style="font-size: 0.82rem; text-decoration: none;">
+                View Public Community Page ↗
+              </a>
+              <button type="button" class="btn-pill-primary" onclick="window.openAddCommunityModal('roundtable')" style="font-size: 0.82rem; padding: 0.55rem 1rem; background: #38BDF8;">
+                📅 Add Live Roundtable / AMA
+              </button>
+              <button type="button" class="btn-pill-primary" onclick="window.openAddCommunityModal('guild')" style="font-size: 0.82rem; padding: 0.55rem 1.1rem;">
+                ➕ Create Working Group / Guild
+              </button>
+            </div>
+          </div>
+
+          <!-- Community HUD Metrics -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.75rem;">
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Total Community Items</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-momentum); font-family: var(--font-mono); margin-top: 4px;" id="admin-comm-total-count">9</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Active Working Guilds</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #8B5CF6; font-family: var(--font-mono); margin-top: 4px;" id="admin-comm-guilds-count">6</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Upcoming Roundtables</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono); margin-top: 4px;" id="admin-comm-roundtables-count">3</div>
+            </div>
+            <div style="background: var(--surface-gray); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.15rem;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Live Published</span>
+              <div style="font-size: 1.8rem; font-weight: 800; color: #10B981; font-family: var(--font-mono); margin-top: 4px;" id="admin-comm-published-count">9</div>
+            </div>
+          </div>
+
+          <!-- Directory Filter Chips & Action Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;" id="comm-filter-chips-bar">
+              <button type="button" class="inv-filter-chip active" id="chip-comm-all" onclick="window.filterCommunityDirectory('all', this)">
+                <span>All Activities</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-comm-guild" onclick="window.filterCommunityDirectory('guild', this)">
+                <span>🛡 Working Groups &amp; Guilds</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-comm-roundtable" onclick="window.filterCommunityDirectory('roundtable', this)">
+                <span>📅 Roundtables &amp; AMAs</span>
+              </button>
+              <button type="button" class="inv-filter-chip" id="chip-comm-drafts" onclick="window.filterCommunityDirectory('draft', this)">
+                <span>📝 Drafts Only</span>
+              </button>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button type="button" class="btn-table-action" onclick="window.refreshAdminCommunityList()" style="font-size: 0.78rem;">
+                🔄 Refresh Directory
+              </button>
+            </div>
+          </div>
+
+          <!-- Community Directory Table -->
+          <div class="invoices-table-wrap">
+            <table class="invoices-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Type</th>
+                  <th>Title &amp; Summary</th>
+                  <th>Focus Discipline</th>
+                  <th>Timing / Metrics</th>
+                  <th>Action / Link</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-comm-tbody">
+                <!-- Rendered dynamically by window.refreshAdminCommunityList() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
   <!-- REVISE / EDIT SCHEDULED BRIEFING MODAL (FULL CRUD CMS) -->
   <div id="briefing-edit-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
     <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 720px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 90vh;">
@@ -1339,7 +1656,529 @@
 
         <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
           <button type="button" class="btn-table-action" onclick="window.closePartnerModal()">Cancel</button>
-          <button type="submit" class="btn-pill-primary" id="btn-save-partner">Save Partner Alliance →</button>
+          <button type="button" class="btn-pill-primary" id="btn-save-partner" onclick="window.savePartner(event)">Save Partner Alliance →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ABOUT US: TEAM MEMBER ADD / REVISE MODAL -->
+  <div id="team-member-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 820px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 92vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 id="team-modal-title" style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            👥 Team Member Profile
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Manage executive leadership and department profile cards on <code>about.html</code> with instant cloud sync.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeTeamModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-team-form" novalidate onsubmit="window.saveTeamMember(event); return false;" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <input type="hidden" id="edit-team-id" value="">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+
+          <!-- Name & Role -->
+          <div style="display: grid; grid-template-columns: 1.3fr 1.2fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Full Name *</label>
+              <input type="text" id="edit-team-name" class="auth-input" placeholder="e.g. Ezeala Obinna" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Official Role / Professional Title *</label>
+              <input type="text" id="edit-team-role" class="auth-input" placeholder="e.g. Founder, Lead Researcher &amp; Data Analyst" required>
+            </div>
+          </div>
+
+          <!-- Category & Custom Department -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Department / Hierarchy Level *</label>
+              <select id="edit-team-category" class="auth-input" onchange="window.handleTeamCategoryChange(this.value)" required>
+                <option value="executive">👑 Executive Leadership Spotlight</option>
+                <option value="specialist">📊 Senior Sector Specialists</option>
+                <option value="__new__">➕ Create New Custom Department...</option>
+              </select>
+            </div>
+            <div class="auth-field-group" id="group-team-category-label">
+              <label class="auth-label">Department Display Label</label>
+              <input type="text" id="edit-team-category-label" class="auth-input" placeholder="e.g. Social Media Management">
+            </div>
+          </div>
+
+          <!-- Desk Badge & Photo URL with Live Preview -->
+          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.25rem; align-items: start;">
+            <div class="auth-field-group">
+              <label class="auth-label">Desk Badge / Telemetry Tag</label>
+              <input type="text" id="edit-team-desk-badge" class="auth-input" placeholder="e.g. MACRO DESK, OPERATIONS">
+            </div>
+
+            <div class="auth-field-group">
+              <label class="auth-label">Profile Photo URL</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <div style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--border-light); overflow: hidden; background: #1e293b; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                  <img id="team-photo-preview" src="assets/images/obinna_main_photo.png" alt="Photo Preview" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/brand/renalytica_emblem.png';">
+                </div>
+                <input type="text" id="edit-team-photo" class="auth-input" placeholder="assets/images/obinna_main_photo.png" oninput="document.getElementById('team-photo-preview').src = this.value || 'assets/brand/renalytica_emblem.png'" style="flex: 1;">
+              </div>
+              <!-- Quick Presets -->
+              <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center;">
+                <span style="font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono);">Presets:</span>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/obinna_main_photo.png')" style="font-size: 0.65rem; padding: 2px 6px;">Obinna</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/alfred_brand_photo.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Alfred</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/about/team_lead_economist.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Economist</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/about/team_agriculture_lead.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Agri</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/about/team_fmcg_lead.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">FMCG</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/images/about/team_quant_lead.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Quant</button>
+                <button type="button" class="btn-table-action" onclick="window.setTeamPhotoPreset('assets/brand/renalytica_emblem.png')" style="font-size: 0.65rem; padding: 2px 6px;">Emblem</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Focus Areas Tagline -->
+          <div class="auth-field-group">
+            <label class="auth-label">Focus Areas / Tagline</label>
+            <input type="text" id="edit-team-tagline" class="auth-input" placeholder="e.g. Currency Trends • Budgets • Inflation">
+          </div>
+
+          <!-- Professional Bio -->
+          <div class="auth-field-group">
+            <label class="auth-label">Professional Biography &amp; Practice Advisory Narrative</label>
+            <textarea id="edit-team-bio" class="auth-input" rows="3" placeholder="Provide background on experience, institutional advisory, and practice expertise."></textarea>
+          </div>
+
+          <!-- Multi-Platform Social & Contact Links -->
+          <div>
+            <label class="auth-label" style="margin-bottom: 6px; display: block;">Social &amp; Professional Corridors</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="auth-field-group">
+                <span style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">🔗 LinkedIn Profile URL</span>
+                <input type="text" id="edit-team-linkedin" class="auth-input" placeholder="https://linkedin.com/in/username">
+              </div>
+              <div class="auth-field-group">
+                <span style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">🌐 Personal Website / Portfolio URL</span>
+                <input type="text" id="edit-team-website" class="auth-input" placeholder="https://yourportfolio.com">
+              </div>
+              <div class="auth-field-group">
+                <span style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">📘 Facebook Profile URL</span>
+                <input type="text" id="edit-team-facebook" class="auth-input" placeholder="https://facebook.com/username">
+              </div>
+              <div class="auth-field-group">
+                <span style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">🐦 Twitter / X Profile URL</span>
+                <input type="text" id="edit-team-twitter" class="auth-input" placeholder="https://x.com/username">
+              </div>
+            </div>
+            <div class="auth-field-group" style="margin-top: 0.85rem;">
+              <span style="font-size: 0.73rem; color: var(--text-muted); font-family: var(--font-mono);">🎓 ResearchGate / Google Scholar URL</span>
+              <input type="text" id="edit-team-scholar" class="auth-input" placeholder="https://scholar.google.com/citations?user=...">
+            </div>
+          </div>
+
+          <!-- Credentials Badges -->
+          <div class="auth-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Credentials / Certifications (1 per line)</label>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">e.g. ✔ 18+ Yrs Institutional Advisory</span>
+            </div>
+            <textarea id="edit-team-credentials" class="auth-input" rows="2" placeholder="✔ International Award-Winning Author&#10;✔ Quantitative Finance &amp; AI"></textarea>
+          </div>
+
+          <!-- Status & Display Order -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Publication Status *</label>
+              <select id="edit-team-status" class="auth-input" style="font-weight: 700;">
+                <option value="published">🟢 Published (Live on about.html)</option>
+                <option value="draft">🟡 Draft (Hidden from public)</option>
+                <option value="archived">⚪ Archived</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Display Order Sequence</label>
+              <input type="number" id="edit-team-order" class="auth-input" value="1" min="1" max="99">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closeTeamModal()">Cancel</button>
+          <button type="button" class="btn-pill-primary" id="btn-save-team-member" onclick="window.saveTeamMember(event)">Save Profile to Directory →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ABOUT US: NARRATIVE SECTIONS EDIT MODAL -->
+  <div id="about-narrative-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 780px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 90vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            ✏️ Revise About Us Page Narrative Content
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Update copy across Hero, Dual Headquarters, Mission, and Vision on <code>about.html</code>.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeAboutNarrativeModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-about-narrative-form" onsubmit="window.saveAboutNarrative(event)" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+
+          <!-- Hero Section -->
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--accent-momentum); font-family: var(--font-mono); text-transform: uppercase;">1. Hero Stage</h4>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-bottom: 0.85rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Title Main</label>
+                <input type="text" id="narrative-hero-main" class="auth-input" value="Clear Direction for Leaders in Unpredictable">
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Title Accent (Orange)</label>
+                <input type="text" id="narrative-hero-accent" class="auth-input" value="Markets.">
+              </div>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Hero Subtitle</label>
+              <textarea id="narrative-hero-subtitle" class="auth-input" rows="2">Renalytica provides high-frequency telemetry, structural macroeconomic research, and empirical ground-truth intelligence across West Africa and global frontier economies.</textarea>
+            </div>
+          </div>
+
+          <!-- Dual Headquarters -->
+          <div style="border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--accent-momentum); font-family: var(--font-mono); text-transform: uppercase;">2. Dual Headquarters Stage</h4>
+            <div class="auth-field-group" style="margin-bottom: 0.85rem;">
+              <label class="auth-label">Section Title</label>
+              <input type="text" id="narrative-hq-title" class="auth-input" value="Bridging Global Capital & Ground Realities">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Section Subtitle</label>
+              <textarea id="narrative-hq-subtitle" class="auth-input" rows="2">Our dual corporate and analytical headquarters link global institutional capital in Manhattan directly with street-level retail and commodities intelligence in Lagos.</textarea>
+            </div>
+          </div>
+
+          <!-- Mission & Vision -->
+          <div>
+            <h4 style="margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--accent-momentum); font-family: var(--font-mono); text-transform: uppercase;">3. Mission &amp; Vision</h4>
+            <div class="auth-field-group" style="margin-bottom: 0.85rem;">
+              <label class="auth-label">Mission Statement</label>
+              <textarea id="narrative-mission" class="auth-input" rows="2">To eradicate information asymmetry across African and frontier economies by equipping global institutions, multinational corporations, and sovereign policymakers with rigorous, empirical, and decision-grade intelligence.</textarea>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Vision Statement</label>
+              <textarea id="narrative-vision" class="auth-input" rows="2">To become the undisputed sovereign standard and premier institutional benchmark for economic intelligence, quantitative data models, and business strategy in the developing world.</textarea>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closeAboutNarrativeModal()">Cancel</button>
+          <button type="button" class="btn-pill-primary" id="btn-save-about-narrative" onclick="window.saveAboutNarrative(event)">Save Narrative Revisions →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CAREERS & JOB OPENINGS ADD / EDIT MODAL -->
+  <div id="job-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 820px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 92vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 id="job-modal-title" style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            💼 Career Opening Details
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Manage job posting, requirements, and application triggers on <code>careers.html</code> with instant cloud persistence.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeJobModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-job-form" novalidate onsubmit="window.saveJobOpening(event); return false;" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <input type="hidden" id="edit-job-id" value="">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+
+          <!-- Title & Department -->
+          <div style="display: grid; grid-template-columns: 1.3fr 1.2fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Role Title *</label>
+              <input type="text" id="edit-job-title" class="auth-input" placeholder="e.g. Senior Agribusiness Economist" required>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Department / Practice Desk *</label>
+              <input type="text" id="edit-job-dept" class="auth-input" placeholder="e.g. Agriculture & Commodities Desk" required>
+            </div>
+          </div>
+
+          <!-- Category Slug & Filter Label -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Filter Category *</label>
+              <select id="edit-job-category" class="auth-input" onchange="window.handleJobCategoryChange(this.value)" required>
+                <option value="agri">🌾 Agriculture & Commodities</option>
+                <option value="data">⚡ Data & Quantitative Systems</option>
+                <option value="macro">📊 Macroeconomic Policy</option>
+                <option value="sales">🤝 Commercial Advisory</option>
+                <option value="__new__">➕ Create New Custom Department...</option>
+              </select>
+            </div>
+            <div class="auth-field-group" id="group-job-category-label">
+              <label class="auth-label">Filter Button Label</label>
+              <input type="text" id="edit-job-category-label" class="auth-input" placeholder="e.g. Agriculture & Commodities">
+            </div>
+          </div>
+
+          <!-- Location, Type & Experience -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Location</label>
+              <input type="text" id="edit-job-location" class="auth-input" placeholder="e.g. Lagos, Nigeria (Hybrid)">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Employment Type</label>
+              <select id="edit-job-type" class="auth-input">
+                <option value="Full-Time">Full-Time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Contract">Contract / Project-Based</option>
+                <option value="Fellowship">Research Fellowship</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Experience Level</label>
+              <input type="text" id="edit-job-experience" class="auth-input" placeholder="e.g. 3–5 Years Exp">
+            </div>
+          </div>
+
+          <!-- Overview -->
+          <div class="auth-field-group">
+            <label class="auth-label">Role Overview / Summary *</label>
+            <textarea id="edit-job-overview" class="auth-input" rows="3" placeholder="Brief summary of what this role entails and its strategic mission within Renalytica." required></textarea>
+          </div>
+
+          <!-- Responsibilities -->
+          <div class="auth-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">What You Will Do (1 bullet per line)</label>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Key duties & deliverables</span>
+            </div>
+            <textarea id="edit-job-responsibilities" class="auth-input" rows="3" placeholder="Design and manage field survey models across 36 trade corridors.&#10;Author flagship industry forecast reports.&#10;Conduct quarterly briefings for corporate clients."></textarea>
+          </div>
+
+          <!-- Qualifications -->
+          <div class="auth-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">What We Look For (1 bullet per line)</label>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Skills, education & requirements</span>
+            </div>
+            <textarea id="edit-job-qualifications" class="auth-input" rows="3" placeholder="Master's degree in Quantitative Economics or related discipline.&#10;Proven track record with Python time-series modeling.&#10;Deep understanding of West African market dynamics."></textarea>
+          </div>
+
+          <!-- Application Trigger & Link -->
+          <div style="background: rgba(255, 128, 0, 0.05); border: 1px solid rgba(255, 128, 0, 0.2); border-radius: 12px; padding: 1.15rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <strong style="color: var(--accent-momentum); font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase;">
+                🎯 Candidate Application Action Trigger
+              </strong>
+            </div>
+            <div style="display: grid; grid-template-columns: 1.2fr 1.5fr; gap: 1.25rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Apply Mechanism *</label>
+                <select id="edit-job-apply-mode" class="auth-input" onchange="window.handleJobApplyModeChange(this.value)">
+                  <option value="modal">Built-in Application Modal (on careers.html)</option>
+                  <option value="external_url">External Application URL (Google Form / ATS / LinkedIn)</option>
+                  <option value="email">Direct Email Application</option>
+                </select>
+              </div>
+              <div class="auth-field-group" id="group-job-apply-url">
+                <label class="auth-label" id="label-job-apply-url">External Application Link / URL</label>
+                <input type="text" id="edit-job-apply-url" class="auth-input" placeholder="https://forms.google.com/... or careers@renalytica.com">
+              </div>
+            </div>
+            <div class="auth-field-group" style="margin-top: 0.75rem;">
+              <label class="auth-label">Button Call-To-Action Text</label>
+              <input type="text" id="edit-job-button-label" class="auth-input" value="Apply for This Role →">
+            </div>
+          </div>
+
+          <!-- Status & Order -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Publication Status *</label>
+              <select id="edit-job-status" class="auth-input" style="font-weight: 700;">
+                <option value="published">🟢 Published (Live on careers.html)</option>
+                <option value="draft">🟡 Draft (Admin Desk Only)</option>
+                <option value="archived">⚪ Archived</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Display Order Sequence</label>
+              <input type="number" id="edit-job-order" class="auth-input" value="1" min="1" max="99">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closeJobModal()">Cancel</button>
+          <button type="button" class="btn-pill-primary" id="btn-save-job" onclick="window.saveJobOpening(event)">Save Job Opening →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- COMMUNITY ACTIVITIES & GUILDS ADD / EDIT MODAL -->
+  <div id="community-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(10, 15, 29, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="modal-card" style="background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 16px; max-width: 800px; width: 100%; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.6); max-height: 92vh;">
+      <div style="padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);">
+        <div>
+          <h3 id="community-modal-title" style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            🌐 Community Activity Details
+          </h3>
+          <p style="margin: 4px 0 0; font-size: 0.76rem; color: var(--text-muted);">
+            Manage working groups, specialized research circles, and closed-door roundtables on <code>community.html</code>.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeCommunityModal()" style="background: transparent; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form id="admin-community-form" novalidate onsubmit="window.saveCommunityActivity(event); return false;" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+        <input type="hidden" id="edit-comm-id" value="">
+        <div style="padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; flex: 1;">
+
+          <!-- Activity Type -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1.5fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Activity Type *</label>
+              <select id="edit-comm-type" class="auth-input" onchange="window.handleCommunityTypeChange(this.value)" required>
+                <option value="guild">🛡 Specialized Working Group / Guild</option>
+                <option value="roundtable">📅 Closed-Door Roundtable / AMA</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Focus Discipline / Category *</label>
+              <select id="edit-comm-category" class="auth-input" required>
+                <option value="macro">Macro &amp; Currency</option>
+                <option value="agri">Agritech &amp; Logistics</option>
+                <option value="commodity">Commodity Corridors</option>
+                <option value="diaspora">Diaspora Capital</option>
+                <option value="energy">Renewable Energy &amp; Infrastructure</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div class="auth-field-group">
+            <label class="auth-label">Title / Name *</label>
+            <input type="text" id="edit-comm-title" class="auth-input" placeholder="e.g. FX Parallel Arbitrage & Remittance Guild" required>
+          </div>
+
+          <!-- Telemetry Badge & Timing -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Telemetry Badge / Pill</label>
+              <input type="text" id="edit-comm-badge" class="auth-input" placeholder="e.g. UPCOMING // 4 DAYS or WEEKLY TELEMETRY">
+            </div>
+            <div class="auth-field-group" id="group-comm-datetime">
+              <label class="auth-label">Date &amp; Time (For Roundtables)</label>
+              <input type="text" id="edit-comm-datetime" class="auth-input" placeholder="e.g. MAR 18 • 16:00 WAT">
+            </div>
+          </div>
+
+          <!-- Mission / Overview -->
+          <div class="auth-field-group">
+            <label class="auth-label">Mission / Session Description *</label>
+            <textarea id="edit-comm-mission" class="auth-input" rows="3" placeholder="Describe the focus of the working group or agenda of the roundtable." required></textarea>
+          </div>
+
+          <!-- Roundtable Speaker Section (Shown for roundtables) -->
+          <div id="section-comm-speaker" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 1.15rem; display: none;">
+            <strong style="color: #38BDF8; font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; display: block; margin-bottom: 0.75rem;">
+              👤 Session Lead / Speaker Lockup
+            </strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 0.85rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Speaker Name</label>
+                <input type="text" id="edit-comm-speaker-name" class="auth-input" placeholder="e.g. Dr. Tariq Adeleke">
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Speaker Role / Designation</label>
+                <input type="text" id="edit-comm-speaker-role" class="auth-input" placeholder="e.g. Lead Econometrician, Lagos Node">
+              </div>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Speaker Photo URL</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-light); overflow: hidden; background: #1e293b; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                  <img id="comm-speaker-preview" src="assets/images/community/community_roundtable_charts.jpg" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/brand/renalytica_emblem.png';">
+                </div>
+                <input type="text" id="edit-comm-speaker-photo" class="auth-input" placeholder="assets/images/community/community_roundtable_charts.jpg" oninput="document.getElementById('comm-speaker-preview').src = this.value || 'assets/brand/renalytica_emblem.png'" style="flex: 1;">
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center;">
+                <span style="font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono);">Presets:</span>
+                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_roundtable_charts.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Charts/Adeleke</button>
+                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_colleagues_laptop.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Chioma</button>
+                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_strategy_conference.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Babatunde</button>
+                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/brand/renalytica_emblem.png')" style="font-size: 0.65rem; padding: 2px 6px;">Emblem</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guild Metrics Section (Shown for guilds) -->
+          <div id="section-comm-metrics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Metric Tag 1 (e.g. Fellow Count)</label>
+              <input type="text" id="edit-comm-metric1" class="auth-input" placeholder="e.g. 412 FELLOWS">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Metric Tag 2 (e.g. Briefing Cadence)</label>
+              <input type="text" id="edit-comm-metric2" class="auth-input" placeholder="e.g. BI-WEEKLY BRIEFING">
+            </div>
+          </div>
+
+          <!-- Action Button & Outbound URL -->
+          <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 1.15rem;">
+            <strong style="color: #8B5CF6; font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; display: block; margin-bottom: 0.75rem;">
+              🔗 Action Button &amp; Outbound Join/RSVP Corridor
+            </strong>
+            <div style="display: grid; grid-template-columns: 1.2fr 1.5fr; gap: 1.25rem;">
+              <div class="auth-field-group">
+                <label class="auth-label">Button Label</label>
+                <input type="text" id="edit-comm-action-label" class="auth-input" placeholder="e.g. View Guild Charter → or RSVP for Seat →">
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-label">Custom Action Destination URL</label>
+                <input type="text" id="edit-comm-action-url" class="auth-input" placeholder="https://zoom.us/... or Google Meet / Form link (leave blank for default modal)">
+              </div>
+            </div>
+          </div>
+
+          <!-- Status & Order -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="auth-field-group">
+              <label class="auth-label">Publication Status *</label>
+              <select id="edit-comm-status" class="auth-input" style="font-weight: 700;">
+                <option value="published">🟢 Published (Live on community.html)</option>
+                <option value="draft">🟡 Draft (Admin Desk Only)</option>
+                <option value="archived">⚪ Archived</option>
+              </select>
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label">Display Order Sequence</label>
+              <input type="number" id="edit-comm-order" class="auth-input" value="1" min="1" max="99">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding: 1rem 1.75rem; border-top: 1px solid var(--border-light); background: var(--surface-card); display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn-table-action" onclick="window.closeCommunityModal()">Cancel</button>
+          <button type="button" class="btn-pill-primary" id="btn-save-comm" onclick="window.saveCommunityActivity(event)">Save Community Activity →</button>
         </div>
       </form>
     </div>
@@ -2001,6 +2840,43 @@
   <script src="lib/supabase-client.js"></script>
 
   <script>
+    // Universal Toast HUD Manager (Available across all admin desks)
+    function showAdminToast(message, type = 'info', durationMs = 4000) {
+      const hud = document.getElementById('admin-toast-hud');
+      if (!hud) {
+        console.log(`[Toast ${type}]`, message);
+        return;
+      }
+
+      const toast = document.createElement('div');
+      const normalizedType = (type === 'danger' || type === 'error') ? 'danger' : (type === 'warning' ? 'warning' : (type === 'success' ? 'success' : 'info'));
+      toast.className = `admin-toast ${normalizedType}`;
+      
+      let icon = '⚡';
+      if (type === 'success') icon = '✅';
+      else if (type === 'error' || type === 'danger') icon = '❌';
+      else if (type === 'warning') icon = '⚠️';
+
+      toast.innerHTML = `
+        <span style="font-size: 1.15rem; line-height: 1;">${icon}</span>
+        <div style="flex: 1; line-height: 1.4;">${message}</div>
+        <button type="button" onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; opacity: 0.6; font-size: 1.1rem; line-height: 1;">&times;</button>
+      `;
+
+      hud.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'toastSlideOut 0.35s ease forwards';
+        setTimeout(() => toast.remove(), 350);
+      }, durationMs);
+    }
+    window.showAdminToast = showAdminToast;
+
+    function showToast(message, type = 'info', durationMs = 4000) {
+      showAdminToast(message, type, durationMs);
+    }
+    window.showToast = showToast;
+
     document.addEventListener('DOMContentLoaded', () => {
       // ====================================================================
       // ANALYST BRIEFINGS SCHEDULER ENGINE (ADMIN CONTROLS)
@@ -2766,9 +3642,1872 @@
         });
       }
 
-      // Initialize briefings list & partners list
+      // ==============================================================================
+      // ABOUT US & TEAM MANAGEMENT CMS ENGINE (DESK 8)
+      // ==============================================================================
+      let currentTeamFilter = 'all';
+
+      const DEFAULT_TEAM_MEMBERS = [
+        {
+          id: "ezeala-obinna",
+          name: "Ezeala Obinna",
+          role: "Founder, Lead Researcher & Data Analyst",
+          category: "executive",
+          category_label: "Executive Leadership Spotlight",
+          desk_badge: "FOUNDING EXECUTIVE",
+          badge_pill: "FOUNDER & LEAD RESEARCHER",
+          role_eyebrow: "RESEARCH LEADERSHIP & FOUNDER",
+          photo_url: "assets/images/obinna_main_photo.png",
+          tagline: "Research Consultant • Data Analyst • Business Analyst • Digital Strategist",
+          bio: "A philanthropist, seasoned expert in finance, artificial intelligence, fintech, corporate governance, & strategic management. An international award winning author with research that integrates quantitative methods and emerging technologies to address challenges in financial markets, organizational performance and digital transformation.",
+          social_links: {
+            linkedin: "https://www.linkedin.com/in/ezeala-obinna-5821a8119/",
+            scholar: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u5HHmVD_uO8C",
+            website: "",
+            facebook: "",
+            twitter: ""
+          },
+          credentials: [
+            "✔ International Award-Winning Author",
+            "✔ Quantitative Finance & AI"
+          ],
+          papers: [
+            {
+              title: "\"An Empirical Analysis of Capital Structure, Liquidity and Banking Sector Performance in Nigeria (2011–2021)\"",
+              researchgate: "https://www.researchgate.net/publication/373618126_An_Empirical_Analysis_of_Capital_Structure_Liquidity_and_Banking_Sector_Performance_in_Nigeria_2011-2021",
+              scholar: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u5HHmVD_uO8C"
+            },
+            {
+              title: "\"Financial Technology Innovations and Banking Performance in Developing Economies\"",
+              repec: "https://ideas.repec.org/a/aif/journl/v26y2023i1p207-223.html",
+              scholar: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=l2UepQYAAAAJ&citation_for_view=l2UepQYAAAAJ:u-x6o8ySG0sC"
+            }
+          ],
+          skills: [],
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "alfred-williams",
+          name: "Alfred Williams",
+          role: "Chief Technology Officer (CTO)",
+          category: "executive",
+          category_label: "Executive Leadership Spotlight",
+          desk_badge: "TECHNOLOGY & SYSTEMS",
+          badge_pill: "CHIEF TECHNOLOGY OFFICER (CTO)",
+          role_eyebrow: "EXECUTIVE LEADERSHIP & TECHNOLOGY",
+          photo_url: "assets/images/alfred_brand_photo.jpg",
+          tagline: "Digital Strategist • Writer • Editor • Research Consultant",
+          bio: "Combining over five years of professional experience in Education Training, Media and Communications, with excellent researching, writing, editing, designing, and marketing skills, I help these SMEs both come up with winning strategies and implement them most practically.",
+          social_links: {
+            linkedin: "https://www.linkedin.com/in/williams-e-alfred/",
+            website: "",
+            facebook: "",
+            twitter: "",
+            scholar: ""
+          },
+          credentials: [
+            "✔ 5+ Yrs Media & Comms Vet",
+            "✔ Digital Strategy & Systems"
+          ],
+          papers: [],
+          skills: [
+            "Content/Digital Strategy",
+            "Search Engine Optimization",
+            "Social Media Marketing",
+            "Lead Generation and Email Marketing",
+            "Content/Web Design and Development"
+          ],
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "lead-economist",
+          name: "Lead Economist & Head of Macroeconomic Research",
+          role: "Lead Economist & Head of Macroeconomic Research",
+          category: "specialist",
+          category_label: "Senior Sector Specialists",
+          desk_badge: "MACRO DESK",
+          badge_pill: "MACRO DESK",
+          role_eyebrow: "RESEARCH LEADERSHIP",
+          photo_url: "assets/images/about/team_lead_economist.jpg",
+          tagline: "Currency Trends • Budgets • Inflation",
+          bio: "Over 18 years of experience advising commercial banks, government agencies, and investment funds across Africa and international capital centers on economic policy, monetary risk, and sovereign debt.",
+          social_links: { linkedin: "", facebook: "", website: "", twitter: "", scholar: "" },
+          credentials: ["✔ 18+ Yrs Institutional Advisory"],
+          papers: [],
+          skills: [],
+          status: "published",
+          display_order: 3
+        },
+        {
+          id: "agri-sector-lead",
+          name: "Senior Sector Lead — Agriculture & Commodities",
+          role: "Senior Sector Lead — Agriculture & Commodities",
+          category: "specialist",
+          category_label: "Senior Sector Specialists",
+          desk_badge: "AGRI & COMMODITIES",
+          badge_pill: "AGRI & COMMODITIES",
+          role_eyebrow: "SECTOR SPECIALIST",
+          photo_url: "assets/images/about/team_agriculture_lead.jpg",
+          tagline: "Farming Trends • Fertilizer • Grains",
+          bio: "An agricultural economist with deep experience across grain storage, seed adoption, fertilizer import pricing, and farm-to-factory logistics throughout West and East Africa's primary food basins.",
+          social_links: { linkedin: "", facebook: "", website: "", twitter: "", scholar: "" },
+          credentials: ["✔ Agronomy & Silo Network Audit"],
+          papers: [],
+          skills: [],
+          status: "published",
+          display_order: 4
+        },
+        {
+          id: "fmcg-sector-lead",
+          name: "Senior Sector Lead — Retail, Commerce & FMCG",
+          role: "Senior Sector Lead — Retail, Commerce & FMCG",
+          category: "specialist",
+          category_label: "Senior Sector Specialists",
+          desk_badge: "COMMERCE & FMCG",
+          badge_pill: "COMMERCE & FMCG",
+          role_eyebrow: "COMMERCIAL SPECIALIST",
+          photo_url: "assets/images/about/team_fmcg_lead.jpg",
+          tagline: "Supermarkets • Open Markets • FMCG",
+          bio: "Former supply chain strategist for top regional consumer goods manufacturers. Specializes in modern supermarket distribution routes, wholesale depot pricing, and neighborhood market consumer spending.",
+          social_links: { linkedin: "", facebook: "", website: "", twitter: "", scholar: "" },
+          credentials: ["✔ Consumer Route-to-Market Vet"],
+          papers: [],
+          skills: [],
+          status: "published",
+          display_order: 5
+        },
+        {
+          id: "quant-modeling-lead",
+          name: "Head of Data & Quantitative Modeling",
+          role: "Head of Data & Quantitative Modeling",
+          category: "specialist",
+          category_label: "Senior Sector Specialists",
+          desk_badge: "QUANTITATIVE DATA",
+          badge_pill: "QUANTITATIVE DATA",
+          role_eyebrow: "SYSTEMS & MODELING",
+          photo_url: "assets/images/about/team_quant_lead.jpg",
+          tagline: "Satellite NDVI • Systems • Models",
+          bio: "Data specialist focused on satellite crop tracking, port customs trade registries, statistical Monte Carlo simulations, and engineering unlocked Excel forecast tools for corporate and risk desks.",
+          social_links: { linkedin: "", facebook: "", website: "", twitter: "", scholar: "" },
+          credentials: ["✔ Geospatial & Stochastic Models"],
+          papers: [],
+          skills: [],
+          status: "published",
+          display_order: 6
+        }
+      ];
+
+      function getStoredTeam() {
+        try {
+          const raw = localStorage.getItem('renalytica_team');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              return parsed;
+            }
+          }
+        } catch (e) {}
+        try {
+          localStorage.setItem('renalytica_team', JSON.stringify(DEFAULT_TEAM_MEMBERS));
+        } catch (e) {}
+        return DEFAULT_TEAM_MEMBERS;
+      }
+
+      function saveStoredTeam(team) {
+        localStorage.setItem('renalytica_team', JSON.stringify(team));
+        window.dispatchEvent(new CustomEvent('renalytica_team_updated', { detail: { count: team.length } }));
+      }
+
+      window.filterTeamDirectory = function(filter, chipEl) {
+        currentTeamFilter = filter;
+        const chips = document.querySelectorAll('#team-filter-chips-bar .inv-filter-chip');
+        chips.forEach(c => c.classList.remove('active'));
+        if (chipEl) chipEl.classList.add('active');
+        window.refreshAdminTeamList();
+      };
+
+      window.refreshAdminTeamList = async function() {
+        const tbody = document.getElementById('admin-team-tbody');
+        if (!tbody) return;
+        let team = getStoredTeam();
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          const res = await fetch('/api/admin/team', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.team) && data.team.length > 0) {
+              team = data.team;
+              saveStoredTeam(team);
+            }
+          }
+        } catch (e) {}
+
+        // Counters
+        const totalEl = document.getElementById('admin-team-total-count');
+        const pubEl = document.getElementById('admin-team-published-count');
+        const execEl = document.getElementById('admin-team-exec-count');
+        const specEl = document.getElementById('admin-team-specialist-count');
+        const custEl = document.getElementById('admin-team-custom-count');
+
+        const pubCount = team.filter(m => m.status === 'published').length;
+        const execCount = team.filter(m => m.category === 'executive').length;
+        const specCount = team.filter(m => m.category === 'specialist').length;
+        const custCount = team.filter(m => m.category !== 'executive' && m.category !== 'specialist').length;
+
+        if (totalEl) totalEl.textContent = team.length;
+        if (pubEl) pubEl.textContent = pubCount;
+        if (execEl) execEl.textContent = execCount;
+        if (specEl) specEl.textContent = specCount;
+        if (custEl) custEl.textContent = custCount;
+
+        // Populate Category Dropdown with any custom departments
+        window.populateTeamCategoryDropdown(team);
+
+        // Filter list
+        let filtered = team;
+        if (currentTeamFilter === 'executive') {
+          filtered = team.filter(m => m.category === 'executive');
+        } else if (currentTeamFilter === 'specialist') {
+          filtered = team.filter(m => m.category === 'specialist');
+        } else if (currentTeamFilter === 'custom') {
+          filtered = team.filter(m => m.category !== 'executive' && m.category !== 'specialist');
+        } else if (currentTeamFilter === 'draft') {
+          filtered = team.filter(m => m.status === 'draft');
+        }
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-secondary);">No team profiles found matching this category filter. Click "+ Add New Team Member" to register a profile.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(m => {
+          const isPublished = m.status === 'published';
+          const catLabel = m.category_label || (
+            m.category === 'executive' ? 'Executive Leadership' :
+            m.category === 'specialist' ? 'Sector Specialist' : (m.category || 'General')
+          );
+          const catPillClass = m.category === 'executive' ? 'pill-sports' : (m.category === 'specialist' ? 'pill-telemetry' : 'pill-education');
+
+          // Social icons indicator
+          const links = m.social_links || {};
+          const icons = [];
+          if (links.linkedin) icons.push('<span title="LinkedIn" style="color: #0A66C2;">in</span>');
+          if (links.facebook) icons.push('<span title="Facebook" style="color: #1877F2;">fb</span>');
+          if (links.website) icons.push('<span title="Website" style="color: var(--accent-momentum);">web</span>');
+          if (links.twitter) icons.push('<span title="Twitter/X" style="color: #38BDF8;">𝕏</span>');
+          if (links.scholar) icons.push('<span title="Scholar/Citations" style="color: #10B981;">🎓</span>');
+          const socialDisplay = icons.length > 0
+            ? `<div style="display: flex; gap: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;">${icons.join('')}</div>`
+            : '<span style="font-size: 0.75rem; color: var(--text-muted);">—</span>';
+
+          return `
+            <tr>
+              <td>
+                <div style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--border-light); overflow: hidden; background: #0f172a; display: flex; align-items: center; justify-content: center;">
+                  <img src="${m.photo_url || 'assets/brand/renalytica_emblem.png'}" alt="${m.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/brand/renalytica_emblem.png'">
+                </div>
+              </td>
+              <td>
+                <strong style="color: var(--text-primary); font-size: 0.92rem; display: block;">${m.name}</strong>
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">${m.role || ''}</div>
+                ${m.tagline ? `<div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${m.tagline}</div>` : ''}
+              </td>
+              <td>
+                <span class="partner-sector-pill ${catPillClass}" style="font-size: 0.7rem; padding: 2px 8px;">${catLabel}</span>
+              </td>
+              <td>
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--accent-momentum); background: rgba(255,128,0,0.08); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,128,0,0.2);">
+                  ${m.desk_badge || m.badge_pill || 'TEAM'}
+                </span>
+              </td>
+              <td>
+                ${socialDisplay}
+              </td>
+              <td>
+                <button type="button" class="status-switch-btn ${isPublished ? 'published' : 'draft'}" onclick="window.toggleTeamMemberStatus('${m.id}')" title="Click to toggle between Published and Draft">
+                  ● ${isPublished ? 'Published' : 'Draft'}
+                </button>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 6px;">
+                  <button type="button" class="btn-table-action" onclick="window.openEditTeamModal('${m.id}')" style="color: #38BDF8;" title="Edit Profile">✏️ Edit</button>
+                  <button type="button" class="btn-table-action" onclick="window.deleteAdminTeamMember('${m.id}')" style="color: #EF4444;" title="Delete Profile">🗑</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      window.populateTeamCategoryDropdown = function(team) {
+        const catSelect = document.getElementById('edit-team-category');
+        if (!catSelect) return;
+        const currentVal = catSelect.value;
+
+        // Discover custom categories
+        const customCats = new Map();
+        (team || []).forEach(m => {
+          if (m.category && m.category !== 'executive' && m.category !== 'specialist') {
+            customCats.set(m.category, m.category_label || m.category);
+          }
+        });
+
+        let opts = `
+          <option value="executive">👑 Executive Leadership Spotlight</option>
+          <option value="specialist">📊 Senior Sector Specialists</option>
+        `;
+        customCats.forEach((label, catKey) => {
+          opts += `<option value="${catKey}">🏷 ${label}</option>`;
+        });
+        opts += `<option value="__new__">➕ Create New Custom Department...</option>`;
+        catSelect.innerHTML = opts;
+
+        if (currentVal && catSelect.querySelector(`option[value="${currentVal}"]`)) {
+          catSelect.value = currentVal;
+        }
+      };
+
+      window.handleTeamCategoryChange = function(val) {
+        const labelInput = document.getElementById('edit-team-category-label');
+        if (val === '__new__') {
+          const deptName = prompt('Enter the name of the new department or category:\n(e.g. "Social Media Management", "Administration & Reception", "Accounting & Finance")');
+          if (deptName && deptName.trim()) {
+            const slug = deptName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const catSelect = document.getElementById('edit-team-category');
+            const newOpt = document.createElement('option');
+            newOpt.value = slug;
+            newOpt.textContent = `🏷 ${deptName.trim()}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+            catSelect.value = slug;
+            if (labelInput) labelInput.value = deptName.trim();
+          } else {
+            document.getElementById('edit-team-category').value = 'specialist';
+          }
+        } else if (val === 'executive') {
+          if (labelInput) labelInput.value = 'Executive Leadership Spotlight';
+        } else if (val === 'specialist') {
+          if (labelInput) labelInput.value = 'Senior Sector Specialists';
+        }
+      };
+
+      window.promptAddCustomDepartment = function() {
+        const deptName = prompt('Create a new dynamic department or category:\n(e.g. "Social Media Management", "Administration & Reception", "Accounting & Finance", "Legal & Compliance")');
+        if (deptName && deptName.trim()) {
+          window.openAddTeamModal();
+          const slug = deptName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          const catSelect = document.getElementById('edit-team-category');
+          if (catSelect) {
+            const newOpt = document.createElement('option');
+            newOpt.value = slug;
+            newOpt.textContent = `🏷 ${deptName.trim()}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+            catSelect.value = slug;
+          }
+          const labelInput = document.getElementById('edit-team-category-label');
+          if (labelInput) labelInput.value = deptName.trim();
+          showToast(`Department "${deptName.trim()}" ready. Complete the profile details below!`, 'success');
+        }
+      };
+
+      window.setTeamPhotoPreset = function(url) {
+        const input = document.getElementById('edit-team-photo');
+        const prev = document.getElementById('team-photo-preview');
+        if (input) input.value = url;
+        if (prev) prev.src = url;
+      };
+
+      window.openAddTeamModal = function() {
+        document.getElementById('team-modal-title').textContent = '➕ Add New Team Member Profile';
+        document.getElementById('edit-team-id').value = '';
+        document.getElementById('edit-team-name').value = '';
+        document.getElementById('edit-team-role').value = '';
+        document.getElementById('edit-team-category').value = 'specialist';
+        document.getElementById('edit-team-category-label').value = 'Senior Sector Specialists';
+        document.getElementById('edit-team-desk-badge').value = '';
+        document.getElementById('edit-team-photo').value = 'assets/images/about/team_lead_economist.jpg';
+        document.getElementById('team-photo-preview').src = 'assets/images/about/team_lead_economist.jpg';
+        document.getElementById('edit-team-tagline').value = '';
+        document.getElementById('edit-team-bio').value = '';
+        document.getElementById('edit-team-linkedin').value = '';
+        document.getElementById('edit-team-website').value = '';
+        document.getElementById('edit-team-facebook').value = '';
+        document.getElementById('edit-team-twitter').value = '';
+        document.getElementById('edit-team-scholar').value = '';
+        document.getElementById('edit-team-credentials').value = '';
+        document.getElementById('edit-team-status').value = 'published';
+        document.getElementById('edit-team-order').value = (getStoredTeam().length + 1);
+
+        const modal = document.getElementById('team-member-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.openEditTeamModal = function(id) {
+        const team = getStoredTeam();
+        const m = team.find(item => item.id === id);
+        if (!m) {
+          showToast('Team member profile not found.', 'warning');
+          return;
+        }
+
+        document.getElementById('team-modal-title').textContent = `✏️ Revise Profile: ${m.name}`;
+        document.getElementById('edit-team-id').value = m.id;
+        document.getElementById('edit-team-name').value = m.name || '';
+        document.getElementById('edit-team-role').value = m.role || '';
+
+        // Ensure category is in select
+        const catSelect = document.getElementById('edit-team-category');
+        if (catSelect) {
+          if (!catSelect.querySelector(`option[value="${m.category}"]`)) {
+            const newOpt = document.createElement('option');
+            newOpt.value = m.category;
+            newOpt.textContent = `🏷 ${m.category_label || m.category}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+          }
+          catSelect.value = m.category || 'specialist';
+        }
+
+        document.getElementById('edit-team-category-label').value = m.category_label || '';
+        document.getElementById('edit-team-desk-badge').value = m.desk_badge || m.badge_pill || '';
+        document.getElementById('edit-team-photo').value = m.photo_url || '';
+        document.getElementById('team-photo-preview').src = m.photo_url || 'assets/brand/renalytica_emblem.png';
+        document.getElementById('edit-team-tagline').value = m.tagline || '';
+        document.getElementById('edit-team-bio').value = m.bio || '';
+
+        const links = m.social_links || {};
+        document.getElementById('edit-team-linkedin').value = links.linkedin || '';
+        document.getElementById('edit-team-website').value = links.website || '';
+        document.getElementById('edit-team-facebook').value = links.facebook || '';
+        document.getElementById('edit-team-twitter').value = links.twitter || '';
+        document.getElementById('edit-team-scholar').value = links.scholar || '';
+
+        document.getElementById('edit-team-credentials').value = (m.credentials || []).join('\n');
+        document.getElementById('edit-team-status').value = m.status || 'published';
+        document.getElementById('edit-team-order').value = m.display_order || 1;
+
+        const modal = document.getElementById('team-member-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeTeamModal = function() {
+        const modal = document.getElementById('team-member-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.saveTeamMember = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        try {
+          const existingId = document.getElementById('edit-team-id').value.trim();
+          const name = document.getElementById('edit-team-name').value.trim();
+          const role = document.getElementById('edit-team-role').value.trim();
+
+          if (!name || !role) {
+            showToast('Full name and official title are required.', 'warning');
+            return;
+          }
+
+          const category = document.getElementById('edit-team-category').value;
+          const category_label = document.getElementById('edit-team-category-label').value.trim() || (
+            category === 'executive' ? 'Executive Leadership Spotlight' :
+            category === 'specialist' ? 'Senior Sector Specialists' : category
+          );
+          const desk_badge = document.getElementById('edit-team-desk-badge').value.trim();
+          const photo_url = document.getElementById('edit-team-photo').value.trim() || 'assets/images/obinna_main_photo.png';
+          const tagline = document.getElementById('edit-team-tagline').value.trim();
+          const bio = document.getElementById('edit-team-bio').value.trim();
+
+          function cleanUrl(u) {
+            if (!u) return '';
+            u = u.trim();
+            if (!u) return '';
+            if (!/^https?:\/\//i.test(u)) return 'https://' + u;
+            return u;
+          }
+
+          const social_links = {
+            linkedin: cleanUrl(document.getElementById('edit-team-linkedin').value),
+            website: cleanUrl(document.getElementById('edit-team-website').value),
+            facebook: cleanUrl(document.getElementById('edit-team-facebook').value),
+            twitter: cleanUrl(document.getElementById('edit-team-twitter').value),
+            scholar: cleanUrl(document.getElementById('edit-team-scholar').value)
+          };
+
+          const credsRaw = document.getElementById('edit-team-credentials').value;
+          const credentials = credsRaw.split('\n').map(s => s.trim()).filter(Boolean);
+          const status = document.getElementById('edit-team-status').value;
+          const display_order = parseInt(document.getElementById('edit-team-order').value, 10) || 1;
+
+          const id = existingId || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || ('member-' + Date.now());
+
+          const team = getStoredTeam();
+          const existingIdx = team.findIndex(m => m.id === id);
+          const prev = existingIdx !== -1 ? team[existingIdx] : {};
+
+          const memberPayload = {
+            ...prev,
+            id,
+            name,
+            role,
+            category,
+            category_label,
+            desk_badge,
+            badge_pill: desk_badge || role,
+            role_eyebrow: prev.role_eyebrow || (category === 'executive' ? 'EXECUTIVE LEADERSHIP' : 'SECTOR SPECIALIST'),
+            photo_url,
+            tagline,
+            bio,
+            social_links,
+            credentials,
+            papers: prev.papers || [],
+            skills: prev.skills || [],
+            status,
+            display_order,
+            updated_at: new Date().toISOString()
+          };
+
+          if (existingIdx !== -1) {
+            team[existingIdx] = memberPayload;
+            saveStoredTeam(team);
+            showToast(`✔ Profile for "${name}" successfully updated!`, 'success');
+          } else {
+            team.push(memberPayload);
+            saveStoredTeam(team);
+            showToast(`✔ New profile for "${name}" added to directory!`, 'success');
+          }
+
+          window.closeTeamModal();
+          window.refreshAdminTeamList();
+
+          // Background sync to backend API and Supabase
+          try {
+            const method = existingIdx !== -1 ? 'PUT' : 'POST';
+            const url = existingIdx !== -1 ? `/api/admin/team/${encodeURIComponent(id)}` : '/api/admin/team';
+            const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+            const token = session.token || 'mock_jwt_token_admin_exec';
+
+            const apiRes = await fetch(url, {
+              method,
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(memberPayload)
+            });
+            if (apiRes.ok) {
+              const apiData = await apiRes.json();
+              if (apiData && apiData.member) {
+                const refreshed = getStoredTeam();
+                const rIdx = refreshed.findIndex(m => m.id === id);
+                if (rIdx !== -1) {
+                  refreshed[rIdx] = apiData.member;
+                  saveStoredTeam(refreshed);
+                }
+              }
+            }
+          } catch (apiErr) {
+            console.warn('[Team CMS] Backend sync notice:', apiErr.message);
+          }
+        } catch (err) {
+          console.error('[Team CMS] Save error:', err);
+          showToast('Error saving profile: ' + err.message, 'danger');
+        }
+      };
+
+      window.deleteAdminTeamMember = async function(id) {
+        const team = getStoredTeam();
+        const target = team.find(m => m.id === id);
+        const name = target ? target.name : 'team member';
+        if (!confirm(`Are you sure you want to delete "${name}" from the About Us directory?\n\nThis will permanently remove the member from about.html and database storage.`)) {
+          return;
+        }
+
+        const filtered = team.filter(m => m.id !== id);
+        saveStoredTeam(filtered);
+        showToast(`Profile for "${name}" removed.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/team/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminTeamList();
+      };
+
+      window.toggleTeamMemberStatus = async function(id) {
+        const team = getStoredTeam();
+        const target = team.find(m => m.id === id);
+        if (!target) return;
+
+        target.status = target.status === 'published' ? 'draft' : 'published';
+        saveStoredTeam(team);
+        showToast(`Profile "${target.name}" switched to ${target.status.toUpperCase()}.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/team/${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status: target.status })
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminTeamList();
+      };
+
+      // Modal backdrop click-out for team member modal
+      const teamModalEl = document.getElementById('team-member-modal');
+      if (teamModalEl) {
+        teamModalEl.addEventListener('click', (e) => {
+          if (e.target === teamModalEl) window.closeTeamModal();
+        });
+      }
+
+      // About Narrative Modal functions
+      window.openAboutNarrativeModal = async function() {
+        try {
+          const res = await fetch('/api/about');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.content) {
+              const c = data.content;
+              if (c.hero) {
+                document.getElementById('narrative-hero-main').value = c.hero.title_main || '';
+                document.getElementById('narrative-hero-accent').value = c.hero.title_accent || '';
+                document.getElementById('narrative-hero-subtitle').value = c.hero.subtitle || '';
+              }
+              if (c.dual_hq) {
+                document.getElementById('narrative-hq-title').value = c.dual_hq.title || '';
+                document.getElementById('narrative-hq-subtitle').value = c.dual_hq.subtitle || '';
+              }
+              if (c.mission_vision) {
+                document.getElementById('narrative-mission').value = c.mission_vision.mission?.desc || '';
+                document.getElementById('narrative-vision').value = c.mission_vision.vision?.desc || '';
+              }
+            }
+          }
+        } catch (e) {}
+
+        const modal = document.getElementById('about-narrative-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeAboutNarrativeModal = function() {
+        const modal = document.getElementById('about-narrative-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.saveAboutNarrative = async function(e) {
+        e.preventDefault();
+        const payload = {
+          hero: {
+            telemetry_badge_1: "AFRICAN MARKET INTELLIGENCE",
+            telemetry_badge_2: "DUAL HEADQUARTERS // NEW YORK • LAGOS",
+            title_main: document.getElementById('narrative-hero-main').value.trim(),
+            title_accent: document.getElementById('narrative-hero-accent').value.trim(),
+            subtitle: document.getElementById('narrative-hero-subtitle').value.trim(),
+            cta_primary_text: "Schedule Briefing →",
+            cta_primary_url: "portal.html?mode=briefing",
+            cta_secondary_text: "Meet the Team ↓",
+            cta_secondary_url: "#leadership-team"
+          },
+          dual_hq: {
+            tag: "DUAL GLOBAL COORDINATION // HIGH-VELOCITY NETWORK",
+            title: document.getElementById('narrative-hq-title').value.trim(),
+            subtitle: document.getElementById('narrative-hq-subtitle').value.trim(),
+            ny_office: {
+              title: "New York Analytical & Client Desk",
+              address: "445 Park Avenue, 9th Floor, New York, NY 10022",
+              desc: "Global client relations, institutional macro modeling, and capital corridor advisory."
+            },
+            lagos_office: {
+              title: "Lagos Field Research & Operations Center",
+              address: "Victoria Island Financial Corridor, Lagos, Nigeria",
+              desc: "Field data collection, wholesale commodity audits, trade corridor tracking, and local banking telemetry."
+            }
+          },
+          mission_vision: {
+            mission: {
+              title: "Our Mission",
+              desc: document.getElementById('narrative-mission').value.trim()
+            },
+            vision: {
+              title: "Our Vision",
+              desc: document.getElementById('narrative-vision').value.trim()
+            }
+          }
+        };
+
+        localStorage.setItem('renalytica_about_content', JSON.stringify(payload));
+        window.dispatchEvent(new CustomEvent('renalytica_about_updated', { detail: payload }));
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch('/api/admin/about', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (apiErr) {}
+
+        showToast('About page narrative content successfully updated!', 'success');
+        window.closeAboutNarrativeModal();
+      };
+
+      const narrativeModalEl = document.getElementById('about-narrative-modal');
+      if (narrativeModalEl) {
+        narrativeModalEl.addEventListener('click', (e) => {
+          if (e.target === narrativeModalEl) window.closeAboutNarrativeModal();
+        });
+      }
+
+      // ====================================================================
+      // 12C. CAREERS & JOB OPENINGS MANAGEMENT CONTROLLER (ADMIN DESK CMS)
+      // ====================================================================
+      const DEFAULT_JOBS_SEED = [
+        {
+          id: "senior-agribusiness-economist",
+          title: "Senior Agribusiness Economist",
+          department: "Agriculture & Commodities Desk",
+          category: "agri",
+          category_label: "Agriculture & Commodities",
+          location: "Lagos, Nigeria (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "4–7 Years Exp",
+          overview: "Lead our crop forecasting models, fertilizer price tracking, and value-chain margin analysis across West and East Africa.",
+          responsibilities: [
+            "Design and manage field survey models for cereal grains, oilseeds, and farm inputs across 36 trade corridors.",
+            "Author flagship industry forecast reports and high-priority executive briefing notes.",
+            "Conduct quarterly briefings for corporate clients, commercial lenders, and private equity investors."
+          ],
+          qualifications: [
+            "Master's degree in Agricultural Economics, Quantitative Economics, or related discipline.",
+            "Proven track record with time-series modeling using Python, R, or advanced Excel econometric toolkits."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "quantitative-data-telemetry-engineer",
+          title: "Quantitative Data & Telemetry Engineer",
+          department: "Data Architecture & Quantitative Systems",
+          category: "data",
+          category_label: "Data & Quantitative Systems",
+          location: "Remote / Lagos (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "3–5 Years Exp",
+          overview: "Build and maintain automated data harvesting pipelines integrating port manifests, satellite vegetation indices (NDVI), and macroeconomic registers.",
+          responsibilities: [
+            "Build robust, fault-tolerant ETL pipelines using Python and SQL to ingest and standardize multi-country economic and trade datasets.",
+            "Create automated statistical validation tests to identify data collection anomalies."
+          ],
+          qualifications: [
+            "Strong proficiency in Python, PostgreSQL, Pandas, and modern orchestration tools (Airflow, Dagster, or Prefect)."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "macroeconomic-research-analyst",
+          title: "Macroeconomic Research Analyst",
+          department: "Macroeconomic & Sovereign Policy Desk",
+          category: "macro",
+          category_label: "Macroeconomic Policy",
+          location: "Lagos, Nigeria (Hybrid)",
+          employment_type: "Full-Time",
+          experience_level: "2–4 Years Exp",
+          overview: "Track central bank monetary policy shifts, inflation dynamics, foreign exchange liquidity, and sovereign debt across regional trading blocs.",
+          responsibilities: [
+            "Monitor daily central bank bulletins, debt issuance calendars, treasury bill auctions, and headline inflation releases.",
+            "Maintain and update our proprietary macroeconomic scenario simulation models."
+          ],
+          qualifications: [
+            "Degree in Economics, Finance, Statistics, or Actuarial Science."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 3
+        },
+        {
+          id: "b2b-research-sales-client-manager",
+          title: "B2B Research Sales & Client Relationship Manager",
+          department: "Commercial & Client Advisory",
+          category: "sales",
+          category_label: "Commercial Advisory",
+          location: "Lagos, Nigeria",
+          employment_type: "Full-Time",
+          experience_level: "3–6 Years Exp",
+          overview: "Manage executive relationships with corporate clients, investment funds, commercial banks, and global consultancies purchasing Renalytica research reports.",
+          responsibilities: [
+            "Lead consultative demonstrations of the Renalytica research store, proprietary data feeds, and corporate subscription tiers.",
+            "Build enduring partnerships that drive annual subscription renewals."
+          ],
+          qualifications: [
+            "Proven track record in B2B corporate sales, financial services advisory, or enterprise software."
+          ],
+          apply_mode: "modal",
+          apply_url: "",
+          apply_button_label: "Apply for This Role →",
+          status: "published",
+          display_order: 4
+        }
+      ];
+
+      function getStoredJobs() {
+        try {
+          const raw = localStorage.getItem('renalytica_jobs');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          }
+        } catch (e) {}
+        return [...DEFAULT_JOBS_SEED];
+      }
+
+      function saveStoredJobs(jobs) {
+        try {
+          localStorage.setItem('renalytica_jobs', JSON.stringify(jobs));
+          window.dispatchEvent(new CustomEvent('renalytica_jobs_updated', { detail: jobs }));
+        } catch (e) {}
+      }
+
+      let currentJobsFilter = 'all';
+
+      window.refreshAdminJobsList = async function() {
+        let jobs = getStoredJobs();
+
+        // Hydrate from backend API
+        try {
+          const res = await fetch('/api/admin/jobs', {
+            headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.jobs) && data.jobs.length > 0) {
+              jobs = data.jobs;
+              saveStoredJobs(jobs);
+            }
+          }
+        } catch (err) {}
+
+        // Update HUD Metrics
+        const total = jobs.length;
+        const published = jobs.filter(j => j.status === 'published').length;
+        const fullTime = jobs.filter(j => (j.employment_type || '').toLowerCase().includes('full-time')).length;
+        const hybrid = jobs.filter(j => {
+          const loc = (j.location || '').toLowerCase();
+          return loc.includes('hybrid') || loc.includes('remote');
+        }).length;
+        const depts = new Set(jobs.map(j => j.category || 'agri')).size;
+
+        const elTotal = document.getElementById('admin-jobs-total-count');
+        const elPub = document.getElementById('admin-jobs-published-count');
+        const elFull = document.getElementById('admin-jobs-fulltime-count');
+        const elHyb = document.getElementById('admin-jobs-hybrid-count');
+        const elDept = document.getElementById('admin-jobs-dept-count');
+
+        if (elTotal) elTotal.textContent = total;
+        if (elPub) elPub.textContent = published;
+        if (elFull) elFull.textContent = fullTime;
+        if (elHyb) elHyb.textContent = hybrid;
+        if (elDept) elDept.textContent = depts;
+
+        window.populateJobCategoryDropdown(jobs);
+        window.renderJobsTableRows(jobs);
+      };
+
+      window.renderJobsTableRows = function(jobs) {
+        const tbody = document.getElementById('admin-jobs-tbody');
+        if (!tbody) return;
+
+        let filtered = [...jobs];
+        if (currentJobsFilter === 'draft') {
+          filtered = filtered.filter(j => j.status === 'draft');
+        } else if (currentJobsFilter !== 'all') {
+          filtered = filtered.filter(j => j.category === currentJobsFilter);
+        }
+
+        filtered.sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">💼</div>
+                <div>No job openings matching filter criteria.</div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(j => {
+          const isPublished = j.status === 'published';
+          let applyBadge = '';
+          if (j.apply_mode === 'external_url') {
+            applyBadge = `<a href="${j.apply_url || '#'}" target="_blank" style="color: #38BDF8; font-size: 0.74rem; text-decoration: underline; font-family: var(--font-mono); font-weight: 700;">🔗 URL: ${escapeHtml(j.apply_button_label || 'Apply')} ↗</a>`;
+          } else if (j.apply_mode === 'email') {
+            applyBadge = `<span style="color: #F59E0B; font-size: 0.74rem; font-family: var(--font-mono); font-weight: 700;">✉️ ${escapeHtml(j.apply_url || 'careers@renalytica.com')}</span>`;
+          } else {
+            applyBadge = `<span style="color: #10B981; font-size: 0.74rem; font-family: var(--font-mono); font-weight: 700;">⚡ Built-in Modal</span>`;
+          }
+
+          return `
+            <tr>
+              <td>
+                <strong style="color: var(--text-primary); font-size: 0.92rem; display: block;">${escapeHtml(j.title)}</strong>
+                <span style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);">${escapeHtml(j.experience_level || 'Experienced')}</span>
+              </td>
+              <td>
+                <span class="partner-sector-pill" style="font-size: 0.7rem; padding: 2px 8px; background: rgba(255,128,0,0.1); color: var(--accent-momentum); border: 1px solid rgba(255,128,0,0.25);">
+                  ${escapeHtml(j.department || j.category_label || j.category)}
+                </span>
+              </td>
+              <td>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml(j.location || 'Lagos (Hybrid)')}</div>
+                <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">${escapeHtml(j.employment_type || 'Full-Time')}</span>
+              </td>
+              <td>
+                ${applyBadge}
+              </td>
+              <td>
+                <button type="button" class="status-switch-btn ${isPublished ? 'published' : 'draft'}" onclick="window.toggleJobStatus('${j.id}')" title="Click to toggle between Published and Draft">
+                  ● ${isPublished ? 'Published' : 'Draft'}
+                </button>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 6px;">
+                  <button type="button" class="btn-table-action" onclick="window.openEditJobModal('${j.id}')" style="color: #38BDF8;" title="Edit Job Opening">✏️ Edit</button>
+                  <button type="button" class="btn-table-action" onclick="window.deleteAdminJob('${j.id}')" style="color: #EF4444;" title="Delete Job Opening">🗑</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      window.populateJobCategoryDropdown = function(jobs) {
+        const catSelect = document.getElementById('edit-job-category');
+        if (!catSelect) return;
+        const currentVal = catSelect.value;
+
+        const customCats = new Map();
+        (jobs || []).forEach(j => {
+          if (j.category && !['agri', 'data', 'macro', 'sales'].includes(j.category)) {
+            customCats.set(j.category, j.category_label || j.department || j.category);
+          }
+        });
+
+        let opts = `
+          <option value="agri">🌾 Agriculture &amp; Commodities</option>
+          <option value="data">⚡ Data &amp; Quantitative Systems</option>
+          <option value="macro">📊 Macroeconomic Policy</option>
+          <option value="sales">🤝 Commercial Advisory</option>
+        `;
+        customCats.forEach((label, catKey) => {
+          opts += `<option value="${catKey}">🏷 ${escapeHtml(label)}</option>`;
+        });
+        opts += `<option value="__new__">➕ Create New Custom Department...</option>`;
+        catSelect.innerHTML = opts;
+
+        if (currentVal && catSelect.querySelector(`option[value="${currentVal}"]`)) {
+          catSelect.value = currentVal;
+        }
+      };
+
+      window.filterJobsDirectory = function(cat, btnEl) {
+        currentJobsFilter = cat;
+        const chips = document.querySelectorAll('#jobs-filter-chips-bar .inv-filter-chip');
+        chips.forEach(c => c.classList.remove('active'));
+        if (btnEl) btnEl.classList.add('active');
+        window.renderJobsTableRows(getStoredJobs());
+      };
+
+      window.handleJobCategoryChange = function(val) {
+        const labelInput = document.getElementById('edit-job-category-label');
+        const deptInput = document.getElementById('edit-job-dept');
+        if (val === '__new__') {
+          const deptName = prompt('Enter the name of the new department / practice:\n(e.g. "Legal & Compliance", "Renewable Energy & Infrastructure", "Digital Marketing")');
+          if (deptName && deptName.trim()) {
+            const slug = deptName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const catSelect = document.getElementById('edit-job-category');
+            const newOpt = document.createElement('option');
+            newOpt.value = slug;
+            newOpt.textContent = `🏷 ${deptName.trim()}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+            catSelect.value = slug;
+            if (labelInput) labelInput.value = deptName.trim();
+            if (deptInput && !deptInput.value) deptInput.value = deptName.trim();
+          } else {
+            document.getElementById('edit-job-category').value = 'agri';
+          }
+        } else if (val === 'agri') {
+          if (labelInput) labelInput.value = 'Agriculture & Commodities';
+          if (deptInput && !deptInput.value) deptInput.value = 'Agriculture & Commodities Desk';
+        } else if (val === 'data') {
+          if (labelInput) labelInput.value = 'Data & Quantitative Systems';
+          if (deptInput && !deptInput.value) deptInput.value = 'Data Architecture & Quantitative Systems';
+        } else if (val === 'macro') {
+          if (labelInput) labelInput.value = 'Macroeconomic Policy';
+          if (deptInput && !deptInput.value) deptInput.value = 'Macroeconomic & Sovereign Policy Desk';
+        } else if (val === 'sales') {
+          if (labelInput) labelInput.value = 'Commercial Advisory';
+          if (deptInput && !deptInput.value) deptInput.value = 'Commercial & Client Advisory';
+        }
+      };
+
+      window.promptAddCustomJobCategory = function() {
+        const deptName = prompt('Create a new dynamic department or practice area:\n(e.g. "Legal & Compliance", "Field Operations & Telemetry", "Sustainability & ESG")');
+        if (deptName && deptName.trim()) {
+          window.openAddJobModal();
+          const slug = deptName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          const catSelect = document.getElementById('edit-job-category');
+          if (catSelect) {
+            const newOpt = document.createElement('option');
+            newOpt.value = slug;
+            newOpt.textContent = `🏷 ${deptName.trim()}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+            catSelect.value = slug;
+          }
+          const labelInput = document.getElementById('edit-job-category-label');
+          if (labelInput) labelInput.value = deptName.trim();
+          const deptInput = document.getElementById('edit-job-dept');
+          if (deptInput) deptInput.value = deptName.trim();
+          showToast(`Department "${deptName.trim()}" ready. Configure role specifics below!`, 'success');
+        }
+      };
+
+      window.handleJobApplyModeChange = function(mode) {
+        const group = document.getElementById('group-job-apply-url');
+        const label = document.getElementById('label-job-apply-url');
+        const input = document.getElementById('edit-job-apply-url');
+        const btnInput = document.getElementById('edit-job-button-label');
+
+        if (mode === 'modal') {
+          if (label) label.textContent = 'External Application Link (Optional / Unused for Modal)';
+          if (input) input.placeholder = 'None needed (built-in modal used)';
+          if (btnInput && (!btnInput.value || btnInput.value.includes('Google Form') || btnInput.value.includes('Email'))) {
+            btnInput.value = 'Apply for This Role →';
+          }
+        } else if (mode === 'external_url') {
+          if (label) label.textContent = 'External Application URL *';
+          if (input) input.placeholder = 'https://forms.google.com/... or LinkedIn / ATS link';
+          if (btnInput && (!btnInput.value || btnInput.value === 'Apply for This Role →')) {
+            btnInput.value = 'Apply via Application Form →';
+          }
+        } else if (mode === 'email') {
+          if (label) label.textContent = 'Application Destination Email *';
+          if (input) input.placeholder = 'careers@renalytica.com';
+          if (btnInput && (!btnInput.value || btnInput.value === 'Apply for This Role →')) {
+            btnInput.value = 'Apply via Email →';
+          }
+        }
+      };
+
+      window.openAddJobModal = function() {
+        document.getElementById('job-modal-title').textContent = '➕ Post New Career Opening';
+        document.getElementById('edit-job-id').value = '';
+        document.getElementById('edit-job-title').value = '';
+        document.getElementById('edit-job-dept').value = 'Agriculture & Commodities Desk';
+        document.getElementById('edit-job-category').value = 'agri';
+        document.getElementById('edit-job-category-label').value = 'Agriculture & Commodities';
+        document.getElementById('edit-job-location').value = 'Lagos, Nigeria (Hybrid)';
+        document.getElementById('edit-job-type').value = 'Full-Time';
+        document.getElementById('edit-job-experience').value = '3–5 Years Exp';
+        document.getElementById('edit-job-overview').value = '';
+        document.getElementById('edit-job-responsibilities').value = '';
+        document.getElementById('edit-job-qualifications').value = '';
+        document.getElementById('edit-job-apply-mode').value = 'modal';
+        document.getElementById('edit-job-apply-url').value = '';
+        document.getElementById('edit-job-button-label').value = 'Apply for This Role →';
+        document.getElementById('edit-job-status').value = 'published';
+        document.getElementById('edit-job-order').value = (getStoredJobs().length + 1);
+
+        window.handleJobApplyModeChange('modal');
+        const modal = document.getElementById('job-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.openEditJobModal = function(id) {
+        const jobs = getStoredJobs();
+        const j = jobs.find(item => item.id === id);
+        if (!j) {
+          showToast('Job opening not found.', 'warning');
+          return;
+        }
+
+        document.getElementById('job-modal-title').textContent = `✏️ Revise Opening: ${j.title}`;
+        document.getElementById('edit-job-id').value = j.id;
+        document.getElementById('edit-job-title').value = j.title || '';
+        document.getElementById('edit-job-dept').value = j.department || '';
+
+        const catSelect = document.getElementById('edit-job-category');
+        if (catSelect) {
+          if (!catSelect.querySelector(`option[value="${j.category}"]`)) {
+            const newOpt = document.createElement('option');
+            newOpt.value = j.category;
+            newOpt.textContent = `🏷 ${j.category_label || j.department || j.category}`;
+            catSelect.insertBefore(newOpt, catSelect.lastElementChild);
+          }
+          catSelect.value = j.category || 'agri';
+        }
+
+        document.getElementById('edit-job-category-label').value = j.category_label || j.department || '';
+        document.getElementById('edit-job-location').value = j.location || 'Lagos, Nigeria (Hybrid)';
+        document.getElementById('edit-job-type').value = j.employment_type || 'Full-Time';
+        document.getElementById('edit-job-experience').value = j.experience_level || '3–5 Years Exp';
+        document.getElementById('edit-job-overview').value = j.overview || '';
+        document.getElementById('edit-job-responsibilities').value = (j.responsibilities || []).join('\n');
+        document.getElementById('edit-job-qualifications').value = (j.qualifications || []).join('\n');
+        document.getElementById('edit-job-apply-mode').value = j.apply_mode || 'modal';
+        document.getElementById('edit-job-apply-url').value = j.apply_url || '';
+        document.getElementById('edit-job-button-label').value = j.apply_button_label || 'Apply for This Role →';
+        document.getElementById('edit-job-status').value = j.status || 'published';
+        document.getElementById('edit-job-order').value = j.display_order || 1;
+
+        window.handleJobApplyModeChange(j.apply_mode || 'modal');
+        const modal = document.getElementById('job-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeJobModal = function() {
+        const modal = document.getElementById('job-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.saveJobOpening = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        try {
+          const existingId = document.getElementById('edit-job-id').value.trim();
+          const title = document.getElementById('edit-job-title').value.trim();
+          const dept = document.getElementById('edit-job-dept').value.trim();
+
+          if (!title) {
+            showToast('Please enter a role title.', 'warning');
+            return;
+          }
+          if (!dept) {
+            showToast('Please specify the department/desk.', 'warning');
+            return;
+          }
+
+          const category = document.getElementById('edit-job-category').value;
+          const category_label = document.getElementById('edit-job-category-label').value.trim() || dept;
+          const location = document.getElementById('edit-job-location').value.trim() || 'Lagos, Nigeria (Hybrid)';
+          const employment_type = document.getElementById('edit-job-type').value;
+          const experience_level = document.getElementById('edit-job-experience').value.trim() || 'Experienced';
+          const overview = document.getElementById('edit-job-overview').value.trim();
+          const respRaw = document.getElementById('edit-job-responsibilities').value;
+          const responsibilities = respRaw.split('\n').map(s => s.trim()).filter(Boolean);
+          const qualRaw = document.getElementById('edit-job-qualifications').value;
+          const qualifications = qualRaw.split('\n').map(s => s.trim()).filter(Boolean);
+          const apply_mode = document.getElementById('edit-job-apply-mode').value;
+          const apply_url = document.getElementById('edit-job-apply-url').value.trim();
+          const apply_button_label = document.getElementById('edit-job-button-label').value.trim() || 'Apply for This Role →';
+          const status = document.getElementById('edit-job-status').value;
+          const display_order = parseInt(document.getElementById('edit-job-order').value, 10) || 1;
+
+          const slug = (existingId || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          const id = existingId || slug || ('job-' + Date.now());
+
+          const jobs = getStoredJobs();
+          const existingIdx = jobs.findIndex(j => j.id === id);
+
+          const jobPayload = {
+            id,
+            title,
+            department: dept,
+            category,
+            category_label,
+            location,
+            employment_type,
+            experience_level,
+            overview,
+            responsibilities,
+            qualifications,
+            apply_mode,
+            apply_url,
+            apply_button_label,
+            status,
+            display_order,
+            updated_at: new Date().toISOString()
+          };
+
+          if (existingIdx !== -1) {
+            jobs[existingIdx] = jobPayload;
+            saveStoredJobs(jobs);
+            showToast(`✔ Role "${title}" successfully updated!`, 'success');
+          } else {
+            jobPayload.created_at = new Date().toISOString();
+            jobs.push(jobPayload);
+            saveStoredJobs(jobs);
+            showToast(`✔ New role "${title}" published to careers directory!`, 'success');
+          }
+
+          window.closeJobModal();
+          window.refreshAdminJobsList();
+
+          // Background API sync
+          try {
+            const method = existingIdx !== -1 ? 'PUT' : 'POST';
+            const url = existingIdx !== -1 ? `/api/admin/jobs/${encodeURIComponent(id)}` : '/api/admin/jobs';
+            const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+            const token = session.token || 'mock_jwt_token_admin_exec';
+
+            await fetch(url, {
+              method,
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(jobPayload)
+            });
+          } catch (apiErr) {}
+
+        } catch (err) {
+          showToast('Error saving job opening: ' + err.message, 'error');
+        }
+      };
+
+      window.deleteAdminJob = async function(id) {
+        const jobs = getStoredJobs();
+        const j = jobs.find(item => item.id === id);
+        if (!j) return;
+
+        if (!confirm(`Are you sure you want to permanently delete the job opening: "${j.title}"?\nThis cannot be undone.`)) {
+          return;
+        }
+
+        const filtered = jobs.filter(item => item.id !== id);
+        saveStoredJobs(filtered);
+        showToast(`Role "${j.title}" permanently removed.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/jobs/${encodeURIComponent(id)}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminJobsList();
+      };
+
+      window.toggleJobStatus = async function(id) {
+        const jobs = getStoredJobs();
+        const target = jobs.find(j => j.id === id);
+        if (!target) return;
+
+        target.status = target.status === 'published' ? 'draft' : 'published';
+        saveStoredJobs(jobs);
+        showToast(`Role "${target.title}" switched to ${target.status.toUpperCase()}.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/jobs/${encodeURIComponent(id)}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status: target.status })
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminJobsList();
+      };
+
+      const jobModalEl = document.getElementById('job-modal');
+      if (jobModalEl) {
+        jobModalEl.addEventListener('click', (e) => {
+          if (e.target === jobModalEl) window.closeJobModal();
+        });
+      }
+
+      // ====================================================================
+      // 12D. COMMUNITY ACTIVITIES & GUILDS MANAGEMENT CONTROLLER (ADMIN DESK CMS)
+      // ====================================================================
+      const DEFAULT_COMMUNITY_SEED = [
+        {
+          id: "fx-parallel-arbitrage-guild",
+          type: "guild",
+          title: "FX Parallel Arbitrage & Remittance Guild",
+          category: "macro",
+          category_label: "Macro & Currency",
+          badge: null,
+          datetime: null,
+          mission: "Monitors daily street bureau de change (BDC) rates across Lagos, Abuja, Kano, and London. Tracks FX spread anomalies, crypto stablecoin liquidity, and importer demand.",
+          metric_1: "412 FELLOWS",
+          metric_2: "BI-WEEKLY BRIEFING",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "sahelian-grain-cereal-corridor-group",
+          type: "guild",
+          title: "Sahelian Grain & Cereal Corridor Group",
+          category: "commodity",
+          category_label: "Commodity Corridors",
+          badge: null,
+          datetime: null,
+          mission: "Tracks cross-border sorghum, millet, and maize flows between Niger, Chad, and Northern Nigeria. Delivers early warnings on drought cycles and transport bottlenecks.",
+          metric_1: "340 FELLOWS",
+          metric_2: "WEEKLY TELEMETRY",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "last-mile-cold-chain-guild",
+          type: "guild",
+          title: "Last-Mile Cold-Chain & Spoilage Guild",
+          category: "agri",
+          category_label: "Agritech & Logistics",
+          badge: null,
+          datetime: null,
+          mission: "Engineers and cold-hub managers quantifying perishability rates in tomato and leafy vegetable transport from Plateau State to coastal urban centers.",
+          metric_1: "528 FELLOWS",
+          metric_2: "MONTHLY FIELD STUDY",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 3
+        },
+        {
+          id: "sub-saharan-sovereign-debt-yield-guild",
+          type: "guild",
+          title: "Sub-Saharan Sovereign Debt & Yield Guild",
+          category: "macro",
+          category_label: "Macro & Currency",
+          badge: null,
+          datetime: null,
+          mission: "Fixed-income analysts and sovereign debt specialists dissecting local currency treasury bill auctions, Eurobond spreads, and IMF debt sustainability metrics.",
+          metric_1: "290 FELLOWS",
+          metric_2: "MONTHLY AMA",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 4
+        },
+        {
+          id: "fmcg-shrinkflation-retail-basket-guild",
+          type: "guild",
+          title: "FMCG Shrinkflation & Retail Basket Guild",
+          category: "commodity",
+          category_label: "Commodity Corridors",
+          badge: null,
+          datetime: null,
+          mission: "Supermarket brand auditors measuring pack-size reductions, sachetization trends, and household substitution behaviors across low-income informal retail points.",
+          metric_1: "670 FELLOWS",
+          metric_2: "WEEKLY CENSUS",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 5
+        },
+        {
+          id: "african-angel-diaspora-syndicate-guild",
+          type: "guild",
+          title: "African Angel & Diaspora Syndicate Guild",
+          category: "diaspora",
+          category_label: "Diaspora Capital",
+          badge: null,
+          datetime: null,
+          mission: "High-net-worth diaspora professionals collaborating on direct investment syndicates in renewable energy mini-grids, export processing, and fintech infrastructure.",
+          metric_1: "845 FELLOWS",
+          metric_2: "QUARTERLY PITCH DECK",
+          action_label: "View Guild Charter →",
+          action_url: "",
+          status: "published",
+          display_order: 6
+        },
+        {
+          id: "parallel-fx-volatility-roundtable",
+          type: "roundtable",
+          title: "Parallel FX Volatility & Central Bank Pass-Through in West Africa",
+          category: "macro",
+          category_label: "Macro & Currency",
+          badge: "UPCOMING // 4 DAYS",
+          datetime: "MAR 18 • 16:00 WAT",
+          mission: "An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.",
+          speaker_name: "Dr. Tariq Adeleke",
+          speaker_role: "Lead Econometrician, Lagos Node",
+          speaker_photo: "assets/images/community/community_roundtable_charts.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 1
+        },
+        {
+          id: "grains-fertilizer-wet-season-outlook",
+          type: "roundtable",
+          title: "Grains, Fertilizer & The 2026 Wet Season Outlook",
+          category: "agri",
+          category_label: "Agritech & Logistics",
+          badge: "UPCOMING // NEXT WEEK",
+          datetime: "MAR 25 • 15:00 WAT",
+          mission: "Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.",
+          speaker_name: "Chioma Okonjo-Briggs",
+          speaker_role: "Director of Agritech Telemetry",
+          speaker_photo: "assets/images/community/community_colleagues_laptop.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 2
+        },
+        {
+          id: "diaspora-direct-investment-roundtable",
+          type: "roundtable",
+          title: "Diaspora Direct Investment: Navigating Real Estate & Agritech Yields",
+          category: "diaspora",
+          category_label: "Diaspora Capital",
+          badge: "CLOSED-DOOR BRIEFING",
+          datetime: "APR 02 • 17:00 WAT",
+          mission: "High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.",
+          speaker_name: "Babatunde Fayemi",
+          speaker_role: "Senior FX Corridor Strategist",
+          speaker_photo: "assets/images/community/community_strategy_conference.jpg",
+          action_label: "RSVP for Seat (Free for Fellows) →",
+          action_url: "",
+          status: "published",
+          display_order: 3
+        }
+      ];
+
+      function getStoredCommunity() {
+        try {
+          const raw = localStorage.getItem('renalytica_community');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          }
+        } catch (e) {}
+        return [...DEFAULT_COMMUNITY_SEED];
+      }
+
+      function saveStoredCommunity(activities) {
+        try {
+          localStorage.setItem('renalytica_community', JSON.stringify(activities));
+          window.dispatchEvent(new CustomEvent('renalytica_community_updated', { detail: activities }));
+        } catch (e) {}
+      }
+
+      let currentCommFilter = 'all';
+
+      window.refreshAdminCommunityList = async function() {
+        let activities = getStoredCommunity();
+
+        // Background API Hydration
+        try {
+          const res = await fetch('/api/admin/community', {
+            headers: { 'Authorization': 'Bearer mock_jwt_token_admin' }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.activities) && data.activities.length > 0) {
+              activities = data.activities;
+              saveStoredCommunity(activities);
+            }
+          }
+        } catch (err) {}
+
+        // Update HUD Metrics
+        const total = activities.length;
+        const guilds = activities.filter(a => a.type === 'guild').length;
+        const roundtables = activities.filter(a => a.type === 'roundtable').length;
+        const published = activities.filter(a => a.status === 'published').length;
+
+        const elTotal = document.getElementById('admin-comm-total-count');
+        const elGuilds = document.getElementById('admin-comm-guilds-count');
+        const elRt = document.getElementById('admin-comm-roundtables-count');
+        const elPub = document.getElementById('admin-comm-published-count');
+
+        if (elTotal) elTotal.textContent = total;
+        if (elGuilds) elGuilds.textContent = guilds;
+        if (elRt) elRt.textContent = roundtables;
+        if (elPub) elPub.textContent = published;
+
+        window.renderCommunityTableRows(activities);
+      };
+
+      window.renderCommunityTableRows = function(activities) {
+        const tbody = document.getElementById('admin-comm-tbody');
+        if (!tbody) return;
+
+        let filtered = [...activities];
+        if (currentCommFilter === 'draft') {
+          filtered = filtered.filter(a => a.status === 'draft');
+        } else if (currentCommFilter === 'guild') {
+          filtered = filtered.filter(a => a.type === 'guild');
+        } else if (currentCommFilter === 'roundtable') {
+          filtered = filtered.filter(a => a.type === 'roundtable');
+        }
+
+        filtered.sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">🌐</div>
+                <div>No community activities matching filter criteria.</div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(a => {
+          const isPublished = a.status === 'published';
+          const isRoundtable = a.type === 'roundtable';
+          const typeBadge = isRoundtable
+            ? `<span style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">📅 ROUNDTABLE</span>`
+            : `<span style="background: rgba(139, 92, 246, 0.12); color: #8B5CF6; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(139, 92, 246, 0.3);">🛡 GUILD</span>`;
+
+          const timingOrMetrics = isRoundtable
+            ? `<span style="color: #F59E0B; font-weight: 700; font-size: 0.75rem; font-family: var(--font-mono);">${escapeHtml(a.datetime || 'TBA')}</span>${a.badge ? `<br><span style="font-size: 0.68rem; color: #38BDF8;">${escapeHtml(a.badge)}</span>` : ''}`
+            : `<span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(a.metric_1 || 'FELLOWS')} • ${escapeHtml(a.metric_2 || 'CADENCE')}</span>`;
+
+          const actionDisplay = a.action_url
+            ? `<a href="${a.action_url}" target="_blank" style="color: #38BDF8; font-size: 0.74rem; text-decoration: underline; font-family: var(--font-mono); font-weight: 700;">🔗 Link: ${escapeHtml(a.action_label || 'Action')} ↗</a>`
+            : `<span style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);">${escapeHtml(a.action_label || 'Default Action')}</span>`;
+
+          return `
+            <tr>
+              <td>${typeBadge}</td>
+              <td>
+                <strong style="color: var(--text-primary); font-size: 0.92rem; display: block;">${escapeHtml(a.title)}</strong>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(a.mission || '')}</div>
+                ${a.speaker_name ? `<div style="font-size: 0.72rem; color: #38BDF8; font-family: var(--font-mono); margin-top: 2px;">Lead: ${escapeHtml(a.speaker_name)} (${escapeHtml(a.speaker_role || '')})</div>` : ''}
+              </td>
+              <td>
+                <span class="partner-sector-pill" style="font-size: 0.7rem; padding: 2px 8px; background: rgba(255,255,255,0.06);">
+                  ${escapeHtml(a.category_label || a.category)}
+                </span>
+              </td>
+              <td>${timingOrMetrics}</td>
+              <td>${actionDisplay}</td>
+              <td>
+                <button type="button" class="status-switch-btn ${isPublished ? 'published' : 'draft'}" onclick="window.toggleCommunityStatus('${a.id}')" title="Click to toggle between Published and Draft">
+                  ● ${isPublished ? 'Published' : 'Draft'}
+                </button>
+              </td>
+              <td style="text-align: right;">
+                <div style="display: inline-flex; gap: 6px;">
+                  <button type="button" class="btn-table-action" onclick="window.openEditCommunityModal('${a.id}')" style="color: #38BDF8;" title="Edit Community Item">✏️ Edit</button>
+                  <button type="button" class="btn-table-action" onclick="window.deleteAdminCommunity('${a.id}')" style="color: #EF4444;" title="Delete Community Item">🗑</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      window.filterCommunityDirectory = function(filterType, btnEl) {
+        currentCommFilter = filterType;
+        const chips = document.querySelectorAll('#comm-filter-chips-bar .inv-filter-chip');
+        chips.forEach(c => c.classList.remove('active'));
+        if (btnEl) btnEl.classList.add('active');
+        window.renderCommunityTableRows(getStoredCommunity());
+      };
+
+      window.handleCommunityTypeChange = function(type) {
+        const speakerSection = document.getElementById('section-comm-speaker');
+        const metricsSection = document.getElementById('section-comm-metrics');
+        const datetimeGroup = document.getElementById('group-comm-datetime');
+        const badgeInput = document.getElementById('edit-comm-badge');
+        const actionLabel = document.getElementById('edit-comm-action-label');
+
+        if (type === 'roundtable') {
+          if (speakerSection) speakerSection.style.display = 'block';
+          if (metricsSection) metricsSection.style.display = 'none';
+          if (datetimeGroup) datetimeGroup.style.display = 'block';
+          if (badgeInput && !badgeInput.value) badgeInput.value = 'UPCOMING // 4 DAYS';
+          if (actionLabel && (!actionLabel.value || actionLabel.value.includes('Charter'))) {
+            actionLabel.value = 'RSVP for Seat (Free for Fellows) →';
+          }
+        } else {
+          if (speakerSection) speakerSection.style.display = 'none';
+          if (metricsSection) metricsSection.style.display = 'grid';
+          if (datetimeGroup) datetimeGroup.style.display = 'none';
+          if (badgeInput && badgeInput.value.includes('UPCOMING')) badgeInput.value = '';
+          if (actionLabel && (!actionLabel.value || actionLabel.value.includes('RSVP'))) {
+            actionLabel.value = 'View Guild Charter →';
+          }
+        }
+      };
+
+      window.setCommPhotoPreset = function(url) {
+        const input = document.getElementById('edit-comm-speaker-photo');
+        const prev = document.getElementById('comm-speaker-preview');
+        if (input) input.value = url;
+        if (prev) prev.src = url;
+      };
+
+      window.openAddCommunityModal = function(defaultType = 'guild') {
+        document.getElementById('community-modal-title').textContent = defaultType === 'roundtable'
+          ? '📅 Add Closed-Door Roundtable / AMA'
+          : '➕ Create Working Group / Guild';
+        document.getElementById('edit-comm-id').value = '';
+        document.getElementById('edit-comm-type').value = defaultType;
+        document.getElementById('edit-comm-category').value = 'macro';
+        document.getElementById('edit-comm-title').value = '';
+        document.getElementById('edit-comm-badge').value = defaultType === 'roundtable' ? 'UPCOMING // NEXT WEEK' : '';
+        document.getElementById('edit-comm-datetime').value = defaultType === 'roundtable' ? 'MAR 25 • 15:00 WAT' : '';
+        document.getElementById('edit-comm-mission').value = '';
+        document.getElementById('edit-comm-speaker-name').value = '';
+        document.getElementById('edit-comm-speaker-role').value = '';
+        document.getElementById('edit-comm-speaker-photo').value = 'assets/images/community/community_roundtable_charts.jpg';
+        document.getElementById('comm-speaker-preview').src = 'assets/images/community/community_roundtable_charts.jpg';
+        document.getElementById('edit-comm-metric1').value = '450 FELLOWS';
+        document.getElementById('edit-comm-metric2').value = 'BI-WEEKLY BRIEFING';
+        document.getElementById('edit-comm-action-label').value = defaultType === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →';
+        document.getElementById('edit-comm-action-url').value = '';
+        document.getElementById('edit-comm-status').value = 'published';
+        document.getElementById('edit-comm-order').value = (getStoredCommunity().length + 1);
+
+        window.handleCommunityTypeChange(defaultType);
+        const modal = document.getElementById('community-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.openEditCommunityModal = function(id) {
+        const list = getStoredCommunity();
+        const a = list.find(item => item.id === id);
+        if (!a) {
+          showToast('Community activity not found.', 'warning');
+          return;
+        }
+
+        document.getElementById('community-modal-title').textContent = `✏️ Revise: ${a.title}`;
+        document.getElementById('edit-comm-id').value = a.id;
+        document.getElementById('edit-comm-type').value = a.type || 'guild';
+        document.getElementById('edit-comm-category').value = a.category || 'macro';
+        document.getElementById('edit-comm-title').value = a.title || '';
+        document.getElementById('edit-comm-badge').value = a.badge || '';
+        document.getElementById('edit-comm-datetime').value = a.datetime || '';
+        document.getElementById('edit-comm-mission').value = a.mission || '';
+        document.getElementById('edit-comm-speaker-name').value = a.speaker_name || '';
+        document.getElementById('edit-comm-speaker-role').value = a.speaker_role || '';
+        document.getElementById('edit-comm-speaker-photo').value = a.speaker_photo || '';
+        document.getElementById('comm-speaker-preview').src = a.speaker_photo || 'assets/brand/renalytica_emblem.png';
+        document.getElementById('edit-comm-metric1').value = a.metric_1 || '';
+        document.getElementById('edit-comm-metric2').value = a.metric_2 || '';
+        document.getElementById('edit-comm-action-label').value = a.action_label || (a.type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →');
+        document.getElementById('edit-comm-action-url').value = a.action_url || '';
+        document.getElementById('edit-comm-status').value = a.status || 'published';
+        document.getElementById('edit-comm-order').value = a.display_order || 1;
+
+        window.handleCommunityTypeChange(a.type || 'guild');
+        const modal = document.getElementById('community-modal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeCommunityModal = function() {
+        const modal = document.getElementById('community-modal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.saveCommunityActivity = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        try {
+          const existingId = document.getElementById('edit-comm-id').value.trim();
+          const title = document.getElementById('edit-comm-title').value.trim();
+          const type = document.getElementById('edit-comm-type').value;
+
+          if (!title) {
+            showToast('Please enter a title for this activity.', 'warning');
+            return;
+          }
+
+          const category = document.getElementById('edit-comm-category').value;
+          const catMap = {
+            macro: 'Macro & Currency',
+            agri: 'Agritech & Logistics',
+            commodity: 'Commodity Corridors',
+            diaspora: 'Diaspora Capital',
+            energy: 'Renewable Energy & Infrastructure'
+          };
+          const category_label = catMap[category] || category;
+
+          const badge = document.getElementById('edit-comm-badge').value.trim() || null;
+          const datetime = document.getElementById('edit-comm-datetime').value.trim() || null;
+          const mission = document.getElementById('edit-comm-mission').value.trim();
+          const speaker_name = document.getElementById('edit-comm-speaker-name').value.trim() || null;
+          const speaker_role = document.getElementById('edit-comm-speaker-role').value.trim() || null;
+          const speaker_photo = document.getElementById('edit-comm-speaker-photo').value.trim() || null;
+          const metric_1 = document.getElementById('edit-comm-metric1').value.trim() || null;
+          const metric_2 = document.getElementById('edit-comm-metric2').value.trim() || null;
+          const action_label = document.getElementById('edit-comm-action-label').value.trim() || (type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →');
+          const action_url = document.getElementById('edit-comm-action-url').value.trim();
+          const status = document.getElementById('edit-comm-status').value;
+          const display_order = parseInt(document.getElementById('edit-comm-order').value, 10) || 1;
+
+          const slug = (existingId || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          const id = existingId || slug || ('comm-' + Date.now());
+
+          const list = getStoredCommunity();
+          const existingIdx = list.findIndex(a => a.id === id);
+
+          const commPayload = {
+            id,
+            type,
+            title,
+            category,
+            category_label,
+            badge,
+            datetime,
+            mission,
+            speaker_name,
+            speaker_role,
+            speaker_photo,
+            metric_1,
+            metric_2,
+            action_label,
+            action_url,
+            status,
+            display_order,
+            updated_at: new Date().toISOString()
+          };
+
+          if (existingIdx !== -1) {
+            list[existingIdx] = commPayload;
+            saveStoredCommunity(list);
+            showToast(`✔ Activity "${title}" successfully updated!`, 'success');
+          } else {
+            commPayload.created_at = new Date().toISOString();
+            list.push(commPayload);
+            saveStoredCommunity(list);
+            showToast(`✔ New activity "${title}" created!`, 'success');
+          }
+
+          window.closeCommunityModal();
+          window.refreshAdminCommunityList();
+
+          // Background API sync
+          try {
+            const method = existingIdx !== -1 ? 'PUT' : 'POST';
+            const url = existingIdx !== -1 ? `/api/admin/community/${encodeURIComponent(id)}` : '/api/admin/community';
+            const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+            const token = session.token || 'mock_jwt_token_admin_exec';
+
+            await fetch(url, {
+              method,
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(commPayload)
+            });
+          } catch (apiErr) {}
+
+        } catch (err) {
+          showToast('Error saving community activity: ' + err.message, 'error');
+        }
+      };
+
+      window.deleteAdminCommunity = async function(id) {
+        const list = getStoredCommunity();
+        const a = list.find(item => item.id === id);
+        if (!a) return;
+
+        if (!confirm(`Are you sure you want to permanently delete: "${a.title}"?\nThis cannot be undone.`)) {
+          return;
+        }
+
+        const filtered = list.filter(item => item.id !== id);
+        saveStoredCommunity(filtered);
+        showToast(`Activity "${a.title}" permanently removed.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/community/${encodeURIComponent(id)}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminCommunityList();
+      };
+
+      window.toggleCommunityStatus = async function(id) {
+        const list = getStoredCommunity();
+        const target = list.find(a => a.id === id);
+        if (!target) return;
+
+        target.status = target.status === 'published' ? 'draft' : 'published';
+        saveStoredCommunity(list);
+        showToast(`Activity "${target.title}" switched to ${target.status.toUpperCase()}.`, 'success');
+
+        try {
+          const session = JSON.parse(localStorage.getItem('renalytica_auth_session') || '{}');
+          const token = session.token || 'mock_jwt_token_admin_exec';
+          await fetch(`/api/admin/community/${encodeURIComponent(id)}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status: target.status })
+          });
+        } catch (apiErr) {}
+
+        window.refreshAdminCommunityList();
+      };
+
+      const commModalEl = document.getElementById('community-modal');
+      if (commModalEl) {
+        commModalEl.addEventListener('click', (e) => {
+          if (e.target === commModalEl) window.closeCommunityModal();
+        });
+      }
+
+      // Cross-tab real-time sync for Jobs & Community
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'renalytica_jobs' && typeof window.refreshAdminJobsList === 'function') {
+          window.refreshAdminJobsList();
+        }
+        if (e.key === 'renalytica_community' && typeof window.refreshAdminCommunityList === 'function') {
+          window.refreshAdminCommunityList();
+        }
+      });
+
+      // Initialize briefings list, partners list, team list, careers list & community list
       window.refreshAdminBriefingsList();
       window.refreshAdminPartnersList();
+      window.refreshAdminTeamList();
+      window.refreshAdminJobsList();
+      window.refreshAdminCommunityList();
 
       // Tab Navigation
       const tabs = document.querySelectorAll('.admin-tab-btn');
@@ -2787,6 +5526,9 @@
           if (paneId === '#pane-audit' && typeof fetchAdminOrders === 'function') fetchAdminOrders();
           if (paneId === '#pane-briefings' && typeof window.refreshAdminBriefingsList === 'function') window.refreshAdminBriefingsList();
           if (paneId === '#pane-partners' && typeof window.refreshAdminPartnersList === 'function') window.refreshAdminPartnersList();
+          if (paneId === '#pane-about' && typeof window.refreshAdminTeamList === 'function') window.refreshAdminTeamList();
+          if (paneId === '#pane-careers' && typeof window.refreshAdminJobsList === 'function') window.refreshAdminJobsList();
+          if (paneId === '#pane-community' && typeof window.refreshAdminCommunityList === 'function') window.refreshAdminCommunityList();
         });
       });
 
@@ -4405,6 +7147,7 @@
       fetchAdminOrders();
       if (typeof window.refreshAdminBriefingsList === 'function') window.refreshAdminBriefingsList();
       if (typeof window.refreshAdminPartnersList === 'function') window.refreshAdminPartnersList();
+      if (typeof window.refreshAdminTeamList === 'function') window.refreshAdminTeamList();
     });
   </script>
 

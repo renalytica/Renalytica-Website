@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "badge": "ABOUT RENALYTICA MACRO INTELLIGENCE",
+    "title": "Bridging Data, Capital, and Institutional Policy in Frontier Markets",
+    "subtitle": "Updated via CMS Desk test suite"
+  },
+  "dual_hq": {
+    "tag": "DUAL GLOBAL COORDINATION // HIGH-VELOCITY NETWORK",
+    "title": "Bridging Global Capital & Ground Realities",
+    "subtitle": "Our dual corporate and analytical headquarters link global institutional capital in Manhattan directly with street-level retail and commodities intelligence in Lagos.",
+    "ny_office": {
+      "title": "New York Analytical & Client Desk",
+      "address": "445 Park Avenue, 9th Floor, New York, NY 10022",
+      "desc": "Global client relations, institutional macro modeling, and capital corridor advisory."
+    },
+    "lagos_office": {
+      "title": "Lagos Field Research & Operations Center",
+      "address": "Victoria Island Financial Corridor, Lagos, Nigeria",
+      "desc": "Field data collection, wholesale commodity audits, trade corridor tracking, and local banking telemetry."
+    }
+  },
+  "mission_vision": {
+    "mission": {
+      "title": "Our Mission",
+      "desc": "To eradicate information asymmetry across African and frontier economies by equipping global institutions, multinational corporations, and sovereign policymakers with rigorous, empirical, and decision-grade intelligence."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "desc": "To become the undisputed sovereign standard and premier institutional benchmark for economic intelligence, quantitative data models, and business strategy in the developing world."
+    }
+  }
+}

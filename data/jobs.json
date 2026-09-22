@@ -1,0 +1,122 @@
+[
+  {
+    "id": "senior-agribusiness-economist",
+    "title": "Senior Agribusiness Economist",
+    "department": "Agriculture & Commodities Desk",
+    "category": "agri",
+    "category_label": "Agriculture & Commodities",
+    "location": "Lagos, Nigeria (Hybrid)",
+    "employment_type": "Full-Time",
+    "experience_level": "4–7 Years Exp",
+    "overview": "Lead our crop forecasting models, fertilizer price tracking, and value-chain margin analysis across West and East Africa. You will turn raw agronomic and market price data into high-conviction decision frameworks for multinationals and agribusiness funds.",
+    "responsibilities": [
+      "Design and manage field survey models for cereal grains, oilseeds, and farm inputs across 36 trade corridors.",
+      "Author flagship industry forecast reports and high-priority executive briefing notes.",
+      "Conduct quarterly briefings for agribusiness corporate clients, commercial lenders, and private equity investors.",
+      "Mentor junior research fellows on econometric time-series analysis and field sampling methodologies."
+    ],
+    "qualifications": [
+      "Master's degree in Agricultural Economics, Quantitative Economics, or related discipline.",
+      "Proven track record with time-series modeling using Python, R, or advanced Excel econometric toolkits.",
+      "Deep contextual understanding of West African agro-climatic zones, logistics bottlenecks, and farmgate pricing dynamics.",
+      "Exceptional writing capability with an aptitude for crafting crystal-clear, executive-grade research summaries."
+    ],
+    "apply_mode": "modal",
+    "apply_url": "",
+    "apply_button_label": "Apply for This Role →",
+    "status": "published",
+    "display_order": 1,
+    "created_at": "2026-03-01T10:00:00.000Z",
+    "updated_at": "2026-03-01T10:00:00.000Z"
+  },
+  {
+    "id": "quantitative-data-telemetry-engineer",
+    "title": "Quantitative Data & Telemetry Engineer",
+    "department": "Data Architecture & Quantitative Systems",
+    "category": "data",
+    "category_label": "Data & Quantitative Systems",
+    "location": "Remote / Lagos (Hybrid)",
+    "employment_type": "Full-Time",
+    "experience_level": "3–5 Years Exp",
+    "overview": "Build and maintain automated data harvesting pipelines integrating port manifests, satellite vegetation indices (NDVI), and macroeconomic registers into our high-frequency intelligence engine.",
+    "responsibilities": [
+      "Build robust, fault-tolerant ETL pipelines using Python and SQL to ingest and standardize multi-country economic and trade datasets.",
+      "Create automated statistical validation tests to identify data collection anomalies, outlier spikes, and currency conversion distortions.",
+      "Collaborate with senior econometricians to turn complex mathematical equations into automated, client-facing dashboard visualizations.",
+      "Architect scalable schema migrations and high-performance API endpoints for institutional enterprise subscribers."
+    ],
+    "qualifications": [
+      "Strong proficiency in Python, PostgreSQL, Pandas, and modern orchestration tools (Airflow, Dagster, or Prefect).",
+      "Familiarity with geospatial GIS data, satellite imagery (NDVI/Sentinel), or shipping telemetry is a strong advantage.",
+      "Passion for immaculate data pipelines, automated testing, and comprehensive documentation.",
+      "Comfort working with hybrid pan-African and international development teams in an agile cadence."
+    ],
+    "apply_mode": "modal",
+    "apply_url": "",
+    "apply_button_label": "Apply for This Role →",
+    "status": "published",
+    "display_order": 2,
+    "created_at": "2026-03-02T10:00:00.000Z",
+    "updated_at": "2026-03-02T10:00:00.000Z"
+  },
+  {
+    "id": "macroeconomic-research-analyst",
+    "title": "Macroeconomic Research Analyst",
+    "department": "Macroeconomic & Sovereign Policy Desk",
+    "category": "macro",
+    "category_label": "Macroeconomic Policy",
+    "location": "Lagos, Nigeria (Hybrid)",
+    "employment_type": "Full-Time",
+    "experience_level": "2–4 Years Exp",
+    "overview": "Track central bank monetary policy shifts, inflation dynamics, foreign exchange liquidity, and sovereign debt across regional West and Central African trading blocs.",
+    "responsibilities": [
+      "Monitor daily central bank bulletins, debt issuance calendars, treasury bill auctions, and headline inflation releases.",
+      "Maintain and update our proprietary macroeconomic scenario simulation models and interest rate sensitivity matrices.",
+      "Draft weekly analytical commentary for The Renalytica Weekly executive briefing newsletter distributed to C-suite subscribers.",
+      "Synthesize high-frequency price indices to evaluate real-time purchasing power parity and currency pass-through."
+    ],
+    "qualifications": [
+      "Degree in Economics, Finance, Statistics, or Actuarial Science.",
+      "Sharp analytical mindset with deep curiosity for fiscal, monetary, and exchange rate mechanisms in frontier markets.",
+      "Outstanding writing and presentation skills, with the ability to explain complex quantitative theories in plain, engaging English.",
+      "Familiarity with financial databases, Bloomberg/Refinitiv terminals, or advanced financial modeling in Excel."
+    ],
+    "apply_mode": "modal",
+    "apply_url": "",
+    "apply_button_label": "Apply for This Role →",
+    "status": "published",
+    "display_order": 3,
+    "created_at": "2026-03-03T10:00:00.000Z",
+    "updated_at": "2026-03-03T10:00:00.000Z"
+  },
+  {
+    "id": "b2b-research-sales-client-manager",
+    "title": "B2B Research Sales & Client Relationship Manager",
+    "department": "Commercial & Client Advisory",
+    "category": "sales",
+    "category_label": "Commercial Advisory",
+    "location": "Lagos, Nigeria",
+    "employment_type": "Full-Time",
+    "experience_level": "3–6 Years Exp",
+    "overview": "Manage executive relationships with corporate clients, investment funds, commercial banks, and global consultancies purchasing Renalytica research reports and enterprise intelligence subscriptions.",
+    "responsibilities": [
+      "Lead consultative demonstrations of the Renalytica research store, proprietary data feeds, and corporate subscription tiers.",
+      "Manage inbound corporate inquiries from senior corporate strategy heads, chief risk officers, and institutional treasurers.",
+      "Collaborate closely with research desk heads to scope custom feasibility proposals (RFPs) and bespoke market surveys.",
+      "Build enduring partnerships that drive annual subscription renewals and expand seat licenses across client teams."
+    ],
+    "qualifications": [
+      "Proven track record in B2B corporate sales, financial services advisory, enterprise software, or consulting services.",
+      "Polished executive presence and stellar interpersonal communication skills when speaking with C-suite executives.",
+      "High emotional intelligence with a consultative, value-first mindset rather than transactional pushiness.",
+      "Strong organizational discipline, pipeline management acumen, and familiarity with modern CRM platforms."
+    ],
+    "apply_mode": "modal",
+    "apply_url": "",
+    "apply_button_label": "Apply for This Role →",
+    "status": "published",
+    "display_order": 4,
+    "created_at": "2026-03-04T10:00:00.000Z",
+    "updated_at": "2026-03-04T10:00:00.000Z"
+  }
+]
