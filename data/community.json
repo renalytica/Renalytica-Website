@@ -8,6 +8,7 @@
     "badge": null,
     "datetime": null,
     "mission": "Monitors daily street bureau de change (BDC) rates across Lagos, Abuja, Kano, and London. Tracks FX spread anomalies, crypto stablecoin liquidity, and importer demand.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -29,6 +30,7 @@
     "badge": null,
     "datetime": null,
     "mission": "Tracks cross-border sorghum, millet, and maize flows between Niger, Chad, and Northern Nigeria. Delivers early warnings on drought cycles and transport bottlenecks.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -50,6 +52,7 @@
     "badge": null,
     "datetime": null,
     "mission": "Engineers and cold-hub managers quantifying perishability rates in tomato and leafy vegetable transport from Plateau State to coastal urban centers.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -71,6 +74,7 @@
     "badge": null,
     "datetime": null,
     "mission": "Fixed-income analysts and sovereign debt specialists dissecting local currency treasury bill auctions, Eurobond spreads, and IMF debt sustainability metrics.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -92,6 +96,7 @@
     "badge": null,
     "datetime": null,
     "mission": "Supermarket brand auditors measuring pack-size reductions, sachetization trends, and household substitution behaviors across low-income informal retail points.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -113,6 +118,7 @@
     "badge": null,
     "datetime": null,
     "mission": "High-net-worth diaspora professionals collaborating on direct investment syndicates in renewable energy mini-grids, export processing, and fintech infrastructure.",
+    "speakers": [],
     "speaker_name": null,
     "speaker_role": null,
     "speaker_photo": null,
@@ -134,6 +140,13 @@
     "badge": "UPCOMING // 4 DAYS",
     "datetime": "MAR 18 • 16:00 WAT",
     "mission": "An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.",
+    "speakers": [
+      {
+        "name": "Dr. Tariq Adeleke",
+        "role": "Lead Econometrician, Lagos Node",
+        "photo": "assets/images/community/community_roundtable_charts.jpg"
+      }
+    ],
     "speaker_name": "Dr. Tariq Adeleke",
     "speaker_role": "Lead Econometrician, Lagos Node",
     "speaker_photo": "assets/images/community/community_roundtable_charts.jpg",
@@ -155,6 +168,13 @@
     "badge": "UPCOMING // NEXT WEEK",
     "datetime": "MAR 25 • 15:00 WAT",
     "mission": "Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.",
+    "speakers": [
+      {
+        "name": "Chioma Okonjo-Briggs",
+        "role": "Director of Agritech Telemetry",
+        "photo": "assets/images/community/community_colleagues_laptop.jpg"
+      }
+    ],
     "speaker_name": "Chioma Okonjo-Briggs",
     "speaker_role": "Director of Agritech Telemetry",
     "speaker_photo": "assets/images/community/community_colleagues_laptop.jpg",
@@ -176,6 +196,13 @@
     "badge": "CLOSED-DOOR BRIEFING",
     "datetime": "APR 02 • 17:00 WAT",
     "mission": "High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.",
+    "speakers": [
+      {
+        "name": "Babatunde Fayemi",
+        "role": "Senior FX Corridor Strategist",
+        "photo": "assets/images/community/community_strategy_conference.jpg"
+      }
+    ],
     "speaker_name": "Babatunde Fayemi",
     "speaker_role": "Senior FX Corridor Strategist",
     "speaker_photo": "assets/images/community/community_strategy_conference.jpg",

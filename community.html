@@ -1143,6 +1143,13 @@
           badge: "UPCOMING // 4 DAYS",
           datetime: "MAR 18 • 16:00 WAT",
           mission: "An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.",
+          speakers: [
+            {
+              name: "Dr. Tariq Adeleke",
+              role: "Lead Econometrician, Lagos Node",
+              photo: "assets/images/community/community_roundtable_charts.jpg"
+            }
+          ],
           speaker_name: "Dr. Tariq Adeleke",
           speaker_role: "Lead Econometrician, Lagos Node",
           speaker_photo: "assets/images/community/community_roundtable_charts.jpg",
@@ -1160,6 +1167,13 @@
           badge: "UPCOMING // NEXT WEEK",
           datetime: "MAR 25 • 15:00 WAT",
           mission: "Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.",
+          speakers: [
+            {
+              name: "Chioma Okonjo-Briggs",
+              role: "Director of Agritech Telemetry",
+              photo: "assets/images/community/community_colleagues_laptop.jpg"
+            }
+          ],
           speaker_name: "Chioma Okonjo-Briggs",
           speaker_role: "Director of Agritech Telemetry",
           speaker_photo: "assets/images/community/community_colleagues_laptop.jpg",
@@ -1177,6 +1191,13 @@
           badge: "CLOSED-DOOR BRIEFING",
           datetime: "APR 02 • 17:00 WAT",
           mission: "High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.",
+          speakers: [
+            {
+              name: "Babatunde Fayemi",
+              role: "Senior FX Corridor Strategist",
+              photo: "assets/images/community/community_strategy_conference.jpg"
+            }
+          ],
           speaker_name: "Babatunde Fayemi",
           speaker_role: "Senior FX Corridor Strategist",
           speaker_photo: "assets/images/community/community_strategy_conference.jpg",
@@ -1346,20 +1367,44 @@
                 `;
               }
 
+              const speakersList = Array.isArray(r.speakers) && r.speakers.length > 0
+                ? r.speakers
+                : (r.speaker_name ? [{ name: r.speaker_name, role: r.speaker_role, photo: r.speaker_photo }] : []);
+
               let speakerHtml = '';
-              if (r.speaker_name) {
+              if (speakersList.length === 1) {
+                const spk = speakersList[0];
                 speakerHtml = `
                   <div class="speaker-lockup">
                     <img 
-                      src="${escapeHtml(r.speaker_photo || 'assets/brand/renalytica_emblem.png')}" 
-                      alt="${escapeHtml(r.speaker_name)}" 
+                      src="${escapeHtml(spk.photo || 'assets/brand/renalytica_emblem.png')}" 
+                      alt="${escapeHtml(spk.name)}" 
                       class="speaker-avatar-circle"
                       onerror="this.src='assets/brand/renalytica_emblem.png';"
                     >
                     <div class="speaker-info">
-                      <h4>${escapeHtml(r.speaker_name)}</h4>
-                      <p>${escapeHtml(r.speaker_role || '')}</p>
+                      <h4>${escapeHtml(spk.name)}</h4>
+                      <p>${escapeHtml(spk.role || '')}</p>
                     </div>
+                  </div>
+                `;
+              } else if (speakersList.length > 1) {
+                speakerHtml = `
+                  <div class="speakers-lockup-list">
+                    ${speakersList.map(spk => `
+                      <div class="speaker-lockup">
+                        <img 
+                          src="${escapeHtml(spk.photo || 'assets/brand/renalytica_emblem.png')}" 
+                          alt="${escapeHtml(spk.name)}" 
+                          class="speaker-avatar-circle"
+                          onerror="this.src='assets/brand/renalytica_emblem.png';"
+                        >
+                        <div class="speaker-info">
+                          <h4>${escapeHtml(spk.name)}</h4>
+                          <p>${escapeHtml(spk.role || '')}</p>
+                        </div>
+                      </div>
+                    `).join('')}
                   </div>
                 `;
               }

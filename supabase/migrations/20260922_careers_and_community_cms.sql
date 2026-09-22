@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS public.community_activities (
     badge TEXT, -- e.g. 'UPCOMING // 4 DAYS', 'WEEKLY TELEMETRY', 'LAGOS NODE'
     datetime TEXT, -- e.g. 'MAR 18 • 16:00 WAT' (for roundtables/events)
     mission TEXT, -- description / summary
+    speakers JSONB DEFAULT '[]'::jsonb,
     speaker_name TEXT,
     speaker_role TEXT,
     speaker_photo TEXT,
@@ -51,6 +52,9 @@ CREATE TABLE IF NOT EXISTS public.community_activities (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Ensure column exists if table was previously created
+ALTER TABLE public.community_activities ADD COLUMN IF NOT EXISTS speakers JSONB DEFAULT '[]'::jsonb;
 
 CREATE INDEX IF NOT EXISTS idx_community_activities_type ON public.community_activities(type);
 CREATE INDEX IF NOT EXISTS idx_community_activities_category ON public.community_activities(category);

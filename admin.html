@@ -2098,35 +2098,26 @@
 
           <!-- Roundtable Speaker Section (Shown for roundtables) -->
           <div id="section-comm-speaker" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 1.15rem; display: none;">
-            <strong style="color: #38BDF8; font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; display: block; margin-bottom: 0.75rem;">
-              👤 Session Lead / Speaker Lockup
-            </strong>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 0.85rem;">
-              <div class="auth-field-group">
-                <label class="auth-label">Speaker Name</label>
-                <input type="text" id="edit-comm-speaker-name" class="auth-input" placeholder="e.g. Dr. Tariq Adeleke">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <strong style="color: #38BDF8; font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                  👥 Session Leads &amp; Speakers Lockup
+                </strong>
+                <p style="margin: 2px 0 0; font-size: 0.72rem; color: var(--text-muted);">
+                  Add one or multiple speakers, panelists, or session moderators for this roundtable.
+                </p>
               </div>
-              <div class="auth-field-group">
-                <label class="auth-label">Speaker Role / Designation</label>
-                <input type="text" id="edit-comm-speaker-role" class="auth-input" placeholder="e.g. Lead Econometrician, Lagos Node">
-              </div>
+              <button type="button" class="btn-table-action" onclick="window.addCommSpeakerRow()" style="font-size: 0.74rem; padding: 4px 10px; color: #38BDF8; border-color: rgba(56, 189, 248, 0.4); display: inline-flex; align-items: center; gap: 4px;">
+                <span>➕</span> Add Speaker
+              </button>
             </div>
-            <div class="auth-field-group">
-              <label class="auth-label">Speaker Photo URL</label>
-              <div style="display: flex; gap: 10px; align-items: center;">
-                <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-light); overflow: hidden; background: #1e293b; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                  <img id="comm-speaker-preview" src="assets/images/community/community_roundtable_charts.jpg" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/brand/renalytica_emblem.png';">
-                </div>
-                <input type="text" id="edit-comm-speaker-photo" class="auth-input" placeholder="assets/images/community/community_roundtable_charts.jpg" oninput="document.getElementById('comm-speaker-preview').src = this.value || 'assets/brand/renalytica_emblem.png'" style="flex: 1;">
-              </div>
-              <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center;">
-                <span style="font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono);">Presets:</span>
-                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_roundtable_charts.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Charts/Adeleke</button>
-                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_colleagues_laptop.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Chioma</button>
-                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/images/community/community_strategy_conference.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Babatunde</button>
-                <button type="button" class="btn-table-action" onclick="window.setCommPhotoPreset('assets/brand/renalytica_emblem.png')" style="font-size: 0.65rem; padding: 2px 6px;">Emblem</button>
-              </div>
-            </div>
+
+            <!-- Dynamic speakers list container -->
+            <div id="comm-speakers-container" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
+
+            <button type="button" onclick="window.addCommSpeakerRow()" style="width: 100%; margin-top: 0.75rem; padding: 8px; border: 1px dashed rgba(56, 189, 248, 0.4); color: #38BDF8; background: rgba(56, 189, 248, 0.05); border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+              <span>➕</span> Add Another Speaker / Panelist
+            </button>
           </div>
 
           <!-- Guild Metrics Section (Shown for guilds) -->
@@ -5043,6 +5034,16 @@
           badge: null,
           datetime: null,
           mission: "High-net-worth diaspora professionals collaborating on direct investment syndicates in renewable energy mini-grids, export processing, and fintech infrastructure.",
+          speakers: [
+            {
+              name: "Dr. Tariq Adeleke",
+              role: "Lead Econometrician, Lagos Node",
+              photo: "assets/images/community/community_roundtable_charts.jpg"
+            }
+          ],
+          speaker_name: "Dr. Tariq Adeleke",
+          speaker_role: "Lead Econometrician, Lagos Node",
+          speaker_photo: "assets/images/community/community_roundtable_charts.jpg",
           metric_1: "845 FELLOWS",
           metric_2: "QUARTERLY PITCH DECK",
           action_label: "View Guild Charter →",
@@ -5059,6 +5060,13 @@
           badge: "UPCOMING // 4 DAYS",
           datetime: "MAR 18 • 16:00 WAT",
           mission: "An empirical examination of FX arbitrage corridors between Lagos and Cotonou, analyzing the transmission speed of monetary interventions into wholesale grocery pricing.",
+          speakers: [
+            {
+              name: "Dr. Tariq Adeleke",
+              role: "Lead Econometrician, Lagos Node",
+              photo: "assets/images/community/community_roundtable_charts.jpg"
+            }
+          ],
           speaker_name: "Dr. Tariq Adeleke",
           speaker_role: "Lead Econometrician, Lagos Node",
           speaker_photo: "assets/images/community/community_roundtable_charts.jpg",
@@ -5076,6 +5084,13 @@
           badge: "UPCOMING // NEXT WEEK",
           datetime: "MAR 25 • 15:00 WAT",
           mission: "Field telemetry from 14 agro-hubs evaluating urea availability, diesel transportation surcharges, and farmgate pricing expectations for maize and rice.",
+          speakers: [
+            {
+              name: "Chioma Okonjo-Briggs",
+              role: "Director of Agritech Telemetry",
+              photo: "assets/images/community/community_colleagues_laptop.jpg"
+            }
+          ],
           speaker_name: "Chioma Okonjo-Briggs",
           speaker_role: "Director of Agritech Telemetry",
           speaker_photo: "assets/images/community/community_colleagues_laptop.jpg",
@@ -5093,6 +5108,13 @@
           badge: "CLOSED-DOOR BRIEFING",
           datetime: "APR 02 • 17:00 WAT",
           mission: "High-conviction allocations: How diaspora syndicates in London and NYC hedge currency volatility while funding asset-backed warehousing and agricultural cold chains.",
+          speakers: [
+            {
+              name: "Babatunde Fayemi",
+              role: "Senior FX Corridor Strategist",
+              photo: "assets/images/community/community_strategy_conference.jpg"
+            }
+          ],
           speaker_name: "Babatunde Fayemi",
           speaker_role: "Senior FX Corridor Strategist",
           speaker_photo: "assets/images/community/community_strategy_conference.jpg",
@@ -5159,47 +5181,55 @@
         window.renderCommunityTableRows(activities);
       };
 
-      window.renderCommunityTableRows = function(activities) {
-        const tbody = document.getElementById('admin-comm-tbody');
+      window.renderCommunityTableRows = function(list) {
+        const tbody = document.getElementById('community-table-body');
         if (!tbody) return;
 
-        let filtered = [...activities];
-        if (currentCommFilter === 'draft') {
-          filtered = filtered.filter(a => a.status === 'draft');
-        } else if (currentCommFilter === 'guild') {
-          filtered = filtered.filter(a => a.type === 'guild');
-        } else if (currentCommFilter === 'roundtable') {
-          filtered = filtered.filter(a => a.type === 'roundtable');
+        let filtered = list || [];
+        if (currentCommFilter !== 'all') {
+          filtered = filtered.filter(item => item.type === currentCommFilter);
         }
-
-        filtered.sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
 
         if (filtered.length === 0) {
           tbody.innerHTML = `
             <tr>
-              <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
-                <div style="font-size: 1.5rem; margin-bottom: 8px;">🌐</div>
-                <div>No community activities matching filter criteria.</div>
+              <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.88rem;">
+                No community activities matching filter "<strong>${escapeHtml(currentCommFilter)}</strong>".
               </td>
             </tr>
           `;
           return;
         }
 
+        // Sort by order ascending
+        filtered.sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
+
         tbody.innerHTML = filtered.map(a => {
           const isPublished = a.status === 'published';
-          const isRoundtable = a.type === 'roundtable';
-          const typeBadge = isRoundtable
-            ? `<span style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.3);">📅 ROUNDTABLE</span>`
-            : `<span style="background: rgba(139, 92, 246, 0.12); color: #8B5CF6; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(139, 92, 246, 0.3);">🛡 GUILD</span>`;
+          const typeBadge = a.type === 'roundtable'
+            ? `<span class="partner-type-badge" style="background: rgba(56, 189, 248, 0.12); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">📅 Roundtable</span>`
+            : `<span class="partner-type-badge" style="background: rgba(139, 92, 246, 0.12); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.3);">🛡 Working Group</span>`;
 
-          const timingOrMetrics = isRoundtable
-            ? `<span style="color: #F59E0B; font-weight: 700; font-size: 0.75rem; font-family: var(--font-mono);">${escapeHtml(a.datetime || 'TBA')}</span>${a.badge ? `<br><span style="font-size: 0.68rem; color: #38BDF8;">${escapeHtml(a.badge)}</span>` : ''}`
-            : `<span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(a.metric_1 || 'FELLOWS')} • ${escapeHtml(a.metric_2 || 'CADENCE')}</span>`;
+          const timingOrMetrics = a.type === 'roundtable'
+            ? `<span style="font-family: var(--font-mono); font-size: 0.76rem; color: #F59E0B;">⏰ ${escapeHtml(a.datetime || 'TBD')}</span>`
+            : `<span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(a.metric_1 || '')} • ${escapeHtml(a.metric_2 || '')}</span>`;
 
           const actionDisplay = a.action_url
             ? `<a href="${a.action_url}" target="_blank" style="color: #38BDF8; font-size: 0.74rem; text-decoration: underline; font-family: var(--font-mono); font-weight: 700;">🔗 Link: ${escapeHtml(a.action_label || 'Action')} ↗</a>`
             : `<span style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);">${escapeHtml(a.action_label || 'Default Action')}</span>`;
+
+          // Format speakers display
+          const speakersArr = Array.isArray(a.speakers) && a.speakers.length > 0
+            ? a.speakers
+            : (a.speaker_name ? [{ name: a.speaker_name, role: a.speaker_role, photo: a.speaker_photo }] : []);
+
+          let speakersDisplay = '';
+          if (speakersArr.length === 1) {
+            speakersDisplay = `<div style="font-size: 0.72rem; color: #38BDF8; font-family: var(--font-mono); margin-top: 2px;">👤 Speaker: ${escapeHtml(speakersArr[0].name)}${speakersArr[0].role ? ` (${escapeHtml(speakersArr[0].role)})` : ''}</div>`;
+          } else if (speakersArr.length > 1) {
+            const names = speakersArr.map(s => escapeHtml(s.name)).join(', ');
+            speakersDisplay = `<div style="font-size: 0.72rem; color: #38BDF8; font-family: var(--font-mono); margin-top: 2px;">👥 Speakers (${speakersArr.length}): ${names}</div>`;
+          }
 
           return `
             <tr>
@@ -5207,7 +5237,7 @@
               <td>
                 <strong style="color: var(--text-primary); font-size: 0.92rem; display: block;">${escapeHtml(a.title)}</strong>
                 <div style="font-size: 0.75rem; color: var(--text-secondary); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(a.mission || '')}</div>
-                ${a.speaker_name ? `<div style="font-size: 0.72rem; color: #38BDF8; font-family: var(--font-mono); margin-top: 2px;">Lead: ${escapeHtml(a.speaker_name)} (${escapeHtml(a.speaker_role || '')})</div>` : ''}
+                ${speakersDisplay}
               </td>
               <td>
                 <span class="partner-sector-pill" style="font-size: 0.7rem; padding: 2px 8px; background: rgba(255,255,255,0.06);">
@@ -5266,6 +5296,106 @@
         }
       };
 
+      window.setSpeakerRowPhoto = function(btn, url) {
+        const entry = btn.closest('.comm-speaker-entry');
+        if (entry) {
+          const input = entry.querySelector('.comm-speaker-photo');
+          const img = entry.querySelector('.comm-speaker-row-preview');
+          if (input) input.value = url;
+          if (img) img.src = url;
+        }
+      };
+
+      window.updateSpeakerBadges = function() {
+        const container = document.getElementById('comm-speakers-container');
+        if (!container) return;
+        const entries = container.querySelectorAll('.comm-speaker-entry');
+        entries.forEach((entry, idx) => {
+          const num = idx + 1;
+          const badge = entry.querySelector('.speaker-num-badge');
+          if (badge) badge.textContent = num;
+          const label = entry.querySelector('.speaker-card-title');
+          if (label) {
+            label.innerHTML = `
+              <span class="speaker-num-badge" style="background: rgba(56, 189, 248, 0.2); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #38BDF8;">${num}</span>
+              ${num === 1 ? 'Primary Speaker / Session Lead' : `Co-Speaker / Panelist #${num}`}
+            `;
+          }
+        });
+      };
+
+      window.addCommSpeakerRow = function(speakerData = null) {
+        const container = document.getElementById('comm-speakers-container');
+        if (!container) return;
+        const currentCount = container.querySelectorAll('.comm-speaker-entry').length;
+        const index = currentCount + 1;
+        const data = speakerData || {
+          name: '',
+          role: '',
+          photo: 'assets/images/community/community_roundtable_charts.jpg'
+        };
+
+        const row = document.createElement('div');
+        row.className = 'comm-speaker-entry';
+        row.style.cssText = 'background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 1rem; position: relative;';
+        row.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="speaker-card-title" style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; color: #38BDF8; display: flex; align-items: center; gap: 6px;">
+              <span class="speaker-num-badge" style="background: rgba(56, 189, 248, 0.2); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #38BDF8;">${index}</span>
+              ${index === 1 ? 'Primary Speaker / Session Lead' : `Co-Speaker / Panelist #${index}`}
+            </span>
+            <button type="button" class="btn-remove-speaker" onclick="window.removeCommSpeakerRow(this)" style="background: transparent; border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444; border-radius: 6px; padding: 2px 8px; font-size: 0.7rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Remove this speaker">
+              🗑 Remove
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+            <div class="auth-field-group">
+              <label class="auth-label" style="font-size: 0.76rem;">Speaker Name</label>
+              <input type="text" class="auth-input comm-speaker-name" placeholder="e.g. Dr. Tariq Adeleke" value="${escapeHtml(data.name || '')}" style="font-size: 0.85rem;">
+            </div>
+            <div class="auth-field-group">
+              <label class="auth-label" style="font-size: 0.76rem;">Speaker Role / Designation</label>
+              <input type="text" class="auth-input comm-speaker-role" placeholder="e.g. Lead Econometrician, Lagos Node" value="${escapeHtml(data.role || '')}" style="font-size: 0.85rem;">
+            </div>
+          </div>
+          <div class="auth-field-group">
+            <label class="auth-label" style="font-size: 0.76rem;">Speaker Photo URL</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-light); overflow: hidden; background: #1e293b; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                <img class="comm-speaker-row-preview" src="${escapeHtml(data.photo || 'assets/brand/renalytica_emblem.png')}" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/brand/renalytica_emblem.png';">
+              </div>
+              <input type="text" class="auth-input comm-speaker-photo" placeholder="assets/images/community/community_roundtable_charts.jpg" value="${escapeHtml(data.photo || '')}" style="flex: 1; font-size: 0.82rem;" oninput="this.closest('.comm-speaker-entry').querySelector('.comm-speaker-row-preview').src = this.value || 'assets/brand/renalytica_emblem.png'">
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center;">
+              <span style="font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono);">Presets:</span>
+              <button type="button" class="btn-table-action" onclick="window.setSpeakerRowPhoto(this, 'assets/images/community/community_roundtable_charts.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Charts/Adeleke</button>
+              <button type="button" class="btn-table-action" onclick="window.setSpeakerRowPhoto(this, 'assets/images/community/community_colleagues_laptop.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Chioma</button>
+              <button type="button" class="btn-table-action" onclick="window.setSpeakerRowPhoto(this, 'assets/images/community/community_strategy_conference.jpg')" style="font-size: 0.65rem; padding: 2px 6px;">Babatunde</button>
+              <button type="button" class="btn-table-action" onclick="window.setSpeakerRowPhoto(this, 'assets/brand/renalytica_emblem.png')" style="font-size: 0.65rem; padding: 2px 6px;">Emblem</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(row);
+        window.updateSpeakerBadges();
+      };
+
+      window.removeCommSpeakerRow = function(btn) {
+        const container = document.getElementById('comm-speakers-container');
+        if (!container) return;
+        const entries = container.querySelectorAll('.comm-speaker-entry');
+        if (entries.length <= 1) {
+          const entry = entries[0];
+          entry.querySelector('.comm-speaker-name').value = '';
+          entry.querySelector('.comm-speaker-role').value = '';
+          entry.querySelector('.comm-speaker-photo').value = 'assets/brand/renalytica_emblem.png';
+          entry.querySelector('.comm-speaker-row-preview').src = 'assets/brand/renalytica_emblem.png';
+          showToast('Speaker details cleared.', 'info');
+          return;
+        }
+        btn.closest('.comm-speaker-entry').remove();
+        window.updateSpeakerBadges();
+      };
+
       window.setCommPhotoPreset = function(url) {
         const input = document.getElementById('edit-comm-speaker-photo');
         const prev = document.getElementById('comm-speaker-preview');
@@ -5284,16 +5414,23 @@
         document.getElementById('edit-comm-badge').value = defaultType === 'roundtable' ? 'UPCOMING // NEXT WEEK' : '';
         document.getElementById('edit-comm-datetime').value = defaultType === 'roundtable' ? 'MAR 25 • 15:00 WAT' : '';
         document.getElementById('edit-comm-mission').value = '';
-        document.getElementById('edit-comm-speaker-name').value = '';
-        document.getElementById('edit-comm-speaker-role').value = '';
-        document.getElementById('edit-comm-speaker-photo').value = 'assets/images/community/community_roundtable_charts.jpg';
-        document.getElementById('comm-speaker-preview').src = 'assets/images/community/community_roundtable_charts.jpg';
         document.getElementById('edit-comm-metric1').value = '450 FELLOWS';
         document.getElementById('edit-comm-metric2').value = 'BI-WEEKLY BRIEFING';
         document.getElementById('edit-comm-action-label').value = defaultType === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →';
         document.getElementById('edit-comm-action-url').value = '';
         document.getElementById('edit-comm-status').value = 'published';
         document.getElementById('edit-comm-order').value = (getStoredCommunity().length + 1);
+
+        // Reset dynamic speakers container
+        const spkContainer = document.getElementById('comm-speakers-container');
+        if (spkContainer) {
+          spkContainer.innerHTML = '';
+          window.addCommSpeakerRow({
+            name: '',
+            role: '',
+            photo: 'assets/images/community/community_roundtable_charts.jpg'
+          });
+        }
 
         window.handleCommunityTypeChange(defaultType);
         const modal = document.getElementById('community-modal');
@@ -5316,16 +5453,38 @@
         document.getElementById('edit-comm-badge').value = a.badge || '';
         document.getElementById('edit-comm-datetime').value = a.datetime || '';
         document.getElementById('edit-comm-mission').value = a.mission || '';
-        document.getElementById('edit-comm-speaker-name').value = a.speaker_name || '';
-        document.getElementById('edit-comm-speaker-role').value = a.speaker_role || '';
-        document.getElementById('edit-comm-speaker-photo').value = a.speaker_photo || '';
-        document.getElementById('comm-speaker-preview').src = a.speaker_photo || 'assets/brand/renalytica_emblem.png';
         document.getElementById('edit-comm-metric1').value = a.metric_1 || '';
         document.getElementById('edit-comm-metric2').value = a.metric_2 || '';
         document.getElementById('edit-comm-action-label').value = a.action_label || (a.type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →');
         document.getElementById('edit-comm-action-url').value = a.action_url || '';
         document.getElementById('edit-comm-status').value = a.status || 'published';
         document.getElementById('edit-comm-order').value = a.display_order || 1;
+
+        // Populate speakers dynamically
+        const spkContainer = document.getElementById('comm-speakers-container');
+        if (spkContainer) {
+          spkContainer.innerHTML = '';
+          let speakersList = [];
+          if (Array.isArray(a.speakers) && a.speakers.length > 0) {
+            speakersList = a.speakers;
+          } else if (a.speaker_name) {
+            speakersList = [{
+              name: a.speaker_name,
+              role: a.speaker_role || '',
+              photo: a.speaker_photo || 'assets/brand/renalytica_emblem.png'
+            }];
+          }
+
+          if (speakersList.length > 0) {
+            speakersList.forEach(s => window.addCommSpeakerRow(s));
+          } else {
+            window.addCommSpeakerRow({
+              name: '',
+              role: '',
+              photo: 'assets/images/community/community_roundtable_charts.jpg'
+            });
+          }
+        }
 
         window.handleCommunityTypeChange(a.type || 'guild');
         const modal = document.getElementById('community-modal');
@@ -5362,9 +5521,27 @@
           const badge = document.getElementById('edit-comm-badge').value.trim() || null;
           const datetime = document.getElementById('edit-comm-datetime').value.trim() || null;
           const mission = document.getElementById('edit-comm-mission').value.trim();
-          const speaker_name = document.getElementById('edit-comm-speaker-name').value.trim() || null;
-          const speaker_role = document.getElementById('edit-comm-speaker-role').value.trim() || null;
-          const speaker_photo = document.getElementById('edit-comm-speaker-photo').value.trim() || null;
+
+          // Collect multiple speakers from dynamic container
+          const spkEntries = document.querySelectorAll('#comm-speakers-container .comm-speaker-entry');
+          const speakers = [];
+          spkEntries.forEach(entry => {
+            const name = entry.querySelector('.comm-speaker-name')?.value.trim() || '';
+            const role = entry.querySelector('.comm-speaker-role')?.value.trim() || '';
+            const photo = entry.querySelector('.comm-speaker-photo')?.value.trim() || '';
+            if (name || role) {
+              speakers.push({
+                name,
+                role,
+                photo: photo || 'assets/brand/renalytica_emblem.png'
+              });
+            }
+          });
+
+          const speaker_name = speakers.length > 0 ? speakers[0].name : null;
+          const speaker_role = speakers.length > 0 ? (speakers[0].role || null) : null;
+          const speaker_photo = speakers.length > 0 ? (speakers[0].photo || null) : null;
+
           const metric_1 = document.getElementById('edit-comm-metric1').value.trim() || null;
           const metric_2 = document.getElementById('edit-comm-metric2').value.trim() || null;
           const action_label = document.getElementById('edit-comm-action-label').value.trim() || (type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →');
@@ -5387,6 +5564,7 @@
             badge,
             datetime,
             mission,
+            speakers,
             speaker_name,
             speaker_role,
             speaker_photo,

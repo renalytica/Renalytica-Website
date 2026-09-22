@@ -2881,6 +2881,7 @@ app.post('/api/admin/community', authenticateUser, requireAdmin, async (req, res
       badge,
       datetime,
       mission,
+      speakers,
       speaker_name,
       speaker_role,
       speaker_photo,
@@ -2899,6 +2900,14 @@ app.post('/api/admin/community', authenticateUser, requireAdmin, async (req, res
     const slug = (req.body.id || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     const actId = slug || ('comm-' + Date.now());
 
+    const normalizedSpeakers = Array.isArray(speakers)
+      ? speakers
+      : (speaker_name ? [{ name: speaker_name, role: speaker_role, photo: speaker_photo }] : []);
+
+    const primarySpeakerName = normalizedSpeakers.length > 0 ? normalizedSpeakers[0].name : (speaker_name || null);
+    const primarySpeakerRole = normalizedSpeakers.length > 0 ? (normalizedSpeakers[0].role || null) : (speaker_role || null);
+    const primarySpeakerPhoto = normalizedSpeakers.length > 0 ? (normalizedSpeakers[0].photo || null) : (speaker_photo || null);
+
     const newActivity = {
       id: actId,
       type: type || 'guild',
@@ -2908,9 +2917,10 @@ app.post('/api/admin/community', authenticateUser, requireAdmin, async (req, res
       badge: badge || null,
       datetime: datetime || null,
       mission: mission || '',
-      speaker_name: speaker_name || null,
-      speaker_role: speaker_role || null,
-      speaker_photo: speaker_photo || null,
+      speakers: normalizedSpeakers,
+      speaker_name: primarySpeakerName,
+      speaker_role: primarySpeakerRole,
+      speaker_photo: primarySpeakerPhoto,
       metric_1: metric_1 || null,
       metric_2: metric_2 || null,
       action_label: action_label || (type === 'roundtable' ? 'RSVP for Seat (Free for Fellows) →' : 'View Guild Charter →'),
@@ -2925,7 +2935,12 @@ app.post('/api/admin/community', authenticateUser, requireAdmin, async (req, res
       try {
         await supabaseAdmin.from('community_activities').upsert(newActivity);
       } catch (sbErr) {
-        console.warn('[Community CMS] Supabase upsert error:', sbErr.message);
+        try {
+          const { speakers: _ignored, ...sbFallback } = newActivity;
+          await supabaseAdmin.from('community_activities').upsert(sbFallback);
+        } catch (retryErr) {
+          console.warn('[Community CMS] Supabase upsert error:', sbErr.message);
+        }
       }
     }
 
@@ -2953,6 +2968,14 @@ app.put('/api/admin/community/:id', authenticateUser, requireAdmin, async (req, 
     }
 
     const updates = { ...req.body };
+    if (updates.speakers !== undefined) {
+      updates.speakers = Array.isArray(updates.speakers) ? updates.speakers : [];
+      if (updates.speakers.length > 0) {
+        updates.speaker_name = updates.speakers[0].name || null;
+        updates.speaker_role = updates.speakers[0].role || null;
+        updates.speaker_photo = updates.speakers[0].photo || null;
+      }
+    }
     if (updates.display_order !== undefined) {
       updates.display_order = parseInt(updates.display_order, 10) || mockCommunity[index].display_order;
     }
@@ -2965,7 +2988,12 @@ app.put('/api/admin/community/:id', authenticateUser, requireAdmin, async (req, 
       try {
         await supabaseAdmin.from('community_activities').upsert(mockCommunity[index]);
       } catch (sbErr) {
-        console.warn('[Community CMS] Supabase update error:', sbErr.message);
+        try {
+          const { speakers: _ignored, ...sbFallback } = mockCommunity[index];
+          await supabaseAdmin.from('community_activities').upsert(sbFallback);
+        } catch (retryErr) {
+          console.warn('[Community CMS] Supabase update error:', sbErr.message);
+        }
       }
     }
 
