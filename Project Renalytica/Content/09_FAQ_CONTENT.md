@@ -242,6 +242,6 @@ At project kickoff, we establish clear milestone deliverables, weekly progress c
   * **Sales & Corporate Licensing:** `sales@renalytica.com`
   * **Billing & Accounts Payable:** `billing@renalytica.com`
   * **Instant WhatsApp Concierge:** `+234 902 084 6138` (Available Monday – Friday, 08:00 to 18:00 WAT)
-  * **Headquarters:** Renalytica Technologies & Research Advisory, Victoria Island, Lagos, Nigeria.
+  * **Headquarters:** Renalytica Technologies & Research Advisory, Atlantic Mall, Chevron Drive, Lekki, Lagos.
 * **Primary Action Button:** `Contact Our Research Desk →` (Color: `#FF8000`)
 * **Secondary Action Button:** `Browse Research Store (2,500+ Reports)`

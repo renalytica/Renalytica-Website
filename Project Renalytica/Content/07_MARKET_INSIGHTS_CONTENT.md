@@ -280,4 +280,4 @@ To empower visiting strategy executives and financial analysts, the Market Insig
 * **Direct Office Contacts:**
   * **Editorial Desk:** `insights@renalytica.com`
   * **Research Store Support:** `sales@renalytica.com`
-  * **Physical Bureau:** Victoria Island, Lagos, Nigeria.
+  * **Physical Bureau:** Atlantic Mall, Chevron Drive, Lekki, Lagos.

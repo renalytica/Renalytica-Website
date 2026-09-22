@@ -256,4 +256,4 @@ If you are considering a Custom Research study or Corporate Subscription, our on
 * **Direct Office Contacts:**
   * **General Advisory:** `advisory@renalytica.com`
   * **Corporate Subscriptions:** `subscriptions@renalytica.com`
-  * **Physical Bureau:** Victoria Island, Lagos, Nigeria.
+  * **Physical Bureau:** Atlantic Mall, Chevron Drive, Lekki, Lagos.

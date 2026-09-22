@@ -37,11 +37,11 @@
 1.1 **Data Controller Identity:** The entity responsible for determining the purposes and means of processing personal data collected through the Renalytica platform (`www.renalytica.com`) is:
 * **Entity:** Renalytica Technologies & Research Advisory Limited
 * **Registration:** Incorporated under the Companies and Allied Matters Act, Federal Republic of Nigeria
-* **Headquarters:** Victoria Island, Lagos, Nigeria
+* **Headquarters:** Atlantic Mall, Chevron Drive, Lekki, Lagos, Nigeria
 
 1.2 **Data Protection Officer (DPO):** We have appointed a dedicated Data Protection Officer to supervise regulatory compliance and handle all data subject inquiries. You may contact our DPO directly at:
 * **Email:** `privacy@renalytica.com` / `dpo@renalytica.com`
-* **Postal Address:** Data Protection Officer, Renalytica Technologies, Victoria Island, Lagos, Nigeria.
+* **Postal Address:** Data Protection Officer, Renalytica Technologies, Atlantic Mall, Chevron Drive, Lekki, Lagos, Nigeria.
 * **Direct Telephone / WhatsApp:** `+234 902 084 6138`
 
 ---
@@ -200,4 +200,4 @@ For questions, requests, or concerns regarding our privacy practices, please con
 * **Data Protection Officer (DPO):** `privacy@renalytica.com`
 * **Corporate Support Desk:** `support@renalytica.com`
 * **Direct Telephone / WhatsApp:** `+234 902 084 6138`
-* **Mailing Address:** Renalytica Technologies & Research Advisory Limited, Attn: Privacy & Data Protection Officer, Victoria Island, Lagos, Nigeria.
+* **Mailing Address:** Renalytica Technologies & Research Advisory Limited, Attn: Privacy & Data Protection Officer, Atlantic Mall, Chevron Drive, Lekki, Lagos, Nigeria.

@@ -47,7 +47,7 @@
 
 ### Channel 4: Visit or Write to Us
 * **Title:** Principal Office
-* **Headquarters:** Lagos, Nigeria
+* **Headquarters:** Atlantic Mall, Chevron Drive, Lekki, Lagos
 * **Regional Desks:** West Africa (Lagos) • East Africa (Nairobi) • International Liaison
 
 ---

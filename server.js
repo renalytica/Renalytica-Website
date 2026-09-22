@@ -2314,7 +2314,7 @@ let mockAboutContent = loadJson('about_content.json', {
     },
     lagos_office: {
       title: "Lagos Field Research & Operations Center",
-      address: "Victoria Island Financial Corridor, Lagos, Nigeria",
+      address: "Atlantic Mall, Chevron Drive, Lekki, Lagos",
       desc: "Field data collection, wholesale commodity audits, trade corridor tracking, and local banking telemetry."
     }
   },
